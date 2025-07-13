@@ -1,0 +1,1 @@
+start %~dp0Content\Engine\Binaries\Win64\ProtobufProgram.exe -CompressPath=%~dp0Content\protobuf.rz -OutPutProtobufPath=I:\newue5\Engine\Source\Programs\RENZHAI\TestCPP2\Private

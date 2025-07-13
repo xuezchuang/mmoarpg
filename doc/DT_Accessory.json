@@ -1,0 +1,678 @@
+[
+	{
+		"Name": "Necklace01",
+		"Type": "Accessories",
+		"Rarity": "Legendary",
+		"Slot": "Neck",
+		"Weapon Category": "None",
+		"Inventory Panel": "P8",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Necklace.BP_Necklace_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/NecklaceAccess.NecklaceAccess'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Necklace01",
+			"Name": "INVTEXT(\"The Necklace of the ancient prophet\")",
+			"Description": "NSLOCTEXT(\"[332F62E641C6073FEB6C60A82890EB26]\", \"B13489C141910FFA7B3CEE9C2104189D\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 0.3,
+			"Value": 130,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 400
+				},
+				{
+					"Type": "Mana",
+					"Value": 110
+				},
+				{
+					"Type": "Stamina",
+					"Value": 15
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 100,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 35,
+			"Max Durability": 89,
+			"Random Stats": [
+				{
+					"Stat": "Health",
+					"Value and Multiplier":
+					{
+						"Min Value": 25,
+						"Max Value": 100,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Mana",
+					"Value and Multiplier":
+					{
+						"Min Value": 10,
+						"Max Value": 78,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "PhysicalDmg",
+					"Value and Multiplier":
+					{
+						"Min Value": 15,
+						"Max Value": 45,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Armor",
+					"Value and Multiplier":
+					{
+						"Min Value": 5,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 150,
+				"Max Value": 320,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 10,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Talisman01",
+		"Type": "Accessories",
+		"Rarity": "Epic",
+		"Slot": "Talisman",
+		"Weapon Category": "None",
+		"Inventory Panel": "P8",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Necklace.BP_Necklace_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/TalismanAccess.TalismanAccess'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Necklace02_Blue",
+			"Name": "INVTEXT(\"The Azure Curse Skull Talisman\")",
+			"Description": "NSLOCTEXT(\"[332F62E641C6073FEB6C60A82890EB26]\", \"256545434296733B93FF869DA56D1B25\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 0.2,
+			"Value": 90,
+			"Stats": [
+				{
+					"Type": "PhysicalDmg",
+					"Value": 150
+				},
+				{
+					"Type": "Health",
+					"Value": 45
+				},
+				{
+					"Type": "CriticalRate",
+					"Value": 3
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 5,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 35,
+			"Max Durability": 89,
+			"Random Stats": [
+				{
+					"Stat": "Health",
+					"Value and Multiplier":
+					{
+						"Min Value": 25,
+						"Max Value": 100,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Mana",
+					"Value and Multiplier":
+					{
+						"Min Value": 10,
+						"Max Value": 78,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "PhysicalDmg",
+					"Value and Multiplier":
+					{
+						"Min Value": 15,
+						"Max Value": 45,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Armor",
+					"Value and Multiplier":
+					{
+						"Min Value": 5,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 150,
+				"Max Value": 320,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 10,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Ring01",
+		"Type": "Accessories",
+		"Rarity": "Superior",
+		"Slot": "Ring",
+		"Weapon Category": "None",
+		"Inventory Panel": "P8",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Necklace.BP_Necklace_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/RingAccess.RingAccess'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Necklace02_Red",
+			"Name": "INVTEXT(\"The Aqua Ring of Blessing\")",
+			"Description": "NSLOCTEXT(\"[332F62E641C6073FEB6C60A82890EB26]\", \"BFBCE2224927C63F6C0EC1894CD4333D\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 4.8,
+			"Value": 45,
+			"Stats": [
+				{
+					"Type": "PhysicalDmg",
+					"Value": 15
+				},
+				{
+					"Type": "Stamina",
+					"Value": 15
+				},
+				{
+					"Type": "Mana",
+					"Value": 15
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 5,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 35,
+			"Max Durability": 89,
+			"Random Stats": [
+				{
+					"Stat": "Health",
+					"Value and Multiplier":
+					{
+						"Min Value": 25,
+						"Max Value": 100,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Mana",
+					"Value and Multiplier":
+					{
+						"Min Value": 10,
+						"Max Value": 78,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "PhysicalDmg",
+					"Value and Multiplier":
+					{
+						"Min Value": 15,
+						"Max Value": 45,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Armor",
+					"Value and Multiplier":
+					{
+						"Min Value": 5,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 150,
+				"Max Value": 320,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 10,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Bracelet01",
+		"Type": "Accessories",
+		"Rarity": "Superior",
+		"Slot": "Bracelet",
+		"Weapon Category": "None",
+		"Inventory Panel": "P8",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Necklace.BP_Necklace_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/BraceletAccess.BraceletAccess'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Necklace02_Red",
+			"Name": "INVTEXT(\"The Leaf Bracelet of will\")",
+			"Description": "NSLOCTEXT(\"[332F62E641C6073FEB6C60A82890EB26]\", \"7621A32140572F2AC040428C22019DC9\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 4.8,
+			"Value": 45,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 20
+				},
+				{
+					"Type": "PhAttackSpeed",
+					"Value": 0.3
+				},
+				{
+					"Type": "Stamina",
+					"Value": 15
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 5,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 35,
+			"Max Durability": 89,
+			"Random Stats": [
+				{
+					"Stat": "Health",
+					"Value and Multiplier":
+					{
+						"Min Value": 25,
+						"Max Value": 100,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Mana",
+					"Value and Multiplier":
+					{
+						"Min Value": 10,
+						"Max Value": 78,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "PhysicalDmg",
+					"Value and Multiplier":
+					{
+						"Min Value": 15,
+						"Max Value": 45,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Armor",
+					"Value and Multiplier":
+					{
+						"Min Value": 5,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 150,
+				"Max Value": 320,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 10,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	}
+]

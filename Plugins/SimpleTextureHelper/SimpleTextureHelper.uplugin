@@ -1,0 +1,27 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "SimpleTextureHelper",
+  "Description": "Support picture conversion.",
+  "Category": "RenZhai",
+  "CreatedBy": "Other Courses",
+  "CreatedByURL": "http://renzhai.net/",
+  "DocsURL": "https://renzhai.net/390.html",
+  "MarketplaceURL": "https://renzhai.net/390.html",
+  "SupportURL": "https://www.aboutcg.org/courseDetails/1228/introduce",
+  "CanContainContent": true,
+  "IsBetaVersion": false,
+  "IsExperimentalVersion": false,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "SimpleTextureHelper",
+      "Type": "Runtime",
+      "LoadingPhase": "PreLoadingScreen",
+      "WhitelistPlatforms": [
+        "Win64"
+      ]
+    }
+  ]
+}

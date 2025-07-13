@@ -1,0 +1,1543 @@
+[
+	{
+		"Name": "Steel",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Common",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_04.SM_fruits_04'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_ingots_06.Tex_ingots_06'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Steel",
+			"Name": "INVTEXT(\"Steel Bars\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"20A07A3C44B074C7270B4EA1D4E135B4\", \"Purchase from the blacksmith shop in regalia\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"C65718054BFF9BAB54CD9991D78388A8\", \"Can be mine in the lost cave of dwarf\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 1,
+			"Value": 40,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Gold",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Epic",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_07.SM_fruits_07'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_ingots_12.Tex_ingots_12'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Gold",
+			"Name": "INVTEXT(\"Gold Bars\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"20A07A3C44B074C7270B4EA1D4E135B4\", \"Purchase from the blacksmith shop in regalia\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"C50949F74FFA61DD808F25B8AFE44D8A\", \"Can be mine in the lost cave of dwarf\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 2.3,
+			"Value": 100,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Silver",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Superior",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_04.SM_fruits_04'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_ingots_01.Tex_ingots_01'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Silver",
+			"Name": "INVTEXT(\"Silver Bars\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"20A07A3C44B074C7270B4EA1D4E135B4\", \"Purchase from the blacksmith shop in regalia\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"2BAA05DD4DEF94CECADF91B70B4F15EE\", \"Can be mine in the lost cave of dwarf\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 2,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Bronze",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Common",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_07.SM_fruits_07'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_ingots_10.Tex_ingots_10'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bronze",
+			"Name": "INVTEXT(\"Bronze Bars\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"20A07A3C44B074C7270B4EA1D4E135B4\", \"Purchase from the blacksmith shop in regalia\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"DAF87A8D4809F84363BC29BFC309F3DC\", \"Can be mine in the lost cave of dwarf\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 1.6,
+			"Value": 25,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Leather",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Common",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_04.SM_fruits_04'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_leather_02.Tex_leather_02'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Leather",
+			"Name": "INVTEXT(\"Piece of Leather\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"1C9032EE4159F4DCD671A3961D4AE975\", \"Purchase from the Clothing shop in regalia\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"1996F7FD435265710EBAA8877FF0C6C7\", \"Chance to drop from animal\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.2,
+			"Value": 5,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 8,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 5,
+				"Max Value": 5,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Copper",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Superior",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_07.SM_fruits_07'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_ingots_05.Tex_ingots_05'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Copper",
+			"Name": "INVTEXT(\"Copper Bars\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"20A07A3C44B074C7270B4EA1D4E135B4\", \"Purchase from the blacksmith shop in regalia\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"BF9E62174ED29713603DC6AA6A17E420\", \"Can be mine in the lost cave of dwarf\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 2.5,
+			"Value": 15,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "BlueCloth",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Superior",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_04.SM_fruits_04'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_strings_04.Tex_strings_04'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "BlueCloth",
+			"Name": "INVTEXT(\"Blue Cloth\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"C8A7426E4C59C7D24539459AF4EF7258\", \"Purchase from the Clothing shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "GreenCloth",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Epic",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_07.SM_fruits_07'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_strings_05.Tex_strings_05'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "GreenCloth",
+			"Name": "INVTEXT(\"Green Cloth\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"6759DA734518D5F431959BA364BDDA9D\", \"Purchase from the Clothing shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "RedCloth",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Epic",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_04.SM_fruits_04'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_strings_08.Tex_strings_08'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "RedCloth",
+			"Name": "INVTEXT(\"Red Cloth\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"E2287D90462F386768965DA4BDD3B509\", \"Purchase from the Clothing shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Wood",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Common",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_07.SM_fruits_07'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_wood_01.Tex_wood_01'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Wood",
+			"Name": "INVTEXT(\"Wood\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"20A07A3C44B074C7270B4EA1D4E135B4\", \"Purchase from the blacksmith shop in regalia\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"9290128E47A8E410A552698EB617A245\", \"Recommendation: Cut from the tree\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 1,
+			"Value": 3,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 30,
+			"Min Quantity": 2,
+			"Max Quantity": 10,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 3,
+				"Max Value": 3,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Azure",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Superior",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_04.SM_fruits_04'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_gemstone_04.Tex_gemstone_04'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Azure",
+			"Name": "INVTEXT(\"Azure Gemstone\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"A3A2DD1848ABE53578C913A9AD2AA17A\", \"Recommedation: Kill any water dragon there a chance to drop this item\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 1.2,
+			"Value": 155,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Ruby",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Legendary",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_07.SM_fruits_07'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_gemstone_05.Tex_gemstone_05'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Ruby",
+			"Name": "INVTEXT(\"Ruby Gemstone\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"2A888D1444F599B878E0F8BDDE70D367\", \"Recommedation: Kill any fire dragon there a chance to drop this item\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 1.2,
+			"Value": 140,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Twine",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Common",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Crafting/BP_CraftingIngredient.BP_CraftingIngredient_C'",
+		"Equippable Static Mesh": "/Script/Engine.StaticMesh'/Game/Model/LevelDesign/Medieval_Village/meshes/props/SM_fruits_04.SM_fruits_04'",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_strings_06.Tex_strings_06'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Twine",
+			"Name": "INVTEXT(\"Twine\")",
+			"Description": "INVTEXT(\"Segments of unknown that are light and far stronger than their humble apperance might suggest. It let\\'s off a light fragrance\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"F2174DDA430F847D3DB501AA6BC31D0C\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[4E2BD87C4D03149405608FAA19C2E96F]\", \"99DEBBDC435853536EBEE39FD2067F23\", \"Purchase from the Clothing shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	}
+]

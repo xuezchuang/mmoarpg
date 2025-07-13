@@ -1,0 +1,2148 @@
+[
+	{
+		"Name": "FS_Helm",
+		"Type": "Armor",
+		"Rarity": "Epic",
+		"Slot": "Head",
+		"Weapon Category": "None",
+		"Inventory Panel": "P1",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Helm.BP_Helm_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "SkeletalMesh'/Game/MetanoiaCombat/Inventory/Meshes/Skeletal/Armor/SK_Helm.SK_Helm'",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/T_Helm.T_Helm'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fs_hm",
+			"Name": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"55A8244A406B280AB7522E8859099AF8\", \"Helm of Fire King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 4.2,
+			"Value": 135,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 35
+				},
+				{
+					"Type": "Armor",
+					"Value": 15
+				},
+				{
+					"Type": "CriticalRate",
+					"Value": 0.2
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 16,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 22,
+			"Max Durability": 100,
+			"Random Stats": [
+				{
+					"Stat": "Stamina",
+					"Value and Multiplier":
+					{
+						"Min Value": 5,
+						"Max Value": 20,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 120,
+				"Max Value": 310,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 5,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Fire King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"4C520FB5453B6E8B3091C2A7C2313312\", \"Helm of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"7FEB060C46EAD5DD7B43A9BB132C9EB3\", \"Plate of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"8A9866424000E90E13E8EF9AC96AAE83\", \"Gloves of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"E902C2AE4B660A60114310A1BF944813\", \"Pants of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"25CCB77F4E2E2E867CC69692A029B2BC\", \"Boots of Fire King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "FS_Plate",
+		"Type": "Armor",
+		"Rarity": "Epic",
+		"Slot": "Chestplate",
+		"Weapon Category": "None",
+		"Inventory Panel": "P1",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Chestplate01_Red.BP_Chestplate01_Red_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "SkeletalMesh'/Game/Model/StaticItem/Custom_FBX/ArmorCape/Meshes/Skeletal/Armor/SK_Chestplate01B.SK_Chestplate01B'",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/T_Chestplate01_Red.T_Chestplate01_Red'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fs_p",
+			"Name": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"6FA831F74C560A4477A6B5A81A2A2D36\", \"Plate of Fire King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 6.1,
+			"Value": 160,
+			"Stats": [
+				{
+					"Type": "Armor",
+					"Value": 35
+				},
+				{
+					"Type": "Health",
+					"Value": 530
+				},
+				{
+					"Type": "Stamina",
+					"Value": 15
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 15,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 40,
+			"Max Durability": 100,
+			"Random Stats": [
+				{
+					"Stat": "Stamina",
+					"Value and Multiplier":
+					{
+						"Min Value": 10,
+						"Max Value": 22,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 120,
+				"Max Value": 280,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 5,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Fire King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"4C520FB5453B6E8B3091C2A7C2313312\", \"Helm of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"7FEB060C46EAD5DD7B43A9BB132C9EB3\", \"Plate of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"8A9866424000E90E13E8EF9AC96AAE83\", \"Gloves of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"E902C2AE4B660A60114310A1BF944813\", \"Pants of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"25CCB77F4E2E2E867CC69692A029B2BC\", \"Boots of Fire King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "FS_Gloves",
+		"Type": "Armor",
+		"Rarity": "Epic",
+		"Slot": "Gloves",
+		"Weapon Category": "None",
+		"Inventory Panel": "P1",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Gloves01_Silver.BP_Gloves01_Silver_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "SkeletalMesh'/Game/MetanoiaCombat/Metanoia_Sub_System/Meshes/SK_SteelGloves1.SK_SteelGloves1'",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/T_Gloves01_Silver.T_Gloves01_Silver'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fs_g",
+			"Name": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"84DA63AE402F0C5615FEC7973C030F36\", \"Gloves of Fire King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 2.5,
+			"Value": 55,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 35
+				},
+				{
+					"Type": "Armor",
+					"Value": 15
+				},
+				{
+					"Type": "CriticalRate",
+					"Value": 0.2
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 30,
+			"Max Durability": 100,
+			"Random Stats": [
+				{
+					"Stat": "Stamina",
+					"Value and Multiplier":
+					{
+						"Min Value": 2,
+						"Max Value": 10,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 45,
+				"Max Value": 130,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 3,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Fire King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"4C520FB5453B6E8B3091C2A7C2313312\", \"Helm of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"7FEB060C46EAD5DD7B43A9BB132C9EB3\", \"Plate of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"8A9866424000E90E13E8EF9AC96AAE83\", \"Gloves of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"E902C2AE4B660A60114310A1BF944813\", \"Pants of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"25CCB77F4E2E2E867CC69692A029B2BC\", \"Boots of Fire King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "FS_Pants",
+		"Type": "Armor",
+		"Rarity": "Epic",
+		"Slot": "Legs",
+		"Weapon Category": "None",
+		"Inventory Panel": "P1",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Legs01_Bronze.BP_Legs01_Bronze_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "SkeletalMesh'/Game/MetanoiaCombat/Inventory/Meshes/Skeletal/Armor/SK_Legs01_Bronze.SK_Legs01_Bronze'",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/T_Legs01_Bronze.T_Legs01_Bronze'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fs_pt",
+			"Name": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"6096C52C4335285D4689D6A57A9F6E64\", \"Pants of Fire King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 6,
+			"Value": 75,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 35
+				},
+				{
+					"Type": "Armor",
+					"Value": 15
+				},
+				{
+					"Type": "CriticalRate",
+					"Value": 0.2
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 30,
+			"Max Durability": 100,
+			"Random Stats": [
+				{
+					"Stat": "Stamina",
+					"Value and Multiplier":
+					{
+						"Min Value": 5,
+						"Max Value": 14,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 50,
+				"Max Value": 120,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 4,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Fire King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"4C520FB5453B6E8B3091C2A7C2313312\", \"Helm of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"7FEB060C46EAD5DD7B43A9BB132C9EB3\", \"Plate of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"8A9866424000E90E13E8EF9AC96AAE83\", \"Gloves of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"E902C2AE4B660A60114310A1BF944813\", \"Pants of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"25CCB77F4E2E2E867CC69692A029B2BC\", \"Boots of Fire King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "FS_Boots",
+		"Type": "Armor",
+		"Rarity": "Epic",
+		"Slot": "Boots",
+		"Weapon Category": "None",
+		"Inventory Panel": "P1",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Boots.BP_Boots_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "SkeletalMesh'/Game/MetanoiaCombat/Inventory/Meshes/Skeletal/Armor/SK_Boots02.SK_Boots02'",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/T_Boots.T_Boots'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fs_b",
+			"Name": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"EDC109144CD8E99847B1A1BE6AD08129\", \"Boots of Fire King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 4.5,
+			"Value": 70,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 35
+				},
+				{
+					"Type": "Armor",
+					"Value": 15
+				},
+				{
+					"Type": "CriticalRate",
+					"Value": 0.2
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 14,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 30,
+			"Max Durability": 100,
+			"Random Stats": [
+				{
+					"Stat": "Stamina",
+					"Value and Multiplier":
+					{
+						"Min Value": 2,
+						"Max Value": 8,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 60,
+				"Max Value": 140,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 3,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Fire King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"4C520FB5453B6E8B3091C2A7C2313312\", \"Helm of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"7FEB060C46EAD5DD7B43A9BB132C9EB3\", \"Plate of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"8A9866424000E90E13E8EF9AC96AAE83\", \"Gloves of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"E902C2AE4B660A60114310A1BF944813\", \"Pants of Fire King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"25CCB77F4E2E2E867CC69692A029B2BC\", \"Boots of Fire King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Necklace01",
+		"Type": "Accessories",
+		"Rarity": "Legendary",
+		"Slot": "Neck",
+		"Weapon Category": "None",
+		"Inventory Panel": "P8",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Necklace.BP_Necklace_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/NecklaceAccess.NecklaceAccess'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "ek_neck_01",
+			"Name": "INVTEXT(\"Necklace of Elder King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 0.3,
+			"Value": 130,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 400
+				},
+				{
+					"Type": "Mana",
+					"Value": 110
+				},
+				{
+					"Type": "Stamina",
+					"Value": 15
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 100,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 35,
+			"Max Durability": 89,
+			"Random Stats": [
+				{
+					"Stat": "Health",
+					"Value and Multiplier":
+					{
+						"Min Value": 25,
+						"Max Value": 100,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Mana",
+					"Value and Multiplier":
+					{
+						"Min Value": 10,
+						"Max Value": 78,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "PhysicalDmg",
+					"Value and Multiplier":
+					{
+						"Min Value": 15,
+						"Max Value": 45,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Armor",
+					"Value and Multiplier":
+					{
+						"Min Value": 5,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 150,
+				"Max Value": 320,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 10,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Elder King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"CD82CB954FDB100E21442DBF5AD1D279\", \"Necklace of Elder King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"F0C951B144E2FC1F6C0192AC63BEBBCE\", \"Talisman of Elder King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"4F26090D478C45B49D2206A01B1161D0\", \"Ring of Elder King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"B88BAC7C4D4E6087EB435EB63686475F\", \"Bracelet of Elder King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Talisman01",
+		"Type": "Accessories",
+		"Rarity": "Legendary",
+		"Slot": "Talisman",
+		"Weapon Category": "None",
+		"Inventory Panel": "P8",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Necklace.BP_Necklace_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/TalismanAccess.TalismanAccess'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "ek_talis_01",
+			"Name": "INVTEXT(\"Talisman of Elder King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 0.2,
+			"Value": 90,
+			"Stats": [
+				{
+					"Type": "PhysicalDmg",
+					"Value": 150
+				},
+				{
+					"Type": "Health",
+					"Value": 45
+				},
+				{
+					"Type": "CriticalRate",
+					"Value": 3
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 5,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 35,
+			"Max Durability": 89,
+			"Random Stats": [
+				{
+					"Stat": "Health",
+					"Value and Multiplier":
+					{
+						"Min Value": 25,
+						"Max Value": 100,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Mana",
+					"Value and Multiplier":
+					{
+						"Min Value": 10,
+						"Max Value": 78,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "PhysicalDmg",
+					"Value and Multiplier":
+					{
+						"Min Value": 15,
+						"Max Value": 45,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Armor",
+					"Value and Multiplier":
+					{
+						"Min Value": 5,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 150,
+				"Max Value": 320,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 10,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Elder King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"CD82CB954FDB100E21442DBF5AD1D279\", \"Necklace of Elder King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"F0C951B144E2FC1F6C0192AC63BEBBCE\", \"Talisman of Elder King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"4F26090D478C45B49D2206A01B1161D0\", \"Ring of Elder King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"B88BAC7C4D4E6087EB435EB63686475F\", \"Bracelet of Elder King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Ring01",
+		"Type": "Accessories",
+		"Rarity": "Legendary",
+		"Slot": "Ring",
+		"Weapon Category": "None",
+		"Inventory Panel": "P8",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Necklace.BP_Necklace_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/RingAccess.RingAccess'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "ek_ring_01",
+			"Name": "INVTEXT(\"Ring of Elder King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 4.8,
+			"Value": 45,
+			"Stats": [
+				{
+					"Type": "PhysicalDmg",
+					"Value": 15
+				},
+				{
+					"Type": "Stamina",
+					"Value": 15
+				},
+				{
+					"Type": "Mana",
+					"Value": 15
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 5,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 35,
+			"Max Durability": 89,
+			"Random Stats": [
+				{
+					"Stat": "Health",
+					"Value and Multiplier":
+					{
+						"Min Value": 25,
+						"Max Value": 100,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Mana",
+					"Value and Multiplier":
+					{
+						"Min Value": 10,
+						"Max Value": 78,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "PhysicalDmg",
+					"Value and Multiplier":
+					{
+						"Min Value": 15,
+						"Max Value": 45,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Armor",
+					"Value and Multiplier":
+					{
+						"Min Value": 5,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 150,
+				"Max Value": 320,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 10,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Elder King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"CD82CB954FDB100E21442DBF5AD1D279\", \"Necklace of Elder King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"F0C951B144E2FC1F6C0192AC63BEBBCE\", \"Talisman of Elder King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"4F26090D478C45B49D2206A01B1161D0\", \"Ring of Elder King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"B88BAC7C4D4E6087EB435EB63686475F\", \"Bracelet of Elder King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Bracelet01",
+		"Type": "Accessories",
+		"Rarity": "Legendary",
+		"Slot": "Bracelet",
+		"Weapon Category": "None",
+		"Inventory Panel": "P8",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Necklace.BP_Necklace_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/BraceletAccess.BraceletAccess'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "ek_brace_01",
+			"Name": "INVTEXT(\"Bracelet of Elder King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 4.8,
+			"Value": 45,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 20
+				},
+				{
+					"Type": "PhAttackSpeed",
+					"Value": 0.3
+				},
+				{
+					"Type": "Stamina",
+					"Value": 15
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 5,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 35,
+			"Max Durability": 89,
+			"Random Stats": [
+				{
+					"Stat": "Health",
+					"Value and Multiplier":
+					{
+						"Min Value": 25,
+						"Max Value": 100,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Mana",
+					"Value and Multiplier":
+					{
+						"Min Value": 10,
+						"Max Value": 78,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "PhysicalDmg",
+					"Value and Multiplier":
+					{
+						"Min Value": 15,
+						"Max Value": 45,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				},
+				{
+					"Stat": "Armor",
+					"Value and Multiplier":
+					{
+						"Min Value": 5,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 150,
+				"Max Value": 320,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 10,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Elder King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"CD82CB954FDB100E21442DBF5AD1D279\", \"Necklace of Elder King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"F0C951B144E2FC1F6C0192AC63BEBBCE\", \"Talisman of Elder King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"4F26090D478C45B49D2206A01B1161D0\", \"Ring of Elder King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"B88BAC7C4D4E6087EB435EB63686475F\", \"Bracelet of Elder King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "WS_Helm",
+		"Type": "Armor",
+		"Rarity": "Legendary",
+		"Slot": "Head",
+		"Weapon Category": "None",
+		"Inventory Panel": "P1",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Chestplate01_Green.BP_Chestplate01_Green_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "SkeletalMesh'/Game/MetanoiaCombat/Inventory/Meshes/Skeletal/Armor/SK_Helm.SK_Helm'",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/T_Helm.T_Helm'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "ws_hm",
+			"Name": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"02F3A1DC40A72BFAF33264802344BB3F\", \"Helm of Water King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 6,
+			"Value": 115,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 35
+				},
+				{
+					"Type": "Armor",
+					"Value": 15
+				},
+				{
+					"Type": "CriticalRate",
+					"Value": 0.2
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 22,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 40,
+			"Max Durability": 100,
+			"Random Stats": [
+				{
+					"Stat": "Stamina",
+					"Value and Multiplier":
+					{
+						"Min Value": 8,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 90,
+				"Max Value": 200,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 4,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Water King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"2DAF56314FC7D0A953FFA9B64B82A579\", \"Helm of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"203D4EE34D23462AA7A617AF5C19CE5F\", \"Plate of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"CC6841DF4F30B45B86B1909787F1635E\", \"Gloves of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"9148C1E04DEF41DA7122ED80745D8622\", \"Pants of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"ADE35075471F597FB2BC148A4FBC4537\", \"Boots of Water King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "WS_Plate",
+		"Type": "Armor",
+		"Rarity": "Legendary",
+		"Slot": "Chestplate",
+		"Weapon Category": "None",
+		"Inventory Panel": "P1",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Chestplate01_Green.BP_Chestplate01_Green_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "SkeletalMesh'/Game/Model/StaticItem/Custom_FBX/ArmorCape/Meshes/Skeletal/Armor/SK_Chestplate01A.SK_Chestplate01A'",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/T_Chestplate01_Green.T_Chestplate01_Green'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "ws_pt",
+			"Name": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"BFF989BC47B0D913CC4D76A15093F000\", \"Plate of the Water King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 6,
+			"Value": 115,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 35
+				},
+				{
+					"Type": "Armor",
+					"Value": 15
+				},
+				{
+					"Type": "CriticalRate",
+					"Value": 0.2
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 22,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 40,
+			"Max Durability": 100,
+			"Random Stats": [
+				{
+					"Stat": "Stamina",
+					"Value and Multiplier":
+					{
+						"Min Value": 8,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 90,
+				"Max Value": 200,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 4,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Water King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"2DAF56314FC7D0A953FFA9B64B82A579\", \"Helm of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"203D4EE34D23462AA7A617AF5C19CE5F\", \"Plate of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"CC6841DF4F30B45B86B1909787F1635E\", \"Gloves of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"9148C1E04DEF41DA7122ED80745D8622\", \"Pants of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"ADE35075471F597FB2BC148A4FBC4537\", \"Boots of Water King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "WS_Gloves",
+		"Type": "Armor",
+		"Rarity": "Legendary",
+		"Slot": "Gloves",
+		"Weapon Category": "None",
+		"Inventory Panel": "P1",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Chestplate01_Green.BP_Chestplate01_Green_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "SkeletalMesh'/Game/MetanoiaCombat/Metanoia_Sub_System/Meshes/SK_SteelGloves1.SK_SteelGloves1'",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/T_Gloves01_Silver.T_Gloves01_Silver'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "ws_gs",
+			"Name": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"BD5AAC7549A6BA704245FFBB76C1F032\", \"Gloves of Water King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 6,
+			"Value": 115,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 35
+				},
+				{
+					"Type": "Armor",
+					"Value": 15
+				},
+				{
+					"Type": "CriticalRate",
+					"Value": 0.2
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 22,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 40,
+			"Max Durability": 100,
+			"Random Stats": [
+				{
+					"Stat": "Stamina",
+					"Value and Multiplier":
+					{
+						"Min Value": 8,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 90,
+				"Max Value": 200,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 4,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Water King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"2DAF56314FC7D0A953FFA9B64B82A579\", \"Helm of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"203D4EE34D23462AA7A617AF5C19CE5F\", \"Plate of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"CC6841DF4F30B45B86B1909787F1635E\", \"Gloves of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"9148C1E04DEF41DA7122ED80745D8622\", \"Pants of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"ADE35075471F597FB2BC148A4FBC4537\", \"Boots of Water King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "WS_Pants",
+		"Type": "Armor",
+		"Rarity": "Legendary",
+		"Slot": "Legs",
+		"Weapon Category": "None",
+		"Inventory Panel": "P1",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Chestplate01_Green.BP_Chestplate01_Green_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "SkeletalMesh'/Game/MetanoiaCombat/Inventory/Meshes/Skeletal/Armor/SK_Legs01_Silver.SK_Legs01_Silver'",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/T_Legs01_Silver.T_Legs01_Silver'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "ws_ps",
+			"Name": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"A1A9D3A84FA0D825CA289FA28CDA1F18\", \"Pants of Water King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 6,
+			"Value": 115,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 35
+				},
+				{
+					"Type": "Armor",
+					"Value": 15
+				},
+				{
+					"Type": "CriticalRate",
+					"Value": 0.2
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 22,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 40,
+			"Max Durability": 100,
+			"Random Stats": [
+				{
+					"Stat": "Stamina",
+					"Value and Multiplier":
+					{
+						"Min Value": 8,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 90,
+				"Max Value": 200,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 4,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Water King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"2DAF56314FC7D0A953FFA9B64B82A579\", \"Helm of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"203D4EE34D23462AA7A617AF5C19CE5F\", \"Plate of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"CC6841DF4F30B45B86B1909787F1635E\", \"Gloves of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"9148C1E04DEF41DA7122ED80745D8622\", \"Pants of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"ADE35075471F597FB2BC148A4FBC4537\", \"Boots of Water King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "WS_Boots",
+		"Type": "Armor",
+		"Rarity": "Legendary",
+		"Slot": "Boots",
+		"Weapon Category": "None",
+		"Inventory Panel": "P1",
+		"Class": "BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Armor/BP_Chestplate01_Green.BP_Chestplate01_Green_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "SkeletalMesh'/Game/MetanoiaCombat/Inventory/Meshes/Skeletal/Armor/SK_Boots02.SK_Boots02'",
+		"Image": "Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/ArmorWeapons/T_Boots.T_Boots'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "ws_bt",
+			"Name": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"54309E6445A1104E87F0BABFDFA50FAD\", \"Boots of Water King\")",
+			"Description": "NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"37F757EF4ACD0EB532F29689AF8C6156\", \"Long Text. There are two types of free text boxes that can be used. One is called the \\\"Short Text\\\" and the other is called \\\"Long Text.\\\" The difference between these two text fields.\")",
+			"Readable Text": ""
+		},
+		"Stats":
+		{
+			"Weight": 6,
+			"Value": 115,
+			"Stats": [
+				{
+					"Type": "Health",
+					"Value": 35
+				},
+				{
+					"Type": "Armor",
+					"Value": 15
+				},
+				{
+					"Type": "CriticalRate",
+					"Value": 0.2
+				}
+			],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": true,
+				"Current Durability": 100
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 22,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 40,
+			"Max Durability": 100,
+			"Random Stats": [
+				{
+					"Stat": "Stamina",
+					"Value and Multiplier":
+					{
+						"Min Value": 8,
+						"Max Value": 18,
+						"Multiplier DataTable": "None"
+					},
+					"Round to Int": true
+				}
+			],
+			"Random Value":
+			{
+				"Min Value": 90,
+				"Max Value": 200,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 1,
+				"Max Value": 4,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "Water King",
+		"ItemNameSet": [
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"2DAF56314FC7D0A953FFA9B64B82A579\", \"Helm of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"203D4EE34D23462AA7A617AF5C19CE5F\", \"Plate of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"CC6841DF4F30B45B86B1909787F1635E\", \"Gloves of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"9148C1E04DEF41DA7122ED80745D8622\", \"Pants of Water King\")",
+			"NSLOCTEXT(\"[47FBC71D4C96438BD8738198C101CB50]\", \"ADE35075471F597FB2BC148A4FBC4537\", \"Boots of Water King\")"
+		],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	}
+]

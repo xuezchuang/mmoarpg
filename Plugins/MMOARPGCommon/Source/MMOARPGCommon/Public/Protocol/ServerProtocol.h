@@ -1,0 +1,21 @@
+#pragma once
+#include "SimpleProtocolsDefinition.h"
+
+
+DEFINITION_SIMPLE_PROTOCOLS(PlayerRegistInfoResponses, 13)
+DEFINITION_SIMPLE_PROTOCOLS(PlayerQuitRequests, 14)
+DEFINITION_SIMPLE_PROTOCOLS(PlayerQuitResponses, 15)
+DEFINITION_SIMPLE_PROTOCOLS(UpdateCharacterDataRequests, 26)
+DEFINITION_SIMPLE_PROTOCOLS(UpdateCharacterDataResponses, 27)
+DEFINITION_SIMPLE_PROTOCOLS(IdentityReplicationRequests, 28)
+DEFINITION_SIMPLE_PROTOCOLS(IdentityReplicationResponses, 29)
+DEFINITION_SIMPLE_PROTOCOLS(CharacterResurrectionRequests, 34)
+DEFINITION_SIMPLE_PROTOCOLS(CharacterResurrectionResponses, 35)
+DEFINITION_SIMPLE_PROTOCOLS(JumpNextDSServerRequests, 38)
+DEFINITION_SIMPLE_PROTOCOLS(JumpNextDSServerResponses, 39)
+DEFINITION_SIMPLE_PROTOCOLS(SyncCharacterStatusRequests, 40)
+DEFINITION_SIMPLE_PROTOCOLS(SyncCharacterStatusResponses, 41)
+DEFINITION_SIMPLE_PROTOCOLS(UserRegisterRequests, 42)
+DEFINITION_SIMPLE_PROTOCOLS(UserRegisterResponses, 43)
+DEFINITION_SIMPLE_PROTOCOLS(ForcedOfflineRequests, 44)
+DEFINITION_SIMPLE_PROTOCOLS(ForcedOfflineResponses, 45)

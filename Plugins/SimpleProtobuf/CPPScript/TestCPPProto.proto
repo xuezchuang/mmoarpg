@@ -1,0 +1,82 @@
+syntax="proto3";
+package TestCPP;
+import  "CPPScript/TestCPPProto1.proto";
+import "CPPScript/Hello/TestCPPProto2.proto";
+
+enum EPlayerState
+{
+	NONE = 0;
+	OK = 1;
+	Hello = 2;
+}
+
+//C++,Java,Python ,go,Ruby,JavaNano,Objective-C,C#
+message FStructObject
+{
+	int32 intvalue = 1;
+	int32 intok = 2;
+	string Str =3;
+	EPlayerState type = 4;
+	double helloDouble = 5;//这个是一个数据
+	float helloFloat = 6;
+	sint32 hellosint32 =7;
+	uint32 hellouint32 = 8;
+	uint64 hellouint64 = 9;
+	sint64 hellosint64 = 10;
+	fixed32 hellofiexed32 =11;//uint32
+	fixed64 hellofiexed64 =12;//uint64
+	sfixed32 uhellofiexed32 = 13;//int32
+	sfixed64 uhellofiexed64 = 14;//int64
+	bool bUP = 15;//bool
+	string xxxxstr = 16;//std::string
+	bytes xxxbytes = 17;//std::string
+	enum EHelloState
+	{
+		HELLONONE = 0;
+		HELLOOK = 1;
+		HELLOHELLO = 2;
+	}
+	EHelloState HelloState = 18;
+
+	message FStructObject1
+	{
+		int32 helloint32 =1;
+
+		message FStructObject2
+		{
+			int32 helloint32 =1;
+		}
+		FStructObject2 Object = 2;
+	}
+
+	FStructObject1 Object2 = 19;
+
+	oneof hello_oneof
+	{
+		string hellostring = 20;//std::string
+		string hellostring1 = 21;//std::string
+		string hellostring2 = 22;//std::string
+		string hellostring3 = 23;//std::string
+		string hellostring4 = 24;//std::string
+		string hellostring5 = 25;//std::string
+	}
+
+	PlayerStateHello.EBoneState BoneState = 26;
+	PlayerStateHello1.EBone1State Bone1State =27;
+
+//	message FMyKey
+//	{
+	//	int32 xxx = 1;
+	//}
+
+	//key = 整数 也可以是字符串 标量类型    不能是浮点和 bytes
+	map<int32,string> masstirng = 28;
+
+	//map<FMyKey,string> masstirng2 = 29;//不支持
+
+	repeated int32 MyArrayInt = 29;
+	repeated string MyArrayString = 30;
+
+	duration MyArrayList = 31;
+}
+

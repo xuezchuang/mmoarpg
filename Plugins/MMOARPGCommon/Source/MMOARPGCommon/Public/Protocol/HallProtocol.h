@@ -1,0 +1,17 @@
+#pragma once
+#include "SimpleProtocolsDefinition.h"
+
+DEFINITION_SIMPLE_PROTOCOLS(CharacterLogin, 100)
+DEFINITION_SIMPLE_PROTOCOLS(CharacterSelect, 200)
+//DEFINITION_SIMPLE_PROTOCOLS(CheckCharacterNameRequests,6)
+//DEFINITION_SIMPLE_PROTOCOLS(CheckCharacterNameResponses, 7)
+//DEFINITION_SIMPLE_PROTOCOLS(CreateCharacterRequests, 8)
+//DEFINITION_SIMPLE_PROTOCOLS(CreateCharacterResponses, 9)
+//DEFINITION_SIMPLE_PROTOCOLS(LoginToDSServerRequests,10)
+//DEFINITION_SIMPLE_PROTOCOLS(LoginToDSServerResponses,11)
+DEFINITION_SIMPLE_PROTOCOLS(CreateCharacter, 300)
+DEFINITION_SIMPLE_PROTOCOLS(DeleteCharacter, 400)
+DEFINITION_SIMPLE_PROTOCOLS(CharacterResponse, 500)
+//DEFINITION_SIMPLE_PROTOCOLS(DeleteCharacterResponses, 21)
+//DEFINITION_SIMPLE_PROTOCOLS(EditorCharacterRequests, 22)
+//DEFINITION_SIMPLE_PROTOCOLS(EditorCharacterResponses, 23)

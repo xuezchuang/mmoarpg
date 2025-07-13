@@ -1,0 +1,29 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.1",
+	"FriendlyName": "SimpleNumericalDeduction",
+	"Description": "Make an upgrade value deduction, such as the effect of the value after rising to level 100. You can view the dynamic effect through the curve.",
+	"Category": "RenZhai",
+	"CreatedBy": "Other Courses",
+	"CreatedByURL": "https://zhuanlan.zhihu.com/p/60117613",
+	"DocsURL": "https://renzhai.net/500.html",
+	"MarketplaceURL": "https://renzhai.net/500.html",
+	"SupportURL": "https://www.aboutcg.org/courseDetails/1269/introduce",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "SimpleNumericalDeduction",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "SimpleNumericalDeductionRuntime",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

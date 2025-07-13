@@ -1,0 +1,29 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "SimpleProtobuf",
+	"Description": "The. Proto cpp file can be generated through UE projectsettings.",
+	"Category": "RenZhai",
+	"CreatedBy": "Other Courses",
+	"CreatedByURL": "http://renzhai.net",
+	"DocsURL": "https://renzhai.net/420.html",
+	"MarketplaceURL": "https://renzhai.net/420.html",
+	"SupportURL": "https://www.aboutcg.org/courseDetails/1269/introduce",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "SimpleProtobuf",
+			"Type": "Runtime",
+			"LoadingPhase": "PreLoadingScreen"
+		},
+		{
+			"Name": "SimpleProtobufEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}

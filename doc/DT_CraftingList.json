@@ -1,0 +1,4904 @@
+[
+	{
+		"Name": "DualSword01",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.FDT_Weapons'",
+				"RowName": "DualSword01"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "Greatsword01",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "Greatsword01"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Bronze"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 1
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 5
+			}
+		]
+	},
+	{
+		"Name": "Gloves01_Silver",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "Gloves01_Silver"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "Gloves01_Gold",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "Gloves01_Gold"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "Necklace01",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "Necklace01"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Ruby"
+				},
+				"Quantity": 1
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 1
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Twine"
+				},
+				"Quantity": 1
+			}
+		]
+	},
+	{
+		"Name": "Talisman01",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "Talisman01"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "Ring01",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "Ring01"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "Legs01_Silver",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "Legs01_Silver"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "Legs01_Bronze",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "Legs01_Bronze"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "Dualsword02",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "Dualsword02"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "Basicarrow01",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "Basicarrow01"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "BasicArrow_0",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ExplosiveArrow01"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "BasicArrow_1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "FreezeArrow01"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "BasicArrow_2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "PoisonArrow01"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "Bracelet01",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "Bracelet01"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "Chestplate03_DG",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "Chestplate01_DarkGrey"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "Chestplate04_White",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "Chestplate01_White"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "RohanSword_FRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "RohanSword_FDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "RohanSword_FRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "RohanSword_FARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+					"RowName": "RohanSword_FDRank1"
+				},
+				"Quantity": 1
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "RohanSword_FRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "RohanSword_FSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+					"RowName": "RohanSword_FARank2"
+				},
+				"Quantity": 1
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "RohanSword_KRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "RohanSword_KDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "RohanSword_KRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "RohanSword_KARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "RohanSword_KRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "RohanSword_KSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "RohanSword_ERank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "RohanSword_EDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "RohanSword_ERank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "RohanSword_EARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "RohanSword_ERank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "RohanSword_ESRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ItimarasBlade_IDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ItimarasBlade_IDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ItimarasBlade_IDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ItimarasBlade_IARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ItimarasBlade_IDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ItimarasBlade_ISRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ItimarasBlade_SDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ItimarasBlade_SDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ItimarasBlade_SDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ItimarasBlade_SARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ItimarasBlade_SDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ItimarasBlade_SSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ItimarasBlade_NDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ItimarasBlade_NDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ItimarasBlade_NDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ItimarasBlade_NARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ItimarasBlade_NDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ItimarasBlade_NSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ClaybornBlade_FDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ClaybornBlade_FDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ClaybornBlade_FDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ClaybornBlade_FARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ClaybornBlade_FDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ClaybornBlade_FSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ClaybornBlade_CDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ClaybornBlade_CDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ClaybornBlade_CDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ClaybornBlade_CARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ClaybornBlade_CDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ClaybornBlade_CSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ClaybornBlade_GDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ClaybornBlade_GDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ClaybornBlade_GDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ClaybornBlade_GARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "ClaybornBlade_GDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "ClaybornBlade_GSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "DragoniaBlade_FDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "DragoniaBlade_FDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "DragoniaBlade_FDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "DragoniaBlade_FARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "DragoniaBlade_FDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "DragoniaBlade_FSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "DragoniaBlade_BDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "DragoniaBlade_BDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "DragoniaBlade_BDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "DragoniaBlade_BARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "DragoniaBlade_BDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "DragoniaBlade_BSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "DragoniaBlade_VDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "DragoniaBlade_VDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "DragoniaBlade_VDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "DragoniaBlade_VARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "DragoniaBlade_VDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "DragoniaBlade_VSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "PalomittasBlade_CDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "PalomittasBlade_CDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "PalomittasBlade_CDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "PalomittasBlade_CDRank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "PalomittasBlade_CDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "PalomittasBlade_CDRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "PalomittasBlade_GDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "PalomittasBlade_GDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "PalomittasBlade_GDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "PalomittasBlade_GDRank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "PalomittasBlade_GDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "PalomittasBlade_GDRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "PalomittasBlade_TDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "PalomittasBlade_TDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "PalomittasBlade_TDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "PalomittasBlade_TDRank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "PalomittasBlade_TDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "PalomittasBlade_TDRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Silver"
+				},
+				"Quantity": 4
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 2
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Wood"
+				},
+				"Quantity": 2
+			}
+		]
+	},
+	{
+		"Name": "KishShield_ADRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KishShield_ADRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KishShield_ADRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KishShield_AARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KishShield_ADRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KishShield_ASRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KishShield_KDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KishShield_KDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KishShield_KDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KishShield_KARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KishShield_KDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KishShield_KSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KishShield_MDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KishShield_MDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KishShield_MDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KishShield_MARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KishShield_MDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KishShield_MSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NoydeShield_ADRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NoydeShield_ADRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NoydeShield_ADRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NoydeShield_AARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NoydeShield_ADRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NoydeShield_ASRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NoydeShield_EDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NoydeShield_EDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NoydeShield_EDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NoydeShield_EARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NoydeShield_EDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NoydeShield_ESRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NoydeShield_SDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NoydeShield_SDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NoydeShield_SDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NoydeShield_SARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NoydeShield_SDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NoydeShield_SSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NatuShield_GSRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NatuShield_GDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NatuShield_GSRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NatuShield_GARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NatuShield_GSRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NatuShield_GSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NatuShield_CSRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NatuShield_CDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NatuShield_CSRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NatuShield_CARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NatuShield_CSRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NatuShield_CSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NatuShield_SSRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NatuShield_SDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NatuShield_SSRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NatuShield_SARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "NatuShield_SSRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "NatuShield_SSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KaelShield_WDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KaelShield_WDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KaelShield_WDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KaelShield_WARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KaelShield_WDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KaelShield_WSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KaelShield_EDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KaelShield_EDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KaelShield_EDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KaelShield_EARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KaelShield_EDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KaelShield_ESRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KaelShield_NDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KaelShield_NDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KaelShield_NDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KaelShield_NARank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "KaelShield_NDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "KaelShield_NSRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "BenezerShield_KDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "BenezerShield_KDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "BenezerShield_KDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "BenezerShield_KDRank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "BenezerShield_KDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "BenezerShield_KDRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "BenezerShield_NDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "BenezerShield_NDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "BenezerShield_NDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "BenezerShield_NDRank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "BenezerShield_NDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "BenezerShield_NDRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "BenezerShield_DDRank1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "BenezerShield_DDRank1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "BenezerShield_DDRank2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "BenezerShield_DDRank2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "BenezerShield_DDRank3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "BenezerShield_DDRank3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "FlareDemonicBow_1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "FlareDemonicBow_1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "FlareDemonicBow_2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "FlareDemonicBow_2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "FlareDemonicBow_3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "FlareDemonicBow_3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "DawnDemonicBow_1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "DawnDemonicBow_1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "DawnDemonicBow_2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "DawnDemonicBow_2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "DawnDemonicBow_3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "DawnDemonicBow_3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "WinterDemonicBow_1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "WinterDemonicBow_1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "WinterDemonicBow_2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "WinterDemonicBow_2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "WinterDemonicBow_3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "WinterDemonicBow_3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "WoodBow_1",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "WoodBow_1"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "WoodBow_2",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "WoodBow_2"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "WoodBow_3",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Weapons.DT_Weapons'",
+				"RowName": "WoodBow_3"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "BlueCloth"
+				},
+				"Quantity": 5
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Gold"
+				},
+				"Quantity": 300
+			}
+		]
+	},
+	{
+		"Name": "FireSetHelm",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "FS_Helm"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 25
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Ruby"
+				},
+				"Quantity": 10
+			}
+		]
+	},
+	{
+		"Name": "WaterSetHelm",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "WS_Helm"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 25
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Ruby"
+				},
+				"Quantity": 10
+			}
+		]
+	},
+	{
+		"Name": "FireSetChest",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "FS_Plate"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 25
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Ruby"
+				},
+				"Quantity": 10
+			}
+		]
+	},
+	{
+		"Name": "WaterSetChest",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "WS_Plate"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 25
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Ruby"
+				},
+				"Quantity": 10
+			}
+		]
+	},
+	{
+		"Name": "FireSetGloves",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "FS_Gloves"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 25
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Ruby"
+				},
+				"Quantity": 10
+			}
+		]
+	},
+	{
+		"Name": "WaterSetGloves",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "WS_Gloves"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 25
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Ruby"
+				},
+				"Quantity": 10
+			}
+		]
+	},
+	{
+		"Name": "FireSetPants",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "FS_Pants"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 25
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Ruby"
+				},
+				"Quantity": 10
+			}
+		]
+	},
+	{
+		"Name": "WaterSetPants",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "WS_Pants"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 25
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Ruby"
+				},
+				"Quantity": 10
+			}
+		]
+	},
+	{
+		"Name": "FireSetBoots",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "FS_Boots"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 25
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Ruby"
+				},
+				"Quantity": 10
+			}
+		]
+	},
+	{
+		"Name": "WaterSetBoots",
+		"Craftable Item":
+		{
+			"Table and Row":
+			{
+				"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_Armor.FDT_Armor'",
+				"RowName": "WS_Boots"
+			},
+			"Quantity": 1
+		},
+		"Required Items": [
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Leather"
+				},
+				"Quantity": 25
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Steel"
+				},
+				"Quantity": 15
+			},
+			{
+				"Table and Row":
+				{
+					"DataTable": "/Script/Engine.DataTable'/Game/DataTable/Inventory/FDT_CraftingIngredients.FDT_CraftingIngredients'",
+					"RowName": "Ruby"
+				},
+				"Quantity": 10
+			}
+		]
+	}
+]

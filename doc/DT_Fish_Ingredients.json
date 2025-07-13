@@ -1,0 +1,1533 @@
+[
+	{
+		"Name": "Fish_01",
+		"Type": "Food",
+		"Rarity": "Common",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Fish/F_Fish_1.F_Fish_1'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fish_01",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"036B48094B3B8DE68BB607B8FA6676EF\", \"Green Tilapia\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"29F2D7AB4215D8EAA99D63945274EEFF\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"FC778D6F4FB8AFF45F6243B0443D9F66\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3A2E133543F7CACCB4C726BA5D5A7F28\", \"Purchase from the Merchant shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Wheat",
+		"Type": "Crafting Ingredient",
+		"Rarity": "Superior",
+		"Slot": "None",
+		"Weapon Category": "None",
+		"Inventory Panel": "P3",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaResources/Icon/ItemTexture/CraftResourcesIcons/Textures/Tex_herbs_12.Tex_herbs_12'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "g_wheat",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"42D174D046563EB4E6E7F9B46FDA58D6\", \"Wheat\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"38D6A89C40430E7EBB07F0A0B0905BA8\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": []
+		},
+		"Stats":
+		{
+			"Weight": 0.01,
+			"Value": 28,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Fish_02",
+		"Type": "Food",
+		"Rarity": "Epic",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Fish/F_Fish_2.F_Fish_2'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fish_02",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"F34CE39A48FB4DE1E4FD55AC1BA71556\", \"Red Tide Tilapia\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"29F2D7AB4215D8EAA99D63945274EEFF\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"60AA5DE4491D8A57C5277194F622A211\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3A2E133543F7CACCB4C726BA5D5A7F28\", \"Purchase from the Merchant shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Fish_03",
+		"Type": "Food",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Fish/F_Fish_3.F_Fish_3'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fish_02",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"4BA693324B1E2F80DFB87896B21E8FB4\", \"Jumbo Piranha\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"29F2D7AB4215D8EAA99D63945274EEFF\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"2BD18BEC4DB3D6A3CCB6B4B83270E8E7\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3A2E133543F7CACCB4C726BA5D5A7F28\", \"Purchase from the Merchant shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Fish_04",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Fish/F_Fish_4.F_Fish_4'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fish_02",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3B2B35024560F74DD813198D09A75D8D\", \"Blue Tambaguy\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"29F2D7AB4215D8EAA99D63945274EEFF\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"F6681B7D478103E56B80279458789361\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3A2E133543F7CACCB4C726BA5D5A7F28\", \"Purchase from the Merchant shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Fish_05",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Fish/F_Fish_5.F_Fish_5'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fish_02",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"6AF4475F43E0C907877F32BA759FE24E\", \"Green Tambaguy\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"29F2D7AB4215D8EAA99D63945274EEFF\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"D779A6754A2B5BFC5078C9836BFE41DD\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3A2E133543F7CACCB4C726BA5D5A7F28\", \"Purchase from the Merchant shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Fish_06",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Fish/F_Fish_6.F_Fish_6'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fish_02",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"312B835649DF2A8EAD70208082743240\", \"Angry Tambaguy\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"29F2D7AB4215D8EAA99D63945274EEFF\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"9160E1874A32087633A5EF86A900D14D\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3A2E133543F7CACCB4C726BA5D5A7F28\", \"Purchase from the Merchant shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Fish_07",
+		"Type": "Food",
+		"Rarity": "Epic",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Fish/F_Fish_7.F_Fish_7'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fish_02",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"BF2968924ABC48D45190618BF82E762F\", \"Proud Salmon\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"29F2D7AB4215D8EAA99D63945274EEFF\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"6224DBD144EFA24C0A64DDA63ED1A615\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3A2E133543F7CACCB4C726BA5D5A7F28\", \"Purchase from the Merchant shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Fish_08",
+		"Type": "Food",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Fish/F_Fish_8.F_Fish_8'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fish_02",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"865CC89A4A5A866935B47E8E8E371F6C\", \"Golden Isda\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"29F2D7AB4215D8EAA99D63945274EEFF\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"92E67A7645E4B45E578D65B6482A73A9\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3A2E133543F7CACCB4C726BA5D5A7F28\", \"Purchase from the Merchant shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Fish_09",
+		"Type": "Food",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Fish/F_Fish_9.F_Fish_9'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fish_02",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"90D041A24381BF6F202A848410129011\", \"Happy Isda\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"29F2D7AB4215D8EAA99D63945274EEFF\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"B489707D43A63F5B76831FA8FFA1244A\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3A2E133543F7CACCB4C726BA5D5A7F28\", \"Purchase from the Merchant shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Fish_10",
+		"Type": "Food",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Fish/F_Fish_10.F_Fish_10'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fish_02",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"6E71315A4A752BF3138D849877F477E7\", \"Brownish Isda\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"29F2D7AB4215D8EAA99D63945274EEFF\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"973896D34941C745424B43BB2A5C5714\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3A2E133543F7CACCB4C726BA5D5A7F28\", \"Purchase from the Merchant shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Fish_11",
+		"Type": "Food",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Fish/F_Fish_11.F_Fish_11'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fish_02",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3ED0250D412C4DFDEE21329E99454862\", \"Chismosang Isda\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"29F2D7AB4215D8EAA99D63945274EEFF\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"51C33F464759ED19CFE75B9FE6A6BCC4\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3A2E133543F7CACCB4C726BA5D5A7F28\", \"Purchase from the Merchant shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Fish_12",
+		"Type": "Food",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Fish/F_Fish_12.F_Fish_12'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "fish_02",
+			"Name": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"52E53E784DE69B89BF708CA927743979\", \"Chismosong Isda\")",
+			"Description": "NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"29F2D7AB4215D8EAA99D63945274EEFF\", \"Guava is a common tropical fruit cultivated in many tropical and subtropical regions\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"19E2588F49D652FA7373E8B4ECA7762E\", \"Found in the wild\")",
+				"NSLOCTEXT(\"[BFC4466C457558225C99F1AA320C75B2]\", \"3A2E133543F7CACCB4C726BA5D5A7F28\", \"Purchase from the Merchant shop in regalia\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	}
+]

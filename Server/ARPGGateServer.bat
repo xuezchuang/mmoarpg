@@ -1,0 +1,1 @@
+start E:\ue\UnrealEngine\Engine\Binaries\Win64\MMOARPGGateServer.exe

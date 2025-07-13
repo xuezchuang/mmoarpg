@@ -1,0 +1,474 @@
+[
+	{
+		"Name": "Book01LBrown",
+		"Type": "Glider",
+		"Rarity": "Legendary",
+		"Slot": "Glider",
+		"Weapon Category": "None",
+		"Inventory Panel": "P10",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "/Script/Engine.SkeletalMesh'/Game/MetanoiaCombat/Actor_Blueprint/Glider/Glider/Items/HeroParachute/SK_SFR_Hero_Parachute.SK_SFR_Hero_Parachute'",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/OtherItems/GliderIcon01.GliderIcon01'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "glider01",
+			"Name": "NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"1BBC65B6404A97394E13BABC18D14F73\", \"Adventurer Skyblue Wood Glider\")",
+			"Description": "NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"7310421F4CCF6489E40B0488BCFFA061\", \"Paraglider will allows you to sail through the sky on your journey.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"F040D0A84C3415D03821AFB6BA357B54\", \"Craft via Artisan Work Lv.5\")",
+				"NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"17AA88CC4BD6CD02B1EFDB99CDA0249C\", \"Can be acquire randomly from any chest\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.01,
+			"Value": 28,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable?": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Book01LBrown_0",
+		"Type": "Glider",
+		"Rarity": "Superior",
+		"Slot": "Glider",
+		"Weapon Category": "None",
+		"Inventory Panel": "P10",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "/Script/Engine.SkeletalMesh'/Game/MetanoiaCombat/Actor_Blueprint/Glider/Glider/Items/HeroParachute/SK_SFR_Hero_Parachute1.SK_SFR_Hero_Parachute1'",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/OtherItems/GliderIcon02.GliderIcon02'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "glider02",
+			"Name": "NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"44051B27440772DFCAE696B98139D94A\", \"Adventurer Red Wood Glider\")",
+			"Description": "NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"7310421F4CCF6489E40B0488BCFFA061\", \"Paraglider will allows you to sail through the sky on your journey.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"F040D0A84C3415D03821AFB6BA357B54\", \"Craft via Artisan Work Lv.5\")",
+				"NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"17AA88CC4BD6CD02B1EFDB99CDA0249C\", \"Can be acquire randomly from any chest\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.01,
+			"Value": 28,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable?": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Book01LBrown_1",
+		"Type": "Glider",
+		"Rarity": "Epic",
+		"Slot": "Glider",
+		"Weapon Category": "None",
+		"Inventory Panel": "P10",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "/Script/Engine.SkeletalMesh'/Game/MetanoiaCombat/Actor_Blueprint/Glider/Glider/Items/HeroParachute/SK_SFR_Hero_Parachute2.SK_SFR_Hero_Parachute2'",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/OtherItems/GliderIcon02.GliderIcon02'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "glider02",
+			"Name": "NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"178498194FC9802FEA7D64BCF23F9849\", \"Adventurer Green Wood Glider\")",
+			"Description": "NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"7310421F4CCF6489E40B0488BCFFA061\", \"Paraglider will allows you to sail through the sky on your journey.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"F040D0A84C3415D03821AFB6BA357B54\", \"Craft via Artisan Work Lv.5\")",
+				"NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"17AA88CC4BD6CD02B1EFDB99CDA0249C\", \"Can be acquire randomly from any chest\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.01,
+			"Value": 28,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable?": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Book01LBrown_2",
+		"Type": "Glider",
+		"Rarity": "Common",
+		"Slot": "Glider",
+		"Weapon Category": "None",
+		"Inventory Panel": "P10",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Other/BP_Book01LBrown.BP_Book01LBrown_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "/Script/Engine.SkeletalMesh'/Game/MetanoiaCombat/Actor_Blueprint/Glider/Glider/Items/HeroParachute/SK_SFR_Hero_Parachute3.SK_SFR_Hero_Parachute3'",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/OtherItems/GliderIcon01.GliderIcon01'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "glider02",
+			"Name": "NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"F55E84A14AB6B59FE150F09C2F0233F9\", \"Adventurer Brown Wood Glider\")",
+			"Description": "NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"7310421F4CCF6489E40B0488BCFFA061\", \"Paraglider will allows you to sail through the sky on your journey.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"F040D0A84C3415D03821AFB6BA357B54\", \"Craft via Artisan Work Lv.5\")",
+				"NSLOCTEXT(\"[620647F44833030942472C9B0B6EA5E8]\", \"17AA88CC4BD6CD02B1EFDB99CDA0249C\", \"Can be acquire randomly from any chest\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.01,
+			"Value": 28,
+			"Stats": [],
+			"Required Level": 0,
+			"Consumable Action":
+			{
+				"Category": "None",
+				"Stat": "Health",
+				"Value": 0,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 0
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable?": false,
+			"Quantity": 1
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 0,
+			"Min Quantity": 0,
+			"Max Quantity": 0,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	}
+]

@@ -1,0 +1,16 @@
+syntax="proto3";
+package PlayerStateHello;
+import "CPPScript/Hello/TestCPPProto2.proto";
+
+enum EBoneState
+{
+	NONE = 0;
+	OK = 1;
+	Hello = 2;
+}
+
+message FStructObject23
+{
+	int32 ddd = 1;
+	PlayerStateHello1.EBone1State Bone1State =2;
+}

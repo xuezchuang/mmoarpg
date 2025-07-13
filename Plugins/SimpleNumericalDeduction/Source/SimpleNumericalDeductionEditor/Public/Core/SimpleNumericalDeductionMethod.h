@@ -1,0 +1,10 @@
+// Copyright (C) RenZhai.2021.All Rights Reserved.
+
+#pragma once
+
+#include "CoreMinimal.h"
+
+namespace SimpleNumericalDeduction
+{
+
+}

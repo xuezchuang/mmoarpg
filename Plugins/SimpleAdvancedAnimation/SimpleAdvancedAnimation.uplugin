@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "SimpleAdvancedAnimation",
+	"Description": "Advanced animation plug-in supports a variety of advanced animation effects. You only need to call the blueprint interface of this plug-in to realize 3A level animation.",
+	"Category": "RenZhai",
+	"CreatedBy": "Other Courses",
+	"CreatedByURL": "http://renzhai.net/",
+	"DocsURL": "https://zhuanlan.zhihu.com/p/390459326",
+	"MarketplaceURL": "https://renzhai.net/436.html",
+	"SupportURL": "https://www.aboutcg.org/courseDetails/1269/introduce",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "SimpleAdvancedAnimation",
+			"Type": "Runtime",
+			"LoadingPhase": "PreLoadingScreen"
+		}
+	]
+}

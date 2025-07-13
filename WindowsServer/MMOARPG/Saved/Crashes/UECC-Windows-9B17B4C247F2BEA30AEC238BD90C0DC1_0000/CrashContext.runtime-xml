@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FGenericCrashContext>
+<RuntimeProperties>
+<CrashVersion>3</CrashVersion>
+<ExecutionGuid>9EE40EDA461412A207C328B2E47B4022</ExecutionGuid>
+<CrashGUID>UECC-Windows-9B17B4C247F2BEA30AEC238BD90C0DC1_0000</CrashGUID>
+<IsEnsure>true</IsEnsure>
+<IsStall>false</IsStall>
+<IsAssert>false</IsAssert>
+<CrashType>Ensure</CrashType>
+<ErrorMessage>Ensure condition failed: false  [File:E:\ue\UnrealEngine\Engine\Source\Runtime\GameplayTags\Private\NativeGameplayTags.cpp] [Line: 118] 
+Unable to find information about module &apos;GameplayAbilities&apos; in plugin &apos;GameplayAbilities&apos;
+Stack: 
+0x00007ff6753a5add MMOARPGServer.exe!FNativeGameplayTag::ValidateTagRegistration() [E:\ue\UnrealEngine\Engine\Source\Runtime\GameplayTags\Private\NativeGameplayTags.cpp:118]
+0x00007ff6753825af MMOARPGServer.exe!UGameplayTagsManager::ConstructGameplayTagTree() [E:\ue\UnrealEngine\Engine\Source\Runtime\GameplayTags\Private\GameplayTagsManager.cpp:457]
+0x00007ff675395dfb MMOARPGServer.exe!UGameplayTagsManager::InitializeManager() [E:\ue\UnrealEngine\Engine\Source\Runtime\GameplayTags\Private\GameplayTagsManager.cpp:994]
+0x00007ff676b57660 MMOARPGServer.exe!UEngine::InitializeObjectReferences() [E:\ue\UnrealEngine\Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp:3013]
+0x00007ff676b4f1bc MMOARPGServer.exe!UEngine::Init() [E:\ue\UnrealEngine\Engine\Source\Runtime\Engine\Private\UnrealEngine.cpp:1992]
+0x00007ff675ee199b MMOARPGServer.exe!UGameEngine::Init() [E:\ue\UnrealEngine\Engine\Source\Runtime\Engine\Private\GameEngine.cpp:1113]
+0x00007ff66ecfdcd7 MMOARPGServer.exe!FEngineLoop::Init() [E:\ue\UnrealEngine\Engine\Source\Runtime\Launch\Private\LaunchEngineLoop.cpp:4775]
+0x00007ff66ed19d26 MMOARPGServer.exe!GuardedMain() [E:\ue\UnrealEngine\Engine\Source\Runtime\Launch\Private\Launch.cpp:168]
+0x00007ff66ed19f1a MMOARPGServer.exe!GuardedMainWrapper() [E:\ue\UnrealEngine\Engine\Source\Runtime\Launch\Private\Windows\LaunchWindows.cpp:107]
+0x00007ff66ed1cc16 MMOARPGServer.exe!LaunchWindowsStartup() [E:\ue\UnrealEngine\Engine\Source\Runtime\Launch\Private\Windows\LaunchWindows.cpp:244]
+0x00007ff66ed29f94 MMOARPGServer.exe!WinMain() [E:\ue\UnrealEngine\Engine\Source\Runtime\Launch\Private\Windows\LaunchWindows.cpp:285]
+0x00007ff67839feba MMOARPGServer.exe!__scrt_common_main_seh() [D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl:288]
+0x00007ff8bb797344 KERNEL32.DLL!UnknownFunction []
+0x00007ff8bbe426b1 ntdll.dll!UnknownFunction []
+</ErrorMessage>
+<CrashReporterMessage></CrashReporterMessage>
+<ProcessId>20632</ProcessId>
+<SecondsSinceStart>0</SecondsSinceStart>
+<IsInternalBuild>false</IsInternalBuild>
+<IsPerforceBuild>false</IsPerforceBuild>
+<IsSourceDistribution>false</IsSourceDistribution>
+<GameName>UE-MMOARPG</GameName>
+<ExecutableName>MMOARPGServer</ExecutableName>
+<BuildConfiguration>Development</BuildConfiguration>
+<GameSessionID></GameSessionID>
+<PlatformName>WindowsServer</PlatformName>
+<PlatformNameIni>Windows</PlatformNameIni>
+<EngineMode>Server</EngineMode>
+<EngineModeEx>Unset</EngineModeEx>
+<DeploymentName></DeploymentName>
+<EngineVersion>5.2.1-0+UE5</EngineVersion>
+<CommandLine></CommandLine>
+<LanguageLCID>0</LanguageLCID>
+<AppDefaultLocale>zh-CN</AppDefaultLocale>
+<BuildVersion>UE5-CL-0</BuildVersion>
+<Symbols>UE5-CL-0-Win64-Development</Symbols>
+<IsUERelease>false</IsUERelease>
+<IsRequestingExit>false</IsRequestingExit>
+<UserName></UserName>
+<BaseDir>D:/test/WindowsServer/MMOARPG/Binaries/Win64/</BaseDir>
+<RootDir>D:/test/WindowsServer/</RootDir>
+<MachineId>8BE21F6D469D987338D5419BAF5DADBE</MachineId>
+<LoginId>8be21f6d469d987338d5419baf5dadbe</LoginId>
+<EpicAccountId>5741d77988c849be853c4a4aed869df0</EpicAccountId>
+<SourceContext></SourceContext>
+<UserDescription></UserDescription>
+<UserActivityHint></UserActivityHint>
+<CrashDumpMode>0</CrashDumpMode>
+<GameStateName></GameStateName>
+<Misc.NumberOfCores>24</Misc.NumberOfCores>
+<Misc.NumberOfCoresIncludingHyperthreads>32</Misc.NumberOfCoresIncludingHyperthreads>
+<Misc.Is64bitOperatingSystem>1</Misc.Is64bitOperatingSystem>
+<Misc.CPUVendor>GenuineIntel</Misc.CPUVendor>
+<Misc.CPUBrand>Intel(R) Core(TM) i9-14900K</Misc.CPUBrand>
+<Misc.PrimaryGPUBrand>NVIDIA GeForce RTX 4080</Misc.PrimaryGPUBrand>
+<Misc.OSVersionMajor>Windows 10 (22H2) [10.0.19045.3693]</Misc.OSVersionMajor>
+<Misc.OSVersionMinor></Misc.OSVersionMinor>
+<MemoryStats.TotalPhysical>102879051776</MemoryStats.TotalPhysical>
+<MemoryStats.TotalVirtual>117911437312</MemoryStats.TotalVirtual>
+<MemoryStats.PageSize>4096</MemoryStats.PageSize>
+<MemoryStats.TotalPhysicalGB>96</MemoryStats.TotalPhysicalGB>
+<MemoryStats.AvailablePhysical>75230269440</MemoryStats.AvailablePhysical>
+<MemoryStats.AvailableVirtual>83002212352</MemoryStats.AvailableVirtual>
+<MemoryStats.UsedPhysical>891609088</MemoryStats.UsedPhysical>
+<MemoryStats.PeakUsedPhysical>891940864</MemoryStats.PeakUsedPhysical>
+<MemoryStats.UsedVirtual>827027456</MemoryStats.UsedVirtual>
+<MemoryStats.PeakUsedVirtual>827027456</MemoryStats.PeakUsedVirtual>
+<MemoryStats.bIsOOM>0</MemoryStats.bIsOOM>
+<MemoryStats.OOMAllocationSize>0</MemoryStats.OOMAllocationSize>
+<MemoryStats.OOMAllocationAlignment>0</MemoryStats.OOMAllocationAlignment>
+<NumMinidumpFramesToIgnore>6</NumMinidumpFramesToIgnore>
+<CallStack></CallStack>
+<PCallStack>
+
+MMOARPGServer  0x00007ff66e250000 + 7155add         
+MMOARPGServer  0x00007ff66e250000 + 71325af         
+MMOARPGServer  0x00007ff66e250000 + 7145dfb         
+MMOARPGServer  0x00007ff66e250000 + 8907660         
+MMOARPGServer  0x00007ff66e250000 + 88ff1bc         
+MMOARPGServer  0x00007ff66e250000 + 7c9199b         
+MMOARPGServer  0x00007ff66e250000 + aadcd7          
+MMOARPGServer  0x00007ff66e250000 + ac9d26          
+MMOARPGServer  0x00007ff66e250000 + ac9f1a          
+MMOARPGServer  0x00007ff66e250000 + accc16          
+MMOARPGServer  0x00007ff66e250000 + ad9f94          
+MMOARPGServer  0x00007ff66e250000 + a14feba         
+KERNEL32       0x00007ff8bb780000 + 17344           
+ntdll          0x00007ff8bbdf0000 + 526b1           
+</PCallStack>
+<PCallStackHash>1BEA10D80C806B2A40376D1A942181F967EAB283</PCallStackHash>
+</RuntimeProperties>
+<PlatformProperties>
+<PlatformIsRunningWindows>1</PlatformIsRunningWindows>
+<IsRunningOnBattery>false</IsRunningOnBattery>
+<PlatformCallbackResult>0</PlatformCallbackResult>
+<CrashTrigger>0</CrashTrigger>
+</PlatformProperties>
+<EngineData>
+<MatchingDPStatus>WindowsServerNo errors</MatchingDPStatus>
+<RHI.RHIName>NullRHI</RHI.RHIName>
+<DeviceProfile.Name>WindowsServer</DeviceProfile.Name>
+</EngineData>
+<GameData>
+</GameData>
+</FGenericCrashContext>

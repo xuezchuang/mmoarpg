@@ -1,0 +1,3840 @@
+[
+	{
+		"Name": "KarneInihaw",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_4.F_food_4'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Inihaw na karne\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Health",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "MixMushroom",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_3.F_food_3'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Beer",
+			"Name": "INVTEXT(\"Rambulan ng mushroom\")",
+			"Description": "INVTEXT(\"Drink to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Stamina",
+				"Value": 500,
+				"Number of Repetitions": 20,
+				"Duration": 15,
+				"Additional Effects": "Drunk",
+				"Consumable Cooldown": 15
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "OnigiriTuna",
+		"Type": "Food",
+		"Rarity": "Epic",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_5.F_food_5'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Carrot",
+			"Name": "INVTEXT(\"Onigiri with tuna on top\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Damage",
+				"Value": 8,
+				"Number of Repetitions": 12,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "TilapiaInihaw",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_2.F_food_2'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Cucumber",
+			"Name": "INVTEXT(\"Inihaw na tilapia\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "MaxHealth",
+				"Value": 3,
+				"Number of Repetitions": 6,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 9
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "ApplePen",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_1.F_food_1'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Breadroll",
+			"Name": "INVTEXT(\"Pen pen apple pen\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Stamina",
+				"Value": 5,
+				"Number of Repetitions": 5,
+				"Duration": 8,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 6
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Failed",
+		"Type": "Food",
+		"Rarity": "Common",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/FailedCraft/F_failed.F_failed'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Breadroll",
+			"Name": "INVTEXT(\"Lupa man ini\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"23ED486945285E70529171BF88766E67\", \"Obtain by failed cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "Health",
+				"Value": 5,
+				"Number of Repetitions": 5,
+				"Duration": 8,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 6
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "PBTuna",
+		"Type": "Food",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_7.F_food_7'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Beer",
+			"Name": "INVTEXT(\"Grilled Pork, Beef and Salmon\")",
+			"Description": "INVTEXT(\"Drink to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "MaxStamina",
+				"Value": 500,
+				"Number of Repetitions": 20,
+				"Duration": 15,
+				"Additional Effects": "Drunk",
+				"Consumable Cooldown": 15
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "PBTilapia",
+		"Type": "Food",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_8.F_food_8'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Beer",
+			"Name": "INVTEXT(\"Grilled Pork, Beef and Tilapia\")",
+			"Description": "INVTEXT(\"Drink to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "MaxHealth",
+				"Value": 500,
+				"Number of Repetitions": 20,
+				"Duration": 15,
+				"Additional Effects": "Drunk",
+				"Consumable Cooldown": 15
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "EBVegan",
+		"Type": "Food",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_9.F_food_9'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Beer",
+			"Name": "INVTEXT(\"Grilled beef with egg\")",
+			"Description": "INVTEXT(\"Drink to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Armor",
+				"Value": 500,
+				"Number of Repetitions": 20,
+				"Duration": 15,
+				"Additional Effects": "Drunk",
+				"Consumable Cooldown": 15
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "TilapiaTomatoe",
+		"Type": "Food",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_10.F_food_10'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Beer",
+			"Name": "INVTEXT(\"Sharshado\")",
+			"Description": "INVTEXT(\"Drink to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "MaxHealth",
+				"Value": 500,
+				"Number of Repetitions": 20,
+				"Duration": 15,
+				"Additional Effects": "Drunk",
+				"Consumable Cooldown": 15
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "MushroomSoup",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_6.F_food_6'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Beer",
+			"Name": "INVTEXT(\"Mushroom Soup\")",
+			"Description": "INVTEXT(\"Drink to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "MaxStamina",
+				"Value": 500,
+				"Number of Repetitions": 20,
+				"Duration": 15,
+				"Additional Effects": "Drunk",
+				"Consumable Cooldown": 15
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "MushroomGrilled",
+		"Type": "Food",
+		"Rarity": "Common",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_11.F_food_11'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Mushroom grilled\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Damage",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "FishGrilledMushroom",
+		"Type": "Food",
+		"Rarity": "Common",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_12.F_food_12'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Fish mushroom grilled\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Attack Speed",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "BeefGrilledMushroom",
+		"Type": "Food",
+		"Rarity": "Common",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_13.F_food_13'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Beef grilled mushrrom\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Armor",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "DoubleFishGrilled",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_14.F_food_14'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Twin fish grilled\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Stamina",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "BBQGrilled",
+		"Type": "Food",
+		"Rarity": "Common",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_15.F_food_15'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"BBQ grilled smoke\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Stamina",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "FamilyFishGrilled",
+		"Type": "Food",
+		"Rarity": "Epic",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_16.F_food_16'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Family fish grilled\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "MaxHealth",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "TwiBBQGrilled",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_17.F_food_17'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Twin BBQ grilled\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Armor",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "RambleGrilled",
+		"Type": "Food",
+		"Rarity": "Common",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_18.F_food_18'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Ramble grilled smoke\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Attack Speed",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "BrownSoup",
+		"Type": "Food",
+		"Rarity": "Common",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_19.F_food_19'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Brown carrot soup\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "Health",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "RedSoup",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_20.F_food_20'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Red fish soup\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "Damage",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "BlueSoup",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_21.F_food_21'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Blue onion soup\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "Stamina",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "MaroonSoup",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_22.F_food_22'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Kalabasa soup\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "MaxHealth",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "PinkSoup",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_23.F_food_23'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Heart soup\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "Attack Speed",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "GoldSoup",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_24.F_food_24'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Mushroom golden soup\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "MaxStamina",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Greensoup",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_25.F_food_25'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Bread",
+			"Name": "INVTEXT(\"Leaf soup\")",
+			"Description": "INVTEXT(\"Eat to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 1,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "Armor",
+				"Value": 5,
+				"Number of Repetitions": 10,
+				"Duration": 10,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 7
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_Tunaporkflakes",
+		"Type": "Food",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_26.F_food_26'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Beer",
+			"Name": "INVTEXT(\"Tuna pork flakes\")",
+			"Description": "INVTEXT(\"Drink to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Stamina",
+				"Value": 500,
+				"Number of Repetitions": 20,
+				"Duration": 15,
+				"Additional Effects": "Drunk",
+				"Consumable Cooldown": 15
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_Greensaladflakes",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_27.F_food_27'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Beer",
+			"Name": "INVTEXT(\"Green salad flakes\")",
+			"Description": "INVTEXT(\"Drink to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "MaxStamina",
+				"Value": 500,
+				"Number of Repetitions": 20,
+				"Duration": 15,
+				"Additional Effects": "Drunk",
+				"Consumable Cooldown": 15
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_Mushroomsalad",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_28.F_food_28'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Beer",
+			"Name": "INVTEXT(\"Mushroom salad in a plate\")",
+			"Description": "INVTEXT(\"Drink to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "MaxStamina",
+				"Value": 500,
+				"Number of Repetitions": 20,
+				"Duration": 15,
+				"Additional Effects": "Drunk",
+				"Consumable Cooldown": 15
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_BeefAdobo",
+		"Type": "Food",
+		"Rarity": "Epic",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_29.F_food_29'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Beer",
+			"Name": "INVTEXT(\"Beed adobo inasal\")",
+			"Description": "INVTEXT(\"Drink to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Stamina",
+				"Value": 500,
+				"Number of Repetitions": 20,
+				"Duration": 15,
+				"Additional Effects": "Drunk",
+				"Consumable Cooldown": 15
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_Halftunasauce",
+		"Type": "Food",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_30.F_food_30'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Beer",
+			"Name": "INVTEXT(\"Half tuna sause cream\")",
+			"Description": "INVTEXT(\"Drink to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Damage",
+				"Value": 500,
+				"Number of Repetitions": 20,
+				"Duration": 15,
+				"Additional Effects": "Drunk",
+				"Consumable Cooldown": 15
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_Bangussauce",
+		"Type": "Food",
+		"Rarity": "Epic",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Food.BP_Food_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Cook_Dish/F_food_31.F_food_31'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "Beer",
+			"Name": "INVTEXT(\"Cut bangus sauce flakes\")",
+			"Description": "INVTEXT(\"Drink to restore small amount of Health over time.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"87DB2BC54F3558C7E12DD28A5C021423\", \"Obtain by cooking\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"FEAC83D44CF1A2C53719F8A4FF15F28C\", \"Bought in any restaurant\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"9A466F2F47B5701FABADE89AD582B380\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[EC4FCFDB4A08F4FE21D4778884562D88]\", \"0DE630154C6EA666B16886932681935D\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 2,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Attack Speed",
+				"Value": 500,
+				"Number of Repetitions": 20,
+				"Duration": 15,
+				"Additional Effects": "Drunk",
+				"Consumable Cooldown": 15
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 20,
+			"Min Quantity": 1,
+			"Max Quantity": 3,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	}
+]

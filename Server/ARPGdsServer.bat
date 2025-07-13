@@ -1,0 +1,1 @@
+start D:\test\WindowsServer\MMOARPGServer.exe

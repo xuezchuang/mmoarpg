@@ -1,0 +1,9 @@
+syntax="proto3";
+package PlayerStateHello1;
+
+enum EBone1State
+{
+	NONE = 0;
+	OK = 1;
+	Hello = 2;
+}

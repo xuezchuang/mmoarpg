@@ -1,0 +1,103 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "5.2",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "MMOARPG",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"UMG"
+			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "SimpleNetChannel",
+			"Enabled": true,
+			"MarketplaceURL": "https://renzhai.net/361.html"
+		},
+		{
+			"Name": "SimpleThread",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/f842694afc354d25b1c3cb3a5397bd9d"
+		},
+		{
+			"Name": "MMOARPGCommon",
+			"Enabled": true
+		},
+		{
+			"Name": "SimpleCombat",
+			"Enabled": false
+		},
+		{
+			"Name": "DarkerNodes",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/4b3441f0228a40ec9ca986489a5bd682"
+		},
+		{
+			"Name": "ElectronicNodes",
+			"Enabled": false,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/5cb2a394d0c04e73891762be4cbd7216"
+		},
+		{
+			"Name": "AnimationLocomotionLibrary",
+			"Enabled": true
+		},
+		{
+			"Name": "HorizonUIPlugin",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/8b94d073d32443b497d4a9e8b1e210f7"
+		},
+		{
+			"Name": "SimpleFileHelper",
+			"Enabled": true
+		},
+		{
+			"Name": "SimplePopup",
+			"Enabled": true,
+			"MarketplaceURL": "https://renzhai.net/518.html"
+		},
+		{
+			"Name": "SimpleDrawText",
+			"Enabled": true,
+			"MarketplaceURL": "https://renzhai.net/150.html"
+		},
+		{
+			"Name": "SimpleHotUpdate",
+			"Enabled": true,
+			"MarketplaceURL": "https://renzhai.net/470.html"
+		},
+		{
+			"Name": "SimpleNumericalDeduction",
+			"Enabled": true,
+			"MarketplaceURL": "https://renzhai.net/500.html"
+		},
+		{
+			"Name": "SimpleMySQL",
+			"Enabled": true
+		},
+		{
+			"Name": "SimpleOSS",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/ac60a4ebdba746c1b3a5ffb894624ca4"
+		},
+		{
+			"Name": "SimpleProtobuf",
+			"Enabled": true,
+			"MarketplaceURL": "https://renzhai.net/420.html"
+		},
+		{
+			"Name": "SimpleHTTP",
+			"Enabled": true,
+			"MarketplaceURL": "https://www.aboutcg.org/courseDetails/764/introduce"
+		},
+		{
+			"Name": "AnimationWarping",
+			"Enabled": true
+		}
+	]
+}

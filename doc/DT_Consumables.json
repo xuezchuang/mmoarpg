@@ -1,0 +1,3632 @@
+[
+	{
+		"Name": "Ins_small_hp",
+		"Type": "Potion",
+		"Rarity": "Common",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_4.P_Potion_4'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small HP Instant Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of health by 50 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "Health",
+				"Value": 50,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Ins_small_sp",
+		"Type": "Potion",
+		"Rarity": "Common",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_2.P_Potion_2'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small SP Instant Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of stamina by 50 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "Stamina",
+				"Value": 50,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Ins_small_mp",
+		"Type": "Potion",
+		"Rarity": "Common",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_1.P_Potion_1'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small MP Instant Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 50 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "Stamina",
+				"Value": 50,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Ins_big_hp",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_10.P_Potion_10'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big HP Instant Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of health by 50 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "Health",
+				"Value": 50,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Ins_big_sp",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_13.P_Potion_13'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big SP Instant Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of stamina by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "Stamina",
+				"Value": 50,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "Ins_big_mp",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_11.P_Potion_11'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big MP Instant Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Instantly",
+				"Stat": "Stamina",
+				"Value": 50,
+				"Number of Repetitions": 0,
+				"Duration": 0,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_small_hp",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_4.P_Potion_4'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small HP Over Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Health",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_small_sp",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_2.P_Potion_2'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small SP Over Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Stamina",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_small_mp",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_2.P_Potion_2'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small MP Over Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Stamina",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_big_hp",
+		"Type": "Potion",
+		"Rarity": "Epic",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_10.P_Potion_10'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big HP Over Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of health by 50 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "MaxHealth",
+				"Value": 500,
+				"Number of Repetitions": 0,
+				"Duration": 5,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_big_sp",
+		"Type": "Potion",
+		"Rarity": "Epic",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_13.P_Potion_13'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big SP Over Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of health by 50 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "MaxStamina",
+				"Value": 500,
+				"Number of Repetitions": 0,
+				"Duration": 5,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_big_mp",
+		"Type": "Potion",
+		"Rarity": "Epic",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_11.P_Potion_11'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big MP Over Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of health by 50 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "MaxStamina",
+				"Value": 500,
+				"Number of Repetitions": 0,
+				"Duration": 5,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_small_dmg",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_7.P_Potion_7'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small DMG Over Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Damage",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_big_dmg",
+		"Type": "Potion",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_9.P_Potion_9'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big DMG Over Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Damage",
+				"Value": 117,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_small_armor",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_3.P_Potion_3'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small Armor Over Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Armor",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_big_armor",
+		"Type": "Potion",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_8.P_Potion_8'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big Armor Over Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Armor",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_small_atkspd",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_5.P_Potion_5'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small ATK SPD Over Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Attack Speed",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AOD_big_atkspd",
+		"Type": "Potion",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_6.P_Potion_6'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big ATK SPD Over Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add Over Duration",
+				"Stat": "Attack Speed",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AFD_small_hp",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_4.P_Potion_4'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small HP For Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Health",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AFD_small_sp",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_2.P_Potion_2'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small SP For Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Stamina",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AFD_small_mp",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_2.P_Potion_2'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small MP For Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Stamina",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AFD_big_hp",
+		"Type": "Potion",
+		"Rarity": "Epic",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_10.P_Potion_10'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big HP For Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of health by 50 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "MaxHealth",
+				"Value": 500,
+				"Number of Repetitions": 0,
+				"Duration": 5,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AFD_big_sp",
+		"Type": "Potion",
+		"Rarity": "Epic",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_13.P_Potion_13'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big SP For Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of health by 50 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "MaxStamina",
+				"Value": 500,
+				"Number of Repetitions": 0,
+				"Duration": 5,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AFD_big_mp",
+		"Type": "Potion",
+		"Rarity": "Epic",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_11.P_Potion_11'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big MP For Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of health by 50 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "MaxStamina",
+				"Value": 500,
+				"Number of Repetitions": 0,
+				"Duration": 5,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AFD_small_dmg",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_7.P_Potion_7'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small DMG For Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Damage",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AFD_big_dmg",
+		"Type": "Potion",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_9.P_Potion_9'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big DMG For Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Damage",
+				"Value": 117,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AFD_small_armor",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_3.P_Potion_3'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small Armor For Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Armor",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AFD_big_armor",
+		"Type": "Potion",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_8.P_Potion_8'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big Armor For Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Armor",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AFD_small_atkspd",
+		"Type": "Potion",
+		"Rarity": "Superior",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_5.P_Potion_5'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Small ATK SPD For Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Attack Speed",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	},
+	{
+		"Name": "AFD_big_atkspd",
+		"Type": "Potion",
+		"Rarity": "Legendary",
+		"Slot": "Pocket1",
+		"Weapon Category": "None",
+		"Inventory Panel": "P2",
+		"Class": "/Script/Engine.BlueprintGeneratedClass'/Game/MetanoiaCombat/Inventory/ItemClasses/Consumables/BP_Potion.BP_Potion_C'",
+		"Equippable Static Mesh": "None",
+		"Equippable Skeletal Mesh": "None",
+		"Image": "/Script/Engine.Texture2D'/Game/MetanoiaCombat/Inventory/Textures/Images/Consumables/Potion/P_Potion_6.P_Potion_6'",
+		"Index": 0,
+		"Description":
+		{
+			"ID": "shp_01",
+			"Name": "INVTEXT(\"Big ATK SPD For Potion\")",
+			"Description": "INVTEXT(\"Drink it immediately restore a small amount of mana by 150 points.\")",
+			"Readable Text": [
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FC09F22D4C24D0D3EEB88BBB8AFD5A7E\", \"Synthesis in any alchemy table\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"54DC05BA494EB50BAD2941802F51F894\", \"Found in the chest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"FCA63D80482A46DE59FA9599C2189D73\", \"Reward for completing quest\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"464ABB7946FAC3D2603AD995825A13D0\", \"Bought in any alchemy shop\")",
+				"NSLOCTEXT(\"[6793EB9544BAC1C981D24BA8A580E43E]\", \"C900EC724118DCD707FFA79E2BFB87B5\", \"Ingredient can found in the wild\")"
+			]
+		},
+		"Stats":
+		{
+			"Weight": 0.1,
+			"Value": 10,
+			"Stats": [],
+			"Required Level": 1,
+			"Consumable Action":
+			{
+				"Category": "Add For Duration",
+				"Stat": "Attack Speed",
+				"Value": 5,
+				"Number of Repetitions": 0,
+				"Duration": 15,
+				"Additional Effects": "None",
+				"Consumable Cooldown": 11
+			},
+			"Durability":
+			{
+				"Use Durability": false,
+				"Current Durability": 0
+			}
+		},
+		"Stacks":
+		{
+			"Stackable": true,
+			"Quantity": 99
+		},
+		"Use":
+		{
+			"Usable Type": "None",
+			"Already used": false,
+			"Remove Type": "Default"
+		},
+		"Is Equipped": false,
+		"Loot Randomizer":
+		{
+			"Drop Percentage": 50,
+			"Min Quantity": 1,
+			"Max Quantity": 6,
+			"Min Durability": 0,
+			"Max Durability": 0,
+			"Random Stats": [],
+			"Random Value":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			},
+			"Random Required Level":
+			{
+				"Min Value": 0,
+				"Max Value": 0,
+				"Multiplier DataTable": "None"
+			}
+		},
+		"Arrow Class": "None",
+		"Arrow Type Mesh": "None",
+		"Quiver Type Mesh": "None",
+		"Dual Wield Mesh": "None",
+		"Arrow Effect": "Basic",
+		"Rune Data":
+		{
+			"Rune Data":
+			{
+				"RuneID": "None",
+				"Name": "",
+				"Icon": "None",
+				"RuneType": "None",
+				"Stats": [],
+				"Sellable?": false,
+				"SellValue": 0,
+				"ShopIcon": "None"
+			}
+		},
+		"ItemSetID": "",
+		"ItemNameSet": [],
+		"Mount Data":
+		{
+			"Mount Class": "None",
+			"MountType": "Wild Horse",
+			"Mount Mobility":
+			{
+				"Max Boost": 4,
+				"Dash Consume": 1,
+				"Boost Regen Time": 15
+			},
+			"Mount Physical":
+			{
+				"Sprint Stamina Cost": 0.029999999999999999,
+				"Stamina Regen Power": 0.5,
+				"Charge Time": 5,
+				"Charge Consume": 2,
+				"Turning Stamina Cost": 6
+			}
+		}
+	}
+]
