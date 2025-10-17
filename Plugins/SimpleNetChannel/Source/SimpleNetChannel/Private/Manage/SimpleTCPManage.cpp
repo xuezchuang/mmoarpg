@@ -101,7 +101,7 @@ bool FSimpleTCPManage::Init(uint32 InIP, uint32 InPort)
 
 			return false;
 		}
-		//UE_LOG(LogSimpleNetChannel, Display, TEXT("Create socket:%d"), Socket->GetPortNo());
+		UE_LOG(LogSimpleNetChannel, Display, TEXT("Create socket:%d"), Socket->GetPortNo());
 		int32 RecvSize = 0;
 		int32 SendSize = 0;
 		Socket->SetReceiveBufferSize(FSimpleNetGlobalInfo::Get()->GetInfo().RecvDataNumber, RecvSize);

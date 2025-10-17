@@ -145,15 +145,15 @@ void UUI_LoginMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 					{
 						//FString str;
 						uint32 IP;
-						FString DomainName = _T("home.snowsome.com");
-						FAddressInfoResult AddressInfoResult = SocketSubsystem->GetAddressInfo(*DomainName, nullptr, EAddressInfoFlags::Default, NAME_None);
-						if (AddressInfoResult.Results.Num() > 0)
+						//FString DomainName = _T("home.snowsome.com");
+						//FAddressInfoResult AddressInfoResult = SocketSubsystem->GetAddressInfo(*DomainName, nullptr, EAddressInfoFlags::Default, NAME_None);
+						//if (AddressInfoResult.Results.Num() > 0)
 						{
-							TSharedPtr<FInternetAddr> TmpAddr = AddressInfoResult.Results[0].Address;
-							//TSharedRef<FInternetAddr> TmpAddr = SocketSubsystem->CreateInternetAddr();
-							//bool bBindAddr = false;
-							//FString FStr_IP = UTF8_TO_TCHAR(ip.ip);
-							//TmpAddr->SetIp(*FStr_IP, bBindAddr);
+							//TSharedPtr<FInternetAddr> TmpAddr = AddressInfoResult.Results[0].Address;
+							TSharedRef<FInternetAddr> TmpAddr = SocketSubsystem->CreateInternetAddr();
+							bool bBindAddr = false;
+							FString FStr_IP = UTF8_TO_TCHAR(ip.ip);
+							TmpAddr->SetIp(*FStr_IP, bBindAddr);
 							TmpAddr->GetIp(IP);
 
 							FMMOARPGGateStatus& gateStatus = InGameInstance->GetGateStatus();
