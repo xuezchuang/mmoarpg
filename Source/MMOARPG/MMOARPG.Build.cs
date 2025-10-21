@@ -52,6 +52,7 @@ public class MMOARPG : ModuleRules
 			"MMOARPG/Core/Game",
 			"MMOARPG/UI/Core",
 			"MMOARPG/UI/Common",
+			"MMOARPG/UI/Game",
 			"MMOARPG/Core/Game/Character",
 			"MMOARPG/Core/Game/Animation/Instance/Core",
 			//"MMOARPG",
