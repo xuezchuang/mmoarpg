@@ -6,7 +6,7 @@
 #include "UI_UpperUIBar.h"
 #include "InventoryHUD.h"
 #include "Blueprint/UserWidget.h"
-#include "../UI/Common/UI_EditMap.h"
+#include "UI_EditMap.h"
 
 AMMOARPGInventoryCharacter::AMMOARPGInventoryCharacter()
 {
@@ -31,12 +31,12 @@ void AMMOARPGInventoryCharacter::OpenCrafting()
 	m_UpperUI->ShowWidget(E_UIType::Crafting);
 }
 
-void AMMOARPGInventoryCharacter::OpenMapEdit()
-{
-#if WITH_EDITOR
-	m_EditMapUI->Active();
-#endif
-}
+//void AMMOARPGInventoryCharacter::OpenMapEdit()
+//{
+//#if WITH_EDITOR
+//	m_EditMapUI->Active();
+//#endif
+//}
 
 void AMMOARPGInventoryCharacter::BeginPlay()
 {
@@ -51,9 +51,9 @@ void AMMOARPGInventoryCharacter::BeginPlay()
 			m_UpperUI = CurrentHUD->GetWidget();
 		}
 	}
-#if WITH_EDITOR
-	m_EditMapUI = CreateWidget<UUI_EditMap>(GetWorld(), UIEditMap_BPClass);
-	m_EditMapUI->AddToViewport();
-	m_EditMapUI->SetVisibility(ESlateVisibility::Hidden);
-#endif
+//#if WITH_EDITOR
+//	m_EditMapUI = CreateWidget<UUI_EditMap>(GetWorld(), UIEditMap_BPClass);
+//	m_EditMapUI->AddToViewport();
+//	m_EditMapUI->SetVisibility(ESlateVisibility::Hidden);
+//#endif
 }

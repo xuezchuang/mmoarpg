@@ -34,6 +34,29 @@ enum class EEffectiveness :uint8
 	LowEffective
 };
 
+USTRUCT(BlueprintType)
+struct FMonsterInfo     // 运行时缓存，用于 UI/逻辑
+{
+    GENERATED_BODY()
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly) FText Name;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly) int32 Level = 1;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly) float ExpForKill = 0.f;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly) bool bDoesRespawn = true;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly) float RespawnTime = 0.f;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly) float TotalHealth = 0.f;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly) float BaseDamage = 0.f;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly) int32 CritChance = 0;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly) TSubclassOf<class ABaseElement> Element;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly) EDamageType DamageType = EDamageType::Physical;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly) bool bAggressive = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly) bool bDead = false;
+};
+
 /**
  * 
  */
@@ -46,19 +69,34 @@ public:
 	AMMOARPGMonster();
 
 protected:
-	float BaseDamage = 25.0f;
-	EDamageType DamageType = EDamageType::Physical;
-	UPROPERTY(EditAnywhere, Category = Info)
-	TSubclassOf<class ABaseElement> Element;
-	int CritChance = 25;
+	//UPROPERTY(VisibleAnywhere, Category = "Info")
+	FMonsterInfo Info;
+
+	//float BaseDamage = 25.0f;
+	//EDamageType DamageType = EDamageType::Physical;
+	//UPROPERTY(EditAnywhere, Category = Info)
+	//TSubclassOf<class ABaseElement> Element;
+	//int CritChance = 25;
 
 	class AMMOARPGEnemyController* MyController;
 
-	UPROPERTY(EditAnywhere, Category = Info)
-	bool bAggressive;//是否是有侵略性的
+	//UPROPERTY(EditAnywhere, Category = Info)
+	//bool bAggressive;//是否是有侵略性的
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Behavior)
-	bool bDead;
+	//UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Behavior)
+	//bool bDead;
+
+	//UPROPERTY(EditAnywhere, Category = Info)
+	//FText Name = FText::FromString("Spider");
+	//UPROPERTY(EditAnywhere, Category = Info)
+	//int Level = 1;
+	//UPROPERTY(EditAnywhere, Category = Info)
+	//float ExpForKill = 500.0f;
+	//UPROPERTY(EditAnywhere, Category = Info)
+	//bool bDoesRespawn = true;
+	//UPROPERTY(EditAnywhere, Category = Info)
+	//float RespawnTime = 10;
+
 
 	UPROPERTY(VisibleAnywhere, Category = AI)
 	class UAIPerceptionComponent* AIPerceptionComp;
@@ -72,16 +110,6 @@ protected:
 
 	class UEnemyInfoWidget* EnemyInfoWidget;
 
-	UPROPERTY(EditAnywhere, Category = Info)
-	FText Name = FText::FromString("Spider");
-	UPROPERTY(EditAnywhere, Category = Info)
-	int Level = 1;
-	UPROPERTY(EditAnywhere, Category = Info)
-	float ExpForKill = 500.0f;
-	UPROPERTY(EditAnywhere, Category = Info)
-	bool bDoesRespawn = true;
-	UPROPERTY(EditAnywhere, Category = Info)
-	float RespawnTime = 10;
 
 	UFUNCTION(BlueprintCallable)
 	void OnNotifyHit();
@@ -104,18 +132,19 @@ protected:
 	void OnSightPerceptionUpdate(const TArray<AActor*>& UpdatedActors);
 
 public:
+	UPROPERTY(EditAnywhere, Category = Info)
+	int MonsterID = 0;
+
 	FVector StartLocation;//初始的位置
 	UPROPERTY(VisibleAnywhere, Category = Hit)
 	class UArrowComponent* HitArrow;
-	UPROPERTY(EditAnywhere, Category = Info)
-	float TotalHealth = 50.0f;
 
 	float CurrentHealth;
 
 	UPROPERTY(EditAnywhere, Category = Behavior)
 	TArray<class UAnimMontage*> AttackAnimaions;
 
-	FORCEINLINE bool GetBDead() { return bDead; }
+	FORCEINLINE bool GetBDead() { return Info.bDead; }
 
 	void UpdateHealthBar();
 };

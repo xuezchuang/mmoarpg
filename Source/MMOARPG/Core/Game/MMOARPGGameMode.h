@@ -9,6 +9,7 @@
 #include "MMOARPGGameMode.generated.h"
 
 class FSimpleChannel;
+class AMMOARPGNetEnemyController;
 
 UCLASS(minimalapi)
 class AMMOARPGGameMode : public AGameModeBase
@@ -42,6 +43,14 @@ private:
 	void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
 private:
 	FDelegateHandle RecvDelegate;
+
+	// MMOARPGGameMode.h
+	UPROPERTY()
+	TMap<int32, TWeakObjectPtr<AMMOARPGNetEnemyController>> MonsterMap;
+
+	void RegisterMonster(int32 MonsterId, AMMOARPGNetEnemyController* Ctlr);
+	void UnregisterMonster(int32 MonsterId);
+	AMMOARPGNetEnemyController* FindMonsterCtlr(int32 MonsterId) const;
 
 
 };

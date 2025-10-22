@@ -13,6 +13,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/TextBlock.h"
 #include "EnemyInfoWidget.h"
+#include "MMOARPGGameMode.h"
 
 #define LOCTEXT_NAMESPACE "EnemyNameSpace"
 
@@ -77,6 +78,22 @@ void AMMOARPGMonster::BeginPlay()
 {
 	Super::BeginPlay();
 
+	UWorld* World = GetWorld();
+	if (!World)
+	{
+		Destroy();
+		return;
+	}
+
+	// 获取当前 GameMode（只在服务器有效）
+	AGameModeBase* GameMode = World->GetAuthGameMode();
+	if (!GameMode || GameMode->IsA(AMMOARPGGameMode::StaticClass()))
+	{
+		// 如果不是 MMOARPGGameMode，就销毁自己
+		Destroy();
+		return;
+	}
+
 	EnemyInfoWidget = Cast<UEnemyInfoWidget>(EnemyWidgetComp->GetUserWidgetObject());
 	MyController = Cast<AMMOARPGEnemyController>(GetController());
 	if (MyController)
@@ -90,7 +107,7 @@ void AMMOARPGMonster::BeginPlay()
 
 void AMMOARPGMonster::OnSightPerceptionUpdate(const TArray<AActor*>& UpdatedActors)
 {
-	if (bAggressive && !MyController->bWasAggroed)
+	if (Info.bAggressive && !MyController->bWasAggroed)
 	{
 		for (auto Actor : UpdatedActors)
 		{
@@ -135,7 +152,7 @@ void AMMOARPGMonster::AttackRay()
 
 void AMMOARPGMonster::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (!bDead)
+	if (!Info.bDead)
 	{
 		//if (Cast<ARBaseCharacter>(OtherActor) && !EnemyWidgetComp->IsVisible())
 		//{
@@ -147,7 +164,7 @@ void AMMOARPGMonster::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, A
 
 void AMMOARPGMonster::OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (!bDead)
+	if (!Info.bDead)
 	{
 	//	bInShowRange = false;
 	//	if (Cast<ARBaseCharacter>(OtherActor) && EnemyWidgetComp->IsVisible())
@@ -159,9 +176,9 @@ void AMMOARPGMonster::OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 
 void AMMOARPGMonster::InitWidgetText()
 {
-	EnemyInfoWidget->LevelName->SetText(FText::Format(LOCTEXT("EnemyNameSpace", "[Lv{0}.{1}]"), FText::AsNumber(Level), Name));
+	EnemyInfoWidget->LevelName->SetText(FText::Format(LOCTEXT("EnemyNameSpace", "[Lv{0}.{1}]"), FText::AsNumber(Info.Level), Info.Name));
 	FLinearColor CurrentColor;
-	if (bAggressive)
+	if (Info.bAggressive)
 	{
 		CurrentColor = FLinearColor::Red;
 	}

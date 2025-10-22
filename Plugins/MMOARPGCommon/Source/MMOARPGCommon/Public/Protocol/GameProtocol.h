@@ -8,6 +8,17 @@ DEFINITION_SIMPLE_PROTOCOLS(EnterWorld, 900)
 DEFINITION_SIMPLE_PROTOCOLS(UpdatePos, 1000)
 DEFINITION_SIMPLE_PROTOCOLS(UpdateOtherPos, 1100)
 
+
+DEFINITION_SIMPLE_PROTOCOLS(MonsterData,         8000)  // 怪物数据（含基础信息/位置等）
+DEFINITION_SIMPLE_PROTOCOLS(MonsterAck,          8100)  // 怪物返回/确认
+DEFINITION_SIMPLE_PROTOCOLS(MonsterHP,           8200)  // 怪物生命更新
+DEFINITION_SIMPLE_PROTOCOLS(MonsterState,        8300)  // 怪物状态（如Idle/Chase/Back等）
+DEFINITION_SIMPLE_PROTOCOLS(MonsterMove,         8400)  // 怪物移动
+DEFINITION_SIMPLE_PROTOCOLS(MonsterAttack,       8500)  // 怪物出招/攻击
+DEFINITION_SIMPLE_PROTOCOLS(MonsterSkillDamage,  8700)  // 技能伤害结果
+DEFINITION_SIMPLE_PROTOCOLS(MonsterBuff,         8800)  // 怪物 Buff 变化
+
+
 //DEFINITION_SIMPLE_PROTOCOLS(UpdateLoginCharacterInfoRequests, 18)
 //DEFINITION_SIMPLE_PROTOCOLS(UpdateLoginCharacterInfoResponses, 19)
 //DEFINITION_SIMPLE_PROTOCOLS(GetCharacterDataRequests, 24)

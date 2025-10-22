@@ -14,8 +14,8 @@ class AMMOARPGInventoryCharacter : public ABladeIINetCharacter
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, Category = UI)
-	TSubclassOf<UUI_EditMap> UIEditMap_BPClass;
+	//UPROPERTY(EditDefaultsOnly, Category = UI)
+	//TSubclassOf<UUI_EditMap> UIEditMap_BPClass;
 
 public:
 
@@ -32,8 +32,8 @@ public:
 	void OpenCrafting();
 
 
-	UFUNCTION(BlueprintCallable, Category = "MapEditSystem")
-	void OpenMapEdit();
+	//UFUNCTION(BlueprintCallable, Category = "MapEditSystem")
+	//void OpenMapEdit();
 
 protected:
 	virtual void BeginPlay() override;
@@ -41,5 +41,5 @@ protected:
 private:
 	UUI_UpperUIBar* m_UpperUI;
 	APlayerController* m_PlayerController;
-	UUI_EditMap* m_EditMapUI;
+	//UUI_EditMap* m_EditMapUI;
 };

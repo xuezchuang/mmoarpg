@@ -1,19 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "MapGameMode.h"
-//#include "Character/MMOARPGCharacter.h"
-//#include "UObject/ConstructorHelpers.h"
-//#include "MMOARPGHUD.h"
-//#include "ThreadManage.h"
-//#include "UObject/SimpleController.h"
-//#include "MMOARPGMacroType.h"
-//#include "MMOARPGPlayerState.h"
-//#include "MMOARPGGameState.h"
-//#include "ThreadManage.h"
-//#include "Character/MMOARPGPlayerCharacter.h"
-//#include "Protocol/GameProtocol.h"
-//#include "Core/MethodUnit.h"
-//#include "MMOARPGPlayerController.h"
+//#include "UI_EditMap.h"
 
 AMapGameMode::AMapGameMode()
 {

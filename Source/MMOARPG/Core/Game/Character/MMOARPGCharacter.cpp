@@ -11,6 +11,7 @@
 #include "../../Component/FlyComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "MMOARPGType.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMMOARPGCharacter
@@ -53,6 +54,7 @@ AMMOARPGCharacter::AMMOARPGCharacter()
 void AMMOARPGCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
 	//Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{

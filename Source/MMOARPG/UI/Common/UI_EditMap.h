@@ -33,7 +33,7 @@ struct FS_GRID_BASE
 };
 
 
-UCLASS()
+UCLASS(Blueprintable, Abstract)
 class UUI_EditMap: public UUserWidget
 {
 	GENERATED_BODY()

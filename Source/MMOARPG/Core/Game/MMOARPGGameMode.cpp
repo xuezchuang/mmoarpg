@@ -109,45 +109,204 @@ void AMMOARPGGameMode::LinkServer()
 	}
 }
 
+// GameMode.cpp: 在 RecvProtocol 里新增怪物分支
 void AMMOARPGGameMode::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 {
-	//switch (ProtocolNumber)
-	//{
-	//	case SP_UpdateLoginCharacterInfoResponses:
-	//	{
-	//		int32 UserID = INDEX_NONE;
-	//		FString CAJsonString;
-	//		SIMPLE_PROTOCOLS_RECEIVE(SP_UpdateLoginCharacterInfoResponses, UserID, CAJsonString);
+    switch (ProtocolNumber)
+    {
+    // ================= Monster =================
+    case SP_MonsterData:
+    {
+        uint16 Child = 0;
+        (*Channel) >> Child;                 // childcmd（你目前发送的是 0）
+        if (Child != 0)
+        {
+            UE_LOG(MMOARPG, Warning, TEXT("MonsterData childcmd != 0 [%d]"), Child);
+        }
 
-	//		if (UserID != INDEX_NONE && !CAJsonString.IsEmpty())
-	//		{
-	//			//寻找特定玩家
-	//			MethodUnit::ServerCallAllPlayerController<AMMOARPGPlayerController>(GetWorld(), [&](AMMOARPGPlayerController *InController)->MethodUnit::EServerCallType
-	//			{
-	//				if (AMMOARPGPlayerCharacter *InPlayerCharacter = InController->GetPawn<AMMOARPGPlayerCharacter>())
-	//				{
-	//					if (InPlayerCharacter->GetUserID() == UserID)
-	//					{
-	//						if (AMMOARPGPlayerState* InPlayerState = InController->GetPlayerState<AMMOARPGPlayerState>())		
-	//						{
-	//							NetDataAnalysis::StringToCharacterAppearances(CAJsonString,InPlayerState->GetCA());
+        // 读掉 S_ROBOT_DATA 的原始块（先缓存为字节，等你日后需要就解析）
+        uint32 RobotBlobSize = 0; // 这个值服务端是 sizeof(S_ROBOT_DATA)。UE端必须知道它是多少。
+        // 如果你的通道没有显式传大小，那我们只能和服务端约定“固定大小”。先宏一个：
+        constexpr uint32 kSize_S_ROBOT_DATA = 64; // TODO: 换成真实 sizeof(S_ROBOT_DATA)
+        RobotBlobSize = kSize_S_ROBOT_DATA;
 
-	//							InPlayerCharacter->UpdateKneadingBoby(InPlayerState->GetCA());
-	//							InPlayerCharacter->CallUpdateKneadingBobyOnClient(InPlayerState->GetCA());
-	//						}
+        TArray<uint8> RobotBlob;
+        RobotBlob.SetNumUninitialized(RobotBlobSize);
+        ReadBytes(Channel, RobotBlob.GetData(), RobotBlobSize);
 
-	//						return MethodUnit::EServerCallType::PROGRESS_COMPLETE;
-	//					}
-	//				}
+        // 后续字段（按你的发送顺序与类型来）
+        uint32 Id = 0;
+        uint8  Dir = 0;
+        uint32 Hp  = 0;
+        int32  GridX = 0, GridY = 0;
 
-	//				return MethodUnit::EServerCallType::INPROGRESS;					
-	//			});
-	//		}
+        (*Channel) >> Id;
+        (*Channel) >> Dir;
+        (*Channel) >> Hp;
 
-	//		break;
-	//	}
-	//}
+        // grid_pos 8字节：假设是两个 int32
+        (*Channel) >> GridX;
+        (*Channel) >> GridY;
+
+        //// —— 切回游戏线程处理 ——（如果当前已在Game线程，可以省略）
+        //AsyncTask(ENamedThreads::GameThread, [this, Id, Dir, Hp, GridX, GridY]()
+		// 
+        
+        if (AMMOARPGNetEnemyController* Ctl = FindMonsterCtlr((int32)Id))
+        {
+            // 已存在：更新HP、位置/朝向
+            if (AMMOARPGMonster* M = Cast<AMMOARPGMonster>(Ctl->GetPawn()))
+            {
+                const FVector Loc = GridToWorld(GridX, GridY);
+                Ctl->Net_MoveTo(Loc, /*Speed*/200.f, /*bChasing*/false); // 速度先用小步速；后续服务端发 8400 修正
+                Ctl->Net_HealthUpdate((int32)Hp, M->TotalHealth);        // 或者你也在 8000 里带 MaxHP
+                // 简单朝向：用网格下一步方向近似
+                const FVector FacePos = Loc + FVector(FMath::Cos(FMath::DegreesToRadians((float)Dir)), FMath::Sin(FMath::DegreesToRadians((float)Dir)), 0.f) * 10.f;
+                Ctl->Net_FaceTo(FacePos);
+            }
+        }
+        else
+        {
+            // 生成怪物 + 网络控制器
+            if (!ensure(MonsterClass)) { UE_LOG(MMOARPG, Error, TEXT("MonsterClass is null")); return; }
+
+            const FVector SpawnLoc = GridToWorld(GridX, GridY);
+            const FRotator SpawnRot(0.f, (float)Dir, 0.f);
+
+            AMMOARPGMonster* Monster = GetWorld()->SpawnActor<AMMOARPGMonster>(MonsterClass, SpawnLoc, SpawnRot);
+            if (!Monster) { UE_LOG(MMOARPG, Error, TEXT("Spawn Monster failed [id:%u]"), Id); return; }
+
+            // 控制器
+            AMMOARPGNetEnemyController* NewCtl = GetWorld()->SpawnActor<AMMOARPGNetEnemyController>();
+            if (!NewCtl) { Monster->Destroy(); return; }
+
+            NewCtl->SetNetMonsterId((int32)Id);
+            NewCtl->Possess(Monster);
+            RegisterMonster((int32)Id, NewCtl);
+
+            // 初始表现：HP、站位、朝向
+            NewCtl->Net_HealthUpdate((int32)Hp, Monster->TotalHealth);
+            NewCtl->Net_ResetToHome(SpawnLoc);
+            NewCtl->Net_FaceTo(SpawnLoc + SpawnRot.Vector() * 10.f);
+        }
+
+        break;
+    }
+
+    //case SP_MonsterMove:
+    //{
+    //    // 8400：最低限——读 Id + grid_pos(+ 可选速度)
+    //    uint32 Id = 0; int32 GridX = 0, GridY = 0; float Speed = 200.f;
+    //    (*Channel) >> Id;
+    //    (*Channel) >> GridX; (*Channel) >> GridY;
+    //    // 如果服务端也发速度/是否追击，就再读：
+    //    // (*Channel) >> Speed;
+
+    //    AsyncTask(ENamedThreads::GameThread, [this, Id, GridX, GridY, Speed]()
+    //    {
+    //        if (AMMOARPGNetEnemyController* Ctl = FindMonsterCtlr((int32)Id))
+    //        {
+    //            Ctl->Net_MoveTo(GridToWorld(GridX, GridY), Speed, /*bChasing*/false);
+    //        }
+    //    });
+    //    break;
+    //}
+
+    //case SP_MonsterHP:
+    //{
+    //    uint32 Id = 0; int32 CurHP = 0; int32 MaxHP = 0;
+    //    (*Channel) >> Id >> CurHP >> MaxHP;
+
+    //    AsyncTask(ENamedThreads::GameThread, [this, Id, CurHP, MaxHP]()
+    //    {
+    //        if (AMMOARPGNetEnemyController* Ctl = FindMonsterCtlr((int32)Id))
+    //        {
+    //            Ctl->Net_HealthUpdate(CurHP, MaxHP);
+    //        }
+    //    });
+    //    break;
+    //}
+
+    //case SP_MonsterState:
+    //{
+    //    uint32 Id = 0; uint8 NewState = 0; // 自定义：0=Idle,1=Patrol,2=Chase,3=Back...
+    //    (*Channel) >> Id >> NewState;
+
+    //    AsyncTask(ENamedThreads::GameThread, [this, Id, NewState]()
+    //    {
+    //        if (AMMOARPGNetEnemyController* Ctl = FindMonsterCtlr((int32)Id))
+    //        {
+    //            // 仅表现：例如回家
+    //            if (NewState == 3 /*Back*/)
+    //            {
+    //                if (AMMOARPGMonster* M = Cast<AMMOARPGMonster>(Ctl->GetPawn()))
+    //                    Ctl->Net_ResetToHome(M->StartLocation);
+    //            }
+    //        }
+    //    });
+    //    break;
+    //}
+
+    //case SP_MonsterAttack:
+    //{
+    //    uint32 Id = 0; int32 AttackIndex = 0; float PlayRate = 1.f; float ExpectedSecs = 0.f;
+    //    (*Channel) >> Id >> AttackIndex >> PlayRate >> ExpectedSecs;
+
+    //    AsyncTask(ENamedThreads::GameThread, [this, Id, AttackIndex, PlayRate, ExpectedSecs]()
+    //    {
+    //        if (AMMOARPGNetEnemyController* Ctl = FindMonsterCtlr((int32)Id))
+    //        {
+    //            Ctl->Net_PlayAttack(AttackIndex, PlayRate, ExpectedSecs);
+    //        }
+    //    });
+    //    break;
+    //}
+
+    //case SP_MonsterSkillDamage:
+    //{
+    //    // 8700：通常包含 施法者Id、受击者Id、伤害值、是否暴击 等
+    //    uint32 CasterId=0, TargetId=0; int32 Dmg=0; uint8 bCrit=0;
+    //    (*Channel) >> CasterId >> TargetId >> Dmg >> bCrit;
+    //    // 这里只做受击飘字/受击姿势；真正血量变化交 8200
+    //    AsyncTask(ENamedThreads::GameThread, [this, TargetId, Dmg, bCrit]()
+    //    {
+    //        if (AMMOARPGNetEnemyController* Ctl = FindMonsterCtlr((int32)TargetId))
+    //        {
+    //            if (AMMOARPGMonster* M = Cast<AMMOARPGMonster>(Ctl->GetPawn()))
+    //            {
+    //                M->PlayHitReact(/*方向*/);
+    //                M->ShowFloatingText(-Dmg, bCrit != 0);
+    //            }
+    //        }
+    //    });
+    //    break;
+    //}
+
+    //case SP_MonsterBuff:
+    //{
+    //    // 8800：按你实际定义解析，添加/移除/刷新
+    //    uint32 Id=0; uint16 BuffId=0; uint8 Op=0; float TimeLeft=0.f;
+    //    (*Channel) >> Id >> BuffId >> Op >> TimeLeft;
+
+    //    AsyncTask(ENamedThreads::GameThread, [this, Id, BuffId, Op, TimeLeft]()
+    //    {
+    //        if (AMMOARPGNetEnemyController* Ctl = FindMonsterCtlr((int32)Id))
+    //        {
+    //            if (AMMOARPGMonster* M = Cast<AMMOARPGMonster>(Ctl->GetPawn()))
+    //            {
+    //                M->UpdateBuffUI(BuffId, Op, TimeLeft);
+    //            }
+    //        }
+    //    });
+    //    break;
+    //}
+
+    // ===== 你原有的玩家/其他 =====
+    default:
+        break;
+    }
 }
+
 
 //DS Server Timer
 void AMMOARPGGameMode::PostLogin(APlayerController* NewPlayer)
@@ -171,4 +330,24 @@ void AMMOARPGGameMode::PostLogin(APlayerController* NewPlayer)
 	//		}*/
 	//	}
 	//},NewPlayer);
+}
+
+// MMOARPGGameMode.cpp
+void AMMOARPGGameMode::RegisterMonster(int32 Id, AMMOARPGNetEnemyController* C)
+{
+    MonsterMap.Add(Id, C);
+}
+
+void AMMOARPGGameMode::UnregisterMonster(int32 Id)
+{
+    MonsterMap.Remove(Id);
+}
+
+AMMOARPGNetEnemyController* AMMOARPGGameMode::FindMonsterCtlr(int32 Id) const
+{
+    if (const TWeakObjectPtr<AMMOARPGNetEnemyController>* P = MonsterMap.Find(Id))
+    {
+        return P->Get();
+    }
+    return nullptr;
 }

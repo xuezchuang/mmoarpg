@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
-#include "../../DataTable/CharacterAnimTable.h"
-#include "../../DataTable/CharacterStyleTable.h"
+#include "DataTable/CharacterAnimTable.h"
+#include "DataTable/CharacterStyleTable.h"
 #include "FItemData.h"
 #include "InventoryGameState.generated.h"
 

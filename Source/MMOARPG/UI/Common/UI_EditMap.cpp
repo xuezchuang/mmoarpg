@@ -15,6 +15,7 @@
 //#include "RobotBase.h"
 #include "MMOARPG.h"
 #include <corecrt_io.h>
+#include "MMOARPGMonster.h"
 
 #define	MAX_FILENAME_LEN  250
 #define	C_WORLDMAP_ONE_GRID 100//单位 100 cm一个格子
@@ -39,6 +40,19 @@ void UUI_EditMap::Active()
 {
 	SetVisibility(ESlateVisibility::Visible);
 	//file_input->forc
+	if (APlayerController* PC = GetWorld()->GetFirstPlayerController())
+    {
+        // 显示鼠标
+        PC->bShowMouseCursor = true;
+        PC->bEnableClickEvents = true;
+        PC->bEnableMouseOverEvents = true;
+
+        // 切换为“仅 UI 模式”
+        FInputModeUIOnly InputMode;
+        InputMode.SetWidgetToFocus(TakeWidget());  // 让当前UI获得焦点
+        InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+        PC->SetInputMode(InputMode);
+    }
 }
 
 void UUI_EditMap::OnButtonClicked()
@@ -114,22 +128,22 @@ void UUI_EditMap::OnButtonClicked()
 		gridToPos(&grid, &Newpos, &left);
 		UE_LOG(MMOARPG, Display, TEXT("grid [%d,%d],value [%d],NewPos [%f,%f]"), grid.row, grid.col, m_MapData.value[grid.row][grid.col], Newpos.X, Newpos.Y);
 	}
-	//
-	//TArray<AActor*> MonsterActors;
-	//UGameplayStatics::GetAllActorsOfClass(World, ARobotBase::StaticClass(), MonsterActors);
-	//if(!MonsterActors.IsEmpty())
-	//{
-	//	for(AActor* it : MonsterActors)
-	//	{
-	//		ARobotBase* monsterActor = Cast<ARobotBase>(it);
-	//		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("monste_id:%d"), monsterActor->data.id));
-	//		FVector pos = monsterActor->GetActorLocation();
-	//		FS_GRID_BASE grid;
-	//		posToGrid(&grid, &pos, &left);
-	//		////GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("pos:%f,%f, born grid:%d,%d"), pos.X,pos.Y,grid.row, grid.col));
-	//		insertBinValue(grid.row, grid.col, monsterActor->data.id);
-	//	}
-	//}
+	
+	TArray<AActor*> MonsterActors;
+	UGameplayStatics::GetAllActorsOfClass(World, AMMOARPGMonster::StaticClass(), MonsterActors);
+	if(!MonsterActors.IsEmpty())
+	{
+		for(AActor* it : MonsterActors)
+		{
+			AMMOARPGMonster* monsterActor = Cast<AMMOARPGMonster>(it);
+			GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("monste_id:%d"), monsterActor->MonsterID));
+			FVector pos = monsterActor->GetActorLocation();
+			FS_GRID_BASE grid;
+			posToGrid(&grid, &pos, &left);
+			////GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("pos:%f,%f, born grid:%d,%d"), pos.X,pos.Y,grid.row, grid.col));
+			insertBinValue(grid.row, grid.col, monsterActor->MonsterID);
+		}
+	}
 	WriteMapFile();
 }
 
@@ -137,7 +151,7 @@ void UUI_EditMap::WriteMapFile()
 {
 	FString filename = file_input->GetText().ToString();
 	FString basedir = FPaths::ProjectDir();
-	basedir = FPaths::Combine(*basedir, TEXT("Binaries/Win64/bin"));
+	basedir = FPaths::Combine(*basedir, TEXT("Binaries/bin"));
 	basedir = basedir.Replace(TEXT("/"), TEXT("//"));
 
 	TCHAR* pSendData = basedir.GetCharArray().GetData();
