@@ -117,44 +117,17 @@ void AMMOARPGGameMode::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Chann
     // ================= Monster =================
     case SP_MonsterData:
     {
-        uint16 Child = 0;
-        (*Channel) >> Child;                 // childcmd（你目前发送的是 0）
-        if (Child != 0)
+		FMonsterDataPacket MonsterData;
+		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterData, MonsterData);
+        if (MonsterData.ChildCmd != 0)
         {
             UE_LOG(MMOARPG, Warning, TEXT("MonsterData childcmd != 0 [%d]"), Child);
         }
-
-        // 读掉 S_ROBOT_DATA 的原始块（先缓存为字节，等你日后需要就解析）
-        uint32 RobotBlobSize = 0; // 这个值服务端是 sizeof(S_ROBOT_DATA)。UE端必须知道它是多少。
-        // 如果你的通道没有显式传大小，那我们只能和服务端约定“固定大小”。先宏一个：
-        constexpr uint32 kSize_S_ROBOT_DATA = 64; // TODO: 换成真实 sizeof(S_ROBOT_DATA)
-        RobotBlobSize = kSize_S_ROBOT_DATA;
-
-        TArray<uint8> RobotBlob;
-        RobotBlob.SetNumUninitialized(RobotBlobSize);
-        ReadBytes(Channel, RobotBlob.GetData(), RobotBlobSize);
-
-        // 后续字段（按你的发送顺序与类型来）
-        uint32 Id = 0;
-        uint8  Dir = 0;
-        uint32 Hp  = 0;
-        int32  GridX = 0, GridY = 0;
-
-        (*Channel) >> Id;
-        (*Channel) >> Dir;
-        (*Channel) >> Hp;
-
-        // grid_pos 8字节：假设是两个 int32
-        (*Channel) >> GridX;
-        (*Channel) >> GridY;
-
-        //// —— 切回游戏线程处理 ——（如果当前已在Game线程，可以省略）
-        //AsyncTask(ENamedThreads::GameThread, [this, Id, Dir, Hp, GridX, GridY]()
-		// 
         
         if (AMMOARPGNetEnemyController* Ctl = FindMonsterCtlr((int32)Id))
         {
-            // 已存在：更新HP、位置/朝向
+
+			/// 已存在：更新HP、位置/朝向
             if (AMMOARPGMonster* M = Cast<AMMOARPGMonster>(Ctl->GetPawn()))
             {
                 const FVector Loc = GridToWorld(GridX, GridY);

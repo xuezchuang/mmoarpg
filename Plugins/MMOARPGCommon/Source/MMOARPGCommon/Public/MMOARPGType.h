@@ -511,6 +511,34 @@ struct S_ROLE_STAND
 	S_ROLE_STAND_TASK      task;     //任务
 };
 
+struct S_REBORN_BASE :S_COMMAND_GATEBASE
+{
+	uint8 kind;//0 原地 1附近城镇复活
+	uint32  userindex;  //需要复活的玩家索引
+};
+
+struct S_ROBOT_DATA :S_COMMAND_GATEBASE
+{
+	uint32  robotindex;
+};
+
+struct FMonsterDataPacket
+{
+	uint16  ChildCmd;
+
+	S_ROBOT_DATA   RobotData;
+
+	int32	Id;
+	uint8	Dir;
+	int32	Hp;
+
+	// 对应 sss(&robot->bc.grid_pos, 8)
+	// 服务器写了 8 字节，一般就是两个 int32（XY）；
+	// 如果你的 grid_pos 实际是其它结构（比如两个 int16 + padding），请据实修改。
+	int32 GridX;
+	int32 GridY;
+};
+
 struct MMOARPGCOMMON_API FMMOARPGUserData
 {
 	FMMOARPGUserData() : ID(INDEX_NONE)
