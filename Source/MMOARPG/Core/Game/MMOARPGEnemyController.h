@@ -16,8 +16,6 @@ class MMOARPG_API AMMOARPGEnemyController : public AAIController
 
 	class UNavigationSystemV1* NavSys;
 
-	class AMMOARPGMonster* EnemyPawn;
-
 	FTimerHandle TimerHandle_Patrol;
 
 
@@ -33,16 +31,10 @@ class MMOARPG_API AMMOARPGEnemyController : public AAIController
 
 	FTimerHandle TimerHnadle_CalDis;
 
-	AMMOARPGEnemyController();
-
 	int GetNextAnimationIndex();//得到下一个要播放动画的索引，主要是来判断动画数组到头的时候，将索引重新置为0
 
 	bool BInAttackRange();//判断目标是否在敌人攻击范围之内
 
-	virtual void OnPossess(APawn* InPawn) override;
-
-	virtual void OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result) override;
-	
 	void DetectedPatrol();
 
 	void PerformAttack();//执行攻击的函数
@@ -55,7 +47,17 @@ class MMOARPG_API AMMOARPGEnemyController : public AAIController
 	void  CacualteTargetDistance();
 
 	void OnReset();//当追着目标跑，但是距离目标太远的时候，就不追了，回到初始位置，并将状态置成初始状态
+protected:
+
+	class AMMOARPGMonster* EnemyPawn;
+
+	virtual void OnPossess(APawn* InPawn) override;
+
+	virtual void OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result) override;
 public:
+
+	explicit AMMOARPGEnemyController(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+
 	AActor* TargetActor;//要攻击或追逐的对象
 	UAnimInstance* AnimInstance;
 	float PatrolWalkSpeed = 200.0f;//巡逻的时候的移动速度

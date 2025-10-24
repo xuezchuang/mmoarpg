@@ -16,9 +16,9 @@
 #include "MMOARPG.h"
 #include <corecrt_io.h>
 #include "MMOARPGMonster.h"
+#include "MMOARPTool.h"
 
-#define	MAX_FILENAME_LEN  250
-#define	C_WORLDMAP_ONE_GRID 100//单位 100 cm一个格子
+
 
 UUI_EditMap::UUI_EditMap(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -110,8 +110,10 @@ void UUI_EditMap::OnButtonClicked()
 	m_MapData.y = left.Y;
 	m_MapData.z = left.Z;
 
-	m_MapData.row = abs(right.X - left.X) / C_WORLDMAP_ONE_GRID;
-	m_MapData.col = abs(right.Y - left.Y) / C_WORLDMAP_ONE_GRID;
+	//m_MapData.row = abs(right.X - left.X) / C_WORLDMAP_ONE_GRID;
+	//m_MapData.col = abs(right.Y - left.Y) / C_WORLDMAP_ONE_GRID;
+	m_MapData.row = FMath::FloorToInt( FMath::Abs(right.X - left.X) / C_WORLDMAP_ONE_GRID );
+	m_MapData.col = FMath::FloorToInt(FMath::Abs(right.Y - left.Y) / C_WORLDMAP_ONE_GRID);
 
 	//
 	TArray<AActor*> PlayerStartActors;
@@ -120,12 +122,16 @@ void UUI_EditMap::OnButtonClicked()
 	{
 		FVector pos = PlayerStartActors[0]->GetActorLocation();
 		FS_GRID_BASE grid;
-		posToGrid(&grid, &pos, &left);
+		//posToGrid(&grid, &pos, &left);
+		FWorldMapInfo Map;
+		Map.Origin = left;                // 左上角为原点
+		Map.GridSize = C_WORLDMAP_ONE_GRID;
+		UMMOARPTool::PosToGrid(grid, pos, Map);
 		//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("pos:%f,%f, born grid:%d,%d"), pos.X,pos.Y,grid.row, grid.col));
 		insertBinValue(grid.row, grid.col, 2);
 
 		FVector Newpos;
-		gridToPos(&grid, &Newpos, &left);
+		UMMOARPTool::GridToPos(grid, Newpos, Map, true);
 		UE_LOG(MMOARPG, Display, TEXT("grid [%d,%d],value [%d],NewPos [%f,%f]"), grid.row, grid.col, m_MapData.value[grid.row][grid.col], Newpos.X, Newpos.Y);
 	}
 	
@@ -139,7 +145,11 @@ void UUI_EditMap::OnButtonClicked()
 			GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("monste_id:%d"), monsterActor->MonsterID));
 			FVector pos = monsterActor->GetActorLocation();
 			FS_GRID_BASE grid;
-			posToGrid(&grid, &pos, &left);
+			//posToGrid(&grid, &pos, &left);
+			FWorldMapInfo Map;
+			Map.Origin = left;                // 左上角为原点
+			Map.GridSize = C_WORLDMAP_ONE_GRID;
+			UMMOARPTool::PosToGrid(grid, pos, Map);
 			////GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("pos:%f,%f, born grid:%d,%d"), pos.X,pos.Y,grid.row, grid.col));
 			insertBinValue(grid.row, grid.col, monsterActor->MonsterID);
 		}
@@ -220,17 +230,17 @@ void UUI_EditMap::WriteMapFile()
 	delete[] Data;
 }
 
-void UUI_EditMap::posToGrid(FS_GRID_BASE* grid, FVector* pos, FVector* left)
-{
-	grid->row = (abs(pos->X - left->X) / (C_WORLDMAP_ONE_GRID));
-	grid->col = (abs(pos->Y - left->Y) / (C_WORLDMAP_ONE_GRID));
-}
-//网格坐标转为3D坐标
-void UUI_EditMap::gridToPos(FS_GRID_BASE* grid, FVector* pos, FVector* left)
-{
-	pos->X = left->X - (grid->row * C_WORLDMAP_ONE_GRID + 50);
-	pos->Y = left->Y + grid->col * C_WORLDMAP_ONE_GRID + 50;
-}
+//void UUI_EditMap::posToGrid(FS_GRID_BASE* grid, FVector* pos, FVector* left)
+//{
+//	grid->row = (abs(pos->X - left->X) / (C_WORLDMAP_ONE_GRID));
+//	grid->col = (abs(pos->Y - left->Y) / (C_WORLDMAP_ONE_GRID));
+//}
+////网格坐标转为3D坐标
+//void UUI_EditMap::gridToPos(FS_GRID_BASE* grid, FVector* pos, FVector* left)
+//{
+//	pos->X = left->X - (grid->row * C_WORLDMAP_ONE_GRID + 50);
+//	pos->Y = left->Y + grid->col * C_WORLDMAP_ONE_GRID + 50;
+//}
 
 void UUI_EditMap::insertBinValue(int row, int col, int id)
 {

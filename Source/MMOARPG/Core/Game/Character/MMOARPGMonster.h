@@ -69,8 +69,6 @@ public:
 	AMMOARPGMonster();
 
 protected:
-	//UPROPERTY(VisibleAnywhere, Category = "Info")
-	FMonsterInfo Info;
 
 	//float BaseDamage = 25.0f;
 	//EDamageType DamageType = EDamageType::Physical;
@@ -125,6 +123,7 @@ protected:
 
 	void InitWidgetText();
 
+	void AdjustZToGround();
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
@@ -132,6 +131,9 @@ protected:
 	void OnSightPerceptionUpdate(const TArray<AActor*>& UpdatedActors);
 
 public:
+	//UPROPERTY(VisibleAnywhere, Category = "Info")
+	FMonsterInfo Info;
+
 	UPROPERTY(EditAnywhere, Category = Info)
 	int MonsterID = 0;
 

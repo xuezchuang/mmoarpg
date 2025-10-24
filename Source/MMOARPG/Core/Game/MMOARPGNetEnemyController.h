@@ -1,63 +1,100 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AIController.h"
-#include "MMOARPGEnemyController.generated.h"
+#include "MMOARPGEnemyController.h"
+#include "MMOARPGNetEnemyController.generated.h"
 
-// AMMOARPGNetEnemyController.h
+// === 服务器下发的网络状态（可按需扩展） ===
+UENUM(BlueprintType)
+enum class ENetMonsterAction : uint8
+{
+    Idle,
+    Run,
+    Attack,
+    Hit,
+    Dead
+};
 
-UCLASS()
-class MMOARPG_API AMMOARPGNetEnemyController : public AAIController
+USTRUCT(BlueprintType)
+struct FNetMonsterState
 {
     GENERATED_BODY()
 
-public:
-    AMMOARPGNetEnemyController();
-
-    virtual void OnPossess(APawn* InPawn) override;
-    virtual void OnUnPossess() override;
-
-    // 基本数据
-private:
-    UPROPERTY()
-    UNavigationSystemV1* NavSys = nullptr;
-
-    UPROPERTY()
-    class AMMOARPGMonster* EnemyPawn = nullptr;
-
-    UPROPERTY()
-    UAnimInstance* AnimInstance = nullptr;
-
-    int32 NetMonsterId = 0;
-    FVector HomeLocation = FVector::ZeroVector;
-
-public:
-    FORCEINLINE void SetNetMonsterId(int32 InId) { NetMonsterId = InId; }
-    FORCEINLINE int32 GetNetMonsterId() const { return NetMonsterId; }
-
-    // 服务器驱动指令（只做播放/移动/数值更新）
-public:
-    void Net_SetTarget(AActor* NewTarget);                            // 目标切换
-    void Net_MoveTo(const FVector& Dest, float Speed, bool bChasing); // 移动到点
-    void Net_FaceTo(const FVector& WorldPos);                         // 朝向点
-    void Net_PlayAttack(int32 AttackIndex, float PlayRate, float ExpectedSecs);
-    void Net_StopAttack();
-    void Net_ResetToHome(const FVector& InHome);
-    void Net_HealthUpdate(int32 CurHP, int32 MaxHP);
-    void Net_Die();
-    void Net_Despawn();
-
-private:
-    // 本地仅维护最小状态用于回放
-    UPROPERTY()
-    AActor* TargetActor = nullptr;
-
-    int32 CurrentAttackIndex = 0;
-    UPROPERTY()
-    UAnimMontage* CurrentAttackMontage = nullptr;
-
-    FTimerHandle TimerHandle_AttackEnd; // 仅用于“视觉对齐”，非逻辑
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) FVector  Pos = FVector::ZeroVector;     // 世界坐标
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) FRotator Rot = FRotator::ZeroRotator;  // 朝向（一般只用 Yaw）
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float    Speed = 0.f;                  // 水平速度（可选）
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) ENetMonsterAction Action = ENetMonsterAction::Idle;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) double   ServerTime = 0.0;             // 服务器时间（秒）
+    //UPROPERTY(EditAnywhere, BlueprintReadWrite) uint32   Seq = 0;                      // 包序号（可选）
 };
 
+class AMMOARPGMonster;
+/**
+ *  网络版控制器：不做本地 AI，只做“网络状态 → 客户端平滑表现”
+ *  重要：不要在 Monster 端调用 Patrol/OnAggroedPulled 等 AI 接口（这些属于单机控制器）
+ */
+UCLASS()
+class MMOARPG_API AMMOARPGNetEnemyController : public AMMOARPGEnemyController
+{
+    GENERATED_BODY()
+
+
+public:
+
+	AMMOARPGNetEnemyController(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+
+    // ========== 网络层喂数据的接口（你在接收包时调用） ==========
+    UFUNCTION(BlueprintCallable, Category="MMOARPG|Enemy|Net")
+    void QueueNetState(const FNetMonsterState& InState);
+
+    UFUNCTION(BlueprintCallable, Category="MMOARPG|Enemy|Net")
+    void QueueNetStates(const TArray<FNetMonsterState>& States);
+
+    UFUNCTION(BlueprintCallable, Category="MMOARPG|Enemy|Net")
+    void ClearStateBuffer();
+
+    // 立即对齐（传送/大误差拉齐）
+    UFUNCTION(BlueprintCallable, Category="MMOARPG|Enemy|Net")
+    void SnapToState(const FNetMonsterState& InState, bool bAdjustZ = true);
+
+    // ========== 可调参数 ==========
+    // 插值延迟（越大越稳、越小越跟手），常见 0.08~0.2
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MMOARPG|Enemy|Net")
+    float InterpDelaySeconds = 0.12f;
+
+    // 偏差过大直接瞬移（cm）
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MMOARPG|Enemy|Net")
+    float SnapThreshold = 300.f;
+
+    // 应用位置时是否贴地
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MMOARPG|Enemy|Net")
+    bool bAdjustZOnApply = true;
+
+    // 给 AnimBP 读的变量（按需绑定）
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="MMOARPG|Enemy|Net")
+    float NetSpeed = 0.f;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="MMOARPG|Enemy|Net")
+    ENetMonsterAction NetAction = ENetMonsterAction::Idle;
+
+protected:
+    virtual void OnPossess(APawn* InPawn) override;
+    virtual void Tick(float DeltaSeconds) override;
+
+private:
+    // === 内部：状态缓冲 & 插值 ===
+    double ComputeClientRenderTime() const;
+    void   InsertStateSorted(const FNetMonsterState& InState);
+    bool   SampleStates(double ClientRenderTime, FNetMonsterState& OutPrev, FNetMonsterState& OutNext) const;
+    void   ApplyInterpolated(AMMOARPGMonster* tEnemyPawn, const FNetMonsterState& A, const FNetMonsterState& B, double ClientRenderTime, float DeltaSeconds);
+
+    // 贴地（复用父类已有逻辑签名不同，故再写一个静态工具）
+    void   AdjustZToGround(AMMOARPGMonster* tEnemyPawn, FVector& InOutPos) const;
+
+private:
+    UPROPERTY() TArray<FNetMonsterState> StateBuffer;
+    UPROPERTY(EditAnywhere, Category="MMOARPG|Enemy|Net") int32 MaxBufferSize = 64;
+
+    FVector PrevVisualPos = FVector::ZeroVector;
+    bool    bHasPrevVisualPos = false;
+};

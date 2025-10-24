@@ -6,6 +6,7 @@
 #include "Engine/StreamableManager.h"
 #include "Engine/AssetManager.h"
 #include "MMOARPGMonster.h"
+#include "MMOARPGNetEnemyController.h"
 
 //#include "SimpleAdvancedAnimationBPLibrary.h"
 
@@ -306,9 +307,11 @@ AMMOARPGMonster* UMMOARPGGameInstance::SpawnMonsterByIdSync(int32 MonsterId, con
     UClass* BPClass = Row->MonsterBlueprint.Get();
     if (!BPClass) return nullptr;
 
-    AMMOARPGMonster* Monster = World->SpawnActor<AMMOARPGMonster>(BPClass, Pos, Rot);
+	FTransform Tf(Rot, Pos);
+	AMMOARPGMonster* Monster = World->SpawnActorDeferred<AMMOARPGMonster>(BPClass, Tf);
     if (!Monster) return nullptr;
 
+	Monster->AIControllerClass = AMMOARPGNetEnemyController::StaticClass();
     Monster->MonsterID = MonsterId;
 
     if (USkeletalMeshComponent* Skel = Monster->GetMesh())

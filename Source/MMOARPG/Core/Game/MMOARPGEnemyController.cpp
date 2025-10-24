@@ -11,7 +11,7 @@
 #include "Animation/AnimMontage.h"
 
 
-AMMOARPGEnemyController::AMMOARPGEnemyController()
+AMMOARPGEnemyController::AMMOARPGEnemyController(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	NavSys = FNavigationSystem::GetCurrent<UNavigationSystemV1>(this);
 }
@@ -160,7 +160,7 @@ void AMMOARPGEnemyController::OnReset()
 {
 	AnimInstance->Montage_Stop(0.0f);
 	bIsRunningBack = true;
-	EnemyPawn->CurrentHealth = EnemyPawn->TotalHealth;
+	EnemyPawn->CurrentHealth = EnemyPawn->Info.TotalHealth;
 	EnemyPawn->UpdateHealthBar();
 	CurrentAttackIndex = 0;
 	GetWorldTimerManager().ClearTimer(TimerHandle_Patrol);

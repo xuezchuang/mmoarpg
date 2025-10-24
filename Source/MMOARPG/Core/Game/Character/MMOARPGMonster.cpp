@@ -98,10 +98,12 @@ void AMMOARPGMonster::BeginPlay()
 	MyController = Cast<AMMOARPGEnemyController>(GetController());
 	if (MyController)
 		MyController->Patrol();
-	StartLocation = GetActorLocation();
+	//StartLocation = GetActorLocation();
+	AdjustZToGround();
+
 	EnemyWidgetComp->SetVisibility(bInShowRange);
 	InitWidgetText();
-	CurrentHealth = TotalHealth;
+	CurrentHealth = Info.TotalHealth;
 	UpdateHealthBar();
 }
 
@@ -188,5 +190,19 @@ void AMMOARPGMonster::InitWidgetText()
 	}
 	EnemyInfoWidget->SetColorAndOpacity(CurrentColor);
 }
+
+void AMMOARPGMonster::AdjustZToGround()
+{
+    FVector Pos = GetActorLocation();
+    FVector Start = FVector(Pos.X, Pos.Y, Pos.Z + 10000.f);
+    FVector End   = FVector(Pos.X, Pos.Y, Pos.Z - 10000.f);
+
+    FHitResult Hit;
+    if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility))
+    {
+        SetActorLocation(Hit.ImpactPoint);
+    }
+}
+
 
 #undef LOCTEXT_NAMESPACE

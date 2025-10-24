@@ -14,6 +14,10 @@
 #include "Protocol/GameProtocol.h"
 #include "Core/MethodUnit.h"
 #include "MMOARPGPlayerController.h"
+#include "MMOARPTool.h"
+#include "MMOARPG.h"
+#include "Character/MMOARPGMonster.h"
+#include "MMOARPGNetEnemyController.h"
 
 AMMOARPGGameMode::AMMOARPGGameMode()
 {
@@ -121,46 +125,60 @@ void AMMOARPGGameMode::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Chann
 		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterData, MonsterData);
         if (MonsterData.ChildCmd != 0)
         {
-            UE_LOG(MMOARPG, Warning, TEXT("MonsterData childcmd != 0 [%d]"), Child);
+            UE_LOG(MMOARPG, Warning, TEXT("MonsterData childcmd != 0 [%d]"), MonsterData.ChildCmd );
         }
         
-        if (AMMOARPGNetEnemyController* Ctl = FindMonsterCtlr((int32)Id))
+        if (AMMOARPGNetEnemyController* Ctl = FindMonsterCtlr(MonsterData.Id))
         {
 
 			/// 已存在：更新HP、位置/朝向
             if (AMMOARPGMonster* M = Cast<AMMOARPGMonster>(Ctl->GetPawn()))
             {
-                const FVector Loc = GridToWorld(GridX, GridY);
-                Ctl->Net_MoveTo(Loc, /*Speed*/200.f, /*bChasing*/false); // 速度先用小步速；后续服务端发 8400 修正
-                Ctl->Net_HealthUpdate((int32)Hp, M->TotalHealth);        // 或者你也在 8000 里带 MaxHP
-                // 简单朝向：用网格下一步方向近似
-                const FVector FacePos = Loc + FVector(FMath::Cos(FMath::DegreesToRadians((float)Dir)), FMath::Sin(FMath::DegreesToRadians((float)Dir)), 0.f) * 10.f;
-                Ctl->Net_FaceTo(FacePos);
+                //const FVector Loc = GridToWorld(GridX, GridY);
+                //Ctl->Net_MoveTo(Loc, /*Speed*/200.f, /*bChasing*/false); // 速度先用小步速；后续服务端发 8400 修正
+                //Ctl->Net_HealthUpdate((int32)Hp, M->TotalHealth);        // 或者你也在 8000 里带 MaxHP
+                //// 简单朝向：用网格下一步方向近似
+                //const FVector FacePos = Loc + FVector(FMath::Cos(FMath::DegreesToRadians((float)Dir)), FMath::Sin(FMath::DegreesToRadians((float)Dir)), 0.f) * 10.f;
+                //Ctl->Net_FaceTo(FacePos);
+				UE_LOG(MMOARPG, Display, TEXT("MonsterData"));
             }
         }
         else
         {
-            // 生成怪物 + 网络控制器
-            if (!ensure(MonsterClass)) { UE_LOG(MMOARPG, Error, TEXT("MonsterClass is null")); return; }
+			FS_GRID_BASE Grid;
+			Grid.row = MonsterData.GridX;
+			Grid.col = MonsterData.GridY;
 
-            const FVector SpawnLoc = GridToWorld(GridX, GridY);
-            const FRotator SpawnRot(0.f, (float)Dir, 0.f);
+			// 计算世界坐标
+			FVector WorldPos = UMMOARPTool::GridToPosSimple(Grid, FVector::ZeroVector, C_WORLDMAP_ONE_GRID, true);
 
-            AMMOARPGMonster* Monster = GetWorld()->SpawnActor<AMMOARPGMonster>(MonsterClass, SpawnLoc, SpawnRot);
-            if (!Monster) { UE_LOG(MMOARPG, Error, TEXT("Spawn Monster failed [id:%u]"), Id); return; }
+			if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+			{
+				// 调用 GameInstance 中的生成函数
+				AMMOARPGMonster* SpawnedMonster = GI->SpawnMonsterByIdSync(MonsterData.Id, WorldPos);
+				if (SpawnedMonster)
+				{
+					// 获取该怪物的控制器
+					AController* Controller = SpawnedMonster->GetController();
+					if (AMMOARPGNetEnemyController* NetController = Cast<AMMOARPGNetEnemyController>(Controller))
+					{
+						RegisterMonster(MonsterData.Id, NetController);
+					}
+					else
+					{
+						UE_LOG(LogTemp, Warning, TEXT("Spawned monster (ID:%lld) has no valid NetEnemyController."), MonsterData.Id);
+					}
+				}
+				else
+				{
+					UE_LOG(LogTemp, Warning, TEXT("Failed to spawn monster with ID:%lld"), MonsterData.Id);
+				}
+			}
 
-            // 控制器
-            AMMOARPGNetEnemyController* NewCtl = GetWorld()->SpawnActor<AMMOARPGNetEnemyController>();
-            if (!NewCtl) { Monster->Destroy(); return; }
-
-            NewCtl->SetNetMonsterId((int32)Id);
-            NewCtl->Possess(Monster);
-            RegisterMonster((int32)Id, NewCtl);
-
-            // 初始表现：HP、站位、朝向
-            NewCtl->Net_HealthUpdate((int32)Hp, Monster->TotalHealth);
-            NewCtl->Net_ResetToHome(SpawnLoc);
-            NewCtl->Net_FaceTo(SpawnLoc + SpawnRot.Vector() * 10.f);
+			//// 初始表现：HP、站位、朝向
+			//NewCtl->Net_HealthUpdate((int32)Hp, Monster->TotalHealth);
+			//NewCtl->Net_ResetToHome(SpawnLoc);
+			//NewCtl->Net_FaceTo(SpawnLoc + SpawnRot.Vector() * 10.f);
         }
 
         break;

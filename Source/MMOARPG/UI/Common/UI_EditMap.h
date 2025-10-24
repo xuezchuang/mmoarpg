@@ -26,12 +26,6 @@ struct S_MAP_BIN_BASE
 	}
 };
 
-struct FS_GRID_BASE
-{
-	int32   row;
-	int32   col;
-};
-
 
 UCLASS(Blueprintable, Abstract)
 class UUI_EditMap: public UUserWidget
@@ -62,9 +56,9 @@ private:
 	void OnButtonClicked();
 
 	//坐标转为格子坐标 大-小
-	void posToGrid(FS_GRID_BASE* grid, FVector* pos, FVector* left);
+	//void posToGrid(FS_GRID_BASE* grid, FVector* pos, FVector* left);
 	//网格坐标转为3D坐标
-	inline void gridToPos(FS_GRID_BASE* grid, FVector* pos, FVector* left);
+	//inline void gridToPos(FS_GRID_BASE* grid, FVector* pos, FVector* left);
 	void insertBinValue(int row, int col, int id);
 
 	void WriteMapFile();
