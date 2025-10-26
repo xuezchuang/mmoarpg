@@ -7,6 +7,8 @@
 #include "MMOARPGMacroType.h"
 #include "UI_InGame.generated.h"
 
+class UTextBlock;
+class UUI_ActiveWP;
 /**
  * 
  */

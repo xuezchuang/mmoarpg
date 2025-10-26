@@ -1,9 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "UI_ActiveWP.h"
 //#include "ThreadManage.h"
-#if UE_MMOARPG_DEBUG_DS
-#include "../../Core/Game/Character/MMOARPGPlayerCharacter.h"
-#endif
+//#if UE_MMOARPG_DEBUG_DS
+//#include "../../Core/Game/Character/MMOARPGPlayerCharacter.h"
+//#endif
+
+#include "UMG/Public/Components/TextBlock.h"
 
 #define LOCTEXT_NAMESPACE "UI_ActiveWP"
 
