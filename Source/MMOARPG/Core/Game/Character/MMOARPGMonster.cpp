@@ -102,7 +102,10 @@ void AMMOARPGMonster::BeginPlay()
 	AdjustZToGround();
 
 	EnemyWidgetComp->SetVisibility(bInShowRange);
-	InitWidgetText();
+	if(EnemyInfoWidget)
+	{
+		InitWidgetText();
+	}
 	CurrentHealth = Info.TotalHealth;
 	UpdateHealthBar();
 }

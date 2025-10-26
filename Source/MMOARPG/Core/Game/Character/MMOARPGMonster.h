@@ -131,7 +131,7 @@ protected:
 	void OnSightPerceptionUpdate(const TArray<AActor*>& UpdatedActors);
 
 public:
-	//UPROPERTY(VisibleAnywhere, Category = "Info")
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Behavior)
 	FMonsterInfo Info;
 
 	UPROPERTY(EditAnywhere, Category = Info)

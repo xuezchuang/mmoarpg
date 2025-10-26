@@ -25,12 +25,16 @@ class MMOARPG_API UUI_LoginMain : public UUI_MainBase
 
 	UPROPERTY(meta = (BindWidget))
 	UUI_Register* UI_Register;
+
+	UPROPERTY(meta = (BindWidget))
+	UUI_Print* UI_Print;
 public:
 	virtual void NativeConstruct();
 
 	virtual void NativeDestruct();
 
-
+	void PrintLog(const FString& InMsg);
+	void PrintLog(const FText& InMsg);
 	
 
 public:

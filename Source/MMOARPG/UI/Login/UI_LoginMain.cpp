@@ -238,4 +238,16 @@ void UUI_LoginMain::LinkServerInfo(ESimpleNetErrorType InType, const FString& In
 	}
 }
 
+void UUI_LoginMain::PrintLog(const FString& InMsg)
+{
+	PrintLog(FText::FromString(InMsg));
+}
+
+void UUI_LoginMain::PrintLog(const FText& InMsg)
+{
+	//播放动画
+	UI_Print->PlayTextAnim();
+
+	UI_Print->SetText(InMsg);
+}
 #undef LOCTEXT_NAMESPACE

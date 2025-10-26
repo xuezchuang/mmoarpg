@@ -61,18 +61,18 @@ void UUI_MainBase::NativeDestruct()
 	}
 }
 
-void UUI_MainBase::PrintLog(const FString& InMsg)
-{
-	PrintLog(FText::FromString(InMsg));
-}
-
-void UUI_MainBase::PrintLog(const FText& InMsg)
-{
-	//播放动画
-	UI_Print->PlayTextAnim();
-
-	UI_Print->SetText(InMsg);
-}
+//void UUI_MainBase::PrintLog(const FString& InMsg)
+//{
+//	PrintLog(FText::FromString(InMsg));
+//}
+//
+//void UUI_MainBase::PrintLog(const FText& InMsg)
+//{
+//	//播放动画
+//	UI_Print->PlayTextAnim();
+//
+//	UI_Print->SetText(InMsg);
+//}
 
 void UUI_MainBase::BindClientRcv()
 {

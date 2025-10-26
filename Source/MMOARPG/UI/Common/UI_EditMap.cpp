@@ -135,26 +135,42 @@ void UUI_EditMap::OnButtonClicked()
 		UE_LOG(MMOARPG, Display, TEXT("grid [%d,%d],value [%d],NewPos [%f,%f]"), grid.row, grid.col, m_MapData.value[grid.row][grid.col], Newpos.X, Newpos.Y);
 	}
 	
+	PendingMapObjects.Reset();
+
 	TArray<AActor*> MonsterActors;
 	UGameplayStatics::GetAllActorsOfClass(World, AMMOARPGMonster::StaticClass(), MonsterActors);
-	if(!MonsterActors.IsEmpty())
+	if (!MonsterActors.IsEmpty())
 	{
-		for(AActor* it : MonsterActors)
+		for (AActor* it : MonsterActors)
 		{
 			AMMOARPGMonster* monsterActor = Cast<AMMOARPGMonster>(it);
-			GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("monste_id:%d"), monsterActor->MonsterID));
+			if (!monsterActor) continue;
+
+			const int32 monsterId = monsterActor->MonsterID;
 			FVector pos = monsterActor->GetActorLocation();
+
 			FS_GRID_BASE grid;
-			//posToGrid(&grid, &pos, &left);
-			FWorldMapInfo Map;
-			Map.Origin = left;                // 左上角为原点
-			Map.GridSize = C_WORLDMAP_ONE_GRID;
+			FWorldMapInfo Map; Map.Origin = left; Map.GridSize = C_WORLDMAP_ONE_GRID;
 			UMMOARPTool::PosToGrid(grid, pos, Map);
-			////GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("pos:%f,%f, born grid:%d,%d"), pos.X,pos.Y,grid.row, grid.col));
-			insertBinValue(grid.row, grid.col, monsterActor->MonsterID);
+
+			// （可选）不再把 ID 塞入 m_MapData.value 网格；如仍需保留占位，可写一个固定类型码
+			// insertBinValue(grid.row, grid.col, EGTY_MONSTER_SPAWN); // 若有这样的类型枚举
+			// 你之前的 insertBinValue(grid.row, grid.col, monsterId) 建议移除，避免网格被ID污染
+
+			// 收集写入尾块的条目
+			S_MAPOBJ_ENTRY e{};
+			e.row = (uint16)FMath::Clamp(grid.row, 0, m_MapData.row - 1);
+			e.col = (uint16)FMath::Clamp(grid.col, 0, m_MapData.col - 1);
+			e.id = (uint32)monsterId;
+			e.kind = EMO_MONSTER;
+
+			PendingMapObjects.Add(e);
+
+			UE_LOG(MMOARPG, Display, TEXT("Monster Pos[%d,%d], id:%d"),(int)e.row, (int)e.col, monsterId);
 		}
 	}
 	WriteMapFile();
+
 }
 
 void UUI_EditMap::WriteMapFile()
@@ -224,8 +240,34 @@ void UUI_EditMap::WriteMapFile()
 	//3 指针偏移到索引20的位置开始写文件
 	fseek(m_File, 20, SEEK_SET);
 	fwrite(Data, 1, writeBytes, m_File);
-	fclose(m_File);
 
+	// ===== 追加对象块（怪物等）到文件尾 =====
+	fseek(m_File, 0, SEEK_END);
+
+	// 只在有条目时写入块；没条目就不写，保持文件更小且兼容
+	if (PendingMapObjects.Num() > 0)
+	{
+		S_MAPOBJ_BLOCK_HDR hdr{};
+		hdr.magic = MAPOBJ_MAGIC;
+		hdr.version = MAPOBJ_VERSION;
+		hdr.entry_size = MAPOBJ_ENTRY_SIZE;
+		hdr.count = (uint32_t)PendingMapObjects.Num();
+
+		// 写块头
+		fwrite(&hdr, 1, sizeof(hdr), m_File);
+
+		// 写 N 条 Entry（内存连续可一次性写出）
+		fwrite(PendingMapObjects.GetData(),
+			sizeof(S_MAPOBJ_ENTRY),
+			PendingMapObjects.Num(),
+			m_File);
+
+		// 可选：写 4 字节校验（这里写 0）
+		uint32_t checksum = 0;
+		fwrite(&checksum, 1, sizeof(uint32_t), m_File);
+	}
+
+	fclose(m_File);
 	//最后删除
 	delete[] Data;
 }

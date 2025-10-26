@@ -648,4 +648,17 @@ void UUI_HallMain::SetEditCharacter(const FMMOARPGCharacterAppearance* InCA)
 	}
 }
 
+void UUI_HallMain::PrintLog(const FString& InMsg)
+{
+	PrintLog(FText::FromString(InMsg));
+}
+
+void UUI_HallMain::PrintLog(const FText& InMsg)
+{
+	//²¥·Å¶¯»­
+	UI_Print->PlayTextAnim();
+
+	UI_Print->SetText(InMsg);
+}
+
 #undef LOCTEXT_NAMESPACE

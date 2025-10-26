@@ -14,6 +14,10 @@
 #include "MMOARPGHUD.h"
 #include "MMOARPGPlayerController.h"
 #include "BladeIINetPlayer.h"
+#include "MMOARPTool.h"
+#include "MMOARPG.h"
+#include "Character/MMOARPGMonster.h"
+#include "MMOARPGNetEnemyController.h"
 
 ABladeIINetGameMode::ABladeIINetGameMode()
 {
@@ -175,6 +179,70 @@ void ABladeIINetGameMode::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Ch
 		}
 		break;
 	}
+	case SP_MonsterData:
+	{
+		FMonsterDataPacket MonsterData;
+		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterData, MonsterData);
+		if (MonsterData.ChildCmd != 0)
+		{
+			UE_LOG(MMOARPG, Warning, TEXT("MonsterData childcmd != 0 [%d]"), MonsterData.ChildCmd);
+		}
+
+		if (AMMOARPGNetEnemyController* Ctl = FindMonsterCtlr(MonsterData.Id))
+		{
+
+			/// 已存在：更新HP、位置/朝向
+			if (AMMOARPGMonster* M = Cast<AMMOARPGMonster>(Ctl->GetPawn()))
+			{
+				//const FVector Loc = GridToWorld(GridX, GridY);
+				//Ctl->Net_MoveTo(Loc, /*Speed*/200.f, /*bChasing*/false); // 速度先用小步速；后续服务端发 8400 修正
+				//Ctl->Net_HealthUpdate((int32)Hp, M->TotalHealth);        // 或者你也在 8000 里带 MaxHP
+				//// 简单朝向：用网格下一步方向近似
+				//const FVector FacePos = Loc + FVector(FMath::Cos(FMath::DegreesToRadians((float)Dir)), FMath::Sin(FMath::DegreesToRadians((float)Dir)), 0.f) * 10.f;
+				//Ctl->Net_FaceTo(FacePos);
+				UE_LOG(MMOARPG, Display, TEXT("MonsterData"));
+			}
+		}
+		else
+		{
+			FS_GRID_BASE Grid;
+			Grid.row = MonsterData.GridX;
+			Grid.col = MonsterData.GridY;
+
+			// 计算世界坐标
+			FVector WorldPos = UMMOARPTool::GridToPosSimple(Grid, FVector::ZeroVector, C_WORLDMAP_ONE_GRID, true);
+
+			if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+			{
+				// 调用 GameInstance 中的生成函数
+				AMMOARPGMonster* SpawnedMonster = GI->SpawnMonsterByIdSync(MonsterData.Id, WorldPos);
+				if (SpawnedMonster)
+				{
+					// 获取该怪物的控制器
+					AController* Controller = SpawnedMonster->GetController();
+					if (AMMOARPGNetEnemyController* NetController = Cast<AMMOARPGNetEnemyController>(Controller))
+					{
+						RegisterMonster(MonsterData.Id, NetController);
+					}
+					else
+					{
+						UE_LOG(LogTemp, Warning, TEXT("Spawned monster (ID:%lld) has no valid NetEnemyController."), MonsterData.Id);
+					}
+				}
+				else
+				{
+					UE_LOG(LogTemp, Warning, TEXT("Failed to spawn monster with ID:%lld"), MonsterData.Id);
+				}
+			}
+
+			//// 初始表现：HP、站位、朝向
+			//NewCtl->Net_HealthUpdate((int32)Hp, Monster->TotalHealth);
+			//NewCtl->Net_ResetToHome(SpawnLoc);
+			//NewCtl->Net_FaceTo(SpawnLoc + SpawnRot.Vector() * 10.f);
+		}
+
+		break;
+	}
 	}
 }
 
@@ -200,4 +268,23 @@ void ABladeIINetGameMode::PostLogin(APlayerController* NewPlayer)
 	//		}*/
 	//	}
 	//},NewPlayer);
+}
+
+void ABladeIINetGameMode::RegisterMonster(int32 Id, AMMOARPGNetEnemyController* C)
+{
+	MonsterMap.Add(Id, C);
+}
+
+void ABladeIINetGameMode::UnregisterMonster(int32 Id)
+{
+	MonsterMap.Remove(Id);
+}
+
+AMMOARPGNetEnemyController* ABladeIINetGameMode::FindMonsterCtlr(int32 Id) const
+{
+	if (const TWeakObjectPtr<AMMOARPGNetEnemyController>* P = MonsterMap.Find(Id))
+	{
+		return P->Get();
+	}
+	return nullptr;
 }

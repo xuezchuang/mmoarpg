@@ -26,6 +26,8 @@ class MMOARPG_API UUI_HallMain : public UUI_MainBase
 	UPROPERTY(meta = (BindWidget))
 	UUI_EditorCharacter* UI_EditorCharacter;
 
+	UPROPERTY(meta = (BindWidget))
+	UUI_Print* UI_Print;
 public:
 	enum ECAType
 	{
@@ -40,6 +42,8 @@ public:
 
 	virtual void NativeDestruct();
 
+	void PrintLog(const FString& InMsg);
+	void PrintLog(const FText& InMsg);
 protected:
 	virtual void LinkInit() override;
 public:

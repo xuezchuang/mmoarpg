@@ -18,8 +18,8 @@ class MMOARPG_API UUI_MainBase : public UUI_Base
 {
 	GENERATED_BODY()
 
-	UPROPERTY(meta = (BindWidget))
-	UUI_Print* UI_Print;
+	//UPROPERTY(meta = (BindWidget))
+	//UUI_Print* UI_Print;
 
 public:
 	virtual void NativeConstruct();
@@ -28,8 +28,8 @@ public:
 
 	virtual void LinkInit(){}
 public:
-	void PrintLog(const FString& InMsg);
-	void PrintLog(const FText& InMsg);
+	//void PrintLog(const FString& InMsg);
+	//void PrintLog(const FText& InMsg);
 
 protected:
 	void BindClientRcv();
