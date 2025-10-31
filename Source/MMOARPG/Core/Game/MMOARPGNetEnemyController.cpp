@@ -314,3 +314,38 @@ void AMMOARPGNetEnemyController::AdjustZToGround(AMMOARPGMonster* tEnemyPawn, FV
 #endif
     }
 }
+
+void AMMOARPGNetEnemyController::Net_MoveTo(const FVector& Target, float Speed, bool bChasing)
+{
+    const UWorld* W = GetWorld();
+    const double NowS = W ? W->GetTimeSeconds() : 0.0;
+    Net_MoveTo_At(Target, NowS, Speed, bChasing);
+}
+
+void AMMOARPGNetEnemyController::Net_MoveTo_At(const FVector& Target, double ServerTimeSeconds, float Speed, bool bChasing)
+{
+    // 组一帧网络状态，丢进插值缓冲
+    FNetMonsterState S;
+    S.ServerTime = ServerTimeSeconds;     // 秒（非常重要：和 StateBuffer 的单位一致）
+    S.Pos        = Target;
+
+    // 计算一个面向（从当前可视位置朝目标）
+    FVector FromPos = EnemyPawn ? EnemyPawn->GetActorLocation() : Target;
+    FVector Dir = Target - FromPos;
+    if (!Dir.IsNearlyZero())
+    {
+        S.Rot = Dir.Rotation();
+    }
+    else
+    {
+        S.Rot = EnemyPawn ? EnemyPawn->GetActorRotation() : FRotator::ZeroRotator;
+    }
+
+    // 速度/动作（可按项目调整）
+    // Speed 不可信时，用上一帧速度或基于距离的估计都可以；这里保留传入为主
+    S.Speed  = FMath::Max(0.f, Speed);
+    //S.Action = bChasing ? ENetMonsterAction::Move  // 或自定义 Chase
+    //                    : (S.Speed > 1.f ? ENetMonsterAction::Move : ENetMonsterAction::Idle);
+
+    InsertStateSorted(S);
+}

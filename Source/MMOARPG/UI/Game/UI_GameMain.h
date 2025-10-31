@@ -26,12 +26,15 @@ public:
 	virtual void NativeDestruct();
 
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime);
+
+	
 protected:
 
 	virtual void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
 
 	//virtual void LinkServerInfo(ESimpleNetErrorType InType, const FString& InMsg);
 
+	
 protected:
 #if UE_MMOARPG_DEBUG_DS
 	FMMOARPGRobot Robot;//只是为了测试

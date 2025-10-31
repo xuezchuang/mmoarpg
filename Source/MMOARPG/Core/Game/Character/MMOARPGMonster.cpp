@@ -13,7 +13,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/TextBlock.h"
 #include "EnemyInfoWidget.h"
-#include "MMOARPGGameMode.h"
+#include "NetPlay/B2NetGameMode.h"
 
 #define LOCTEXT_NAMESPACE "EnemyNameSpace"
 
@@ -87,7 +87,7 @@ void AMMOARPGMonster::BeginPlay()
 
 	// 获取当前 GameMode（只在服务器有效）
 	AGameModeBase* GameMode = World->GetAuthGameMode();
-	if (!GameMode || GameMode->IsA(AMMOARPGGameMode::StaticClass()))
+	if (!GameMode || GameMode->IsA(ABladeIINetGameMode::StaticClass()))
 	{
 		// 如果不是 MMOARPGGameMode，就销毁自己
 		Destroy();

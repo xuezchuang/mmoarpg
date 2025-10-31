@@ -572,6 +572,19 @@ struct S_MOVE_ROLE
 		targetpos.init();
 	}
 };
+
+struct S_MOVE_ROBOT
+{
+	uint32		robotindex;
+	int32		x;
+	int32		y;
+	S_MOVE_ROBOT()
+	{
+		robotindex = 0;
+		x = 0;
+		y = 0;
+	}
+};
 #pragma pack(pop)
 
 

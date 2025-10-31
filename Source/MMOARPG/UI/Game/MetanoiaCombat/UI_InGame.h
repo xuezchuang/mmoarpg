@@ -39,4 +39,19 @@ protected:
 	//virtual void LinkServerInfo(ESimpleNetErrorType InType, const FString& InMsg);
 
 protected:
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Status")
+	double m_dCurHP;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Status")
+	double m_dTolHP;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Status")
+	double m_dCurMP;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Status")
+	double m_dTolMP;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Status")
+	void UpdateState();
 };

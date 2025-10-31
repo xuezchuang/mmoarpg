@@ -7,10 +7,11 @@
 #include "SimpleNetManage.h"
 #include "MMOARPGType.h"
 #include "Engine/DataTable.h"
-
 #include "MMOARPGGameInstance.generated.h"
 
 struct FMonsterAnimRow;
+class AMMOARPGMonster;
+class AMMOARPGNetEnemyController;
 
 USTRUCT()
 struct FMonsterVisualResolved
@@ -25,6 +26,30 @@ struct FMonsterVisualResolved
     UAnimMontage* Death = nullptr;
 };
 
+USTRUCT()
+struct FQueuedMonsterMsg
+{
+    GENERATED_BODY()
+
+    // 用于排序回放
+    UPROPERTY() double ServerTimeMs = 0.0;
+
+    // 是否带有权威位姿（拿到后将触发真正 Spawn 或权威重设）
+    UPROPERTY() bool bHasTransform = false;
+    UPROPERTY() FTransform Transform;
+
+    UPROPERTY() bool  bHasHP     = false;
+    UPROPERTY() int32 HP         = 0;
+
+    UPROPERTY() bool  bHasMaxHP  = false;
+    UPROPERTY() int32 MaxHP      = 0;
+
+    UPROPERTY() bool  bHasLogicState = false;
+    UPROPERTY() uint8 LogicState     = 0;
+
+    UPROPERTY() bool   bHasMoveTarget = false;
+    UPROPERTY() FVector MoveTarget    = FVector::ZeroVector;
+};
 
 /**
  * 
@@ -88,4 +113,38 @@ public:
 
     /** 同步（小资源/编辑器可用）：会同步加载软引用，注意别在帧中卡顿点用 */
     class AMMOARPGMonster* SpawnMonsterByIdSync(int32 MonsterId, const FVector& Pos, const FRotator& Rot = FRotator::ZeroRotator);
+
+	// ========== 对外接口：由网络层调用 ==========
+    // 8000：怪物数据（可能带位置/也可能不带）
+    void GI_OnMonsterData(const FMonsterDataPacket& P, double ServerTimeMs);
+    // 8300：怪物状态（Idle/Chase/Back...）
+    void GI_OnMonsterState(int32 MonsterId, uint8 NewState, double ServerTimeMs);
+    // 8400：怪物移动（通常自带目标位置/方向）
+    void GI_OnMonsterMove(const S_MOVE_ROBOT& Move, double ServerTimeMs);
+
+    // 供外部注册/查询（如果你有现成的，就用你自己的）
+    void RegisterMonster(int32 MonsterId, AMMOARPGNetEnemyController* Ctrl);
+    AMMOARPGNetEnemyController* FindMonsterCtlr(int32 MonsterId) const;
+    AMMOARPGMonster*            FindMonsterById(int32 MonsterId) const;
+private:
+    // ========== 内部：排队与落地 ==========
+    void EnqueuePending(int32 MonsterId, const FQueuedMonsterMsg& Msg);
+    void OnAuthoritativeTransform(int32 MonsterId, const FTransform& T, double ServerTimeMs);
+    void FlushPendingTo(AMMOARPGMonster* M, int32 MonsterId);
+    void ApplyQueued(AMMOARPGMonster* M, const FQueuedMonsterMsg& Msg, bool bAuthoritative);
+
+    // 清理超时的排队（避免堆积）
+    void CleanupPending(float MaxHoldSec = 10.f);
+
+private:
+    // 未落地的队列
+    TMap<int32, TArray<FQueuedMonsterMsg>> PendingMsgs;
+    TMap<int32, double>                    PendingFirstSeenSec;
+
+    // Id → 控制器（或怪物）的弱引用表
+    TMap<int32, TWeakObjectPtr<AMMOARPGNetEnemyController>> IdToCtrl;
+    TMap<int32, TWeakObjectPtr<AMMOARPGMonster>>            IdToMonster;
+
+    // 清理计时器
+    FTimerHandle PendingCleanupHandle;
 };
