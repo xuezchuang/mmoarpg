@@ -27,14 +27,62 @@ void UMMOARPTool::PosToGrid(FS_GRID_BASE& OutGrid, const FVector& Pos, const FWo
     OutGrid.col = col;
 }
 
-void UMMOARPTool::GridToPos(const FS_GRID_BASE& Grid, FVector& OutPos, const FWorldMapInfo& Map, bool bUseCellCenter)
+// 约定回顾（以 PosToGrid 为准）
+// row = floor( (Origin.X - Pos.X) / S )    // 行沿 -X 递增
+// col = floor( (Pos.Y   - Origin.Y) / S )  // 列沿 +Y 递增
+// 同格的 X ∈ (Origin.X - (row+1)S, Origin.X - row*S] （半开区间）
+// 同格的 Y ∈ [Origin.Y + col*S, Origin.Y + (col+1)S)
+
+static FORCEINLINE FVector GridCellCenter(const FS_GRID_BASE& G, const FWorldMapInfo& Map, float Z = 0.f)
 {
     const float S = (Map.GridSize > 0.f) ? Map.GridSize : 100.f;
-    const float Offset = bUseCellCenter ? 0.5f : 0.f;
-
-    // 和上面 PosToGrid 完全互逆（行沿 -X，列沿 +Y）
-    OutPos.X = Map.Origin.X - ( (static_cast<float>(Grid.row) + Offset) * S );
-    OutPos.Y = Map.Origin.Y + ( (static_cast<float>(Grid.col) + Offset) * S );
-    // Z 交给贴地逻辑（AdjustZToGround 或你的统一取高函数）
-    // OutPos.Z 保持外部赋值/射线结果
+    // 取格心，保证 PosToGrid(格心) == (row,col)
+    const float x = Map.Origin.X - ( (static_cast<float>(G.row) + 0.5f) * S );
+    const float y = Map.Origin.Y + ( (static_cast<float>(G.col) + 0.5f) * S );
+    return FVector(x, y, Z);
 }
+
+static FORCEINLINE void GridCellAABB(const FS_GRID_BASE& G, const FWorldMapInfo& Map,
+                                     FVector2f& OutMin, FVector2f& OutMax)
+{
+    const float S = (Map.GridSize > 0.f) ? Map.GridSize : 100.f;
+
+    // X：向 -X 增行 → 这一行在 [Origin.X - (row+1)S, Origin.X - row*S]
+    const float xMin = Map.Origin.X - ( (static_cast<float>(G.row) + 1.0f) * S );
+    const float xMax = Map.Origin.X - ( (static_cast<float>(G.row) + 0.0f) * S );
+
+    // Y：向 +Y 增列 → 这一列在 [Origin.Y + col*S, Origin.Y + (col+1)S]
+    const float yMin = Map.Origin.Y + ( (static_cast<float>(G.col) + 0.0f) * S );
+    const float yMax = Map.Origin.Y + ( (static_cast<float>(G.col) + 1.0f) * S );
+
+    OutMin = FVector2f(xMin, yMin);
+    OutMax = FVector2f(xMax, yMax);
+}
+
+void UMMOARPTool::GridToPos(const FS_GRID_BASE& Grid, FVector& OutPos,
+                            const FWorldMapInfo& Map, bool bUseCellCenter)
+{
+    if (bUseCellCenter)
+    {
+        // 用格心：可确保 PosToGrid(OutPos) == Grid
+        const FVector Center = GridCellCenter(Grid, Map, OutPos.Z);
+        OutPos.X = Center.X;
+        OutPos.Y = Center.Y;
+        // Z 留给外部贴地/射线
+        return;
+    }
+
+    // 若不取格心：默认给“格内稳定代表点”（靠近左下角稍偏内，避免落到边界导致 floor 抖动）
+    const float S = (Map.GridSize > 0.f) ? Map.GridSize : 100.f;
+    constexpr float EPS = 1e-3f;             // 比 S 小很多的正数
+    const float inset = EPS * S;             // 向格内偏移一点点
+
+    FVector2f bmin, bmax;
+    GridCellAABB(Grid, Map, bmin, bmax);
+
+    // 取到“格内”的一个确定点（X 取上边界往内推一点；Y 取下边界往内推一点）
+    OutPos.X = static_cast<double>(bmax.X) - inset;   // 仍在该格内
+    OutPos.Y = static_cast<double>(bmin.Y) + inset;   // 仍在该格内
+    // Z 仍交给外部
+}
+

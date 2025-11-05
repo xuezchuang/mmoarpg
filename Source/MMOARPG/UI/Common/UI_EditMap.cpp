@@ -132,7 +132,7 @@ void UUI_EditMap::OnButtonClicked()
 
 		FVector Newpos;
 		UMMOARPTool::GridToPos(grid, Newpos, Map, true);
-		UE_LOG(MMOARPG, Display, TEXT("grid [%d,%d],value [%d],NewPos [%f,%f]"), grid.row, grid.col, m_MapData.value[grid.row][grid.col], Newpos.X, Newpos.Y);
+		UE_LOG(MMOARPG, Display, TEXT("pos [%f,%f],value [%d],NewPos [%f,%f]"), pos.X, pos.Y, m_MapData.value[grid.row][grid.col], Newpos.X, Newpos.Y);
 	}
 	
 	PendingMapObjects.Reset();

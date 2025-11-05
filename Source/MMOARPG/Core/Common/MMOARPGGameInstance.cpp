@@ -8,7 +8,10 @@
 #include "MMOARPGMonster.h"
 #include "MMOARPGNetEnemyController.h"
 #include "MMOARPTool.h"
-
+#include "MMOARPG.h"
+#include "Landscape.h"
+#include "LandscapeInfo.h"
+#include "Kismet/GameplayStatics.h"
 //#include "SimpleAdvancedAnimationBPLibrary.h"
 
 int UMMOARPGGameInstance::nIndex = 0;
@@ -18,7 +21,7 @@ void UMMOARPGGameInstance::Init()
 	Super::Init();
 	nIndex++;
 
-	// Ã¿ 5 ÃëÇåÒ»´ÎÅÅ¶Ó
+	// æ¯ 5 ç§’æ¸…ä¸€æ¬¡æ’é˜Ÿ
 	GetWorld()->GetTimerManager().SetTimer(PendingCleanupHandle, [this]()
 		{
 			CleanupPending(10.f);
@@ -119,7 +122,7 @@ UDataTable* UMMOARPGGameInstance::EnsureMonsterTableSync()
     if (DT_Monster_Loaded) return DT_Monster_Loaded;
     if (DT_Monster.IsNull()) return nullptr;
 
-    DT_Monster_Loaded = DT_Monster.LoadSynchronous(); // Í¬²½¼ÓÔØ
+    DT_Monster_Loaded = DT_Monster.LoadSynchronous(); // åŒæ­¥åŠ è½½
     return DT_Monster_Loaded;
 }
 
@@ -140,7 +143,7 @@ static UClass* ResolveAnimBPClassSync(const TSoftObjectPtr<UAnimBlueprint>& Soft
     {
         return SoftBP.Get()->GeneratedClass;
     }
-    UAnimBlueprint* BP = SoftBP.LoadSynchronous();        // Í¬²½¼ÓÔØ AnimBP ×Ê²ú
+    UAnimBlueprint* BP = SoftBP.LoadSynchronous();        // åŒæ­¥åŠ è½½ AnimBP èµ„äº§
     return BP ? BP->GeneratedClass : nullptr;
 }
 
@@ -156,7 +159,7 @@ bool UMMOARPGGameInstance::GetMonsterVisualSync(int32 MonsterId, FMonsterVisualR
     if (!Mesh) return false;
     Out.SkeletalMesh = Mesh;
 
-    // AnimBP ¡ú Class
+    // AnimBP â†’ Class
     Out.AnimClass = ResolveAnimBPClassSync(Row->AnimBlueprint);
 
     // Attack montages
@@ -196,7 +199,7 @@ void UMMOARPGGameInstance::GetMonsterVisualAsync(
         return;
     }
 
-    // ÊÕ¼¯ĞèÒªÒì²½¼ÓÔØµÄÂ·¾¶
+    // æ”¶é›†éœ€è¦å¼‚æ­¥åŠ è½½çš„è·¯å¾„
 	TArray<FSoftObjectPath> ToLoad;
 	if (!Row->MonsterBlueprint.IsValid())
 		ToLoad.Add(Row->MonsterBlueprint.ToSoftObjectPath());
@@ -219,13 +222,13 @@ void UMMOARPGGameInstance::GetMonsterVisualAsync(
 
     if (ToLoad.Num() == 0)
     {
-        // ¶¼ÒÑÔÚÄÚ´æ£¬Ö±½Ó×é×°
+        // éƒ½å·²åœ¨å†…å­˜ï¼Œç›´æ¥ç»„è£…
         GetMonsterVisualSync(MonsterId, Result);
         FinishResolve(Result);
         return;
     }
 
-    // Òì²½¼ÓÔØ
+    // å¼‚æ­¥åŠ è½½
     FStreamableManager& SM = UAssetManager::GetStreamableManager();
     SM.RequestAsyncLoad(ToLoad, [this, MonsterId, Row, FinishResolve]()
     {
@@ -243,7 +246,7 @@ void UMMOARPGGameInstance::GetMonsterVisualAsync(
 
 void UMMOARPGGameInstance::SpawnMonsterByIdAsync(int32 MonsterId, const FVector& Pos, const FRotator& Rot)
 {
-    // ÏÈ°ÑÀ¶Í¼ÀàÒ²¼ÓÈëµ½ GetMonsterVisualAsync µÄ¼ÓÔØ¶ÓÁĞÀï£¨¼ûÏÂ·½¸ÄÔì£©
+    // å…ˆæŠŠè“å›¾ç±»ä¹ŸåŠ å…¥åˆ° GetMonsterVisualAsync çš„åŠ è½½é˜Ÿåˆ—é‡Œï¼ˆè§ä¸‹æ–¹æ”¹é€ ï¼‰
     const FMonsterAnimRow* Row = GetMonsterRowSync(MonsterId);
     if (!Row)
     {
@@ -263,7 +266,7 @@ void UMMOARPGGameInstance::SpawnMonsterByIdAsync(int32 MonsterId, const FVector&
             UWorld* W = GetWorld();
             if (!W) return;
 
-            // À¶Í¼ÀàÒ²Ó¦ÒÑ¼ÓÔØ£¨¼ûÏÂ·½ĞŞ¸Ä£©
+            // è“å›¾ç±»ä¹Ÿåº”å·²åŠ è½½ï¼ˆè§ä¸‹æ–¹ä¿®æ”¹ï¼‰
             UClass* BPClass = ResolvedRow->MonsterBlueprint.Get();
             if (!BPClass)
             {
@@ -282,9 +285,98 @@ void UMMOARPGGameInstance::SpawnMonsterByIdAsync(int32 MonsterId, const FVector&
                 if (Visual.AnimClass)    Skel->SetAnimInstanceClass(Visual.AnimClass);
             }
 
-            // ÕâÀï¿É°Ñ Visual.AttackMontages/Idle/Hit/Death ×¢²áµ½ Monster µÄ¶¯×÷ÏµÍ³Àï
+            // è¿™é‡Œå¯æŠŠ Visual.AttackMontages/Idle/Hit/Death æ³¨å†Œåˆ° Monster çš„åŠ¨ä½œç³»ç»Ÿé‡Œ
             Monster->UpdateHealthBar();
         });
+}
+
+AMMOARPGMonster* UMMOARPGGameInstance::SpawnMonsterDebug(int32 MonsterId)
+{
+    UWorld* World = GetWorld();
+    if (!World) { UE_LOG(LogTemp, Error, TEXT("[GI] World NULL")); return nullptr; }
+
+    const FMonsterAnimRow* Row = GetMonsterRowSync(MonsterId);
+    if (!Row) { UE_LOG(LogTemp, Error, TEXT("[GI] Row missing.")); return nullptr; }
+
+    // === åŠ è½½ç±»ï¼ˆä½¿ç”¨ä¸Šé¢ç¬¬ 2 æ­¥é‚£æ®µï¼‰===
+	TSubclassOf<AMMOARPGMonster> BPClass = Row->MonsterBlueprint.LoadSynchronous();
+    if (!BPClass)
+    {
+        UE_LOG(LogTemp, Error, TEXT("MonsterBlueprint is NULL for id=%d (ç¡®ä¿ DataTable å¡«çš„æ˜¯ *_C ç±»è·¯å¾„)"), MonsterId);
+        return nullptr;
+	}
+
+	AActor* CDO = Cast<AActor>(BPClass->GetDefaultObject());
+	if (CDO)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[SpawnDiag] CDO EditorOnly=%d DefaultSpawnCollision=%d"),
+			CDO->IsEditorOnly(),
+			(int32)CDO->SpawnCollisionHandlingMethod);
+	}
+
+    // ...ï¼ˆåŒä¸Šé¢ï¼‰æŠŠ RawClass ç®—å‡ºæ¥â€¦
+    // éªŒè¯æ´¾ç”Ÿä¸æŠ½è±¡ï¼ˆåŒä¸Šï¼‰
+
+	// å›ºå®šä¸€ä¸ªå®‰å…¨ä½ç½®
+	FActorSpawnParameters Params;
+	Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	Params.bDeferConstruction = false;
+	Params.bNoFail = false; // å¯è®¾ true çœ‹çœ‹æ˜¯å¦æœ‰ ensure
+	Params.OverrideLevel = World->GetCurrentLevel();
+	Params.Name = MakeUniqueObjectName(World, BPClass, FName(TEXT("Monster_")));
+
+	FVector SpawnLoc(0, 0, 300);
+	FRotator SpawnRot = FRotator::ZeroRotator;
+
+	AActor* A = World->SpawnActor<AActor>(BPClass, SpawnLoc, SpawnRot, Params);
+	UE_LOG(LogTemp, Warning, TEXT("[SpawnDiag] Spawned=%p Class=%s"),
+		A, A ? *A->GetClass()->GetName() : TEXT("NULL"));
+
+	AMMOARPGMonster* M = Cast<AMMOARPGMonster>(A);
+	if (!M)
+	{
+		UE_LOG(LogTemp, Error, TEXT("[SpawnDiag] Spawned actor is NOT AMMOARPGMonster-derived! BPClass=%s Parent=%s"),
+			*BPClass->GetName(),
+			*BPClass->GetSuperClass()->GetName());
+		return nullptr;
+	}
+
+    //AMMOARPGMonster* M = World->SpawnActor<AMMOARPGMonster>(BPClass, SpawnLoc, SpawnRot, Params);
+    //if (!M) { UE_LOG(LogTemp, Error, TEXT("[GI] SpawnActor returned NULL")); return nullptr; }
+
+    // ä¿è¯å¯è§ & å¯æ§
+    M->SetActorHiddenInGame(false);
+    M->SetActorEnableCollision(true);
+    M->SetActorTickEnabled(true);
+    M->AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
+    M->AIControllerClass = AMMOARPGNetEnemyController::StaticClass();
+
+    // Mesh/Anim ä¹Ÿé¡ºä¾¿ç¡®è®¤ä¸€ä¸‹
+    if (USkeletalMeshComponent* Skel = M->GetMesh())
+    {
+        USkeletalMesh* Mesh = Row->Mesh.IsValid() ? Row->Mesh.Get() : Row->Mesh.LoadSynchronous();
+        if (Mesh) Skel->SetSkeletalMesh(Mesh);
+
+        // AnimClassï¼ˆæ— è®ºä½ æ˜¯ TSoftClassPtr<UAnimInstance> è¿˜æ˜¯ UAnimBlueprintï¼‰
+        UClass* AnimClass = nullptr;
+        if (Row->AnimBlueprint.IsValid())
+        {
+            if (UAnimBlueprint* ABP = Row->AnimBlueprint.Get())
+                AnimClass = ABP->GeneratedClass;
+        }
+        else
+        {
+            if (UAnimBlueprint* ABP = Row->AnimBlueprint.LoadSynchronous())
+                AnimClass = ABP->GeneratedClass;
+        }
+        if (AnimClass) Skel->SetAnimInstanceClass(AnimClass);
+    }
+
+    // åœ¨å±å¹•ä¸Šç”»ä¸ªçƒç¡®è®¤åæ ‡
+    DrawDebugSphere(World, SpawnLoc, 30.f, 12, FColor::White, /*bPersistentLines*/false, /*LifeTime*/8.f);
+
+    UE_LOG(LogTemp, Warning, TEXT("[GI] SpawnMonsterDebug OK id=%d at %s"), MonsterId, *SpawnLoc.ToString());
+    return M;
 }
 
 AMMOARPGNetEnemyController* UMMOARPGGameInstance::FindMonsterCtlr(int32 MonsterId) const
@@ -301,7 +393,7 @@ AMMOARPGMonster* UMMOARPGGameInstance::FindMonsterById(int32 MonsterId) const
 	return nullptr;
 }
 
-// ====== ºËĞÄ£ºÈ¨ÍşÂäµØÓëÅÅ¶Ó ======
+// ====== æ ¸å¿ƒï¼šæƒå¨è½åœ°ä¸æ’é˜Ÿ ======
 void UMMOARPGGameInstance::EnqueuePending(int32 MonsterId, const FQueuedMonsterMsg& Msg)
 {
     PendingMsgs.FindOrAdd(MonsterId).Add(Msg);
@@ -312,11 +404,11 @@ void UMMOARPGGameInstance::OnAuthoritativeTransform(int32 MonsterId, const FTran
 {
     if (AMMOARPGMonster* M = FindMonsterById(MonsterId))
     {
-        // ÒÑ´æÔÚ£¬°´È¨ÍşÎ»ÖÃÖØÖÃ£¨¿É¸ÄÎª²åÖµÆğµã£©
+        // å·²å­˜åœ¨ï¼ŒæŒ‰æƒå¨ä½ç½®é‡ç½®ï¼ˆå¯æ”¹ä¸ºæ’å€¼èµ·ç‚¹ï¼‰
         M->SetActorTransform(T, false, nullptr, ETeleportType::TeleportPhysics);
-        // °ÑÅÅ¶ÓÏûÏ¢»Ø·Å
+        // æŠŠæ’é˜Ÿæ¶ˆæ¯å›æ”¾
         FlushPendingTo(M, MonsterId);
-        // ÔÙÌ×ÓÃÒ»¸ö¡°È¨Íş¡±ÏûÏ¢£¨¿ÉÑ¡£©
+        // å†å¥—ç”¨ä¸€ä¸ªâ€œæƒå¨â€æ¶ˆæ¯ï¼ˆå¯é€‰ï¼‰
         FQueuedMonsterMsg Cur;
         Cur.ServerTimeMs  = ServerTimeMs;
         Cur.bHasTransform = true;
@@ -325,24 +417,28 @@ void UMMOARPGGameInstance::OnAuthoritativeTransform(int32 MonsterId, const FTran
         return;
     }
 
-    // ²»´æÔÚ ¡ú ÏÖÔÚÂäµØ + »Ø·Å
+    // ä¸å­˜åœ¨ â†’ ç°åœ¨è½åœ° + å›æ”¾
     AMMOARPGMonster* NewM = SpawnMonsterByIdSync(MonsterId, T.GetLocation(), T.Rotator());
-    if (!NewM) return;
+	if (!NewM)
+	{
+		UE_LOG(MMOARPG, Error, TEXT("Spawn MonsterID:%d"), MonsterId);
+		return;
+	}
 
-    // ÖØÒª£ºDeferred µÄÒ»¶¨Òª FinishSpawning
+
     NewM->FinishSpawning(T);
 
-    // ¼ÇÂ¼
+    // è®°å½•
     IdToMonster.FindOrAdd(MonsterId) = NewM;
     if (AMMOARPGNetEnemyController* Ctl = Cast<AMMOARPGNetEnemyController>(NewM->GetController()))
     {
         IdToCtrl.FindOrAdd(MonsterId) = Ctl;
     }
 
-    // ÏÈ»Ø·ÅÅÅ¶ÓÀïµÄ¾ÉÏûÏ¢£¨°´Ê±¼äÉıĞò£©
+    // å…ˆå›æ”¾æ’é˜Ÿé‡Œçš„æ—§æ¶ˆæ¯ï¼ˆæŒ‰æ—¶é—´å‡åºï¼‰
     FlushPendingTo(NewM, MonsterId);
 
-    // ÔÙÌ×ÓÃµ±Ç°È¨Íş
+    // å†å¥—ç”¨å½“å‰æƒå¨
     FQueuedMonsterMsg Cur;
     Cur.ServerTimeMs  = ServerTimeMs;
     Cur.bHasTransform = true;
@@ -373,7 +469,7 @@ void UMMOARPGGameInstance::ApplyQueued(AMMOARPGMonster* M, const FQueuedMonsterM
 {
     if (!M) return;
 
-    // Î»×Ë£¨È¨Íş£©
+    // ä½å§¿ï¼ˆæƒå¨ï¼‰
     if (Msg.bHasTransform)
     {
         M->SetActorTransform(Msg.Transform, false, nullptr, ETeleportType::TeleportPhysics);
@@ -382,7 +478,7 @@ void UMMOARPGGameInstance::ApplyQueued(AMMOARPGMonster* M, const FQueuedMonsterM
     //// HP/MaxHP
     //if (Msg.HP.IsSet())
     //{
-    //    // Äã×Ô¼ºµÄ½Ó¿Ú£ºNet_HealthUpdate / SetHP µÈ
+    //    // ä½ è‡ªå·±çš„æ¥å£ï¼šNet_HealthUpdate / SetHP ç­‰
     //    if (AMMOARPGNetEnemyController* Ctl = Cast<AMMOARPGNetEnemyController>(M->GetController()))
     //    {
     //        const int32 MaxHp = Msg.MaxHP.IsSet() ? Msg.MaxHP.GetValue() : (int32)M->TotalHealth;
@@ -394,7 +490,7 @@ void UMMOARPGGameInstance::ApplyQueued(AMMOARPGMonster* M, const FQueuedMonsterM
     //    }
     //}
 
-    //// Âß¼­×´Ì¬£¨¶¯»­/AI£©
+    //// é€»è¾‘çŠ¶æ€ï¼ˆåŠ¨ç”»/AIï¼‰
     //if (Msg.LogicState.IsSet())
     //{
     //    if (AMMOARPGNetEnemyController* Ctl = Cast<AMMOARPGNetEnemyController>(M->GetController()))
@@ -407,17 +503,17 @@ void UMMOARPGGameInstance::ApplyQueued(AMMOARPGMonster* M, const FQueuedMonsterM
     //    }
     //}
 
-    // ÒÆ¶¯Ä¿±ê£¨8400£©
+    // ç§»åŠ¨ç›®æ ‡ï¼ˆ8400ï¼‰
     if (Msg.bHasMoveTarget)
     {
         if (AMMOARPGNetEnemyController* Ctl = Cast<AMMOARPGNetEnemyController>(M->GetController()))
         {
-            //Ctl->Net_MoveTo_At(Msg.MoveTarget, Msg.ServerTimeMs * 0.001 /*ÈôÄãÊÇºÁÃë£¬×¢Òâ×ª³ÉÃë*/, 200.f, false);
+            //Ctl->Net_MoveTo_At(Msg.MoveTarget, Msg.ServerTimeMs * 0.001 /*è‹¥ä½ æ˜¯æ¯«ç§’ï¼Œæ³¨æ„è½¬æˆç§’*/, 200.f, false);
 			Ctl->Net_MoveTo(Msg.MoveTarget, 200.f, false);
         }
         else
         {
-            // ÎŞ¿ØÖÆÆ÷Ê±Ö±½ÓÎ»ÒÆ£¨É÷ÓÃ£©
+            // æ— æ§åˆ¶å™¨æ—¶ç›´æ¥ä½ç§»ï¼ˆæ…ç”¨ï¼‰
             //M->SetActorLocation(Msg.MoveTarget.GetValue(), false, nullptr, ETeleportType::TeleportPhysics);
         }
     }
@@ -438,7 +534,6 @@ void UMMOARPGGameInstance::CleanupPending(float MaxHoldSec)
     }
 }
 
-// ====== ÄãµÄ Spawn ĞŞÕı£º¼ÇµÃ FinishSpawning ÔÚµ÷ÓÃ´¦×ö ======
 AMMOARPGMonster* UMMOARPGGameInstance::SpawnMonsterByIdSync(int32 MonsterId, const FVector& Pos, const FRotator& Rot)
 {
     UWorld* World = GetWorld();
@@ -450,7 +545,7 @@ AMMOARPGMonster* UMMOARPGGameInstance::SpawnMonsterByIdSync(int32 MonsterId, con
     if (!Row->MonsterBlueprint.IsValid()) Row->MonsterBlueprint.LoadSynchronous();
     if (!Row->Mesh.IsValid())             Row->Mesh.LoadSynchronous();
     if (!Row->AnimBlueprint.IsValid())    Row->AnimBlueprint.LoadSynchronous();
-    // ¡­ Ê¡ÂÔ Montage/Idle/Hit/Death µÄÍ¬²½¼ÓÔØ£¨Í¬ÄãÔ­´úÂë£©
+    // â€¦ çœç•¥ Montage/Idle/Hit/Death çš„åŒæ­¥åŠ è½½ï¼ˆåŒä½ åŸä»£ç ï¼‰
 
     UClass* BPClass = Row->MonsterBlueprint.Get();
     if (!BPClass) return nullptr;
@@ -462,6 +557,7 @@ AMMOARPGMonster* UMMOARPGGameInstance::SpawnMonsterByIdSync(int32 MonsterId, con
 
     if (!Monster) return nullptr;
 
+	Monster->AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
     Monster->AIControllerClass = AMMOARPGNetEnemyController::StaticClass();
     Monster->MonsterID = MonsterId;
 
@@ -472,27 +568,27 @@ AMMOARPGMonster* UMMOARPGGameInstance::SpawnMonsterByIdSync(int32 MonsterId, con
             if (UClass* AnimClass = AnimBP->GeneratedClass)
                 Skel->SetAnimInstanceClass(AnimClass);
     }
-    // ×¢Òâ£ºFinishSpawning ÔÚ OnAuthoritativeTransform Àï×ö
+    // æ³¨æ„ï¼šFinishSpawning åœ¨ OnAuthoritativeTransform é‡Œåš
     return Monster;
 }
 
 void UMMOARPGGameInstance::GI_OnMonsterData(const FMonsterDataPacket& P, double ServerTimeMs)
 {
-    // ÊÇ·ñÄÜ½âÎö³öÊÀ½çÎ»×Ë£¿
+    // æ˜¯å¦èƒ½è§£æå‡ºä¸–ç•Œä½å§¿ï¼Ÿ
     bool bHasTransform = false;
     FTransform T;
 
-    // ÄãÒÑÓĞµÄÍø¸ñ¡úÊÀ½ç»»Ëã£¨Èô°üÀï¾ÍÓĞÊÀ½ç×ø±ê/Ğı×ª£¬Ö±½ÓÓÃ£©
-    if (/* P º¬ GridX/Y ÇÒ¿ÉÓÃ */ P.GridX >= 0 && P.GridY >= 0)
+    // ä½ å·²æœ‰çš„ç½‘æ ¼â†’ä¸–ç•Œæ¢ç®—ï¼ˆè‹¥åŒ…é‡Œå°±æœ‰ä¸–ç•Œåæ ‡/æ—‹è½¬ï¼Œç›´æ¥ç”¨ï¼‰
+    if (/* P å« GridX/Y ä¸”å¯ç”¨ */ P.GridX >= 0 && P.GridY >= 0)
     {
         FS_GRID_BASE Grid; Grid.row = P.GridX; Grid.col = P.GridY;
         const FVector WorldPos = UMMOARPTool::GridToPosSimple(Grid, FVector::ZeroVector, C_WORLDMAP_ONE_GRID, true);
-        const FRotator Rot = FRotator::ZeroRotator; // Èç¹û°üÀïÓĞ³¯Ïò£¬ÓÃËü
+        const FRotator Rot = FRotator::ZeroRotator; // å¦‚æœåŒ…é‡Œæœ‰æœå‘ï¼Œç”¨å®ƒ
         T = FTransform(Rot, WorldPos);
         bHasTransform = true;
     }
 
-    // ÒÑ¾­´æÔÚ ¡ú Ö±½ÓÓ¦ÓÃ£¨Èô´øÈ¨ÍşÎ»×ËÔòÖØÉè£©
+    // å·²ç»å­˜åœ¨ â†’ ç›´æ¥åº”ç”¨ï¼ˆè‹¥å¸¦æƒå¨ä½å§¿åˆ™é‡è®¾ï¼‰
     if (AMMOARPGMonster* M = FindMonsterById(P.Id))
     {
         FQueuedMonsterMsg Msg;
@@ -505,14 +601,14 @@ void UMMOARPGGameInstance::GI_OnMonsterData(const FMonsterDataPacket& P, double 
         return;
     }
 
-    // ²»´æÔÚ£º
+    // ä¸å­˜åœ¨ï¼š
     if (bHasTransform)
     {
-        OnAuthoritativeTransform(P.Id, T, ServerTimeMs); // ½«´¥·¢ Spawn + »Ø·Å
+        OnAuthoritativeTransform(P.Id, T, ServerTimeMs); // å°†è§¦å‘ Spawn + å›æ”¾
     }
     else
     {
-        // »¹Ã»ÓĞÎ»ÖÃ£¬ÏÈÅÅ¶Ó
+        // è¿˜æ²¡æœ‰ä½ç½®ï¼Œå…ˆæ’é˜Ÿ
         FQueuedMonsterMsg Msg;
         Msg.ServerTimeMs = ServerTimeMs;
         //if (P.HP >= 0)    Msg.HP = P.HP;
@@ -530,7 +626,7 @@ void UMMOARPGGameInstance::GI_OnMonsterState(int32 MonsterId, uint8 NewState, do
         ApplyQueued(M, Msg, /*bAuthoritative*/false);
         return;
     }
-    // Î´ÂäµØ ¡ú ÅÅ¶Ó
+    // æœªè½åœ° â†’ æ’é˜Ÿ
     FQueuedMonsterMsg Msg; Msg.ServerTimeMs = ServerTimeMs; 
 	//Msg.LogicState = NewState;
     EnqueuePending(MonsterId, Msg);
@@ -538,17 +634,39 @@ void UMMOARPGGameInstance::GI_OnMonsterState(int32 MonsterId, uint8 NewState, do
 
 void UMMOARPGGameInstance::GI_OnMonsterMove(const S_MOVE_ROBOT& Move, double ServerTimeMs)
 {
-    const int32 MonsterId = Move.robotindex; // ÄãµÄĞ­Òé×Ö¶ÎÃû
-    // ´ÓÍø¸ñ»»ËãÎ»×Ë£¨Èç¹û Move ×Ô´øÊÀ½ç pos/rot ¾ÍÖ±½ÓÓÃ£©
+    const int32 MonsterId = Move.robotindex; // ä½ çš„åè®®å­—æ®µå
+    // ä»ç½‘æ ¼æ¢ç®—ä½å§¿ï¼ˆå¦‚æœ Move è‡ªå¸¦ä¸–ç•Œ pos/rot å°±ç›´æ¥ç”¨ï¼‰
+
+	TArray<AActor*> LandscapeActors;
+	UWorld* World = GetWorld();
+	UGameplayStatics::GetAllActorsOfClass(World, ALandscape::StaticClass(), LandscapeActors);
+	if (LandscapeActors.IsEmpty())
+	{
+		UE_LOG(MMOARPG, Display, TEXT("no Find LandScape"));
+		return;
+	}
+	const ALandscape* Landscape = Cast<ALandscape>(LandscapeActors[0]);
+	if (Landscape == NULL)
+	{
+		UE_LOG(MMOARPG, Display, TEXT("no Find LandScape"));
+		return;
+	}
+	FBox fbox = Landscape->GetCompleteBounds();
+	UE_LOG(MMOARPG, Display, TEXT("leftPos:%.2f,%.2f,%.2f;RightPos:%.2f,%.2f,%.2f"), fbox.Min[0], fbox.Min[1], fbox.Min[2], fbox.Max[0], fbox.Max[1], fbox.Max[2]);
+
+	FVector Origin;
+	Origin.X = fbox.Max[0]; Origin.Y = fbox.Min[1]; Origin.Z = fbox.Min[2];
+
+
     FS_GRID_BASE Grid; Grid.row = Move.x; Grid.col = Move.y;
-    const FVector WorldPos = UMMOARPTool::GridToPosSimple(Grid, FVector::ZeroVector, C_WORLDMAP_ONE_GRID, true);
-    const FRotator Rot = FRotator::ZeroRotator; // Èô°üÀïÓĞ³¯Ïò£¬ÓÃËü
+    const FVector WorldPos = UMMOARPTool::GridToPosSimple(Grid, Origin, C_WORLDMAP_ONE_GRID, true);
+    const FRotator Rot = FRotator::ZeroRotator; // è‹¥åŒ…é‡Œæœ‰æœå‘ï¼Œç”¨å®ƒ
     const FTransform T(Rot, WorldPos);
 
-    // 8400 Ò»°ã¿ÉÊÓÎª¡°´øÎ»ÖÃ¡±µÄÈ¨Íş¸üĞÂ
+    // 8400 ä¸€èˆ¬å¯è§†ä¸ºâ€œå¸¦ä½ç½®â€çš„æƒå¨æ›´æ–°
     OnAuthoritativeTransform(MonsterId, T, ServerTimeMs);
 
-    // Èç¹û»¹Ïë°Ñ¡°ÒÆ¶¯Ä¿±ê¡±Ò²µ±×÷ÅÅ¶ÓÏûÏ¢¼ÇÂ¼£¨¿ÉÑ¡£©£º
+    // å¦‚æœè¿˜æƒ³æŠŠâ€œç§»åŠ¨ç›®æ ‡â€ä¹Ÿå½“ä½œæ’é˜Ÿæ¶ˆæ¯è®°å½•ï¼ˆå¯é€‰ï¼‰ï¼š
     // FQueuedMonsterMsg Q; Q.ServerTimeMs = ServerTimeMs; Q.MoveTarget = WorldPos;
     // if (AMMOARPGMonster* M = FindMonsterById(MonsterId)) ApplyQueued(M, Q, false);
     // else EnqueuePending(MonsterId, Q);

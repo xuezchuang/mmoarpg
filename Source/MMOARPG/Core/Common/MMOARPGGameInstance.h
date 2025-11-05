@@ -111,6 +111,8 @@ public:
 	 /** 异步：按 MonsterId + Pos(+Rot可选) 生成怪到当前世界 */
     void SpawnMonsterByIdAsync(int32 MonsterId, const FVector& Pos, const FRotator& Rot = FRotator::ZeroRotator);
 
+	AMMOARPGMonster* SpawnMonsterDebug(int32 MonsterId);
+
     /** 同步（小资源/编辑器可用）：会同步加载软引用，注意别在帧中卡顿点用 */
     class AMMOARPGMonster* SpawnMonsterByIdSync(int32 MonsterId, const FVector& Pos, const FRotator& Rot = FRotator::ZeroRotator);
 

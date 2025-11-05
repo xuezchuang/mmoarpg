@@ -15,7 +15,6 @@
 #include "MMOARPGPlayerController.h"
 #include "BladeIINetPlayer.h"
 #include "MMOARPTool.h"
-#include "MMOARPG.h"
 #include "Character/MMOARPGMonster.h"
 #include "MMOARPGNetEnemyController.h"
 
@@ -99,7 +98,7 @@ void ABladeIINetGameMode::LinkServerInfo(ESimpleNetErrorType InType, const FStri
 
 void ABladeIINetGameMode::LinkServer()
 {
-	//´´½¨¿Í»§¶Ë
+	//åˆ›å»ºå®¢æˆ·ç«¯
 	if (UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
 	{
 		InGameInstance->CreateClient();
@@ -109,7 +108,7 @@ void ABladeIINetGameMode::LinkServer()
 
 			//InGameInstance->LinkServer();
 			//
-			//×÷Îª²âÊÔ
+			//ä½œä¸ºæµ‹è¯•
 			//InGameInstance->LinkServer(TEXT("127.0.0.1"),11231);
 
 			BindClientRcv();
@@ -183,7 +182,7 @@ void ABladeIINetGameMode::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Ch
 	{
 		FMonsterDataPacket MonsterData;
 		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterData, MonsterData);
-		double ServerMs = /* ´Ó°üÀï¶ÁÊ±¼ä»òÓÃ±¾µØ½üËÆ */ FPlatformTime::Seconds() * 1000.0;
+		double ServerMs = /* ä»åŒ…é‡Œè¯»æ—¶é—´æˆ–ç”¨æœ¬åœ°è¿‘ä¼¼ */ FPlatformTime::Seconds() * 1000.0;
 
 		if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
 		{
@@ -199,8 +198,8 @@ void ABladeIINetGameMode::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Ch
 		
 		double ServerMs = FPlatformTime::Seconds() * 1000.0;
 
-		// ÄãĞèÒª´ÓÉÏÏÂÎÄÖªµÀ MonsterId£¨Èç¹ûĞ­Òé²»´ø£¬ĞèÒªÇ°ÖÃÉÏÏÂÎÄ»òÓ³Éä£©
-		const int32 MonsterId = /* ´Ó°ü»òÉÏÏÂÎÄÈ¡ */ 0;
+		// ä½ éœ€è¦ä»ä¸Šä¸‹æ–‡çŸ¥é“ MonsterIdï¼ˆå¦‚æœåè®®ä¸å¸¦ï¼Œéœ€è¦å‰ç½®ä¸Šä¸‹æ–‡æˆ–æ˜ å°„ï¼‰
+		const int32 MonsterId = /* ä»åŒ…æˆ–ä¸Šä¸‹æ–‡å– */ 0;
 
 		if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
 		{
