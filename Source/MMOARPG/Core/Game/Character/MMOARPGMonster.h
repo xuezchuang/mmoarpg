@@ -13,11 +13,11 @@ enum  class ETargetTypes :uint8
 	Self,
 	SelectedEnemy,
 	SelectedArea,//AOE
-	AreaAroundSelf,//×ÔÉíÖÜÎ§
-	Missile //±ÈÈçÔªÆøµ¯
+	AreaAroundSelf,//è‡ªèº«å‘¨å›´
+	Missile //æ¯”å¦‚å…ƒæ°”å¼¹
 };
 
-//ÉËº¦ÀàĞÍ
+//ä¼¤å®³ç±»å‹
 UENUM()
 enum class EDamageType :uint8 
 {
@@ -25,7 +25,7 @@ enum class EDamageType :uint8
 	Physical
 };
 
-//Ğ§¹û£¬±ÈÈçĞ§¹ûÔö¼Ó£¬ºÍĞ§¹ûÏ÷Èõ
+//æ•ˆæœï¼Œæ¯”å¦‚æ•ˆæœå¢åŠ ï¼Œå’Œæ•ˆæœå‰Šå¼±
 UENUM()
 enum class EEffectiveness :uint8 
 {
@@ -34,8 +34,14 @@ enum class EEffectiveness :uint8
 	LowEffective
 };
 
+UENUM(BlueprintType)
+enum class ENetMonsterAction : uint8
+{
+    None, Idle, Move, Attack, // ...
+};
+
 USTRUCT(BlueprintType)
-struct FMonsterInfo     // ÔËĞĞÊ±»º´æ£¬ÓÃÓÚ UI/Âß¼­
+struct FMonsterInfo     // è¿è¡Œæ—¶ç¼“å­˜ï¼Œç”¨äº UI/é€»è¾‘
 {
     GENERATED_BODY()
 
@@ -79,7 +85,7 @@ protected:
 	class AMMOARPGEnemyController* MyController;
 
 	//UPROPERTY(EditAnywhere, Category = Info)
-	//bool bAggressive;//ÊÇ·ñÊÇÓĞÇÖÂÔĞÔµÄ
+	//bool bAggressive;//æ˜¯å¦æ˜¯æœ‰ä¾µç•¥æ€§çš„
 
 	//UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Behavior)
 	//bool bDead;
@@ -115,7 +121,7 @@ protected:
 	void AttackRay();
 
 	bool bInShowRange;
-	//µ±Ö÷½ÇÀïµĞÈËºÜ½üµÄÊ±ºòÏÔÊ¾ĞÅÏ¢£¬ºÜ½ü£ºÓëÇòĞÎÅö×²Ìå·¢ÉúÅö×²µÄÊ±ºò
+	//å½“ä¸»è§’é‡Œæ•Œäººå¾ˆè¿‘çš„æ—¶å€™æ˜¾ç¤ºä¿¡æ¯ï¼Œå¾ˆè¿‘ï¼šä¸çƒå½¢ç¢°æ’ä½“å‘ç”Ÿç¢°æ’çš„æ—¶å€™
 	UFUNCTION()
 	void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	UFUNCTION()
@@ -137,7 +143,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = Info)
 	int MonsterID = 0;
 
-	FVector StartLocation;//³õÊ¼µÄÎ»ÖÃ
+	FVector StartLocation;//åˆå§‹çš„ä½ç½®
 	UPROPERTY(VisibleAnywhere, Category = Hit)
 	class UArrowComponent* HitArrow;
 
@@ -149,5 +155,24 @@ public:
 	FORCEINLINE bool GetBDead() { return Info.bDead; }
 
 	void UpdateHealthBar();
+
+	 // ä¾› AnimBP è¯»å–ï¼ˆä¸å¿…å¤ç°åˆ°ç½‘ç»œï¼Œå®¢æˆ·ç«¯æœ¬åœ°å¯è§†å‚æ•°è€Œå·²ï¼‰
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="NetVisual")
+    float VisualSpeed = 0.f;        // cm/sï¼ˆæˆ–ä½ å–œæ¬¢çš„å•ä½ï¼‰
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="NetVisual")
+    float VisualDirection = 0.f;    // ç›¸å¯¹æœå‘çš„è¿åŠ¨æ–¹å‘è§’ï¼ˆ-180~180ï¼‰
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="NetVisual")
+    ENetMonsterAction VisualAction = ENetMonsterAction::Idle;
+
+    // å¯é€‰ï¼šä¸ºäº†æ–¹ä¾¿ AnimBP åˆ¤æ–­
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="NetVisual")
+    bool bVisualMoving = false;
+
+    // ç”±æ§åˆ¶å™¨æ¯å¸§è°ƒç”¨ï¼šæŠŠå¯è§†å‚æ•°å†™è¿›æ¥ï¼ˆå†…éƒ¨åšå¹³æ»‘ï¼‰
+    UFUNCTION(BlueprintCallable, Category="NetVisual")
+    void ApplyNetAnimParams(float InSpeed, const FVector& InVelocityDirWS, ENetMonsterAction InAction, float DeltaSeconds);
+
 };
 

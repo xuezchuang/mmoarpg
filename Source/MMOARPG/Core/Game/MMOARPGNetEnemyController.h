@@ -2,36 +2,27 @@
 
 #include "CoreMinimal.h"
 #include "MMOARPGEnemyController.h"
+#include "Character/MMOARPGMonster.h"
 #include "MMOARPGNetEnemyController.generated.h"
 
-// === ·şÎñÆ÷ÏÂ·¢µÄÍøÂç×´Ì¬£¨¿É°´ĞèÀ©Õ¹£© ===
-UENUM(BlueprintType)
-enum class ENetMonsterAction : uint8
-{
-    Idle,
-    Run,
-    Attack,
-    Hit,
-    Dead
-};
 
 USTRUCT(BlueprintType)
 struct FNetMonsterState
 {
     GENERATED_BODY()
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) FVector  Pos = FVector::ZeroVector;     // ÊÀ½ç×ø±ê
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) FRotator Rot = FRotator::ZeroRotator;  // ³¯Ïò£¨Ò»°ãÖ»ÓÃ Yaw£©
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) float    Speed = 0.f;                  // Ë®Æ½ËÙ¶È£¨¿ÉÑ¡£©
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) FVector  Pos = FVector::ZeroVector;     // ä¸–ç•Œåæ ‡
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) FRotator Rot = FRotator::ZeroRotator;  // æœå‘ï¼ˆä¸€èˆ¬åªç”¨ Yawï¼‰
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float    Speed = 0.f;                  // æ°´å¹³é€Ÿåº¦ï¼ˆå¯é€‰ï¼‰
     UPROPERTY(EditAnywhere, BlueprintReadWrite) ENetMonsterAction Action = ENetMonsterAction::Idle;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) double   ServerTime = 0.0;             // ·şÎñÆ÷Ê±¼ä£¨Ãë£©
-    //UPROPERTY(EditAnywhere, BlueprintReadWrite) uint32   Seq = 0;                      // °üĞòºÅ£¨¿ÉÑ¡£©
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) double   ServerTime = 0.0;             // æœåŠ¡å™¨æ—¶é—´ï¼ˆç§’ï¼‰
+    //UPROPERTY(EditAnywhere, BlueprintReadWrite) uint32   Seq = 0;                      // åŒ…åºå·ï¼ˆå¯é€‰ï¼‰
 };
 
 class AMMOARPGMonster;
 /**
- *  ÍøÂç°æ¿ØÖÆÆ÷£º²»×ö±¾µØ AI£¬Ö»×ö¡°ÍøÂç×´Ì¬ ¡ú ¿Í»§¶ËÆ½»¬±íÏÖ¡±
- *  ÖØÒª£º²»ÒªÔÚ Monster ¶Ëµ÷ÓÃ Patrol/OnAggroedPulled µÈ AI ½Ó¿Ú£¨ÕâĞ©ÊôÓÚµ¥»ú¿ØÖÆÆ÷£©
+ *  ç½‘ç»œç‰ˆæ§åˆ¶å™¨ï¼šä¸åšæœ¬åœ° AIï¼Œåªåšâ€œç½‘ç»œçŠ¶æ€ â†’ å®¢æˆ·ç«¯å¹³æ»‘è¡¨ç°â€
+ *  é‡è¦ï¼šä¸è¦åœ¨ Monster ç«¯è°ƒç”¨ Patrol/OnAggroedPulled ç­‰ AI æ¥å£ï¼ˆè¿™äº›å±äºå•æœºæ§åˆ¶å™¨ï¼‰
  */
 UCLASS()
 class MMOARPG_API AMMOARPGNetEnemyController : public AMMOARPGEnemyController
@@ -43,7 +34,7 @@ public:
 
 	AMMOARPGNetEnemyController(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
-    // ========== ÍøÂç²ãÎ¹Êı¾İµÄ½Ó¿Ú£¨ÄãÔÚ½ÓÊÕ°üÊ±µ÷ÓÃ£© ==========
+    // ========== ç½‘ç»œå±‚å–‚æ•°æ®çš„æ¥å£ï¼ˆä½ åœ¨æ¥æ”¶åŒ…æ—¶è°ƒç”¨ï¼‰ ==========
     UFUNCTION(BlueprintCallable, Category="MMOARPG|Enemy|Net")
     void QueueNetState(const FNetMonsterState& InState);
 
@@ -53,24 +44,24 @@ public:
     UFUNCTION(BlueprintCallable, Category="MMOARPG|Enemy|Net")
     void ClearStateBuffer();
 
-    // Á¢¼´¶ÔÆë£¨´«ËÍ/´óÎó²îÀ­Æë£©
+    // ç«‹å³å¯¹é½ï¼ˆä¼ é€/å¤§è¯¯å·®æ‹‰é½ï¼‰
     UFUNCTION(BlueprintCallable, Category="MMOARPG|Enemy|Net")
     void SnapToState(const FNetMonsterState& InState, bool bAdjustZ = true);
 
-    // ========== ¿Éµ÷²ÎÊı ==========
-    // ²åÖµÑÓ³Ù£¨Ô½´óÔ½ÎÈ¡¢Ô½Ğ¡Ô½¸úÊÖ£©£¬³£¼û 0.08~0.2
+    // ========== å¯è°ƒå‚æ•° ==========
+    // æ’å€¼å»¶è¿Ÿï¼ˆè¶Šå¤§è¶Šç¨³ã€è¶Šå°è¶Šè·Ÿæ‰‹ï¼‰ï¼Œå¸¸è§ 0.08~0.2
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MMOARPG|Enemy|Net")
     float InterpDelaySeconds = 0.12f;
 
-    // Æ«²î¹ı´óÖ±½ÓË²ÒÆ£¨cm£©
+    // åå·®è¿‡å¤§ç›´æ¥ç¬ç§»ï¼ˆcmï¼‰
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MMOARPG|Enemy|Net")
     float SnapThreshold = 300.f;
 
-    // Ó¦ÓÃÎ»ÖÃÊ±ÊÇ·ñÌùµØ
+    // åº”ç”¨ä½ç½®æ—¶æ˜¯å¦è´´åœ°
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MMOARPG|Enemy|Net")
     bool bAdjustZOnApply = true;
 
-    // ¸ø AnimBP ¶ÁµÄ±äÁ¿£¨°´Ğè°ó¶¨£©
+    // ç»™ AnimBP è¯»çš„å˜é‡ï¼ˆæŒ‰éœ€ç»‘å®šï¼‰
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="MMOARPG|Enemy|Net")
     float NetSpeed = 0.f;
 
@@ -78,11 +69,11 @@ public:
     ENetMonsterAction NetAction = ENetMonsterAction::Idle;
 
 public:
-	// ½«¡°ÒÆ¶¯µ½Ä³¸öÊÀ½ç×ø±ê¡±µÄÍøÂç×´Ì¬Èë¶Ó£¨ÎŞ·şÎñÆ÷Ê±¼ä´ÁÊ±ÓÃ±¾µØÊ±¼ä£©
+	// å°†â€œç§»åŠ¨åˆ°æŸä¸ªä¸–ç•Œåæ ‡â€çš„ç½‘ç»œçŠ¶æ€å…¥é˜Ÿï¼ˆæ— æœåŠ¡å™¨æ—¶é—´æˆ³æ—¶ç”¨æœ¬åœ°æ—¶é—´ï¼‰
 	void Net_MoveTo(const FVector& Target, float Speed = 0.f, bool bChasing = false);
 
-	// Èç¹ûÄã´Ó 8400/ÆäËü°üÀïÄÃµ½ÁË¡°·şÎñÆ÷Ê±¼ä´Á¡±£¬ÓÃÕâ¸ö°æ±¾¸ü×¼
-	// Ô¼¶¨£ºServerTimeSeconds ÊÇ¡°Ãë¡±Îªµ¥Î»£¨ºÍ StateBuffer µÄ ServerTime Ò»ÖÂ£©
+	// å¦‚æœä½ ä» 8400/å…¶å®ƒåŒ…é‡Œæ‹¿åˆ°äº†â€œæœåŠ¡å™¨æ—¶é—´æˆ³â€ï¼Œç”¨è¿™ä¸ªç‰ˆæœ¬æ›´å‡†
+	// çº¦å®šï¼šServerTimeSeconds æ˜¯â€œç§’â€ä¸ºå•ä½ï¼ˆå’Œ StateBuffer çš„ ServerTime ä¸€è‡´ï¼‰
 	void Net_MoveTo_At(const FVector& Target, double ServerTimeSeconds, float Speed = 0.f, bool bChasing = false);
 
 protected:
@@ -90,13 +81,13 @@ protected:
     virtual void Tick(float DeltaSeconds) override;
 
 private:
-    // === ÄÚ²¿£º×´Ì¬»º³å & ²åÖµ ===
+    // === å†…éƒ¨ï¼šçŠ¶æ€ç¼“å†² & æ’å€¼ ===
     double ComputeClientRenderTime() const;
     void   InsertStateSorted(const FNetMonsterState& InState);
     bool   SampleStates(double ClientRenderTime, FNetMonsterState& OutPrev, FNetMonsterState& OutNext) const;
     void   ApplyInterpolated(AMMOARPGMonster* tEnemyPawn, const FNetMonsterState& A, const FNetMonsterState& B, double ClientRenderTime, float DeltaSeconds);
 
-    // ÌùµØ£¨¸´ÓÃ¸¸ÀàÒÑÓĞÂß¼­Ç©Ãû²»Í¬£¬¹ÊÔÙĞ´Ò»¸ö¾²Ì¬¹¤¾ß£©
+    // è´´åœ°ï¼ˆå¤ç”¨çˆ¶ç±»å·²æœ‰é€»è¾‘ç­¾åä¸åŒï¼Œæ•…å†å†™ä¸€ä¸ªé™æ€å·¥å…·ï¼‰
     void   AdjustZToGround(AMMOARPGMonster* tEnemyPawn, FVector& InOutPos) const;
 
 private:

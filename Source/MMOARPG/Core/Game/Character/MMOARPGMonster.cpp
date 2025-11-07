@@ -14,6 +14,7 @@
 #include "Components/TextBlock.h"
 #include "EnemyInfoWidget.h"
 #include "NetPlay/B2NetGameMode.h"
+#include "Kismet/KismetMathLibrary.h"
 
 #define LOCTEXT_NAMESPACE "EnemyNameSpace"
 
@@ -211,5 +212,21 @@ void AMMOARPGMonster::AdjustZToGround()
     }
 }
 
+void AMMOARPGMonster::ApplyNetAnimParams(float InSpeed, const FVector& InVelDirWS, ENetMonsterAction InAction, float DeltaSeconds)
+{
+    // 速度平滑（避免抖动）
+    const float TargetSpeed = FMath::Max(0.f, InSpeed);
+    VisualSpeed = FMath::FInterpTo(VisualSpeed, TargetSpeed, DeltaSeconds, 8.f);
+
+    // 方向：把世界速度方向投影到水平面，换算成相对朝向角（供 2D BlendSpace 使用）
+    FVector FlatDir = InVelDirWS; FlatDir.Z = 0.f;
+    const float DirDeg = FlatDir.IsNearlyZero()
+        ? 0.f
+        : UKismetMathLibrary::NormalizedDeltaRotator(FlatDir.Rotation(), GetActorRotation()).Yaw;
+    VisualDirection = FMath::FInterpTo(VisualDirection, DirDeg, DeltaSeconds, 8.f);
+
+    VisualAction = InAction;
+    bVisualMoving = (VisualSpeed > 3.f); // 视作在动的阈值，按手感调
+}
 
 #undef LOCTEXT_NAMESPACE

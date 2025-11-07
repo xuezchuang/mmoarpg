@@ -7,7 +7,7 @@
 
 AMMOARPGNetEnemyController::AMMOARPGNetEnemyController(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
-	PrimaryActorTick.bCanEverTick = true; // ĞèÒª Tick ×ö²åÖµ
+	PrimaryActorTick.bCanEverTick = true; // éœ€è¦ Tick åšæ’å€¼
 }
 
 
@@ -15,19 +15,19 @@ void AMMOARPGNetEnemyController::OnPossess(APawn* InPawn)
 {
     Super::OnPossess(InPawn);
 
-    // ÍøÂç°æ²»ÅÜÒÆ¶¯ÒâÍ¼£ºÖ»¸ù¾İ·şÎñÆ÷×´Ì¬ÉèÖÃ Transform
+    // ç½‘ç»œç‰ˆä¸è·‘ç§»åŠ¨æ„å›¾ï¼šåªæ ¹æ®æœåŠ¡å™¨çŠ¶æ€è®¾ç½® Transform
     if (auto* TempEnemyPawn = Cast<AMMOARPGMonster>(InPawn))
     {
         if (auto* Move = TempEnemyPawn->GetCharacterMovement())
         {
-            Move->DisableMovement();         // ½ûÓÃ CharacterMovement µÄÒâÍ¼Çı¶¯
+            Move->DisableMovement();         // ç¦ç”¨ CharacterMovement çš„æ„å›¾é©±åŠ¨
             Move->bOrientRotationToMovement = false;
         }
         PrevVisualPos = TempEnemyPawn->GetActorLocation();
         bHasPrevVisualPos = true;
     }
 
-    // Çå¿ÕÈÎºÎµ¥»ú AI ÓÃµÄ¼ÆÊ±Æ÷£¨±ÜÃâÎó´¥£©
+    // æ¸…ç©ºä»»ä½•å•æœº AI ç”¨çš„è®¡æ—¶å™¨ï¼ˆé¿å…è¯¯è§¦ï¼‰
     GetWorldTimerManager().ClearAllTimersForObject(this);
 }
 
@@ -39,7 +39,7 @@ void AMMOARPGNetEnemyController::Tick(float DeltaSeconds)
 
     if (StateBuffer.Num() == 0)
     {
-        // Ã»×´Ì¬£¬¾ÍÈÃËÙ¶È»ºµ½0£¬±ÜÃâ¶¯»­¶¶¶¯
+        // æ²¡çŠ¶æ€ï¼Œå°±è®©é€Ÿåº¦ç¼“åˆ°0ï¼Œé¿å…åŠ¨ç”»æŠ–åŠ¨
         NetSpeed = FMath::FInterpTo(NetSpeed, 0.f, DeltaSeconds, 5.f);
         return;
     }
@@ -49,7 +49,7 @@ void AMMOARPGNetEnemyController::Tick(float DeltaSeconds)
     FNetMonsterState A, B;
     if (!SampleStates(ClientRenderTime, A, B))
     {
-        // Ö»ÓĞ×î½üÒ»Ö¡¿ÉÓÃ£ºÓÃ×î½üÖ¡»º¶¯µ½Î»
+        // åªæœ‰æœ€è¿‘ä¸€å¸§å¯ç”¨ï¼šç”¨æœ€è¿‘å¸§ç¼“åŠ¨åˆ°ä½
         const FNetMonsterState& Last = StateBuffer.Last();
 
         FVector Target = Last.Pos;
@@ -84,14 +84,14 @@ void AMMOARPGNetEnemyController::Tick(float DeltaSeconds)
 
     PrevVisualPos = EnemyPawn->GetActorLocation();
 
-    // ĞŞ¼ô¹ı¾É×´Ì¬£¨±£Áô×î½ü 0.5s£©
+    // ä¿®å‰ªè¿‡æ—§çŠ¶æ€ï¼ˆä¿ç•™æœ€è¿‘ 0.5sï¼‰
     const double Cut = ClientRenderTime - 0.5;
     int32 FirstUseful = 0;
     while (FirstUseful < StateBuffer.Num() && StateBuffer[FirstUseful].ServerTime < Cut) ++FirstUseful;
     if (FirstUseful > 0) StateBuffer.RemoveAt(0, FirstUseful, false);
 }
 
-// ================== ÍøÂç½Ó¿Ú ==================
+// ================== ç½‘ç»œæ¥å£ ==================
 
 void AMMOARPGNetEnemyController::QueueNetState(const FNetMonsterState& InState)
 {
@@ -128,7 +128,7 @@ void AMMOARPGNetEnemyController::SnapToState(const FNetMonsterState& InState, bo
     StateBuffer.Add(InState);
 }
 
-// ================== ÄÚ²¿£º²åÖµÊµÏÖ ==================
+// ================== å†…éƒ¨ï¼šæ’å€¼å®ç° ==================
 
 double AMMOARPGNetEnemyController::ComputeClientRenderTime() const
 {
@@ -150,7 +150,7 @@ void AMMOARPGNetEnemyController::InsertStateSorted(const FNetMonsterState& InSta
     }
     StateBuffer.Insert(InState, InsertIdx);
 
-    // Í¬Ê±¼ä´ÁÈ¥ÖØ£º±£ÁôĞÂ
+    // åŒæ—¶é—´æˆ³å»é‡ï¼šä¿ç•™æ–°
     for (int32 i = StateBuffer.Num() - 2; i >= 0; --i)
     {
         if (FMath::IsNearlyEqual(StateBuffer[i].ServerTime, StateBuffer[i + 1].ServerTime))
@@ -180,7 +180,7 @@ bool AMMOARPGNetEnemyController::SampleStates(double ClientRenderTime, FNetMonst
             return true;
         }
     }
-    return false; // ÈÃÍâ²ãÓÃ×î½üÖ¡
+    return false; // è®©å¤–å±‚ç”¨æœ€è¿‘å¸§
 }
 
 void AMMOARPGNetEnemyController::ApplyInterpolated(
@@ -196,18 +196,18 @@ void AMMOARPGNetEnemyController::ApplyInterpolated(
         return;
     }
 
-    // ---- Ê±¼äÓë²åÖµÒò×Ó ----
+    // ---- æ—¶é—´ä¸æ’å€¼å› å­ ----
     const double Den  = FMath::Max(B.ServerTime - A.ServerTime, KINDA_SMALL_NUMBER);
     float Alpha = static_cast<float>((ClientRenderTime - A.ServerTime) / Den);
     Alpha = FMath::Clamp(Alpha, 0.f, 1.f);
 
-    // ---- Ä¿±ê×´Ì¬£¨ÏßĞÔ²åÖµ£©----
+    // ---- ç›®æ ‡çŠ¶æ€ï¼ˆçº¿æ€§æ’å€¼ï¼‰----
     const FVector  TargetPos = FMath::Lerp(A.Pos,   B.Pos,   Alpha);
     const FRotator TargetRot = FMath::Lerp(A.Rot,   B.Rot,   Alpha);
     float          TargetSpd = FMath::Lerp(A.Speed, B.Speed, Alpha);
     const ENetMonsterAction TargetAct = (Alpha < 0.5f) ? A.Action : B.Action;
 
-    // ---- ´óÌø±äÊ±Ö±½Ó¡°Ë²ÒÆ¡±¶ÔÆë£¨·ÀÖ¹ÏğÆ¤½î£©----
+    // ---- å¤§è·³å˜æ—¶ç›´æ¥â€œç¬ç§»â€å¯¹é½ï¼ˆé˜²æ­¢æ©¡çš®ç­‹ï¼‰----
     const FVector CurPos = EnemyPawn->GetActorLocation();
     if (FVector::DistSquared(TargetPos, CurPos) > FMath::Square(SnapThreshold))
     {
@@ -220,24 +220,24 @@ void AMMOARPGNetEnemyController::ApplyInterpolated(
         EnemyPawn->SetActorLocation(SnapPos, /*bSweep*/false, /*OutHit*/nullptr, ETeleportType::TeleportPhysics);
         EnemyPawn->SetActorRotation(TargetRot);
 
-        // ¼ÇÂ¼ÍøÂç¶¯×÷ÓëËÙ¶È
+        // è®°å½•ç½‘ç»œåŠ¨ä½œä¸é€Ÿåº¦
         NetAction = TargetAct;
         NetSpeed  = FMath::Max(0.f, TargetSpd);
 
-        // »º´æ¿ÉÊÓÎ»ÖÃ£¨¹©ÏÂÒ»Ö¡¡°ËÙ¶È»ØÍË¹À¼Æ¡±Ê¹ÓÃ£©
+        // ç¼“å­˜å¯è§†ä½ç½®ï¼ˆä¾›ä¸‹ä¸€å¸§â€œé€Ÿåº¦å›é€€ä¼°è®¡â€ä½¿ç”¨ï¼‰
         PrevVisualPos     = SnapPos;
         bHasPrevVisualPos = true;
         return;
     }
 
-    // ---- Ğ¡Æ«²î£º×öÆ½»¬²åÖµ ----
+    // ---- å°åå·®ï¼šåšå¹³æ»‘æ’å€¼ ----
     FVector  AimPos = TargetPos;
     if (bAdjustZOnApply)
     {
         AdjustZToGround(EnemyPawn, AimPos);
     }
 
-    // Î»ÖÃ/Ğı×ªÆ½»¬£¨²åÖµËÙÂÊ¿É°´ÊÖ¸Ğµ÷Õû£©
+    // ä½ç½®/æ—‹è½¬å¹³æ»‘ï¼ˆæ’å€¼é€Ÿç‡å¯æŒ‰æ‰‹æ„Ÿè°ƒæ•´ï¼‰
     constexpr float LocInterpSpeed = 14.f;
     constexpr float RotInterpSpeed = 14.f;
 
@@ -247,19 +247,19 @@ void AMMOARPGNetEnemyController::ApplyInterpolated(
     EnemyPawn->SetActorLocation(NewPos);
     EnemyPawn->SetActorRotation(NewRot);
 
-    // ---- ËÙ¶È»ØÍË¹À¼Æ£ºµ±ÍøÂç¸øµÄËÙ¶È²»¿É¿¿/ÎªÁãÊ±£¬ÓÃÆÁÄ»Î»ÒÆ¹ÀËã ----
+    // ---- é€Ÿåº¦å›é€€ä¼°è®¡ï¼šå½“ç½‘ç»œç»™çš„é€Ÿåº¦ä¸å¯é /ä¸ºé›¶æ—¶ï¼Œç”¨å±å¹•ä½ç§»ä¼°ç®— ----
     if ((TargetSpd <= 0.f || !FMath::IsFinite(TargetSpd)) && bHasPrevVisualPos)
     {
         const float Moved = (NewPos - PrevVisualPos).Size();
-        // ·ÀÖ¹Òì³££ºDeltaSeconds>0 ÒÑÔÚ¿ªÍ·ÅĞ¶Ï
+        // é˜²æ­¢å¼‚å¸¸ï¼šDeltaSeconds>0 å·²åœ¨å¼€å¤´åˆ¤æ–­
         TargetSpd = Moved / DeltaSeconds;  // cm/s
     }
 
-    // ËÙ¶È/¶¯×÷ÊÕÁ²ÓëÇ¯ÖÆ£¨¿É¸ù¾İÏîÄ¿ĞèÒªµ÷ÕûÉÏÏŞ£©
-    constexpr float MaxReasonableSpeed = 2000.f; // cm/s ¾ÙÀı
+    // é€Ÿåº¦/åŠ¨ä½œæ”¶æ•›ä¸é’³åˆ¶ï¼ˆå¯æ ¹æ®é¡¹ç›®éœ€è¦è°ƒæ•´ä¸Šé™ï¼‰
+    constexpr float MaxReasonableSpeed = 2000.f; // cm/s ä¸¾ä¾‹
     TargetSpd = FMath::Clamp(FMath::IsFinite(TargetSpd) ? TargetSpd : 0.f, 0.f, MaxReasonableSpeed);
 
-    // Èç¹ûÍøÂç¶¯×÷²»¿ÉĞÅ£¬¿ÉÒÔÒÀ¾İËÙ¶ÈĞŞÕı¶¯×÷£¨¿ÉÑ¡£©
+    // å¦‚æœç½‘ç»œåŠ¨ä½œä¸å¯ä¿¡ï¼Œå¯ä»¥ä¾æ®é€Ÿåº¦ä¿®æ­£åŠ¨ä½œï¼ˆå¯é€‰ï¼‰
     ENetMonsterAction FinalAct = TargetAct;
     //if (FinalAct == ENetMonsterAction::None)
     //{
@@ -269,9 +269,28 @@ void AMMOARPGNetEnemyController::ApplyInterpolated(
     NetAction = FinalAct;
     NetSpeed  = TargetSpd;
 
-    // ---- ¸üĞÂ¿ÉÊÓÎ»ÖÃ»º´æ ----
+    // ---- æ›´æ–°å¯è§†ä½ç½®ç¼“å­˜ ----
     PrevVisualPos     = NewPos;
     bHasPrevVisualPos = true;
+
+	// è®¡ç®—åŸºäºç”»é¢ç§»åŠ¨çš„é€Ÿåº¦å‘é‡ï¼ˆæ°´å¹³å‘é‡å³å¯ï¼‰
+	const FVector VelWS = (PrevVisualPos.IsNearlyZero() || DeltaSeconds <= 0.f)
+		? FVector::ZeroVector
+		: (EnemyPawn->GetActorLocation() - PrevVisualPos) / FMath::Max(DeltaSeconds, KINDA_SMALL_NUMBER);
+
+	// é€Ÿåº¦æ ‡é‡ä¼˜å…ˆç”¨ç½‘ç»œç»™çš„ TargetSpdï¼ˆä½ å·²æœ‰ï¼‰ï¼Œé€€åŒ–æ—¶å¯ç”¨ VelWS.Size()
+	const float VisualSpeedScalar = (TargetSpd > 0.f && FMath::IsFinite(TargetSpd))
+		? TargetSpd
+		: VelWS.Size();
+
+	// æŠŠâ€œå¯è§†å‚æ•°â€ä¼ è¿›å»ï¼ŒAnimBP åªè¯»è¿™äº›
+	EnemyPawn->ApplyNetAnimParams(VisualSpeedScalar, VelWS, FinalAct, DeltaSeconds);
+	    GEngine->AddOnScreenDebugMessage(
+		5,                       // Keyï¼ˆ-1 = ä¸è¦†ç›–ï¼ŒæŒç»­è¿½åŠ ï¼‰
+        5.0f,                     // æ˜¾ç¤ºæ—¶é•¿ï¼ˆç§’ï¼Œå»ºè®®çŸ­ä¸€ç‚¹ä¸ç„¶åˆ·å±ï¼‰
+        FColor::Green,            // å­—ä½“é¢œè‰²
+        FString::Printf(TEXT("VisualSpeed = %.1f"), VisualSpeedScalar)
+    );
 }
 
 void AMMOARPGNetEnemyController::AdjustZToGround(AMMOARPGMonster* tEnemyPawn, FVector& InOutPos) const
@@ -287,28 +306,28 @@ void AMMOARPGNetEnemyController::AdjustZToGround(AMMOARPGMonster* tEnemyPawn, FV
         return;
     }
 
-    // ÆğµãÉÔÎ¢¸ßÒ»µã£¬±ÜÃâ´ÓµØÃæÒÔÏÂÉäÏß
+    // èµ·ç‚¹ç¨å¾®é«˜ä¸€ç‚¹ï¼Œé¿å…ä»åœ°é¢ä»¥ä¸‹å°„çº¿
     FVector Start = InOutPos + FVector(0.f, 0.f, 200.f);
     FVector End   = InOutPos - FVector(0.f, 0.f, 1000.f);
 
     FHitResult Hit;
     FCollisionQueryParams Params(SCENE_QUERY_STAT(AdjustZToGround), false, tEnemyPawn);
 
-    // Ê¹ÓÃ¿ÉĞĞ×ß±íÃæ£¨Visibility Í¨µÀ£©¼ì²âµØÃæ
+    // ä½¿ç”¨å¯è¡Œèµ°è¡¨é¢ï¼ˆVisibility é€šé“ï¼‰æ£€æµ‹åœ°é¢
     if (World->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, Params))
     {
-        // ÂäµãµÄµØÃæ×ø±ê
+        // è½ç‚¹çš„åœ°é¢åæ ‡
         InOutPos.Z = Hit.ImpactPoint.Z;
 
 #if WITH_EDITOR
-        // ¿ÉÊÓ»¯µ÷ÊÔÏß£¨Ö»ÔÚ±à¼­Æ÷¿É¼û£©
+        // å¯è§†åŒ–è°ƒè¯•çº¿ï¼ˆåªåœ¨ç¼–è¾‘å™¨å¯è§ï¼‰
         DrawDebugLine(World, Start, Hit.ImpactPoint, FColor::Green, false, 1.0f, 0, 1.0f);
         DrawDebugPoint(World, Hit.ImpactPoint, 6.0f, FColor::Yellow, false, 1.0f);
 #endif
     }
     else
     {
-        // Ã»´òµ½µØÃæ£¬±£³ÖÔ­¸ß¶È
+        // æ²¡æ‰“åˆ°åœ°é¢ï¼Œä¿æŒåŸé«˜åº¦
 #if WITH_EDITOR
         DrawDebugLine(World, Start, End, FColor::Red, false, 1.0f, 0, 1.0f);
 #endif
@@ -324,12 +343,12 @@ void AMMOARPGNetEnemyController::Net_MoveTo(const FVector& Target, float Speed, 
 
 void AMMOARPGNetEnemyController::Net_MoveTo_At(const FVector& Target, double ServerTimeSeconds, float Speed, bool bChasing)
 {
-    // ×éÒ»Ö¡ÍøÂç×´Ì¬£¬¶ª½ø²åÖµ»º³å
+    // ç»„ä¸€å¸§ç½‘ç»œçŠ¶æ€ï¼Œä¸¢è¿›æ’å€¼ç¼“å†²
     FNetMonsterState S;
-    S.ServerTime = ServerTimeSeconds;     // Ãë£¨·Ç³£ÖØÒª£ººÍ StateBuffer µÄµ¥Î»Ò»ÖÂ£©
+    S.ServerTime = ServerTimeSeconds;     // ç§’ï¼ˆéå¸¸é‡è¦ï¼šå’Œ StateBuffer çš„å•ä½ä¸€è‡´ï¼‰
     S.Pos        = Target;
 
-    // ¼ÆËãÒ»¸öÃæÏò£¨´Óµ±Ç°¿ÉÊÓÎ»ÖÃ³¯Ä¿±ê£©
+    // è®¡ç®—ä¸€ä¸ªé¢å‘ï¼ˆä»å½“å‰å¯è§†ä½ç½®æœç›®æ ‡ï¼‰
     FVector FromPos = EnemyPawn ? EnemyPawn->GetActorLocation() : Target;
     FVector Dir = Target - FromPos;
     if (!Dir.IsNearlyZero())
@@ -341,10 +360,10 @@ void AMMOARPGNetEnemyController::Net_MoveTo_At(const FVector& Target, double Ser
         S.Rot = EnemyPawn ? EnemyPawn->GetActorRotation() : FRotator::ZeroRotator;
     }
 
-    // ËÙ¶È/¶¯×÷£¨¿É°´ÏîÄ¿µ÷Õû£©
-    // Speed ²»¿ÉĞÅÊ±£¬ÓÃÉÏÒ»Ö¡ËÙ¶È»ò»ùÓÚ¾àÀëµÄ¹À¼Æ¶¼¿ÉÒÔ£»ÕâÀï±£Áô´«ÈëÎªÖ÷
+    // é€Ÿåº¦/åŠ¨ä½œï¼ˆå¯æŒ‰é¡¹ç›®è°ƒæ•´ï¼‰
+    // Speed ä¸å¯ä¿¡æ—¶ï¼Œç”¨ä¸Šä¸€å¸§é€Ÿåº¦æˆ–åŸºäºè·ç¦»çš„ä¼°è®¡éƒ½å¯ä»¥ï¼›è¿™é‡Œä¿ç•™ä¼ å…¥ä¸ºä¸»
     S.Speed  = FMath::Max(0.f, Speed);
-    //S.Action = bChasing ? ENetMonsterAction::Move  // »ò×Ô¶¨Òå Chase
+    //S.Action = bChasing ? ENetMonsterAction::Move  // æˆ–è‡ªå®šä¹‰ Chase
     //                    : (S.Speed > 1.f ? ENetMonsterAction::Move : ENetMonsterAction::Idle);
 
     InsertStateSorted(S);
