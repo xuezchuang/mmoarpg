@@ -32,6 +32,7 @@ AMMOARPGMonster::AMMOARPGMonster()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	AIControllerClass = AMMOARPGEnemyController::StaticClass();
+
 	AIPerceptionComp = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("AIPerceptionComp"));
 	SightConfig = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightConfig"));
 
@@ -48,7 +49,6 @@ AMMOARPGMonster::AMMOARPGMonster()
 	AIPerceptionComp->ConfigureSense(*SightConfig);
 	AIPerceptionComp->SetDominantSense(UAISense_Sight::StaticClass());
 
-	AIPerceptionComp->OnPerceptionUpdated.AddDynamic(this, &AMMOARPGMonster::OnSightPerceptionUpdate);
 	EnemyWidgetComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("EnemyWidgetComp"));
 
 	static ConstructorHelpers::FClassFinder<UEnemyInfoWidget> EIW(TEXT("WidgetBlueprint'/Game/UI/Game/WBP_EnemyInfo.WBP_EnemyInfo_C'"));
@@ -85,14 +85,18 @@ void AMMOARPGMonster::BeginPlay()
 		return;
 	}
 
-	// »ñÈ¡µ±Ç° GameMode£¨Ö»ÔÚ·þÎñÆ÷ÓÐÐ§£©
+	// èŽ·å–å½“å‰ GameModeï¼ˆåªåœ¨æœåŠ¡å™¨æœ‰æ•ˆï¼‰
 	AGameModeBase* GameMode = World->GetAuthGameMode();
-	if (!GameMode || !GameMode->IsA(ABladeIINetGameMode::StaticClass()))
+	if (!GameMode)
 	{
-		// Èç¹û²»ÊÇ MMOARPGGameMode£¬¾ÍÏú»Ù×Ô¼º
+		// å¦‚æžœä¸æ˜¯ MMOARPGGameModeï¼Œå°±é”€æ¯è‡ªå·±
 		Destroy();
 		return;
 	}
+	 if(!GameMode->IsA(ABladeIINetGameMode::StaticClass()))
+	 {
+		 AIPerceptionComp->OnPerceptionUpdated.AddDynamic(this, &AMMOARPGMonster::OnSightPerceptionUpdate);
+	 }
 
 	EnemyInfoWidget = Cast<UEnemyInfoWidget>(EnemyWidgetComp->GetUserWidgetObject());
 	MyController = Cast<AMMOARPGEnemyController>(GetController());

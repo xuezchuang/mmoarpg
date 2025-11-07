@@ -118,7 +118,7 @@ void UUI_HallMain::ResetCharacterCreatePanel(bool bSpawnNewCharacter)
 
 	if (bSpawnNewCharacter)
 	{
-		//Éú³É×î½üµÄ¶ÔÏó
+		//ç”Ÿæˆæœ€è¿‘çš„å¯¹è±¡
 		SpawnRecentCharacter();
 	}
 
@@ -127,7 +127,7 @@ void UUI_HallMain::ResetCharacterCreatePanel(bool bSpawnNewCharacter)
 
 void UUI_HallMain::DestroyCharacter()
 {
-	//É¾³ı¸Õ¸Õ½ÇÉ«
+	//åˆ é™¤åˆšåˆšè§’è‰²
 	if (AHallPawn* InPawn = GetPawn<AHallPawn>())
 	{
 		if (InPawn->CharacterStage)
@@ -174,7 +174,7 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 	case SP_CharacterLogin:
 	{
 		uint16 childcmd;
-		//ÄÃµ½¿Í»§¶Ë·¢ËÍµÄÕËºÅ
+		//æ‹¿åˆ°å®¢æˆ·ç«¯å‘é€çš„è´¦å·
 		TArray<uint8> Buffer;
 		Channel->Receive(Buffer);
 		FSimpleIOStream Stream(Buffer);
@@ -232,10 +232,10 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 		//	
 		//		UI_CharacterCreatePanel->InitCharacterButtons(InState->GetCharacterAppearance());
 
-		//		//Éú³É×î½üÊ¹ÓÃ½ÇÉ«
+		//		//ç”Ÿæˆæœ€è¿‘ä½¿ç”¨è§’è‰²
 		//		SpawnRecentCharacter();
 
-		//		//ÈÃÎÒÃÇ¸ßÁÁ
+		//		//è®©æˆ‘ä»¬é«˜äº®
 		//		HighlightDefaultSelection();
 		//	}
 		//}
@@ -267,11 +267,11 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 			{
 				FMMOARPGUserData& UserData = InGameInstance->GetUserData();
 				
-				uint64  roleid;//½ÇÉ«id
-				uint8   roleindex;//½ÇÉ«Ë÷Òı
-				uint8   job;//Ö°Òµ
-				uint8   sex;//ĞÔ±ğ
-				S_LOGIN_NAME nick;//êÇ³Æ
+				uint64  roleid;//è§’è‰²id
+				uint8   roleindex;//è§’è‰²ç´¢å¼•
+				uint8   job;//èŒä¸š
+				uint8   sex;//æ€§åˆ«
+				S_LOGIN_NAME nick;//æ˜µç§°
 
 				Stream >> roleindex >> roleid >> job >> sex >> nick;
 				S_USER_MEMBER_ROLE& mRole = UserData.role[roleindex];
@@ -333,31 +333,30 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 	}
 	case SP_CharacterResponse:
 	{
-		uint16 childcmd;
-		TArray<uint8> Buffer;
-		Channel->Receive(Buffer);
-		FSimpleIOStream Stream(Buffer);
-		Stream.Seek(sizeof(FSimpleBunchHead));
-		Stream >> childcmd;
-		if(childcmd == 0)
-		{
-			FMMOARPGUserData& UserData = GetGameInstance<UMMOARPGGameInstance>()->GetUserData();
-			int32  userindex;
-			Stream >> UserData.base.exp >> UserData.base.econ >> UserData.base.status >> UserData.base.life;
-			Stream >> userindex >> UserData.stand.myskill >> UserData.stand.bag;
-			UE_LOG(MMOARPG, Display, TEXT("Recv SP_CharacterResponse"));
-			HallMainOut();
-			//Ğ­³Ì
-			GThread::Get()->GetCoroutines().BindLambda(
-				1.f, [=]()
+		SIMPLE_PROTOCOLS_RECEIVE_WITH(SP_CharacterResponse, [&](FSimpleIOStream& Stream)
+			{
+				uint8 childcmd = 0;
+				Stream >> childcmd;
+				if (childcmd == 0)
 				{
-					UGameplayStatics::OpenLevel(GetWorld(), TEXT("TestInventory"));
-				});
-		}
-		else
-		{
-			UE_LOG(MMOARPG, Error, TEXT("Recv SP_CharacterResponse [childcmd:%d]"), childcmd);
-		}
+					FMMOARPGUserData& UserData = GetGameInstance<UMMOARPGGameInstance>()->GetUserData();
+					int32  userindex;
+					Stream >> UserData.base.exp >> UserData.base.econ >> UserData.base.status >> UserData.base.life;
+					Stream >> userindex >> UserData.stand.myskill >> UserData.stand.bag;
+					UE_LOG(MMOARPG, Display, TEXT("Recv SP_CharacterResponse"));
+					HallMainOut();
+					//åç¨‹
+					GThread::Get()->GetCoroutines().BindLambda(
+						1.f, [=]()
+						{
+							UGameplayStatics::OpenLevel(GetWorld(), TEXT("TestInventory"));
+						});
+				}
+				else
+				{
+					UE_LOG(MMOARPG, Error, TEXT("Recv SP_CharacterResponse [childcmd:%d]"), childcmd);
+				}
+			});
 		break;
 	}
 	}
@@ -385,7 +384,7 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 	//		if (AHallPlayerState* InPlayerState = GetPlayerState<AHallPlayerState>())
 	//		{
 	//			InPlayerState->AddCharacterCA(InCA);
-	//			//µ­³ö
+	//			//æ·¡å‡º
 	//			PlayRenameOut();
 	//			ResetCharacterCreatePanel(false);
 	//			SetEditCharacter(&InCA);
@@ -407,7 +406,7 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 	//	FString DSAddrString = FSimpleNetManage::GetAddrString(Addr);
 
 	//	HallMainOut();
-	//	//Ğ­³Ì
+	//	//åç¨‹
 	//	GThread::Get()->GetCoroutines().BindLambda(1.f, [=]()
 	//	{
 	//		UGameplayStatics::OpenLevel(GetWorld(),*DSAddrString);
@@ -452,7 +451,7 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 	//		PrintLog(LOCTEXT("EDITORCHARACTERRESPONSES_ERROR", "Edit character Error."));
 	//	}
 
-	//	//µ­³ö
+	//	//æ·¡å‡º
 	//	PlayRenameOut();
 	//	ResetCharacterCreatePanel(false);
 	//}
@@ -475,10 +474,10 @@ void UUI_HallMain::EditCharacter(int32 InSlot)
 
 				ResetEidtorType();
 				
-				//´ò¿ª¶¯»­
+				//æ‰“å¼€åŠ¨ç”»
 				PlayEditorCharacterOut();
 
-				//ÉèÖÃÃû³Æ
+				//è®¾ç½®åç§°
 				UI_RenameCreate->SetEditableName(FText::FromString(InCA->Name));
 			}
 		}
@@ -524,11 +523,11 @@ void UUI_HallMain::ResetCharacterAppearance(FMMOARPGCharacterAppearance* InCA)
 //		if (UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
 //		{	
 //			//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("id:%d"), InGameInstance->GetUserData().ID));
-//			//½«ÑéÖ¤ĞÅÏ¢·¢¹ıÈ¥
+//			//å°†éªŒè¯ä¿¡æ¯å‘è¿‡å»
 //			FString String;
 //			NetDataAnalysis::UserDataToString(InGameInstance->GetUserData(), String);
 //
-//			//·¢ËÍ½ÇÉ«ĞÎÏóÇëÇó
+//			//å‘é€è§’è‰²å½¢è±¡è¯·æ±‚
 //			//SEND_DATA(SP_CharacterAppearanceRequests, String);
 //		}
 //	}
@@ -655,7 +654,7 @@ void UUI_HallMain::PrintLog(const FString& InMsg)
 
 void UUI_HallMain::PrintLog(const FText& InMsg)
 {
-	//²¥·Å¶¯»­
+	//æ’­æ”¾åŠ¨ç”»
 	UI_Print->PlayTextAnim();
 
 	UI_Print->SetText(InMsg);

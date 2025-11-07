@@ -120,14 +120,7 @@ void ABladeIINetPlayer::Tick(float DeltaTime)
 
 void ABladeIINetPlayer::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 {
-	//switch(ProtocolNumber)
-	//{
-	//case SP_UpdateOtherPos:
-	//{
-
-	//	break;
-	//}
-	//}
+	
 }
 
 void ABladeIINetPlayer::UpDateMove(float DeltaTime)

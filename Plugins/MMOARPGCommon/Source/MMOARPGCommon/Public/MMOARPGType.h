@@ -578,11 +578,13 @@ struct S_MOVE_ROBOT
 	uint32		robotindex;
 	int32		x;
 	int32		y;
+	int32		z;
 	S_MOVE_ROBOT()
 	{
 		robotindex = 0;
 		x = 0;
 		y = 0;
+		z = 0;
 	}
 };
 #pragma pack(pop)

@@ -31,10 +31,10 @@ struct FQueuedMonsterMsg
 {
     GENERATED_BODY()
 
-    // ÓÃÓÚÅÅĞò»Ø·Å
+    // ç”¨äºæ’åºå›æ”¾
     UPROPERTY() double ServerTimeMs = 0.0;
 
-    // ÊÇ·ñ´øÓĞÈ¨ÍşÎ»×Ë£¨ÄÃµ½ºó½«´¥·¢ÕæÕı Spawn »òÈ¨ÍşÖØÉè£©
+    // æ˜¯å¦å¸¦æœ‰æƒå¨ä½å§¿ï¼ˆæ‹¿åˆ°åå°†è§¦å‘çœŸæ­£ Spawn æˆ–æƒå¨é‡è®¾ï¼‰
     UPROPERTY() bool bHasTransform = false;
     UPROPERTY() FTransform Transform;
 
@@ -85,7 +85,7 @@ public:
 private:
 
 
-	// ÔËĞĞÊ±»º´æ
+	// è¿è¡Œæ—¶ç¼“å­˜
 	UPROPERTY(Transient)
 	UDataTable* DT_Monster_Loaded = nullptr;
 
@@ -94,59 +94,63 @@ private:
 	FMMOARPGGateStatus GateStatus;
 
 public:
-    /** È·±£±íÒÑ¼ÓÔØ£¨Ğ¡±í¿ÉÍ¬²½£»´ó±í½¨ÒéÔÚ¼ÓÔØ½çÃæÏÈÒì²½Ô¤ÈÈ£© */
+    /** ç¡®ä¿è¡¨å·²åŠ è½½ï¼ˆå°è¡¨å¯åŒæ­¥ï¼›å¤§è¡¨å»ºè®®åœ¨åŠ è½½ç•Œé¢å…ˆå¼‚æ­¥é¢„çƒ­ï¼‰ */
     UDataTable* EnsureMonsterTableSync();
 
-    /** °´ MonsterId ·µ»ØĞĞ£¨RowName ½¨Òé¼´ MonsterId ×Ö·û´®£© */
+    /** æŒ‰ MonsterId è¿”å›è¡Œï¼ˆRowName å»ºè®®å³ MonsterId å­—ç¬¦ä¸²ï¼‰ */
     const FMonsterAnimRow* GetMonsterRowSync(int32 MonsterId);
 
-    /** Í¬²½½âÎö³É¿ÉÖ±½ÓÊ¹ÓÃµÄ×ÊÔ´Ö¸Õë£¨Èô×ÊÔ´ÉĞÎ´¼ÓÔØ£¬½«Í¬²½¼ÓÔØ£© */
+    /** åŒæ­¥è§£ææˆå¯ç›´æ¥ä½¿ç”¨çš„èµ„æºæŒ‡é’ˆï¼ˆè‹¥èµ„æºå°šæœªåŠ è½½ï¼Œå°†åŒæ­¥åŠ è½½ï¼‰ */
     bool GetMonsterVisualSync(int32 MonsterId, FMonsterVisualResolved& Out);
 
-    /** Òì²½½âÎö£º¼ÓÔØÍê±Ïºó»Øµ÷£¨²»×èÈû£© */
+    /** å¼‚æ­¥è§£æï¼šåŠ è½½å®Œæ¯•åå›è°ƒï¼ˆä¸é˜»å¡ï¼‰ */
     void GetMonsterVisualAsync(
         int32 MonsterId,
         TFunction<void(bool bOk, const FMonsterAnimRow* Row, const FMonsterVisualResolved& Visual)> OnReady);
 
-	 /** Òì²½£º°´ MonsterId + Pos(+Rot¿ÉÑ¡) Éú³É¹Öµ½µ±Ç°ÊÀ½ç */
+	 /** å¼‚æ­¥ï¼šæŒ‰ MonsterId + Pos(+Rotå¯é€‰) ç”Ÿæˆæ€ªåˆ°å½“å‰ä¸–ç•Œ */
     void SpawnMonsterByIdAsync(int32 MonsterId, const FVector& Pos, const FRotator& Rot = FRotator::ZeroRotator);
 
 	AMMOARPGMonster* SpawnMonsterDebug(int32 MonsterId);
 
-    /** Í¬²½£¨Ğ¡×ÊÔ´/±à¼­Æ÷¿ÉÓÃ£©£º»áÍ¬²½¼ÓÔØÈíÒıÓÃ£¬×¢Òâ±ğÔÚÖ¡ÖĞ¿¨¶ÙµãÓÃ */
+    /** åŒæ­¥ï¼ˆå°èµ„æº/ç¼–è¾‘å™¨å¯ç”¨ï¼‰ï¼šä¼šåŒæ­¥åŠ è½½è½¯å¼•ç”¨ï¼Œæ³¨æ„åˆ«åœ¨å¸§ä¸­å¡é¡¿ç‚¹ç”¨ */
     class AMMOARPGMonster* SpawnMonsterByIdSync(int32 MonsterId, const FVector& Pos, const FRotator& Rot = FRotator::ZeroRotator);
 
-	// ========== ¶ÔÍâ½Ó¿Ú£ºÓÉÍøÂç²ãµ÷ÓÃ ==========
-    // 8000£º¹ÖÎïÊı¾İ£¨¿ÉÄÜ´øÎ»ÖÃ/Ò²¿ÉÄÜ²»´ø£©
+	// ========== å¯¹å¤–æ¥å£ï¼šç”±ç½‘ç»œå±‚è°ƒç”¨ ==========
+    // 8000ï¼šæ€ªç‰©æ•°æ®ï¼ˆå¯èƒ½å¸¦ä½ç½®/ä¹Ÿå¯èƒ½ä¸å¸¦ï¼‰
     void GI_OnMonsterData(const FMonsterDataPacket& P, double ServerTimeMs);
-    // 8300£º¹ÖÎï×´Ì¬£¨Idle/Chase/Back...£©
+    // 8300ï¼šæ€ªç‰©çŠ¶æ€ï¼ˆIdle/Chase/Back...ï¼‰
     void GI_OnMonsterState(int32 MonsterId, uint8 NewState, double ServerTimeMs);
-    // 8400£º¹ÖÎïÒÆ¶¯£¨Í¨³£×Ô´øÄ¿±êÎ»ÖÃ/·½Ïò£©
+    // 8400ï¼šæ€ªç‰©ç§»åŠ¨ï¼ˆé€šå¸¸è‡ªå¸¦ç›®æ ‡ä½ç½®/æ–¹å‘ï¼‰
     void GI_OnMonsterMove(const S_MOVE_ROBOT& Move, double ServerTimeMs);
 
-    // ¹©Íâ²¿×¢²á/²éÑ¯£¨Èç¹ûÄãÓĞÏÖ³ÉµÄ£¬¾ÍÓÃÄã×Ô¼ºµÄ£©
+    // ä¾›å¤–éƒ¨æ³¨å†Œ/æŸ¥è¯¢ï¼ˆå¦‚æœä½ æœ‰ç°æˆçš„ï¼Œå°±ç”¨ä½ è‡ªå·±çš„ï¼‰
     void RegisterMonster(int32 MonsterId, AMMOARPGNetEnemyController* Ctrl);
     AMMOARPGNetEnemyController* FindMonsterCtlr(int32 MonsterId) const;
     AMMOARPGMonster*            FindMonsterById(int32 MonsterId) const;
+
+	UFUNCTION(BlueprintCallable, Category = "MapOrigin")
+	void SetOrigin(int32 MapId, const FVector& NewOrigin);
 private:
-    // ========== ÄÚ²¿£ºÅÅ¶ÓÓëÂäµØ ==========
+    // ========== å†…éƒ¨ï¼šæ’é˜Ÿä¸è½åœ° ==========
     void EnqueuePending(int32 MonsterId, const FQueuedMonsterMsg& Msg);
     void OnAuthoritativeTransform(int32 MonsterId, const FTransform& T, double ServerTimeMs);
     void FlushPendingTo(AMMOARPGMonster* M, int32 MonsterId);
     void ApplyQueued(AMMOARPGMonster* M, const FQueuedMonsterMsg& Msg, bool bAuthoritative);
 
-    // ÇåÀí³¬Ê±µÄÅÅ¶Ó£¨±ÜÃâ¶Ñ»ı£©
+    // æ¸…ç†è¶…æ—¶çš„æ’é˜Ÿï¼ˆé¿å…å †ç§¯ï¼‰
     void CleanupPending(float MaxHoldSec = 10.f);
 
 private:
-    // Î´ÂäµØµÄ¶ÓÁĞ
+    // æœªè½åœ°çš„é˜Ÿåˆ—
     TMap<int32, TArray<FQueuedMonsterMsg>> PendingMsgs;
     TMap<int32, double>                    PendingFirstSeenSec;
 
-    // Id ¡ú ¿ØÖÆÆ÷£¨»ò¹ÖÎï£©µÄÈõÒıÓÃ±í
+    // Id â†’ æ§åˆ¶å™¨ï¼ˆæˆ–æ€ªç‰©ï¼‰çš„å¼±å¼•ç”¨è¡¨
     TMap<int32, TWeakObjectPtr<AMMOARPGNetEnemyController>> IdToCtrl;
     TMap<int32, TWeakObjectPtr<AMMOARPGMonster>>            IdToMonster;
+	TMap<int32, FVector>	MapOriginTable;
 
-    // ÇåÀí¼ÆÊ±Æ÷
+    // æ¸…ç†è®¡æ—¶å™¨
     FTimerHandle PendingCleanupHandle;
 };

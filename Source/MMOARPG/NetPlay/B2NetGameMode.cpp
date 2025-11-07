@@ -148,9 +148,25 @@ void ABladeIINetGameMode::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Ch
 	}
 	case SP_EnterWorld:
 	{
-		uint16 childcmd;
-		SIMPLE_PROTOCOLS_RECEIVE(SP_EnterWorld, childcmd);
-		UE_LOG(MMOARPG, Display, TEXT("Recv SP_EnterWorld [childcmd:%d]"), childcmd);
+		SIMPLE_PROTOCOLS_RECEIVE_WITH(SP_EnterWorld, [&](FSimpleIOStream& S)
+			{
+				uint8 childcmd = 0;
+				S >> childcmd;
+
+				//if (childcmd == 0)
+				//{
+				//	S_VECTOR3 pos;
+				//	S >> pos;
+				//	FVector  = FVector(pos.x,pos.y,pos.z);
+				//	
+				//	if (UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
+				//	{
+				//		FMMOARPGUserData& UserData = InGameInstance->GetUserData();
+				//		InGameInstance->SetOrigin(UserData.base.status.mapid, Origin);
+				//	}
+				//}
+				UE_LOG(MMOARPG, Display, TEXT("Recv SP_EnterWorld [childcmd:%d]"), childcmd);
+			});
 		break;
 	}
 	case SP_RoleBaseInfo:

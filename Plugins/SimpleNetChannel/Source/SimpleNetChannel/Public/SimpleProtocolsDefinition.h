@@ -78,6 +78,7 @@ public: \
 #define DEFINITION_SIMPLE_PROTOCOLS(ProtocolsName,ProtocolsNumber) DEFINITION_PROTOCOLS(ProtocolsName,ProtocolsNumber,false)
 #define DEFINITION_SIMPLE_PROTOCOLS_FORCE(ProtocolsName,ProtocolsNumber) DEFINITION_PROTOCOLS(ProtocolsName,ProtocolsNumber,true)
 
+
 #if/* PLATFORM_IOS ||*/ PLATFORM_ANDROID
 #define SIMPLE_PROTOCOLS_SEND(InProtocols,args...) FSimpleProtocols<InProtocols>::Send(Channel,##args);
 #define SIMPLE_PROTOCOLS_RECEIVE(InProtocols,args...) FSimpleProtocols<InProtocols>::Receive(Channel,##args);
@@ -166,3 +167,77 @@ if (SimpleManage && SimpleManage->GetController()) \
 
 //SIMPLE_PROTOCOLS_SEND(MMM_Test, 12, TEXT("Hello"), 10.f);
 //SIMPLE_PROTOCOLS_SEND(SP_Hello, TEXT("asdasd"), 12, 25);
+
+// === Lightweight helpers for variable-length payloads (lambda style) ===
+
+class FSimpleProtoUtil
+{
+public:
+    // 发送：由调用方用 builder 往 Stream 里推字段（可变长）
+    template<uint32 InProtocols>
+    static void SendWith(FSimpleChannel* InChannel, TFunctionRef<void(FSimpleIOStream&)> Builder, bool bForceSend=false)
+    {
+        TArray<uint8> Buffer;
+        FSimpleIOStream Stream(Buffer);
+
+        // 写包头
+        FSimpleBunchHead Head;
+        Head.ProtocolsNumber = (uint16)InProtocols;
+        Stream << Head;
+
+        // （可选）写入长度占位，便于日志/跳读；如果你的协议没有长度字段，可删除这一段
+        const int32 LenPos = Stream.Tell();
+        uint32 PayloadLen = 0;
+        Stream << PayloadLen;                  // 先占 4 字节
+
+        const int32 PayloadStart = Stream.Tell();
+        // 交给调用方写任意字段（childcmd / 变长数组 / 字符串等）
+        Builder(Stream);
+        const int32 PayloadEnd = Stream.Tell();
+
+        // 回填真实长度
+        PayloadLen = (uint32)(PayloadEnd - PayloadStart);
+        // 覆写 Buffer 中的长度占位
+        FMemory::Memcpy(Buffer.GetData() + LenPos, &PayloadLen, sizeof(uint32));
+
+        InChannel->Send(Buffer, bForceSend);
+    }
+
+    // 接收：拿到整包，自动跳过包头，把剩余流交给 parser 处理（可变长）
+    template<uint32 InProtocols>
+    static bool ReceiveWith(FSimpleChannel* InChannel, TFunctionRef<void(FSimpleIOStream&)> Parser)
+    {
+        TArray<uint8> Buffer;
+        if (!InChannel->Receive(Buffer))
+        {
+            return false;
+        }
+
+        FSimpleIOStream Stream(Buffer);
+
+        // 跳过包头
+        Stream.Seek(sizeof(FSimpleBunchHead));
+
+        // 如果你在发送时写了 PayloadLen，这里读一下然后把读指针停在负载开始处
+        // 若你的协议没这个字段，可以注释掉这两行
+        uint32 PayloadLen = 0;
+        Stream >> PayloadLen;
+
+        Parser(Stream);   // 让调用方自由解析 childcmd / 任意字段
+        return true;
+    }
+};
+
+// —— 语法糖宏：和你现有的 SIMPLE_PROTOCOLS_SEND/RECEIVE 一样的调用风格 ——
+
+// 发送（可变长）：SIMPLE_PROTOCOLS_SEND_WITH(SP_XXX, [&](FSimpleIOStream& S){ S<<child<<pos; ...; });
+#define SIMPLE_PROTOCOLS_SEND_WITH(InProtocols, BuilderLambda) \
+    FSimpleProtoUtil::SendWith<InProtocols>(Channel, BuilderLambda, false)
+
+// 强制发送（立刻 flush）
+#define SIMPLE_PROTOCOLS_SEND_WITH_FORCE(InProtocols, BuilderLambda) \
+    FSimpleProtoUtil::SendWith<InProtocols>(Channel, BuilderLambda, true)
+
+// 接收（可变长）：SIMPLE_PROTOCOLS_RECEIVE_WITH(SP_XXX, [&](FSimpleIOStream& S){ uint8 c; S>>c; ...; });
+#define SIMPLE_PROTOCOLS_RECEIVE_WITH(InProtocols, ParserLambda) \
+    FSimpleProtoUtil::ReceiveWith<InProtocols>(Channel, ParserLambda)

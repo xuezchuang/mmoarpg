@@ -393,6 +393,11 @@ AMMOARPGMonster* UMMOARPGGameInstance::FindMonsterById(int32 MonsterId) const
 	return nullptr;
 }
 
+void UMMOARPGGameInstance::SetOrigin(int32 MapId, const FVector& NewOrigin)
+{
+	MapOriginTable.Add(MapId, NewOrigin);
+}
+
 // ====== 核心：权威落地与排队 ======
 void UMMOARPGGameInstance::EnqueuePending(int32 MonsterId, const FQueuedMonsterMsg& Msg)
 {
@@ -637,29 +642,19 @@ void UMMOARPGGameInstance::GI_OnMonsterMove(const S_MOVE_ROBOT& Move, double Ser
     const int32 MonsterId = Move.robotindex; // 你的协议字段名
     // 从网格换算位姿（如果 Move 自带世界 pos/rot 就直接用）
 
-	TArray<AActor*> LandscapeActors;
-	UWorld* World = GetWorld();
-	UGameplayStatics::GetAllActorsOfClass(World, ALandscape::StaticClass(), LandscapeActors);
-	if (LandscapeActors.IsEmpty())
-	{
-		UE_LOG(MMOARPG, Display, TEXT("no Find LandScape"));
-		return;
-	}
-	const ALandscape* Landscape = Cast<ALandscape>(LandscapeActors[0]);
-	if (Landscape == NULL)
-	{
-		UE_LOG(MMOARPG, Display, TEXT("no Find LandScape"));
-		return;
-	}
-	FBox fbox = Landscape->GetCompleteBounds();
-	UE_LOG(MMOARPG, Display, TEXT("leftPos:%.2f,%.2f,%.2f;RightPos:%.2f,%.2f,%.2f"), fbox.Min[0], fbox.Min[1], fbox.Min[2], fbox.Max[0], fbox.Max[1], fbox.Max[2]);
+	//int32 MapID = UserData.base.status.mapid;
+	//const FVector* FoundPos = MapOriginTable.Find(MapID);
+	//if (!FoundPos)
+	//{
+	//	UE_LOG(LogTemp, Error, TEXT("MapOriginTable 中找不到 MapID = %d"), MapID);
+	//	return;
+	//}
 
-	FVector Origin;
-	Origin.X = fbox.Max[0]; Origin.Y = fbox.Min[1]; Origin.Z = fbox.Min[2];
+	//FVector Origin = *FoundPos;
 
-
-    FS_GRID_BASE Grid; Grid.row = Move.x; Grid.col = Move.y;
-    const FVector WorldPos = UMMOARPTool::GridToPosSimple(Grid, Origin, C_WORLDMAP_ONE_GRID, true);
+ //   FS_GRID_BASE Grid; Grid.row = Move.x; Grid.col = Move.y;
+    //const FVector WorldPos = UMMOARPTool::GridToPosSimple(Grid, Origin, C_WORLDMAP_ONE_GRID, true);
+	const FVector WorldPos = FVector(Move.x, Move.y, Move.z);
     const FRotator Rot = FRotator::ZeroRotator; // 若包里有朝向，用它
     const FTransform T(Rot, WorldPos);
 

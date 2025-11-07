@@ -96,14 +96,7 @@ void ABladeIINetCharacter::Tick(float DeltaTime)
 
 void ABladeIINetCharacter::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 {
-	//switch(ProtocolNumber)
-	//{
-	//case SP_UpdateOtherPos:
-	//{
 
-	//	break;
-	//}
-	//}
 }
 
 void ABladeIINetCharacter::UpdateSyncedMove()
