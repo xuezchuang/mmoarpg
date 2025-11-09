@@ -198,11 +198,12 @@ void ABladeIINetGameMode::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Ch
 	{
 		FMonsterDataPacket MonsterData;
 		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterData, MonsterData);
-		double ServerMs = /* 从包里读时间或用本地近似 */ FPlatformTime::Seconds() * 1000.0;
+		const UWorld* W = GetWorld();
+		const double NowSecond = W ? W->GetTimeSeconds() : 0.0;
 
 		if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
 		{
-			GI->GI_OnMonsterData(MonsterData, ServerMs);
+			GI->GI_OnMonsterData(MonsterData, NowSecond);
 		}
 
 		break;
@@ -212,14 +213,15 @@ void ABladeIINetGameMode::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Ch
 		uint8 State;
 		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterState, State);
 		
-		double ServerMs = FPlatformTime::Seconds() * 1000.0;
+		const UWorld* W = GetWorld();
+		const double NowSecond = W ? W->GetTimeSeconds() : 0.0;
 
 		// 你需要从上下文知道 MonsterId（如果协议不带，需要前置上下文或映射）
 		const int32 MonsterId = /* 从包或上下文取 */ 0;
 
 		if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
 		{
-			GI->GI_OnMonsterState(MonsterId, State, ServerMs);
+			GI->GI_OnMonsterState(MonsterId, State, NowSecond);
 		}
 
 
@@ -232,11 +234,12 @@ void ABladeIINetGameMode::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Ch
 		
 		//UE_LOG(MMOARPG, Display, TEXT("[SP_MonsterMove] [RobotIndex:%d] [x:%d,y:%d]"), moveRobot.robotindex, moveRobot.x, moveRobot.y);
 
-		double ServerMs = FPlatformTime::Seconds() * 1000.0;
+		const UWorld* W = GetWorld();
+		const double NowSecond = W ? W->GetTimeSeconds() : 0.0;
 
 		if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
 		{
-			GI->GI_OnMonsterMove(Move, ServerMs);
+			GI->GI_OnMonsterMove(Move, NowSecond);
 		}
 
 		break;

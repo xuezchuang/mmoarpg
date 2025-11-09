@@ -114,7 +114,7 @@ void ABladeIINetPlayer::Tick(float DeltaTime)
 	//m_Speed = GetVelocity().Size();
 	//if(!m_TargetPos.Equals(m_CurPos, 10))
 	{
-		UpDateMove(DeltaTime);
+		//UpDateMove(DeltaTime);
 	}
 }
 

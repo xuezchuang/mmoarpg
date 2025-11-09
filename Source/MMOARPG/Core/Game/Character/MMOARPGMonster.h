@@ -129,7 +129,6 @@ protected:
 
 	void InitWidgetText();
 
-	void AdjustZToGround();
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
@@ -137,6 +136,9 @@ protected:
 	void OnSightPerceptionUpdate(const TArray<AActor*>& UpdatedActors);
 
 public:
+
+	void AdjustZToGround(FVector& Pos);
+
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Behavior)
 	FMonsterInfo Info;
 

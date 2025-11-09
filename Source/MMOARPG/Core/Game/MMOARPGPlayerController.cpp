@@ -11,7 +11,7 @@
 
 AMMOARPGPlayerController::AMMOARPGPlayerController()
 {
-	bShowMouseCursor = false;
+	bShowMouseCursor = true;
 	
 }
 

@@ -15,20 +15,21 @@ void AMMOARPGNetEnemyController::OnPossess(APawn* InPawn)
 {
     Super::OnPossess(InPawn);
 
-    // 网络版不跑移动意图：只根据服务器状态设置 Transform
-    if (auto* TempEnemyPawn = Cast<AMMOARPGMonster>(InPawn))
-    {
-        if (auto* Move = TempEnemyPawn->GetCharacterMovement())
-        {
-            Move->DisableMovement();         // 禁用 CharacterMovement 的意图驱动
-            Move->bOrientRotationToMovement = false;
-        }
-        PrevVisualPos = TempEnemyPawn->GetActorLocation();
-        bHasPrevVisualPos = true;
-    }
+	//EnemyPawn = Cast<AMMOARPGMonster>(InPawn);
 
-    // 清空任何单机 AI 用的计时器（避免误触）
-    GetWorldTimerManager().ClearAllTimersForObject(this);
+	//if (EnemyPawn)
+ //   {
+ //       if (auto* Move = EnemyPawn->GetCharacterMovement())
+ //       {
+ //           Move->DisableMovement();         // 禁用 CharacterMovement 的意图驱动
+ //           Move->bOrientRotationToMovement = false;
+ //       }
+ //       PrevVisualPos = EnemyPawn->GetActorLocation();
+ //       bHasPrevVisualPos = true;
+ //   }
+
+ //   // 清空任何单机 AI 用的计时器（避免误触）
+ //   GetWorldTimerManager().ClearAllTimersForObject(this);
 }
 
 void AMMOARPGNetEnemyController::Tick(float DeltaSeconds)
@@ -53,7 +54,7 @@ void AMMOARPGNetEnemyController::Tick(float DeltaSeconds)
         const FNetMonsterState& Last = StateBuffer.Last();
 
         FVector Target = Last.Pos;
-        if (bAdjustZOnApply) AdjustZToGround(EnemyPawn, Target);
+		if (bAdjustZOnApply) { EnemyPawn->AdjustZToGround(Target); }
 
         if (FVector::DistSquared(Target, EnemyPawn->GetActorLocation()) > FMath::Square(SnapThreshold))
         {
@@ -82,13 +83,13 @@ void AMMOARPGNetEnemyController::Tick(float DeltaSeconds)
         ApplyInterpolated(EnemyPawn, A, B, ClientRenderTime, DeltaSeconds);
     }
 
-    PrevVisualPos = EnemyPawn->GetActorLocation();
-
-    // 修剪过旧状态（保留最近 0.5s）
-    const double Cut = ClientRenderTime - 0.5;
+    const double Cut = ClientRenderTime - 50;
     int32 FirstUseful = 0;
     while (FirstUseful < StateBuffer.Num() && StateBuffer[FirstUseful].ServerTime < Cut) ++FirstUseful;
-    if (FirstUseful > 0) StateBuffer.RemoveAt(0, FirstUseful, false);
+    if (FirstUseful > 0)
+	{
+		StateBuffer.RemoveAt(0, FirstUseful, false);
+	}
 }
 
 // ================== 网络接口 ==================
@@ -169,18 +170,10 @@ bool AMMOARPGNetEnemyController::SampleStates(double ClientRenderTime, FNetMonst
     const int32 N = StateBuffer.Num();
     if (N <= 1) return false;
 
-    for (int32 i = 0; i < N - 1; ++i)
-    {
-        const auto& A = StateBuffer[i];
-        const auto& B = StateBuffer[i + 1];
-        if (A.ServerTime <= ClientRenderTime && ClientRenderTime <= B.ServerTime)
-        {
-            OutPrev = A;
-            OutNext = B;
-            return true;
-        }
-    }
-    return false; // 让外层用最近帧
+	OutPrev = StateBuffer[N - 2];
+	OutNext = StateBuffer[N - 1];
+
+    return true;
 }
 
 void AMMOARPGNetEnemyController::ApplyInterpolated(
@@ -334,11 +327,16 @@ void AMMOARPGNetEnemyController::AdjustZToGround(AMMOARPGMonster* tEnemyPawn, FV
     }
 }
 
-void AMMOARPGNetEnemyController::Net_MoveTo(const FVector& Target, float Speed, bool bChasing)
+void AMMOARPGNetEnemyController::Net_MoveTo(const FVector& Target,bool bChasing)
 {
-    const UWorld* W = GetWorld();
-    const double NowS = W ? W->GetTimeSeconds() : 0.0;
-    Net_MoveTo_At(Target, NowS, Speed, bChasing);
+	if (!EnemyPawn) return;
+
+	// 直接叫 UE 自带的导航走过去
+	MoveToLocation(Target, /*AcceptanceRadius=*/50.f, /*bStopOnOverlap=*/true);
+
+    //const UWorld* W = GetWorld();
+    //const double NowS = W ? W->GetTimeSeconds() : 0.0;
+    //Net_MoveTo_At(Target, NowS, Speed, bChasing);
 }
 
 void AMMOARPGNetEnemyController::Net_MoveTo_At(const FVector& Target, double ServerTimeSeconds, float Speed, bool bChasing)

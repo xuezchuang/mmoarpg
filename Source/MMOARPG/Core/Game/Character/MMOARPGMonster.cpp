@@ -103,8 +103,9 @@ void AMMOARPGMonster::BeginPlay()
 	MyController = Cast<AMMOARPGEnemyController>(GetController());
 	if (MyController)
 		MyController->Patrol();
-	//StartLocation = GetActorLocation();
-	AdjustZToGround();
+	StartLocation = GetActorLocation();
+	AdjustZToGround(StartLocation);
+	SetActorLocation(StartLocation,true);
 
 	EnemyWidgetComp->SetVisibility(bInShowRange);
 	if(EnemyInfoWidget)
@@ -199,19 +200,6 @@ void AMMOARPGMonster::InitWidgetText()
 	EnemyInfoWidget->SetColorAndOpacity(CurrentColor);
 }
 
-void AMMOARPGMonster::AdjustZToGround()
-{
-    FVector Pos = GetActorLocation();
-    FVector Start = FVector(Pos.X, Pos.Y, Pos.Z + 10000.f);
-    FVector End   = FVector(Pos.X, Pos.Y, Pos.Z - 10000.f);
-
-    FHitResult Hit;
-    if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility))
-    {
-        SetActorLocation(Hit.ImpactPoint);
-    }
-}
-
 void AMMOARPGMonster::ApplyNetAnimParams(float InSpeed, const FVector& InVelDirWS, ENetMonsterAction InAction, float DeltaSeconds)
 {
     // 速度平滑（避免抖动）
@@ -227,6 +215,36 @@ void AMMOARPGMonster::ApplyNetAnimParams(float InSpeed, const FVector& InVelDirW
 
     VisualAction = InAction;
     bVisualMoving = (VisualSpeed > 3.f); // 视作在动的阈值，按手感调
+}
+
+void AMMOARPGMonster::AdjustZToGround(FVector& Pos)
+{
+	const FVector Start = Pos + FVector(0, 0, 2000.f);
+	const FVector End = Pos + FVector(0, 0, -2000.f);
+
+	FHitResult Hit;
+	FCollisionQueryParams Params(SCENE_QUERY_STAT(AdjustZToGround), false, this);
+
+	if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, Params))
+	{
+		// 2) 计算“理想的胶囊中心Z = 地面高度 + 胶囊半高”
+		float HalfHeight = 88.f; // 备用默认
+		if (const UCapsuleComponent* Cap = GetCapsuleComponent())
+		{
+			HalfHeight = Cap->GetScaledCapsuleHalfHeight();    // 注意用 *Scaled*，考虑缩放和蹲伏
+		}
+
+		// 给一点余量，避免浮点误差导致轻微穿插
+		const float GroundSnapEpsilon = 0.5f;
+
+		Pos.Z = Hit.ImpactPoint.Z + HalfHeight + GroundSnapEpsilon;
+
+#if WITH_EDITOR
+		DrawDebugLine(GetWorld(), Start, Hit.ImpactPoint, FColor::Green, false, 1.0f, 0, 1.0f);
+		DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 8.f, FColor::Yellow, false, 1.0f);
+#endif
+	}
+	// else：没打到地面就不改Z（可选：保底用当前Z或场景最低限）
 }
 
 #undef LOCTEXT_NAMESPACE

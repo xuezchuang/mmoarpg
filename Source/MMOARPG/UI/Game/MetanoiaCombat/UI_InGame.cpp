@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "UI_InGame.h"
+#include "Protocol/GameProtocol.h"
 //#include "ThreadManage.h"
 
 #define LOCTEXT_NAMESPACE "UI_InGame"
@@ -15,7 +16,6 @@
 void UUI_InGame::NativeConstruct()
 {
 	Super::NativeConstruct();
-
 }
 
 void UUI_InGame::NativeDestruct()
@@ -35,10 +35,11 @@ void UUI_InGame::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 {
 	switch (ProtocolNumber)
 	{
-		case 101:
-		{
-			break;
-		}
+	case SP_UpdatePos:
+	{
+		UE_LOG(MMOARPG, Display, TEXT("UUI_InGame Recv SP_UpdatePos"));
+		break;
+	}
 	}
 }
 #undef LOCTEXT_NAMESPACE

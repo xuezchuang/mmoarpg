@@ -69,8 +69,7 @@ public:
     ENetMonsterAction NetAction = ENetMonsterAction::Idle;
 
 public:
-	// 将“移动到某个世界坐标”的网络状态入队（无服务器时间戳时用本地时间）
-	void Net_MoveTo(const FVector& Target, float Speed = 0.f, bool bChasing = false);
+	void Net_MoveTo(const FVector& Target, bool bChasing = false);
 
 	// 如果你从 8400/其它包里拿到了“服务器时间戳”，用这个版本更准
 	// 约定：ServerTimeSeconds 是“秒”为单位（和 StateBuffer 的 ServerTime 一致）
