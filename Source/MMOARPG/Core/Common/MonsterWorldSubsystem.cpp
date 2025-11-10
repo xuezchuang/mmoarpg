@@ -8,10 +8,40 @@
 #include "Protocol/GameProtocol.h"
 #include "MMOARPTool.h"
 #include "../DataTable/MonsterAnimTable.h"
+#include "NetPlay/BladeIINetCharacter.h"
+#include "MMOARPGMacroType.h"
 
 // 你项目里的通道类型
 class FSimpleChannel;
 
+static bool IsGameplayMap(const UWorld& W)
+{
+	// 1) 只认 Game/PIE 世界
+	if (!(W.WorldType == EWorldType::Game || W.WorldType == EWorldType::PIE))
+		return false;
+
+	//// 2) 用 GameState / PlayerController 判别（客户端上没有 GameMode，用它不稳）
+	//if (const AGameStateBase* GS = W.GetGameState())
+	//{
+	//	if (GS->IsA(ABladeIINetGameState::StaticClass()))
+	//		return true;
+	//}
+
+	// 或：看本地玩家控制器类型（如果你登陆/门厅用不同的 PC）
+	if (const APlayerController* PC = UGameplayStatics::GetPlayerController(const_cast<UWorld*>(&W), 0))
+	{
+		if (PC->IsA(ABladeIINetCharacter::StaticClass()))
+			return true;
+	}
+
+	// 3) 兜底：地图名约定（例如 Login_* / Gate_* 不是游戏地图）
+	const FString Short = FPackageName::GetShortName(W.GetMapName());
+	if (Short.StartsWith(TEXT("Login")) || Short.StartsWith(TEXT("Gate")))
+		return false;
+
+	return true; // 其他默认当作游戏地图
+
+}
 void UMonsterWorldSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
     Super::Initialize(Collection);
@@ -22,6 +52,11 @@ void UMonsterWorldSubsystem::OnWorldBeginPlay(UWorld& InWorld)
     Super::OnWorldBeginPlay(InWorld);
 
     BindNet();
+
+	if (IsGameplayMap(InWorld))
+	{
+		SEND_DATA(SP_EnterWorld);
+	}
 
     // 每 5 秒清一次排队
     InWorld.GetTimerManager().SetTimer(
@@ -59,6 +94,7 @@ void UMonsterWorldSubsystem::BindNet()
 
 		Net->RegisterUniqueHandler(SP_MonsterMove,FProtocolHandler::CreateUObject(this, &UMonsterWorldSubsystem::OnMonsterMove));
 
+		Net->RegisterUniqueHandler(SP_MonsterState,FProtocolHandler::CreateUObject(this, &UMonsterWorldSubsystem::OnMonsterState));
 	}
 }
 
@@ -71,6 +107,7 @@ void UMonsterWorldSubsystem::UnbindNet()
     {
         Net->UnRegisterUniqueHandler(SP_MonsterData);
         Net->UnRegisterUniqueHandler(SP_MonsterMove);
+		Net->UnRegisterUniqueHandler(SP_MonsterState);
     }
 }
 
@@ -78,13 +115,8 @@ void UMonsterWorldSubsystem::UnbindNet()
 // 8000：怪物数据（可能带初始位姿）
 void UMonsterWorldSubsystem::OnMonsterData(uint32 /*Proto*/, FSimpleChannel* Channel)
 {
-    // 示例：照你现有读取方式
-    TArray<uint8> Buf; Channel->Receive(Buf);
-    FSimpleIOStream Ar(Buf); Ar.Seek(sizeof(FSimpleBunchHead));
-
     FMonsterDataPacket P{}; // 你的结构
-    // 按你的协议把 P 读出来……
-    // Ar >> P....
+	SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterData, P);
 
     const double ServerTimes = FPlatformTime::Seconds(); // 或包里带的 server time
 
@@ -128,7 +160,7 @@ void UMonsterWorldSubsystem::OnMonsterState(uint32 /*Proto*/, FSimpleChannel* Ch
     FSimpleIOStream Ar(Buf); Ar.Seek(sizeof(FSimpleBunchHead));
 
     int32 MonsterId = 0; uint8 NewState = 0;
-    // Ar >> MonsterId >> NewState;
+	SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterState, MonsterId, NewState);
 
     const double ServerTimes = FPlatformTime::Seconds();
 
@@ -149,11 +181,8 @@ void UMonsterWorldSubsystem::OnMonsterState(uint32 /*Proto*/, FSimpleChannel* Ch
 // 8400：移动
 void UMonsterWorldSubsystem::OnMonsterMove(uint32 /*Proto*/, FSimpleChannel* Channel)
 {
-    TArray<uint8> Buf; Channel->Receive(Buf);
-    FSimpleIOStream Ar(Buf); Ar.Seek(sizeof(FSimpleBunchHead));
-
     S_MOVE_ROBOT Move{}; // 你的移动结构
-    // Ar >> Move ...
+	SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterMove, Move);
 
     const int32 MonsterId = Move.robotindex;
     const FVector WorldPos(Move.x, Move.y, Move.z);

@@ -39,8 +39,8 @@ void ABladeIINetGameMode::BeginPlay()
 
 	MapOtherCharacter.Empty();
 
-	UE_LOG(MMOARPG, Display, TEXT("123"));
-	LinkServer();
+	//UE_LOG(MMOARPG, Display, TEXT("123"));
+	//LinkServer();
 }
 
 void ABladeIINetGameMode::EndPlay(const EEndPlayReason::Type EndPlayReason)

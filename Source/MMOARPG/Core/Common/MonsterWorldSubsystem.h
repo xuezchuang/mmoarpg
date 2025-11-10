@@ -66,6 +66,12 @@ private:
     // 定时清理排队
     void CleanupPending(float MaxHoldSec = 10.f);
 
+	template<class T>
+	T* GetGameInstance()
+	{
+		return GetWorld() != nullptr ? GetWorld()->GetGameInstance<T>() : nullptr;
+	}
+
 private:
     // 运行时表
     TMap<int32, TWeakObjectPtr<AMMOARPGMonster>>            IdToMonster;

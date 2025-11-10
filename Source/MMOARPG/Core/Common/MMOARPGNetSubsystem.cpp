@@ -34,12 +34,12 @@ void UMMOARPGNetSubsystem::BindClientRcv()
     // 尝试一次
     if (USimpleNetworkObject* Ctrl = TryGetReadyController())
 	{
+		CurrentRole = DesiredRole;
 		if (OnNetLinked.IsBound())
 		{
 			OnNetLinked.Execute(CurrentRole);
 		}
-
-		CurrentRole = DesiredRole;
+		
 
         // 推荐 AddUObject：生命周期跟随 this，避免捕获 [&] 的悬空问题
         RecvHandle = Ctrl->RecvDelegate.AddUObject(
