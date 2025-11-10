@@ -100,7 +100,7 @@ void AMMOARPGGameMode::LinkServer()
 		{
 			InGameInstance->GetClient()->NetManageMsgDelegate.BindUObject(this, &AMMOARPGGameMode::LinkServerInfo);
 
-			InGameInstance->LinkServer();
+			//InGameInstance->LinkServer();
 			//
 			//作为测试
 			//InGameInstance->LinkServer(TEXT("127.0.0.1"),11231);

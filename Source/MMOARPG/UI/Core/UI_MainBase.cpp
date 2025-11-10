@@ -6,40 +6,6 @@
 #include "UObject/SimpleController.h"
 #include "MMOARPGMacroType.h"
 
-void UUI_MainBase::LinkServer(const FSimpleAddr& InAddr)
-{
-	//创建客户端
-	if (UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
-	{
-		InGameInstance->CreateClient();
-		if (InGameInstance->GetClient())
-		{
-			InGameInstance->GetClient()->NetManageMsgDelegate.BindUObject(this, &UUI_MainBase::LinkServerInfo);
-
-			InGameInstance->LinkServer(InAddr);
-
-			BindClientRcv();
-		}
-	}
-}
-
-void UUI_MainBase::LinkServer()
-{
-	//创建客户端
-	if (UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
-	{
-		InGameInstance->CreateClient();
-		if (InGameInstance->GetClient())
-		{
-			InGameInstance->GetClient()->NetManageMsgDelegate.BindUObject(this, &UUI_MainBase::LinkServerInfo);
-
-			InGameInstance->LinkServer();
-
-			BindClientRcv();
-		}
-	}
-}
-
 
 void UUI_MainBase::NativeConstruct()
 {
@@ -74,34 +40,4 @@ void UUI_MainBase::NativeDestruct()
 //	UI_Print->SetText(InMsg);
 //}
 
-void UUI_MainBase::BindClientRcv()
-{
-	if (UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
-	{
-		if (FSimpleNetManage* client = InGameInstance->GetClient())
-		{
-			if (USimpleNetworkObject* controller = client->GetController())
-				if (FSimpleChannel* channel = controller->GetChannel())
-					if (TSharedPtr<FSimpleConnetion> connection = channel->GetConnetion())
-						if (connection->GetState() == ESimpleConnetionLinkType::LINK_ConnectSecure)
-						{
-							LinkInit();
-							RecvDelegate = InGameInstance->GetClient()->GetController()->RecvDelegate.AddLambda(
-								[&](uint32 ProtocolNumber, FSimpleChannel* Channel)
-								{
-									this->RecvProtocol(ProtocolNumber, Channel);
-								});
-							return;
-						}
-		}
-	}
-	GThread::Get()->GetCoroutines().BindLambda(0.5f, [&]()
-												{
-													BindClientRcv();
-												});
-}
 
-void UUI_MainBase::LinkServerInfo(ESimpleNetErrorType InType, const FString& InMsg)
-{
-
-}

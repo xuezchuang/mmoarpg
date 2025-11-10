@@ -60,7 +60,7 @@ public:
 	void SetParents(UWidget* InWidget) {ParentWidget = InWidget;}
 	
 protected:
-	virtual void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel) {}
+	//virtual void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel) {}
 
 	UWidgetAnimation* GetNameWidgetAnimation(const FString& InWidgetAnimName);
 

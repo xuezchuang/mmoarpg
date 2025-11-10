@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "../Core/UI_MainBase.h"
+#include "MMOARPGType.h"
+#include "../Core/Common/MMOARPGNetSubsystem.h"
 #include "UI_LoginMain.generated.h"
 
 class FSimpleChannel;
@@ -44,7 +46,9 @@ public:
 	void Register(FString InRegisterInfo);
 	void Register(FString Name,FString Pass);
 protected:
-	virtual void LinkInit() override;
-	virtual void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel) override;
-	virtual void LinkServerInfo(ESimpleNetErrorType InType, const FString& InMsg) override;
+	void LinkInit(ENetServerRole ServerRole);
+	void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
+
+	//UFUNCTION()
+	void HandleRegisterResponse(ERegistrationType Type);
 };

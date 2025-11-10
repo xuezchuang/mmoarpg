@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "../Core/UI_MainBase.h"
+#include "MMOARPGNetSubsystem.h"
 #include "UI_HallMain.generated.h"
 
 class UUI_CharacterCreatePanel;
@@ -45,7 +46,7 @@ public:
 	void PrintLog(const FString& InMsg);
 	void PrintLog(const FText& InMsg);
 protected:
-	virtual void LinkInit() override;
+	void LinkInit(ENetServerRole ServerRole);
 public:
 	void ResetEidtorType();
 	void ResetCreateType();

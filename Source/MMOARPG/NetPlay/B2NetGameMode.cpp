@@ -118,135 +118,135 @@ void ABladeIINetGameMode::LinkServer()
 
 void ABladeIINetGameMode::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 {
-	switch(ProtocolNumber)
-	{
-	case SP_UpdatePos:
-	{
-		uint16 childcmd;
-		SIMPLE_PROTOCOLS_RECEIVE(SP_EnterWorld, childcmd);
-		if(childcmd != 0)
-		{
-			UE_LOG(MMOARPG, Error, TEXT("Recv SP_UpdatePos [childcmd:%d]"), childcmd);
-			GEngine->AddOnScreenDebugMessage(-1, 20.0f, FColor::Yellow, FString::Printf(TEXT("Recv SP_UpdatePos [childcmd:%d]"), childcmd));
-		}
+	//switch(ProtocolNumber)
+	//{
+	//case SP_UpdatePos:
+	//{
+	//	uint16 childcmd;
+	//	SIMPLE_PROTOCOLS_RECEIVE(SP_EnterWorld, childcmd);
+	//	if(childcmd != 0)
+	//	{
+	//		UE_LOG(MMOARPG, Error, TEXT("Recv SP_UpdatePos [childcmd:%d]"), childcmd);
+	//		GEngine->AddOnScreenDebugMessage(-1, 20.0f, FColor::Yellow, FString::Printf(TEXT("Recv SP_UpdatePos [childcmd:%d]"), childcmd));
+	//	}
 
-		break;
-	}
-	case SP_UpdateOtherPos:
-	{
-		S_MOVE_ROLE rMove;
-		SIMPLE_PROTOCOLS_RECEIVE(SP_UpdateOtherPos, rMove);
-		if(!MapOtherCharacter.Contains(rMove.userindex))
-		{
-			SIMPLE_PROTOCOLS_SEND(SP_RoleBaseInfo, rMove.userindex);
-		}
-		else
-		{
-			MapOtherCharacter[rMove.userindex]->UpdateMoveData(&rMove);
-		}
-		break;
-	}
-	case SP_EnterWorld:
-	{
-		SIMPLE_PROTOCOLS_RECEIVE_WITH(SP_EnterWorld, [&](FSimpleIOStream& S)
-			{
-				uint8 childcmd = 0;
-				S >> childcmd;
+	//	break;
+	//}
+	//case SP_UpdateOtherPos:
+	//{
+	//	S_MOVE_ROLE rMove;
+	//	SIMPLE_PROTOCOLS_RECEIVE(SP_UpdateOtherPos, rMove);
+	//	if(!MapOtherCharacter.Contains(rMove.userindex))
+	//	{
+	//		SIMPLE_PROTOCOLS_SEND(SP_RoleBaseInfo, rMove.userindex);
+	//	}
+	//	else
+	//	{
+	//		MapOtherCharacter[rMove.userindex]->UpdateMoveData(&rMove);
+	//	}
+	//	break;
+	//}
+	//case SP_EnterWorld:
+	//{
+	//	SIMPLE_PROTOCOLS_RECEIVE_WITH(SP_EnterWorld, [&](FSimpleIOStream& S)
+	//		{
+	//			uint8 childcmd = 0;
+	//			S >> childcmd;
 
-				//if (childcmd == 0)
-				//{
-				//	S_VECTOR3 pos;
-				//	S >> pos;
-				//	FVector  = FVector(pos.x,pos.y,pos.z);
-				//	
-				//	if (UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
-				//	{
-				//		FMMOARPGUserData& UserData = InGameInstance->GetUserData();
-				//		InGameInstance->SetOrigin(UserData.base.status.mapid, Origin);
-				//	}
-				//}
-				UE_LOG(MMOARPG, Display, TEXT("Recv SP_EnterWorld [childcmd:%d]"), childcmd);
-			});
-		break;
-	}
-	case SP_RoleBaseInfo:
-	{
-		S_ROLE_O_BASE RoleBase;
-		SIMPLE_PROTOCOLS_RECEIVE(SP_RoleBaseInfo, RoleBase);
-		if(MapOtherCharacter.Contains(RoleBase.index))
-		{
-			UE_LOG(MMOARPG, Error, TEXT("recv SP_RoleBaseInfo"));
-		}
-		else
-		{
-			UE_LOG(MMOARPG, Display, TEXT("Recv SP_RoleBaseInfo [uid:%d]"), RoleBase.index);
-			auto temp = GetWorld()->SpawnActor<ABladeIINetPlayer>(OtherCharacterClass);
-			if (temp)
-			{
-				MapOtherCharacter.Emplace(RoleBase.index, temp);
-				MapOtherCharacter[RoleBase.index]->UpdateBaseData(&RoleBase);
-				//MapOtherCharacter[RoleBase.index]->UpdateBaseData(&RoleBase);
-			}
-			else
-			{
-				UE_LOG(MMOARPG, Error, TEXT("recv SP_RoleBaseInfo SpawnActor"));
-			}
-		}
-		break;
-	}
-	case SP_MonsterData:
-	{
-		FMonsterDataPacket MonsterData;
-		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterData, MonsterData);
-		const UWorld* W = GetWorld();
-		const double NowSecond = W ? W->GetTimeSeconds() : 0.0;
+	//			//if (childcmd == 0)
+	//			//{
+	//			//	S_VECTOR3 pos;
+	//			//	S >> pos;
+	//			//	FVector  = FVector(pos.x,pos.y,pos.z);
+	//			//	
+	//			//	if (UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
+	//			//	{
+	//			//		FMMOARPGUserData& UserData = InGameInstance->GetUserData();
+	//			//		InGameInstance->SetOrigin(UserData.base.status.mapid, Origin);
+	//			//	}
+	//			//}
+	//			UE_LOG(MMOARPG, Display, TEXT("Recv SP_EnterWorld [childcmd:%d]"), childcmd);
+	//		});
+	//	break;
+	//}
+	//case SP_RoleBaseInfo:
+	//{
+	//	S_ROLE_O_BASE RoleBase;
+	//	SIMPLE_PROTOCOLS_RECEIVE(SP_RoleBaseInfo, RoleBase);
+	//	if(MapOtherCharacter.Contains(RoleBase.index))
+	//	{
+	//		UE_LOG(MMOARPG, Error, TEXT("recv SP_RoleBaseInfo"));
+	//	}
+	//	else
+	//	{
+	//		UE_LOG(MMOARPG, Display, TEXT("Recv SP_RoleBaseInfo [uid:%d]"), RoleBase.index);
+	//		auto temp = GetWorld()->SpawnActor<ABladeIINetPlayer>(OtherCharacterClass);
+	//		if (temp)
+	//		{
+	//			MapOtherCharacter.Emplace(RoleBase.index, temp);
+	//			MapOtherCharacter[RoleBase.index]->UpdateBaseData(&RoleBase);
+	//			//MapOtherCharacter[RoleBase.index]->UpdateBaseData(&RoleBase);
+	//		}
+	//		else
+	//		{
+	//			UE_LOG(MMOARPG, Error, TEXT("recv SP_RoleBaseInfo SpawnActor"));
+	//		}
+	//	}
+	//	break;
+	//}
+	//case SP_MonsterData:
+	//{
+	//	FMonsterDataPacket MonsterData;
+	//	SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterData, MonsterData);
+	//	const UWorld* W = GetWorld();
+	//	const double NowSecond = W ? W->GetTimeSeconds() : 0.0;
 
-		if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
-		{
-			GI->GI_OnMonsterData(MonsterData, NowSecond);
-		}
+	//	if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+	//	{
+	//		GI->GI_OnMonsterData(MonsterData, NowSecond);
+	//	}
 
-		break;
-	}
-	case SP_MonsterState:
-	{
-		uint8 State;
-		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterState, State);
-		
-		const UWorld* W = GetWorld();
-		const double NowSecond = W ? W->GetTimeSeconds() : 0.0;
+	//	break;
+	//}
+	//case SP_MonsterState:
+	//{
+	//	uint8 State;
+	//	SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterState, State);
+	//	
+	//	const UWorld* W = GetWorld();
+	//	const double NowSecond = W ? W->GetTimeSeconds() : 0.0;
 
-		// 你需要从上下文知道 MonsterId（如果协议不带，需要前置上下文或映射）
-		const int32 MonsterId = /* 从包或上下文取 */ 0;
+	//	// 你需要从上下文知道 MonsterId（如果协议不带，需要前置上下文或映射）
+	//	const int32 MonsterId = /* 从包或上下文取 */ 0;
 
-		if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
-		{
-			GI->GI_OnMonsterState(MonsterId, State, NowSecond);
-		}
+	//	if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+	//	{
+	//		GI->GI_OnMonsterState(MonsterId, State, NowSecond);
+	//	}
 
 
-		break;
-	}
-	case SP_MonsterMove:
-	{
-		S_MOVE_ROBOT Move;
-		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterMove, Move);
-		
-		//UE_LOG(MMOARPG, Display, TEXT("[SP_MonsterMove] [RobotIndex:%d] [x:%d,y:%d]"), moveRobot.robotindex, moveRobot.x, moveRobot.y);
+	//	break;
+	//}
+	//case SP_MonsterMove:
+	//{
+	//	S_MOVE_ROBOT Move;
+	//	SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterMove, Move);
+	//	
+	//	//UE_LOG(MMOARPG, Display, TEXT("[SP_MonsterMove] [RobotIndex:%d] [x:%d,y:%d]"), moveRobot.robotindex, moveRobot.x, moveRobot.y);
 
-		const UWorld* W = GetWorld();
-		const double NowSecond = W ? W->GetTimeSeconds() : 0.0;
+	//	const UWorld* W = GetWorld();
+	//	const double NowSecond = W ? W->GetTimeSeconds() : 0.0;
 
-		if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
-		{
-			GI->GI_OnMonsterMove(Move, NowSecond);
-		}
+	//	if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+	//	{
+	//		GI->GI_OnMonsterMove(Move, NowSecond);
+	//	}
 
-		break;
-	}
-	
-	}
-}
+	//	break;
+	//}
+	//
+	//}
+} 
 
 //DS Server Timer
 void ABladeIINetGameMode::PostLogin(APlayerController* NewPlayer)

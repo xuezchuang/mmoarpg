@@ -26,18 +26,12 @@ public:
 
 	virtual void NativeDestruct();
 
-	virtual void LinkInit(){}
 public:
 	//void PrintLog(const FString& InMsg);
 	//void PrintLog(const FText& InMsg);
 
 protected:
-	void BindClientRcv();
-
-	virtual void LinkServerInfo(ESimpleNetErrorType InType, const FString& InMsg);
-	
-	void LinkServer(const FSimpleAddr &InAddr);
-	void LinkServer();
+	//void BindClientRcv();
 private:
 	FDelegateHandle RecvDelegate;
 };

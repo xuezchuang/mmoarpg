@@ -52,7 +52,7 @@ protected:
 	void NativePreConstruct() override;
 
 
-	virtual void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel) override;
+	void RecvProtocol(uint32 ProtocolNumber);
 	
 private:
 	//UFUNCTION()

@@ -40,7 +40,7 @@ void UUI_Vendor::SetVisibility(ESlateVisibility InVisibility)
 void UUI_Vendor::NativeConstruct()
 {
 	Super::NativeConstruct();
-	BindClientRcv();
+	//BindClientRcv();
 	//WB_UpperUIBar->SetType(E_UIType::Sell);
 	//SetNativeUIType(E_UIType::Sell);
 	//WidgetSwitcher->SetActiveWidget(WB_VendorStorageInventory);
@@ -58,25 +58,25 @@ void UUI_Vendor::NativePreConstruct()
 	
 }
 
-void UUI_Vendor::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
+void UUI_Vendor::RecvProtocol(uint32 ProtocolNumber)
 {
-	switch(ProtocolNumber)
-	{
-	case SP_VendorBuy:
-	{
-		uint16 childcmd = 0;
-		SIMPLE_PROTOCOLS_RECEIVE(SP_VendorBuy, childcmd);
-		UE_LOG(MMOARPG, Display, TEXT("Recv SP_VendorBuy [childcmd:%d]"), childcmd);
-		break;
-	}
-	case SP_VendorSell:
-	{
-		uint16 childcmd = 0;
-		SIMPLE_PROTOCOLS_RECEIVE(SP_VendorSell, childcmd);
-		UE_LOG(MMOARPG, Display, TEXT("Recv SP_VendorSell [childcmd:%d]"), childcmd);
-		break;
-	}
-	}
+	//switch(ProtocolNumber)
+	//{
+	//case SP_VendorBuy:
+	//{
+	//	uint16 childcmd = 0;
+	//	SIMPLE_PROTOCOLS_RECEIVE(SP_VendorBuy, childcmd);
+	//	UE_LOG(MMOARPG, Display, TEXT("Recv SP_VendorBuy [childcmd:%d]"), childcmd);
+	//	break;
+	//}
+	//case SP_VendorSell:
+	//{
+	//	uint16 childcmd = 0;
+	//	SIMPLE_PROTOCOLS_RECEIVE(SP_VendorSell, childcmd);
+	//	UE_LOG(MMOARPG, Display, TEXT("Recv SP_VendorSell [childcmd:%d]"), childcmd);
+	//	break;
+	//}
+	//}
 }
 //
 //void UUI_Vendor::SetNativeUIType(E_UIType eType)

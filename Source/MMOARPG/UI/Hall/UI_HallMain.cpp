@@ -14,10 +14,12 @@
 #include "../../Core/Hall/Character/CharacterStage.h"
 #include "Element/UI_KneadFace.h"
 
+
 #define LOCTEXT_NAMESPACE "UUI_HallMain"
 
-void UUI_HallMain::LinkInit()
+void UUI_HallMain::LinkInit(ENetServerRole ServerRole)
 {
+	ensure(ServerRole == ENetServerRole::Gate);
 	if(UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
 	{
 		FMMOARPGUserData& UserData = InGameInstance->GetUserData();
@@ -73,10 +75,10 @@ void UUI_HallMain::NativeConstruct()
 
 	HallMainIn();
 
-	if(UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
-	{
-		LinkServer(InGameInstance->GetGateStatus().GateServerAddrInfo);
-	}
+	//if(UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
+	//{
+	//	LinkServer(InGameInstance->GetGateStatus().GateServerAddrInfo);
+	//}
 
 	UI_RenameCreate->SetParents(this);
 	UI_CharacterCreatePanel->SetParents(this);
@@ -84,12 +86,42 @@ void UUI_HallMain::NativeConstruct()
 
 	//PlayRenameOut();
 	//ResetCharacterCreatePanel();
+
+	if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+	{
+		if (auto* NetSub = GI->GetSubsystem<UMMOARPGNetSubsystem>())
+		{
+			NetSub->RegisterUniqueHandler(SP_CharacterLogin, FProtocolHandler::CreateUObject(this, &UUI_HallMain::RecvProtocol));
+			NetSub->RegisterUniqueHandler(SP_CharacterSelect, FProtocolHandler::CreateUObject(this, &UUI_HallMain::RecvProtocol));
+			NetSub->RegisterUniqueHandler(SP_CreateCharacter, FProtocolHandler::CreateUObject(this, &UUI_HallMain::RecvProtocol));
+			NetSub->RegisterUniqueHandler(SP_DeleteCharacter, FProtocolHandler::CreateUObject(this, &UUI_HallMain::RecvProtocol));
+			NetSub->RegisterUniqueHandler(SP_CharacterResponse, FProtocolHandler::CreateUObject(this, &UUI_HallMain::RecvProtocol));
+
+			NetSub->OnNetLinked.BindUObject(this, &UUI_HallMain::LinkInit);
+
+			NetSub->BeginLink(ENetServerRole::Gate);
+		}
+	}
+
 }
 
 void UUI_HallMain::NativeDestruct()
 {
 	Super::NativeDestruct();
 
+	if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+	{
+		if (auto* NetSub = GI->GetSubsystem<UMMOARPGNetSubsystem>())
+		{
+			NetSub->UnRegisterUniqueHandler(SP_CharacterLogin);
+			NetSub->UnRegisterUniqueHandler(SP_CharacterSelect);
+			NetSub->UnRegisterUniqueHandler(SP_CreateCharacter);
+			NetSub->UnRegisterUniqueHandler(SP_DeleteCharacter);
+			NetSub->UnRegisterUniqueHandler(SP_CharacterResponse);
+
+			NetSub->OnNetLinked.Unbind();
+		}
+	}
 }
 
 void UUI_HallMain::PlayEditorCharacterIn()

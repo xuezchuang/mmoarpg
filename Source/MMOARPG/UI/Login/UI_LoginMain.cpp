@@ -13,6 +13,7 @@
 #include "UI_Register.h"
 #include <Misc/GeneratedTypeName.h>
 #include "SocketSubsystem.h"
+#include "MMOARPGNetSubsystem.h"
 
 #define LOCTEXT_NAMESPACE "UUI_LoginMain"
 
@@ -25,7 +26,21 @@ void UUI_LoginMain::NativeConstruct()
 	UI_Login->SetParents(this);
 	UI_Register->SetParents(this);
 
-	LinkServer();
+
+	//LinkServer();
+	if(UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+    {
+        if (auto* NetSub = GI->GetSubsystem<UMMOARPGNetSubsystem>())
+        {
+			NetSub->RegisterUniqueHandler(SP_LoginResponses, FProtocolHandler::CreateUObject(this, &UUI_LoginMain::RecvProtocol));
+			NetSub->RegisterUniqueHandler(SP_RegisterResponses, FProtocolHandler::CreateUObject(this, &UUI_LoginMain::RecvProtocol));
+
+			NetSub->OnNetLinked.BindUObject(this, &UUI_LoginMain::LinkInit);
+
+			NetSub->BeginLink(ENetServerRole::Login);
+
+        }
+    }
 
 	//读取账号
 	if (!UI_Login->DecryptionFromLocal(FPaths::ProjectDir() / TEXT("User")))
@@ -37,6 +52,17 @@ void UUI_LoginMain::NativeConstruct()
 void UUI_LoginMain::NativeDestruct()
 {
 	Super::NativeDestruct();
+
+	if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+	{
+		if (auto* NetSub = GI->GetSubsystem<UMMOARPGNetSubsystem>())
+		{
+			NetSub->UnRegisterUniqueHandler(SP_LoginResponses);
+			NetSub->UnRegisterUniqueHandler(SP_RegisterResponses);
+
+			NetSub->OnNetLinked.Unbind();
+		}
+	}
 
 }
 
@@ -225,16 +251,40 @@ void UUI_LoginMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 	}
 }
 
-void UUI_LoginMain::LinkInit()
+void UUI_LoginMain::LinkInit(ENetServerRole ServerRole)
 {
-	LinkServerInfo(ESimpleNetErrorType::HAND_SHAKE_SUCCESS, FString());
+	ensure(ServerRole == ENetServerRole::Login);
+	UI_LinkWidget->SetVisibility(ESlateVisibility::Collapsed);
 }
 
-void UUI_LoginMain::LinkServerInfo(ESimpleNetErrorType InType, const FString& InMsg)
+void UUI_LoginMain::HandleRegisterResponse(ERegistrationType Type)
 {
-	if(InType == ESimpleNetErrorType::HAND_SHAKE_SUCCESS)
+	switch (Type)
 	{
-		UI_LinkWidget->SetVisibility(ESlateVisibility::Collapsed);
+	case ACCOUNT_AND_EMAIL_REPETITION_ERROR:
+	{
+		//PrintLog(LOCTEXT("ACCOUNT_AND_EMAIL_REPETITION_ERROR", "Duplicate account or email."));
+
+		//协程
+		GThread::Get()->GetCoroutines().BindLambda(0.8f, [&]()//不支持引用，支持指针 普通结构
+			{
+				Register();
+
+				//显示重复警告
+				UI_Register->ShowDuplicateWarnings();
+				UI_Register->ShowFailedtoRegisterWarnings();
+			});
+
+		break;
+	}
+	case PLAYER_REGISTRATION_SUCCESS:
+		PrintLog(LOCTEXT("REGISTRATION_SUCCESS", "Registration was successful."));
+		break;
+	case SERVER_BUG_WRONG:
+		PrintLog(LOCTEXT("SERVER_BUG_WRONG", "Server unknown error."));
+		break;
+	default:
+		break;
 	}
 }
 
@@ -250,4 +300,5 @@ void UUI_LoginMain::PrintLog(const FText& InMsg)
 
 	UI_Print->SetText(InMsg);
 }
+
 #undef LOCTEXT_NAMESPACE

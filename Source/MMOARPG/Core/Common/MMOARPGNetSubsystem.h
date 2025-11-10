@@ -1,157 +1,81 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/GameInstance.h"
-#include "SimpleNetManage.h"
+#include "Subsystems/GameInstanceSubsystem.h"
+#include "HAL/ThreadSafeBool.h"
 #include "MMOARPGType.h"
-#include "Engine/DataTable.h"
-#include "MMOARPGGameInstance.generated.h"
+#include "MMOARPGNetSubsystem.generated.h"
 
-struct FMonsterAnimRow;
-class AMMOARPGMonster;
-class AMMOARPGNetEnemyController;
+// 你的底层网络通道类型（已存在于你的工程中）
+class FSimpleChannel;
 
-USTRUCT()
-struct FMonsterVisualResolved
+class USimpleNetworkObject;
+
+UENUM(BlueprintType)
+enum class ENetServerRole : uint8
 {
-    GENERATED_BODY()
-
-    USkeletalMesh* SkeletalMesh = nullptr;
-    UClass* AnimClass = nullptr;
-    TArray<UAnimMontage*> AttackMontages;
-    UAnimMontage* Idle  = nullptr;
-    UAnimMontage* Hit   = nullptr;
-    UAnimMontage* Death = nullptr;
+    Unknown = 0,
+    Login,
+    Gate
 };
 
-USTRUCT()
-struct FQueuedMonsterMsg
-{
-    GENERATED_BODY()
 
-    // 用于排序回放
-    UPROPERTY() double ServerTimes = 0.0;
+DECLARE_DELEGATE_TwoParams(FProtocolHandler, uint32 /*Proto*/, FSimpleChannel* /*Channel*/);
 
-    // 是否带有权威位姿（拿到后将触发真正 Spawn 或权威重设）
-    UPROPERTY() bool bHasTransform = false;
-    UPROPERTY() FTransform Transform;
+DECLARE_DELEGATE_OneParam(FOnNetLinked, ENetServerRole);
 
-    UPROPERTY() bool  bHasHP     = false;
-    UPROPERTY() int32 HP         = 0;
-
-    UPROPERTY() bool  bHasMaxHP  = false;
-    UPROPERTY() int32 MaxHP      = 0;
-
-    UPROPERTY() bool  bHasLogicState = false;
-    UPROPERTY() uint8 LogicState     = 0;
-
-    UPROPERTY() bool   bHasMoveTarget = false;
-    UPROPERTY() FVector MoveTarget    = FVector::ZeroVector;
-};
-
-/**
- * 
- */
 UCLASS()
-class MMOARPG_API UMMOARPGGameInstance : public UGameInstance, public FTickableGameObject
+class MMOARPG_API UMMOARPGNetSubsystem : public UGameInstanceSubsystem
 {
-	GENERATED_BODY()
-	
+    GENERATED_BODY()
+
 public:
-	virtual void Init();
+    // ---------- 生命周期 ----------
+    virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+    virtual void Deinitialize() override;
 
-	virtual void Tick(float DeltaTime);
+	bool RegisterUniqueHandler(uint32 Proto, FProtocolHandler InHandler);
+	bool UnRegisterUniqueHandler(uint32 Proto);
 
-	virtual TStatId GetStatId() const;
+	void BeginLink(ENetServerRole InRole);
 
-	virtual void Shutdown();
+	// 单播事件
+    FOnNetLinked OnNetLinked;
 
-	static int nIndex;
-public:
-	void CreateClient();
+    // 当前连接角色（上次绑定成功的）
+    ENetServerRole CurrentRole = ENetServerRole::Unknown;
 
-	void LinkServer();
-	void LinkServer(const FSimpleAddr& InAddr);
-	void LinkServer(const TCHAR *InIP,uint32 InPort);
 
-	FSimpleNetManage* GetClient();
-	FMMOARPGUserData &GetUserData();
-	FMMOARPGGateStatus& GetGateStatus();
+	// 手动解绑（切服/断开时）
+	void UnbindClientRcv();
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Data")
-	TSoftObjectPtr<UDataTable> DT_Monster;
 private:
 
 
-	// 运行时缓存
-	UPROPERTY(Transient)
-	UDataTable* DT_Monster_Loaded = nullptr;
+    // 强类型解析与分发
+    void RouteTyped(uint32 Protocol, const TArray<uint8>& Payload);
 
-	FSimpleNetManage* Client;
-	FMMOARPGUserData UserData;
-	FMMOARPGGateStatus GateStatus;
+	void BindClientRcv();
+	void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
 
-public:
-    /** 确保表已加载（小表可同步；大表建议在加载界面先异步预热） */
-    UDataTable* EnsureMonsterTableSync();
-
-    /** 按 MonsterId 返回行（RowName 建议即 MonsterId 字符串） */
-    const FMonsterAnimRow* GetMonsterRowSync(int32 MonsterId);
-
-    /** 同步解析成可直接使用的资源指针（若资源尚未加载，将同步加载） */
-    bool GetMonsterVisualSync(int32 MonsterId, FMonsterVisualResolved& Out);
-
-    /** 异步解析：加载完毕后回调（不阻塞） */
-    void GetMonsterVisualAsync(
-        int32 MonsterId,
-        TFunction<void(bool bOk, const FMonsterAnimRow* Row, const FMonsterVisualResolved& Visual)> OnReady);
-
-	 /** 异步：按 MonsterId + Pos(+Rot可选) 生成怪到当前世界 */
-    void SpawnMonsterByIdAsync(int32 MonsterId, const FVector& Pos, const FRotator& Rot = FRotator::ZeroRotator);
-
-    /** 同步（小资源/编辑器可用）：会同步加载软引用，注意别在帧中卡顿点用 */
-    class AMMOARPGMonster* SpawnMonsterByIdSync(int32 MonsterId, const FVector& Pos, const FRotator& Rot = FRotator::ZeroRotator);
-
-	// ========== 对外接口：由网络层调用 ==========
-    // 8000：怪物数据（可能带位置/也可能不带）
-    void GI_OnMonsterData(const FMonsterDataPacket& P, double ServerTimes);
-    // 8300：怪物状态（Idle/Chase/Back...）
-    void GI_OnMonsterState(int32 MonsterId, uint8 NewState, double ServerTimes);
-    // 8400：怪物移动（通常自带目标位置/方向）
-    void GI_OnMonsterMove(const S_MOVE_ROBOT& Move, double ServerTimes);
-
-    // 供外部注册/查询（如果你有现成的，就用你自己的）
-    void RegisterMonster(int32 MonsterId, AMMOARPGNetEnemyController* Ctrl);
-    AMMOARPGNetEnemyController* FindMonsterCtlr(int32 MonsterId) const;
-    AMMOARPGMonster*            FindMonsterById(int32 MonsterId) const;
-
-	UFUNCTION(BlueprintCallable, Category = "MapOrigin")
-	void SetOrigin(int32 MapId, const FVector& NewOrigin);
-private:
-    // ========== 内部：排队与落地 ==========
-    void EnqueuePending(int32 MonsterId, const FQueuedMonsterMsg& Msg);
-    void OnAuthoritativeTransform(int32 MonsterId, const FTransform& T, double ServerTimes);
-    void FlushPendingTo(AMMOARPGMonster* M, int32 MonsterId);
-    void ApplyQueued(AMMOARPGMonster* M, const FQueuedMonsterMsg& Msg, bool bAuthoritative);
-
-    // 清理超时的排队（避免堆积）
-    void CleanupPending(float MaxHoldSec = 10.f);
-
-	// 在 UMMOARPGGameInstance 里加声明
-	void QueuePendingMove(int32 MonsterId, const S_MOVE_ROBOT& Move, double ServerTimes);
+	USimpleNetworkObject* TryGetReadyController();
 
 private:
-    // 未落地的队列
-    TMap<int32, TArray<FQueuedMonsterMsg>> PendingMsgs;
-    TMap<int32, double>                    PendingFirstSeenSec;
+	FDelegateHandle RecvHandle;                       // 记录已绑定的句柄
+	TWeakObjectPtr<USimpleNetworkObject> BoundCtrl;   // 保存当前绑定的控制器
+	int32 BindGen = 0;                                // 绑定世代，避免旧定时器回调“越时空”执行
 
-    // Id → 控制器（或怪物）的弱引用表
-    TMap<int32, TWeakObjectPtr<AMMOARPGNetEnemyController>> IdToCtrl;
-    TMap<int32, TWeakObjectPtr<AMMOARPGMonster>>            IdToMonster;
-	TMap<int32, FVector>	MapOriginTable;
+private:
 
-    // 清理计时器
-    FTimerHandle PendingCleanupHandle;
+	TMap<uint32, FProtocolHandler> UniqueHandlers;
+
+
+    // 协议号（示例：玩家HP）
+    uint32 Proto_PlayerHP = 0;
+
+    // 防止重复绑定
+    FThreadSafeBool bBound = false;
+
+	// 当前&待切换的角色
+	ENetServerRole DesiredRole = ENetServerRole::Unknown;
 };
