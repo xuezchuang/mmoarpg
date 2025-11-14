@@ -51,13 +51,6 @@ private:
 	FDelegateHandle RecvDelegate;
 
 	TMap<uint32, ABladeIINetPlayer*>	MapOtherCharacter;
-
-	//UPROPERTY()
-	//TMap<int32, TWeakObjectPtr<AMMOARPGNetEnemyController>> MonsterMap;
-
-	//void RegisterMonster(int32 MonsterId, AMMOARPGNetEnemyController* Ctlr);
-	//void UnregisterMonster(int32 MonsterId);
-	//AMMOARPGNetEnemyController* FindMonsterCtlr(int32 MonsterId) const;
 };
 
 

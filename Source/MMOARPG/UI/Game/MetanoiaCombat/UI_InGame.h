@@ -9,6 +9,7 @@
 
 class UTextBlock;
 class UUI_ActiveWP;
+struct FMMOARPGUserData;
 /**
  * 
  */
@@ -32,9 +33,14 @@ public:
 	virtual void NativeDestruct();
 
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime);
+
+	void InitHotkeys(const TMap<FKey, int32>& Hotkeys, const TArray<int32>& Slots);
 protected:
 
-	virtual void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
+	TArray<uint32> InterestingProtos;
+	TArray<FDelegateHandle> InterestingHandles;
+
+	void RecvProtocol(uint32 ProtocolNumber);
 
 	//virtual void LinkServerInfo(ESimpleNetErrorType InType, const FString& InMsg);
 
@@ -54,4 +60,10 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Status")
 	void UpdateState();
+
+	FMMOARPGUserData* m_UserData = NULL;
+
+
+	
+
 };

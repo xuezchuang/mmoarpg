@@ -43,3 +43,39 @@ struct FMonsterAnimRow : public FTableRowBase
     // UPROPERTY(EditAnywhere, BlueprintReadOnly)
     // TSoftObjectPtr<USkeletalMesh> Mesh;
 };
+
+USTRUCT(BlueprintType)
+struct FCharacterAnimRow : public FTableRowBase
+{
+    GENERATED_BODY()
+
+    // 角色ID（和服务器下发的 id 一致）
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+    int32 JobId = 0;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character")
+    TSoftClassPtr<class ABladeIINetPlayer> CharacterBlueprint;
+
+    // 模型（SkeletalMesh）
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Character")
+    TSoftObjectPtr<USkeletalMesh> Mesh;
+
+    // 动画蓝图（动画控制器）
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Character")
+    TSoftObjectPtr<UAnimBlueprint> AnimBlueprint;
+
+    // 攻击动画（用软引用，避免强依赖与启动加载）
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+    TArray<TSoftObjectPtr<UAnimMontage>> AttackMontages;
+
+    // 可选：待机/受击/死亡/技能等
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+    TSoftObjectPtr<UAnimMontage> Idle;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+    TSoftObjectPtr<UAnimMontage> Hit;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+    TSoftObjectPtr<UAnimMontage> Death;
+};
+

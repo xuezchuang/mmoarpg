@@ -17,13 +17,13 @@
 
 void UUI_Vendor::VendorBuy(uint16 count, uint32 propid)
 {
-	SEND_DATA(SP_VendorBuy, count, propid);
+	SEND_DATA(SP_ItemBuy, count, propid);
 	UE_LOG(MMOARPG, Display, TEXT("Send SP_VendorSell"));
 }
 
 void UUI_Vendor::VendorSell(uint8 pos, uint16 count, uint32 propid)
 {
-	SEND_DATA(SP_VendorSell, count, propid);
+	SEND_DATA(SP_ItemSell, count, propid);
 	UE_LOG(MMOARPG, Display, TEXT("Send SP_VendorSell"));
 }
 

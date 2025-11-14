@@ -237,6 +237,9 @@ struct S_ROLE_BASE_STATUS
 	S_VECTOR3	pos;  //当前坐标
 	//int32		c_mapid; //保存的地图ID
 	//S_VECTOR3	c_pos;//保存坐标
+	int32		hp;
+	int32		mp;
+
 
 	////进入副本或者退出副本 设置
 	//inline void copyMapid(bool isreturn)
@@ -256,8 +259,8 @@ struct S_ROLE_BASE_STATUS
 //生命信息
 struct S_ROLE_BASE_LIFE
 {
-	int32     hp;//当前生命
-	int32     mp;//当前魔法值
+	int32	hp;
+	int32	mp;
 };
 //道具
 struct  S_ROLE_PROP_BASE
@@ -521,20 +524,23 @@ struct S_ROBOT_DATA :S_COMMAND_GATEBASE
 {
 	uint32  robotindex;
 };
+struct S_GETROLEDATA :S_COMMAND_GATEBASE
+{
+	uint32  targetindex;//需要获取玩家角色数据索引
+
+};
 
 struct FMonsterDataPacket
 {
 	uint16  ChildCmd;
 
-	S_ROBOT_DATA   RobotData;
+	uint32 robotindex;
 
 	int32	Id;
 	uint8	Dir;
 	int32	Hp;
+	int32	TolHp;
 
-	// 对应 sss(&robot->bc.grid_pos, 8)
-	// 服务器写了 8 字节，一般就是两个 int32（XY）；
-	// 如果你的 grid_pos 实际是其它结构（比如两个 int16 + padding），请据实修改。
 	int32 GridX;
 	int32 GridY;
 };

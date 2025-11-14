@@ -39,17 +39,13 @@ public:
     virtual void Deinitialize() override;
     virtual void OnWorldBeginPlay(UWorld& InWorld) override;
 
-
-    // ========== 网络回调（由 NetSubsystem 唯一派发） ==========
-    // 协议号你自己的定义：示例用 8000/8300/8400
-    void OnMonsterData(uint32 Proto, FSimpleChannel* Channel);
-    void OnMonsterState(uint32 Proto, FSimpleChannel* Channel);
-    void OnMonsterMove(uint32 Proto, FSimpleChannel* Channel);
+    void RecvProtocol(uint32 Proto, FSimpleChannel* Channel);
 
     // 对外查询
     AMMOARPGMonster*            FindMonsterById(int32 MonsterId) const;
     AMMOARPGNetEnemyController* FindMonsterCtlr (int32 MonsterId) const;
 
+	 void GetAllAliveMonsters(TArray<AMMOARPGMonster*>& OutMonsters) const;
 private:
     void BindNet();
     void UnbindNet();
@@ -58,7 +54,7 @@ private:
     void EnqueuePending(int32 MonsterId, const FQueuedMonsterMsg& Msg);
     void FlushPendingTo(AMMOARPGMonster* M, int32 MonsterId);
     void ApplyQueued(AMMOARPGMonster* M, const FQueuedMonsterMsg& Msg, bool bAuthoritative);
-    void OnAuthoritativeTransform(int32 MonsterId, const FTransform& T, double ServerTimes);
+    AMMOARPGMonster* SpawnAndSyncMonster(int32 MonsterId, const FTransform& T, double ServerTimes);
 
     // 生成（同步版，编辑器/小资源可用）
     AMMOARPGMonster* SpawnMonsterByIdSync(int32 MonsterId, const FVector& Pos, const FRotator& Rot);
@@ -83,10 +79,7 @@ private:
 
     FTimerHandle PendingCleanupHandle;
 
-    // 协议绑定（唯一消费者）：用你自己的 ID
-    uint32 Proto_MonsterData  = 8000;
-    uint32 Proto_MonsterState = 8300;
-    uint32 Proto_MonsterMove  = 8400;
+	TArray<uint32> Protos;
 
     // 标记是否已绑定（避免重复）
     bool bNetBound = false;

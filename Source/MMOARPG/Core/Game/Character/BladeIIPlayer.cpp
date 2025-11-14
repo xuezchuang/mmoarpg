@@ -16,16 +16,34 @@
 #include "MMOARPGMacroType.h"
 #include "Protocol/GameProtocol.h"
 #include "MMOARPG.h"
+#include "Component/SelectableComponent.h"
 //////////////////////////////////////////////////////////////////////////
 // ABladeIIPlayer
 
 ABladeIIPlayer::ABladeIIPlayer()
 {
-	
+	SelectableComp = CreateDefaultSubobject<USelectableComponent>(TEXT("SelectableComp"));
 }
 
 void ABladeIIPlayer::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (SelectableComp)
+	{
+		SelectableComp->OnSelectedEvent.AddDynamic(this, &ABladeIIPlayer::HandleSelected);
+		SelectableComp->OnSelectionEndEvent.AddDynamic(this, &ABladeIIPlayer::HandleSelectionEnd);
+	}
 }
+
+void ABladeIIPlayer::HandleSelected_Implementation()
+{
+
+}
+
+void ABladeIIPlayer::HandleSelectionEnd_Implementation()
+{
+
+}
+
 

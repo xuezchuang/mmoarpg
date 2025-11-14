@@ -10,6 +10,7 @@
 #include "../DataTable/MonsterAnimTable.h"
 #include "NetPlay/BladeIINetCharacter.h"
 #include "MMOARPGMacroType.h"
+#include "MMOARPG.h"
 
 // 你项目里的通道类型
 class FSimpleChannel;
@@ -89,12 +90,16 @@ void UMonsterWorldSubsystem::BindNet()
 
 	if (auto* Net = GI->GetSubsystem<UMMOARPGNetSubsystem>())
 	{
-		// 按你的 NetSubsystem API 绑定（示例：唯一处理者/或多播）
-		Net->RegisterUniqueHandler(SP_MonsterData,FProtocolHandler::CreateUObject(this, &UMonsterWorldSubsystem::OnMonsterData));
-
-		Net->RegisterUniqueHandler(SP_MonsterMove,FProtocolHandler::CreateUObject(this, &UMonsterWorldSubsystem::OnMonsterMove));
-
-		Net->RegisterUniqueHandler(SP_MonsterState,FProtocolHandler::CreateUObject(this, &UMonsterWorldSubsystem::OnMonsterState));
+		Protos =
+		{
+			SP_RoleHP,
+			SP_RoleMP,
+			SP_RoleState,
+			SP_MonsterData,
+			SP_MonsterMove,
+			SP_MonsterState
+		};
+		Net->RegisterUniqueHandlers(Protos, FProtocolHandler::CreateUObject(this, &UMonsterWorldSubsystem::RecvProtocol));
 	}
 }
 
@@ -103,110 +108,104 @@ void UMonsterWorldSubsystem::UnbindNet()
     UGameInstance* GI = GetWorld() ? GetWorld()->GetGameInstance() : nullptr;
     if (!GI) return;
 
-    if (auto* Net = GI->GetSubsystem<UMMOARPGNetSubsystem>())
-    {
-        Net->UnRegisterUniqueHandler(SP_MonsterData);
-        Net->UnRegisterUniqueHandler(SP_MonsterMove);
-		Net->UnRegisterUniqueHandler(SP_MonsterState);
-    }
+	if (auto* Net = GI->GetSubsystem<UMMOARPGNetSubsystem>())
+	{
+		Net->UnRegisterUniqueHandlers(Protos);
+	}
 }
 
 
-// 8000：怪物数据（可能带初始位姿）
-void UMonsterWorldSubsystem::OnMonsterData(uint32 /*Proto*/, FSimpleChannel* Channel)
+void UMonsterWorldSubsystem::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 {
-    FMonsterDataPacket P{}; // 你的结构
-	SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterData, P);
+	switch (ProtocolNumber)
+	{
+	case SP_MonsterData:
+	{
+		FMonsterDataPacket P{}; // 你的结构
+		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterData, P);
 
-    const double ServerTimes = FPlatformTime::Seconds(); // 或包里带的 server time
+		const double ServerTimes = FPlatformTime::Seconds(); // 或包里带的 server time
 
-    bool bHasTransform = false;
-    FTransform T;
+		const FVector WorldPos(P.GridX, P.GridY, 0.0);
+		FTransform T = FTransform(FRotator::ZeroRotator, WorldPos);
+		
+		if (AMMOARPGMonster* M = FindMonsterById(P.Id))
+		{
+			UE_LOG(MMOARPG, Error, TEXT("recv SP_MonsterData"));
+		}
+		else
+		{
+			AMMOARPGMonster* NewMonster = SpawnAndSyncMonster(P.Id, T, ServerTimes);
+			if (NewMonster)
+			{
+				NewMonster->Info.CurrentHealth = P.Hp;
+				NewMonster->Info.TotalHealth = P.TolHp;
+				NewMonster->UpdateHealthBar();
+			}
+		}
+		break;
+	}
+	case SP_MonsterState:
+	{
+		int32 MonsterId = 0; uint8 NewState = 0;
+		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterState, MonsterId, NewState);
 
-    // 示例：如果包里是 Grid，转世界坐标
-    if (P.GridX >= 0 && P.GridY >= 0)
-    {
-        FS_GRID_BASE Grid; Grid.row = P.GridX; Grid.col = P.GridY;
-        const FVector WorldPos = UMMOARPTool::GridToPosSimple(Grid, FVector::ZeroVector, C_WORLDMAP_ONE_GRID, true);
-        T = FTransform(FRotator::ZeroRotator, WorldPos);
-        bHasTransform = true;
-    }
+		const double ServerTimes = FPlatformTime::Seconds();
 
-    if (AMMOARPGMonster* M = FindMonsterById(P.Id))
-    {
-        FQueuedMonsterMsg Msg;
-        Msg.ServerTimes = ServerTimes;
-        Msg.bHasTransform = bHasTransform;
-        if (bHasTransform) Msg.Transform = T;
-        ApplyQueued(M, Msg, /*bAuthoritative*/ bHasTransform);
-        return;
-    }
+		if (AMMOARPGMonster* M = FindMonsterById(MonsterId))
+		{
+			FQueuedMonsterMsg Msg; Msg.ServerTimes = ServerTimes;
+			// Msg.填状态
+			ApplyQueued(M, Msg, /*bAuthoritative*/ false);
+		}
+		else
+		{
+			FQueuedMonsterMsg Msg; Msg.ServerTimes = ServerTimes;
+			// Msg.填状态
+			EnqueuePending(MonsterId, Msg);
+		}
+		break;
+	}
+	case SP_MonsterMove:
+	{
+		S_MOVE_ROBOT Move{}; // 你的移动结构
+		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterMove, Move);
 
-    if (bHasTransform)
-    {
-        OnAuthoritativeTransform(P.Id, T, ServerTimes);
-    }
-    else
-    {
-        FQueuedMonsterMsg Msg; Msg.ServerTimes = ServerTimes;
-        EnqueuePending(P.Id, Msg);
-    }
+		const int32 MonsterId = Move.robotindex;
+		const FVector WorldPos(Move.x, Move.y, Move.z);
+		const double ServerTimes = FPlatformTime::Seconds();
+
+		if (AMMOARPGMonster* M = FindMonsterById(MonsterId))
+		{
+			if (auto* Ctl = Cast<AMMOARPGNetEnemyController>(M->GetController()))
+			{
+				Ctl->Net_MoveTo(WorldPos, false);
+			}
+			else
+			{
+				FQueuedMonsterMsg Msg; Msg.ServerTimes = ServerTimes;
+				Msg.bHasMoveTarget = true; Msg.MoveTarget = WorldPos;
+				EnqueuePending(MonsterId, Msg);
+			}
+		}
+		else
+		{			
+			SIMPLE_PROTOCOLS_SEND(SP_MonsterData, MonsterId);
+			//SpawnAndSyncMonster(MonsterId, FTransform(FRotator::ZeroRotator, WorldPos), ServerTimes);
+		}
+		break;
+	}
+	case SP_MonsterAttack:
+	{
+		//uint32  index;
+		//int32	value;
+		//SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterAttack, index, value);
+		break;
+	}
+	}
+
 }
 
-// 8300：状态
-void UMonsterWorldSubsystem::OnMonsterState(uint32 /*Proto*/, FSimpleChannel* Channel)
-{
-    TArray<uint8> Buf; Channel->Receive(Buf);
-    FSimpleIOStream Ar(Buf); Ar.Seek(sizeof(FSimpleBunchHead));
-
-    int32 MonsterId = 0; uint8 NewState = 0;
-	SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterState, MonsterId, NewState);
-
-    const double ServerTimes = FPlatformTime::Seconds();
-
-    if (AMMOARPGMonster* M = FindMonsterById(MonsterId))
-    {
-        FQueuedMonsterMsg Msg; Msg.ServerTimes = ServerTimes;
-        // Msg.填状态
-        ApplyQueued(M, Msg, /*bAuthoritative*/ false);
-    }
-    else
-    {
-        FQueuedMonsterMsg Msg; Msg.ServerTimes = ServerTimes;
-        // Msg.填状态
-        EnqueuePending(MonsterId, Msg);
-    }
-}
-
-// 8400：移动
-void UMonsterWorldSubsystem::OnMonsterMove(uint32 /*Proto*/, FSimpleChannel* Channel)
-{
-    S_MOVE_ROBOT Move{}; // 你的移动结构
-	SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterMove, Move);
-
-    const int32 MonsterId = Move.robotindex;
-    const FVector WorldPos(Move.x, Move.y, Move.z);
-    const double ServerTimes = FPlatformTime::Seconds();
-
-    if (AMMOARPGMonster* M = FindMonsterById(MonsterId))
-    {
-        if (auto* Ctl = Cast<AMMOARPGNetEnemyController>(M->GetController()))
-        {
-            Ctl->Net_MoveTo(WorldPos, false);
-        }
-        else
-        {
-            FQueuedMonsterMsg Msg; Msg.ServerTimes = ServerTimes;
-            Msg.bHasMoveTarget = true; Msg.MoveTarget = WorldPos;
-            EnqueuePending(MonsterId, Msg);
-        }
-    }
-    else
-    {
-        // 首次见到，用移动包位置当权威位姿生成
-        OnAuthoritativeTransform(MonsterId, FTransform(FRotator::ZeroRotator, WorldPos), ServerTimes);
-    }
-}
 
 AMMOARPGMonster* UMonsterWorldSubsystem::FindMonsterById(int32 MonsterId) const
 {
@@ -219,6 +218,24 @@ AMMOARPGNetEnemyController* UMonsterWorldSubsystem::FindMonsterCtlr(int32 Monste
     if (const TWeakObjectPtr<AMMOARPGNetEnemyController>* P = IdToCtrl.Find(MonsterId)) return P->Get();
     return nullptr;
 }
+
+void UMonsterWorldSubsystem::GetAllAliveMonsters(TArray<AMMOARPGMonster*>& OutMonsters) const
+{
+    OutMonsters.Reset();
+
+    for (const auto& Pair : IdToMonster)
+    {
+        if (AMMOARPGMonster* M = Pair.Value.Get())
+        {
+            if (!M->IsPendingKill() && M->IsActorInitialized() && M->IsActorTickEnabled())
+            {
+                // 这里你也可以加怪物是否死亡的判断，比如 M->IsDead()
+                OutMonsters.Add(M);
+            }
+        }
+    }
+}
+
 
 void UMonsterWorldSubsystem::EnqueuePending(int32 MonsterId, const FQueuedMonsterMsg& Msg)
 {
@@ -263,17 +280,13 @@ void UMonsterWorldSubsystem::ApplyQueued(AMMOARPGMonster* M, const FQueuedMonste
     }
 }
 
-void UMonsterWorldSubsystem::OnAuthoritativeTransform(int32 MonsterId, const FTransform& T, double ServerTimes)
+AMMOARPGMonster* UMonsterWorldSubsystem::SpawnAndSyncMonster(int32 MonsterId, const FTransform& T, double ServerTimes)
 {
-    if (AMMOARPGMonster* Exist = FindMonsterById(MonsterId))
-    {
-        Exist->SetActorTransform(T, false, nullptr, ETeleportType::TeleportPhysics);
-        FlushPendingTo(Exist, MonsterId);
-        return;
-    }
-
     AMMOARPGMonster* NewM = SpawnMonsterByIdSync(MonsterId, T.GetLocation(), T.Rotator());
-    if (!NewM) return;
+    if (!NewM) 
+	{
+		return NULL;
+	}
 
     // 记录
     IdToMonster.FindOrAdd(MonsterId) = NewM;
@@ -288,6 +301,7 @@ void UMonsterWorldSubsystem::OnAuthoritativeTransform(int32 MonsterId, const FTr
     // 再应用权威
     FQueuedMonsterMsg Cur; Cur.ServerTimes = ServerTimes; Cur.bHasTransform = true; Cur.Transform = T;
     ApplyQueued(NewM, Cur, /*bAuthoritative*/true);
+	return NewM;
 }
 
 AMMOARPGMonster* UMonsterWorldSubsystem::SpawnMonsterByIdSync(int32 MonsterId, const FVector& Pos, const FRotator& Rot)
@@ -295,7 +309,6 @@ AMMOARPGMonster* UMonsterWorldSubsystem::SpawnMonsterByIdSync(int32 MonsterId, c
     UWorld* World = GetWorld();
     if (!World) return nullptr;
 
-    // 继续复用 GI 的“解析 DataTable + 资源加载”逻辑，避免重复代码
     if (auto* GI = World->GetGameInstance<UMMOARPGGameInstance>())
     {
         const FMonsterAnimRow* Row = GI->GetMonsterRowSync(MonsterId);
@@ -344,3 +357,5 @@ void UMonsterWorldSubsystem::CleanupPending(float MaxHoldSec)
         }
     }
 }
+
+

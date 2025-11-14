@@ -16,10 +16,11 @@ class MMOARPG_API UUI_ActiveWP : public UUI_MainBase
 {
 	GENERATED_BODY()
 
-	UPROPERTY(meta = (BindWidget))
+public:
+	UPROPERTY(BlueprintReadOnly,meta = (BindWidget))
 	UTextBlock* MountName;
 
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	UTextBlock* MountPower;
 
 public:

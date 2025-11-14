@@ -7,6 +7,8 @@
 #include "BaseElement.h"
 #include "MMOARPGMonster.generated.h"
 
+class USelectableComponent;
+
 UENUM()
 enum  class ETargetTypes :uint8
 {
@@ -17,13 +19,7 @@ enum  class ETargetTypes :uint8
 	Missile //比如元气弹
 };
 
-//伤害类型
-UENUM()
-enum class EDamageType :uint8 
-{
-	Magic,
-	Physical
-};
+
 
 //效果，比如效果增加，和效果削弱
 UENUM()
@@ -52,6 +48,7 @@ struct FMonsterInfo     // 运行时缓存，用于 UI/逻辑
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly) float RespawnTime = 0.f;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly) float TotalHealth = 0.f;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly) float CurrentHealth = 0.f;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly) float BaseDamage = 0.f;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly) int32 CritChance = 0;
 
@@ -67,7 +64,7 @@ struct FMonsterInfo     // 运行时缓存，用于 UI/逻辑
  * 
  */
 UCLASS()
-class MMOARPG_API AMMOARPGMonster : public AMMOARPGCharacterBase
+class MMOARPG_API AMMOARPGMonster : public AMMOARPGCharacterBase//, public ISelectableInterface
 {
 	GENERATED_BODY()
 	
@@ -174,7 +171,19 @@ public:
 
     // 由控制器每帧调用：把可视参数写进来（内部做平滑）
     UFUNCTION(BlueprintCallable, Category="NetVisual")
-    void ApplyNetAnimParams(float InSpeed, const FVector& InVelocityDirWS, ENetMonsterAction InAction, float DeltaSeconds);
+	void ApplyNetAnimParams(float InSpeed, const FVector& InVelocityDirWS, ENetMonsterAction InAction, float DeltaSeconds);
+
+protected:
+ 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Selectable")
+    USelectableComponent* SelectableComp;
+
+private:
+	UFUNCTION()
+	void HandleSelected();
+
+	UFUNCTION()
+	void HandleSelectionEnd();
 
 };
 

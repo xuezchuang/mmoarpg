@@ -9,23 +9,24 @@
 #include "MMOARPGEnemyController.h"
 #include "Components/WidgetComponent.h"
 #include "Components/ArrowComponent.h"
-#include "Components/CapsuleComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/TextBlock.h"
 #include "EnemyInfoWidget.h"
 #include "NetPlay/B2NetGameMode.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Components/ProgressBar.h"
+#include "Component/SelectableComponent.h"
 
 #define LOCTEXT_NAMESPACE "EnemyNameSpace"
 
 void AMMOARPGMonster::UpdateHealthBar()
 {
-	//EnemyInfoWidget->HealthBar->SetPercent(CurrentHealth / TotalHealth);
+	EnemyInfoWidget->HealthBar->SetPercent(Info.CurrentHealth / Info.TotalHealth);
 	//if (bSelected)
-	//{
-	//	SelectingCharacter->MainUserWidget->EnemyHpBar->SetPercent(CurrentHealth / TotalHealth);
-	//	SelectingCharacter->MainUserWidget->EnemyHpText->SetText(FText::Format(LOCTEXT("EnemyNameSpace", "{0}/{1}"), FText::AsNumber(FMath::RoundHalfToZero(CurrentHealth)), FText::AsNumber(TotalHealth)));
-	//}
+	{
+		//SelectingCharacter->MainUserWidget->EnemyHpBar->SetPercent(CurrentHealth / TotalHealth);
+		//SelectingCharacter->MainUserWidget->EnemyHpText->SetText(FText::Format(LOCTEXT("EnemyNameSpace", "{0}/{1}"), FText::AsNumber(FMath::RoundHalfToZero(CurrentHealth)), FText::AsNumber(TotalHealth)));
+	}
 }
 
 AMMOARPGMonster::AMMOARPGMonster()
@@ -72,6 +73,8 @@ AMMOARPGMonster::AMMOARPGMonster()
 	ShowUICollision->OnComponentEndOverlap.AddDynamic(this, &AMMOARPGMonster::OnEndOverlap);
 	HitArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("HitArrow"));
 	HitArrow->SetupAttachment(RootComponent);
+
+	SelectableComp = CreateDefaultSubobject<USelectableComponent>(TEXT("SelectableComp"));
 }
 
 // Called when the game starts or when spawned
@@ -97,6 +100,12 @@ void AMMOARPGMonster::BeginPlay()
 	 if(!GameMode->IsA(ABladeIINetGameMode::StaticClass()))
 	 {
 		 AIPerceptionComp->OnPerceptionUpdated.AddDynamic(this, &AMMOARPGMonster::OnSightPerceptionUpdate);
+	 }
+
+	 if (SelectableComp)
+	 {
+		 SelectableComp->OnSelectedEvent.AddDynamic(this, &AMMOARPGMonster::HandleSelected);
+		 SelectableComp->OnSelectionEndEvent.AddDynamic(this, &AMMOARPGMonster::HandleSelectionEnd);
 	 }
 
 	EnemyInfoWidget = Cast<UEnemyInfoWidget>(EnemyWidgetComp->GetUserWidgetObject());
@@ -217,6 +226,16 @@ void AMMOARPGMonster::ApplyNetAnimParams(float InSpeed, const FVector& InVelDirW
     bVisualMoving = (VisualSpeed > 3.f); // 视作在动的阈值，按手感调
 }
 
+void AMMOARPGMonster::HandleSelected()
+{
+
+}
+
+void AMMOARPGMonster::HandleSelectionEnd()
+{
+
+}
+
 void AMMOARPGMonster::AdjustZToGround(FVector& Pos)
 {
 	const FVector Start = Pos + FVector(0, 0, 2000.f);
@@ -246,5 +265,6 @@ void AMMOARPGMonster::AdjustZToGround(FVector& Pos)
 	}
 	// else：没打到地面就不改Z（可选：保底用当前Z或场景最低限）
 }
+
 
 #undef LOCTEXT_NAMESPACE

@@ -7,12 +7,13 @@
 #include "../../../../DataTable/CharacterAnimTable.h"
 //#include "CombatInterface/SimpleCombatInterface.h"
 #include "../../../../MMOARPGGameType.h"
+#include "Interface/DamageableInterface.h"
 #include "MMOARPGCharacterBase.generated.h"
 
 class UFlyComponent;
 class UCameraComponent;
 UCLASS()
-class MMOARPG_API AMMOARPGCharacterBase : public ACharacter//,public ISimpleCombatInterface
+class MMOARPG_API AMMOARPGCharacterBase : public ACharacter//, public IDamageableInterface//,public ISimpleCombatInterface
 {
 	GENERATED_BODY()
 
@@ -27,6 +28,9 @@ public:
 
 	virtual void AnimSignal(int32 InSignal);
 	virtual UCameraComponent* GetFollowCamera() const { return NULL; }
+
+	//virtual void OnReceiveDamage(float BaseDamage, EDamageType Type, TSubclassOf<ABaseElement> Element, int CritChance, AActor* Attacker, ABaseSkill* Spell) override;
+
 public:
 	UFUNCTION(BlueprintCallable,BlueprintImplementableEvent, DisplayName = "AnimSignal", Category = "Anim Event")
 	void K2_AnimSignal(int32 InSignal);

@@ -6,11 +6,9 @@
 #include "MMOARPGMacroType.h"
 #include "Channel/SimpleChannel.h"
 #include "UObject/SimpleController.h"
-#include "Protocol/LoginProtocol.h"
 #include "SocketSubsystem.h"
 #include "Kismet/GameplayStatics.h"
 #include "MMOARPG.h"
-#include "Protocol/HallProtocol.h"
 void UMMOARPGNetSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
     Super::Initialize(Collection);
@@ -95,8 +93,8 @@ void UMMOARPGNetSubsystem::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* C
         }
     }
 
-    // 没人注册唯一处理者，则做“仅通知”（UI 可以据此显示小红点/闪光等）
-    //ProtocolReceived.Broadcast(ProtocolNumber);
+	if (auto* MC = ProtoMulticast.Find(ProtocolNumber))
+		MC->Broadcast(ProtocolNumber);
 }
 
 void UMMOARPGNetSubsystem::BeginLink(ENetServerRole InRole)
@@ -147,7 +145,44 @@ bool UMMOARPGNetSubsystem::RegisterUniqueHandler(uint32 Proto, FProtocolHandler 
     return true;
 }
 
+bool UMMOARPGNetSubsystem::RegisterUniqueHandlers(const TArray<uint32>& Protos, const FProtocolHandler& InHandler)
+{
+    if (!InHandler.IsBound())
+        return false;
+
+    bool bAllOK = true;
+
+    for (uint32 Proto : Protos)
+    {
+        if (UniqueHandlers.Contains(Proto))
+        {
+            UE_LOG(LogTemp, Warning, TEXT("RegisterUniqueHandlers: Proto %u already has a handler!"), Proto);
+            bAllOK = false;
+            continue;
+        }
+
+        UniqueHandlers.Add(Proto, InHandler); // 同一个 handler
+    }
+
+    return bAllOK;
+}
+
 bool UMMOARPGNetSubsystem::UnRegisterUniqueHandler(uint32 Proto)
 {
     return UniqueHandlers.Remove(Proto) > 0;
+}
+
+bool UMMOARPGNetSubsystem::UnRegisterUniqueHandlers(const TArray<uint32>& Protos)
+{
+    bool bAnyRemoved = false;
+
+    for (uint32 Proto : Protos)
+    {
+        if (UniqueHandlers.Remove(Proto) > 0)
+        {
+            bAnyRemoved = true;
+        }
+    }
+
+    return bAnyRemoved;
 }

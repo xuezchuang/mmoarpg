@@ -24,6 +24,8 @@ DECLARE_DELEGATE_TwoParams(FProtocolHandler, uint32 /*Proto*/, FSimpleChannel* /
 
 DECLARE_DELEGATE_OneParam(FOnNetLinked, ENetServerRole);
 
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnProtoBroadcast , uint32 /*Proto*/);
+
 UCLASS()
 class MMOARPG_API UMMOARPGNetSubsystem : public UGameInstanceSubsystem
 {
@@ -34,8 +36,46 @@ public:
     virtual void Initialize(FSubsystemCollectionBase& Collection) override;
     virtual void Deinitialize() override;
 
+
 	bool RegisterUniqueHandler(uint32 Proto, FProtocolHandler InHandler);
+	bool RegisterUniqueHandlers(const TArray<uint32>& Protos, const FProtocolHandler& InHandler);
 	bool UnRegisterUniqueHandler(uint32 Proto);
+	bool UnRegisterUniqueHandlers(const TArray<uint32>& Protos);
+	// 单个 Proto：直接传对象+成员函数（内部用 AddUObject）
+	template<class UserClass>
+	FDelegateHandle AddProtoListener(uint32 Proto, UserClass* Obj, void (UserClass::* Func)(uint32))
+	{
+		//FScopeLock _(&CacheCS);
+		return ProtoMulticast.FindOrAdd(Proto).AddUObject(Obj, Func);
+	}
+
+	// 批量 Proto：一个函数监听多个协议；返回一堆句柄，便于解绑
+	template<class UserClass>
+	void AddProtoListenerBatch(const TArray<uint32>& Protos, UserClass* Obj, void (UserClass::* Func)(uint32), TArray<FDelegateHandle>& OutHandles)
+	{
+		OutHandles.Reset();
+		OutHandles.Reserve(Protos.Num());
+		//FScopeLock _(&CacheCS);
+		for (uint32 P : Protos)
+		{
+			OutHandles.Add(ProtoMulticast.FindOrAdd(P).AddUObject(Obj, Func));
+		}
+	}
+
+	// 批量解绑
+	void RemoveProtoListenersBatch(const TArray<uint32>& Protos, const TArray<FDelegateHandle>& Handles)
+	{
+		check(Protos.Num() == Handles.Num());
+		//FScopeLock _(&CacheCS);
+		for (int32 i = 0; i < Protos.Num(); ++i)
+		{
+			if (FOnProtoBroadcast* MC = ProtoMulticast.Find(Protos[i]))
+			{
+				MC->Remove(Handles[i]);
+			}
+		}
+	}
+
 
 	void BeginLink(ENetServerRole InRole);
 
@@ -67,8 +107,9 @@ private:
 
 private:
 
-	TMap<uint32, FProtocolHandler> UniqueHandlers;
+	TMap<uint32, FOnProtoBroadcast> ProtoMulticast;
 
+	TMap<uint32, FProtocolHandler> UniqueHandlers;
 
     // 协议号（示例：玩家HP）
     uint32 Proto_PlayerHP = 0;

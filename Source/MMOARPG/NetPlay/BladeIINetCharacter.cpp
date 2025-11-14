@@ -18,6 +18,7 @@
 #include "MMOARPG.h"
 #include "Kismet/GameplayStatics.h"
 #include "B2NetGameMode.h"
+#include "MMOARPGNetSubsystem.h"
 //////////////////////////////////////////////////////////////////////////
 // ABladeIINetCharacter
 
@@ -35,6 +36,26 @@ void ABladeIINetCharacter::BeginPlay()
 	m_SyncedPos.Y = m_UserData->base.status.pos.y;
 	m_SyncedPos.Z = m_UserData->base.status.pos.z;
 	SetActorLocation(m_SyncedPos);
+
+
+	UGameInstance* GI = GetWorld() ? GetWorld()->GetGameInstance() : nullptr;
+	if (!GI) return;
+
+	if (auto* NetSub = GI->GetSubsystem<UMMOARPGNetSubsystem>())
+	{
+		//NetSub->RegisterUniqueHandlers(
+		//	{
+		//	SP_RoleHP,
+		//	SP_RoleMP,
+		//	SP_RoleState,
+		//	},
+		//	FProtocolHandler::CreateUObject(this, &UUI_HallMain::RecvProtocol)
+		//);
+
+		//NetSub->OnNetLinked.BindUObject(this, &UUI_HallMain::LinkInit);
+
+		//NetSub->BeginLink(ENetServerRole::Gate);
+	}
 }
 
 void ABladeIINetCharacter::SubscribeEvents()
@@ -96,7 +117,21 @@ void ABladeIINetCharacter::Tick(float DeltaTime)
 
 void ABladeIINetCharacter::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 {
+	switch(ProtocolNumber)
+	{
+	case SP_RoleHP:
+	{
+		//struct alignas(1) T_RoleHP
+		//{
+		//	uint32  index;
+		//	int32	value;
+		//};
+		//T_RoleHP RoleHP;
+		//SIMPLE_PROTOCOLS_RECEIVE(SP_RoleHP, RoleHP);
 
+		break;
+	}
+	}
 }
 
 void ABladeIINetCharacter::UpdateSyncedMove()
@@ -179,7 +214,7 @@ void ABladeIINetCharacter::SendSynecdMove(int kind, int state)
 	s_tpos.y = targetpos.Y;
 	s_tpos.z = targetpos.Z;
 
-	SEND_DATA(SP_UpdatePos, tface, tspeed, s_pos, s_tpos);
+	SEND_DATA(SP_SelfMove, tface, tspeed, s_pos, s_tpos);
 	UE_LOG(MMOARPG, Display, TEXT("CurPos:%d-%d-%d"), s_pos.x, s_pos.y,s_pos.z);
 }
 

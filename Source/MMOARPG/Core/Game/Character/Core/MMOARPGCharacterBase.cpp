@@ -72,7 +72,7 @@ void AMMOARPGCharacterBase::SwitchActionStateOnServer_Implementation(ECharacterA
 
 void AMMOARPGCharacterBase::ResetActionState(ECharacterActionState InNewActionState)
 {
-	//¿Í»§¶Ë
+	//å®¢æˆ·ç«¯
 	if (ActionState == InNewActionState)
 	{
 		ActionState = ECharacterActionState::NORMAL_STATE;
@@ -98,6 +98,11 @@ void AMMOARPGCharacterBase::AnimSignal(int32 InSignal)
 {
 	K2_AnimSignal(InSignal);
 }
+
+//void AMMOARPGCharacterBase::OnReceiveDamage(float BaseDamage, EDamageType Type, TSubclassOf<ABaseElement> Element, int CritChance, AActor* Attacker, ABaseSkill* Spell)
+//{
+//	//throw std::logic_error("The method or operation is not implemented.");
+//}
 
 float AMMOARPGCharacterBase::GetSpeed()
 {

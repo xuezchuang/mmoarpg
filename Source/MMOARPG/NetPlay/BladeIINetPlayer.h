@@ -24,6 +24,9 @@ public:
 
 	void UpdateMoveData(const S_MOVE_ROLE* rMove);
 	void UpdateBaseData(const S_ROLE_O_BASE* RoleBase);
+
+
+
 protected:
 	virtual void Tick(float DeltaTime) override;
 

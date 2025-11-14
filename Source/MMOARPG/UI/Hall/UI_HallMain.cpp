@@ -91,11 +91,16 @@ void UUI_HallMain::NativeConstruct()
 	{
 		if (auto* NetSub = GI->GetSubsystem<UMMOARPGNetSubsystem>())
 		{
-			NetSub->RegisterUniqueHandler(SP_CharacterLogin, FProtocolHandler::CreateUObject(this, &UUI_HallMain::RecvProtocol));
-			NetSub->RegisterUniqueHandler(SP_CharacterSelect, FProtocolHandler::CreateUObject(this, &UUI_HallMain::RecvProtocol));
-			NetSub->RegisterUniqueHandler(SP_CreateCharacter, FProtocolHandler::CreateUObject(this, &UUI_HallMain::RecvProtocol));
-			NetSub->RegisterUniqueHandler(SP_DeleteCharacter, FProtocolHandler::CreateUObject(this, &UUI_HallMain::RecvProtocol));
-			NetSub->RegisterUniqueHandler(SP_CharacterResponse, FProtocolHandler::CreateUObject(this, &UUI_HallMain::RecvProtocol));
+			NetSub->RegisterUniqueHandlers(
+				{
+				SP_CharacterLogin,
+				SP_CharacterSelect,
+				SP_CreateCharacter,
+				SP_DeleteCharacter,
+				SP_CharacterResponse
+				},
+				FProtocolHandler::CreateUObject(this, &UUI_HallMain::RecvProtocol)
+			);
 
 			NetSub->OnNetLinked.BindUObject(this, &UUI_HallMain::LinkInit);
 
@@ -113,11 +118,15 @@ void UUI_HallMain::NativeDestruct()
 	{
 		if (auto* NetSub = GI->GetSubsystem<UMMOARPGNetSubsystem>())
 		{
-			NetSub->UnRegisterUniqueHandler(SP_CharacterLogin);
-			NetSub->UnRegisterUniqueHandler(SP_CharacterSelect);
-			NetSub->UnRegisterUniqueHandler(SP_CreateCharacter);
-			NetSub->UnRegisterUniqueHandler(SP_DeleteCharacter);
-			NetSub->UnRegisterUniqueHandler(SP_CharacterResponse);
+			NetSub->UnRegisterUniqueHandlers(
+				{
+					SP_CharacterLogin,
+					SP_CharacterSelect,
+					SP_CreateCharacter,
+					SP_DeleteCharacter,
+					SP_CharacterResponse
+				}
+			);
 
 			NetSub->OnNetLinked.Unbind();
 		}

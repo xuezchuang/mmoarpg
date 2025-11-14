@@ -28,7 +28,7 @@ protected:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	virtual void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
+	void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
 
 	void UpdateSyncedMove();
 	void SendSynecdMove(int kind,int state);
