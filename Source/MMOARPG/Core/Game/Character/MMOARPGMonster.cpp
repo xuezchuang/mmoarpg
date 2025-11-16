@@ -21,11 +21,14 @@
 
 void AMMOARPGMonster::UpdateHealthBar()
 {
-	EnemyInfoWidget->HealthBar->SetPercent(Info.CurrentHealth / Info.TotalHealth);
-	//if (bSelected)
+	if (EnemyInfoWidget)
 	{
-		//SelectingCharacter->MainUserWidget->EnemyHpBar->SetPercent(CurrentHealth / TotalHealth);
-		//SelectingCharacter->MainUserWidget->EnemyHpText->SetText(FText::Format(LOCTEXT("EnemyNameSpace", "{0}/{1}"), FText::AsNumber(FMath::RoundHalfToZero(CurrentHealth)), FText::AsNumber(TotalHealth)));
+		EnemyInfoWidget->HealthBar->SetPercent(Info.CurrentHealth / Info.TotalHealth);
+		//if (bSelected)
+		{
+			//SelectingCharacter->MainUserWidget->EnemyHpBar->SetPercent(CurrentHealth / TotalHealth);
+			//SelectingCharacter->MainUserWidget->EnemyHpText->SetText(FText::Format(LOCTEXT("EnemyNameSpace", "{0}/{1}"), FText::AsNumber(FMath::RoundHalfToZero(CurrentHealth)), FText::AsNumber(TotalHealth)));
+		}
 	}
 }
 
@@ -52,20 +55,29 @@ AMMOARPGMonster::AMMOARPGMonster()
 	AIPerceptionComp->SetDominantSense(UAISense_Sight::StaticClass());
 
 	EnemyWidgetComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("EnemyWidgetComp"));
-
-	static ConstructorHelpers::FClassFinder<UEnemyInfoWidget> EIW(TEXT("WidgetBlueprint'/Game/UI/Game/WBP_EnemyInfo.WBP_EnemyInfo_C'"));
-	if (EIW.Succeeded())
-	{
-		EnemyWidgetComp->SetWidgetClass(EIW.Class);
-	}
-	EnemyWidgetComp->SetDrawSize(FVector2D(200.0f, 60.0f));
+	EnemyWidgetComp->SetupAttachment(RootComponent);
+	EnemyWidgetComp->SetWidgetSpace(EWidgetSpace::World);     // 血条一般用 World 空间
+	EnemyWidgetComp->SetDrawAtDesiredSize(true);              // 让 UMG 自己决定大小
 	EnemyWidgetComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	EnemyWidgetComp->SetTwoSided(true);
 	EnemyWidgetComp->SetVisibility(false);
+	EnemyWidgetComp->SetDrawSize(FVector2D(200.0f, 60.0f));
 
-	EnemyWidgetComp->SetupAttachment(RootComponent);
+	//EnemyWidgetComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("EnemyWidgetComp"));
+
+	//static ConstructorHelpers::FClassFinder<UEnemyInfoWidget> EIW(TEXT("WidgetBlueprint'/Game/UI/Game/WBP_EnemyInfo.WBP_EnemyInfo_C'"));
+	//if (EIW.Succeeded())
+	//{
+	//	EnemyWidgetComp->SetWidgetClass(EIW.Class);
+	//}
+	//EnemyWidgetComp->SetDrawSize(FVector2D(200.0f, 60.0f));
+	//EnemyWidgetComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	//EnemyWidgetComp->SetTwoSided(true);
+	//EnemyWidgetComp->SetVisibility(false);
+
+	//EnemyWidgetComp->SetupAttachment(RootComponent);
 	//EnemyWidgetComp->SetRelativeLocation(FVector(0, 0, 100));
-	EnemyWidgetComp->SetWidgetSpace(EWidgetSpace::Screen);
+	//EnemyWidgetComp->SetWidgetSpace(EWidgetSpace::Screen);
 
 	ShowUICollision = CreateDefaultSubobject<USphereComponent>(TEXT("ShowUICollison"));
 	ShowUICollision->SetupAttachment(RootComponent);
@@ -89,6 +101,11 @@ void AMMOARPGMonster::BeginPlay()
 		return;
 	}
 
+	if (EnemyWidgetClass)
+	{
+		EnemyWidgetComp->SetWidgetClass(EnemyWidgetClass);
+	}
+
 	// 获取当前 GameMode（只在服务器有效）
 	AGameModeBase* GameMode = World->GetAuthGameMode();
 	if (!GameMode)
@@ -97,16 +114,16 @@ void AMMOARPGMonster::BeginPlay()
 		Destroy();
 		return;
 	}
-	 if(!GameMode->IsA(ABladeIINetGameMode::StaticClass()))
-	 {
-		 AIPerceptionComp->OnPerceptionUpdated.AddDynamic(this, &AMMOARPGMonster::OnSightPerceptionUpdate);
-	 }
+	if (!GameMode->IsA(ABladeIINetGameMode::StaticClass()))
+	{
+		AIPerceptionComp->OnPerceptionUpdated.AddDynamic(this, &AMMOARPGMonster::OnSightPerceptionUpdate);
+	}
 
-	 if (SelectableComp)
-	 {
-		 SelectableComp->OnSelectedEvent.AddDynamic(this, &AMMOARPGMonster::HandleSelected);
-		 SelectableComp->OnSelectionEndEvent.AddDynamic(this, &AMMOARPGMonster::HandleSelectionEnd);
-	 }
+	if (SelectableComp)
+	{
+		SelectableComp->OnSelectedEvent.AddDynamic(this, &AMMOARPGMonster::HandleSelected);
+		SelectableComp->OnSelectionEndEvent.AddDynamic(this, &AMMOARPGMonster::HandleSelectionEnd);
+	}
 
 	EnemyInfoWidget = Cast<UEnemyInfoWidget>(EnemyWidgetComp->GetUserWidgetObject());
 	MyController = Cast<AMMOARPGEnemyController>(GetController());
@@ -114,10 +131,10 @@ void AMMOARPGMonster::BeginPlay()
 		MyController->Patrol();
 	StartLocation = GetActorLocation();
 	AdjustZToGround(StartLocation);
-	SetActorLocation(StartLocation,true);
+	SetActorLocation(StartLocation, true);
 
 	EnemyWidgetComp->SetVisibility(bInShowRange);
-	if(EnemyInfoWidget)
+	if (EnemyInfoWidget)
 	{
 		InitWidgetText();
 	}

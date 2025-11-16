@@ -19,12 +19,6 @@ class MMOARPG_API UUI_InGame : public UUI_MainBase
 	GENERATED_BODY()
 
 	UPROPERTY(meta = (BindWidget))
-	UTextBlock* CharacterLevel;
-
-	UPROPERTY(meta = (BindWidget))
-	UTextBlock* CharacterHP;
-
-	UPROPERTY(meta = (BindWidget))
 	UUI_ActiveWP* PlayerProfile;
 
 public:
@@ -46,24 +40,9 @@ protected:
 
 protected:
 	
-	UPROPERTY(BlueprintReadOnly, Category = "Status")
-	double m_dCurHP;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Status")
-	double m_dTolHP;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Status")
-	double m_dCurMP;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Status")
-	double m_dTolMP;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Status")
 	void UpdateState();
 
-	FMMOARPGUserData* m_UserData = NULL;
-
-
-	
 
 };

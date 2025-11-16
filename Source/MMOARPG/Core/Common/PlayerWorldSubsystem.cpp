@@ -198,7 +198,7 @@ void UPlayerWorldSubsystem::GetAllOtherPlayers(TArray<ABladeIINetPlayer*>& OutPl
     {
         if (ABladeIINetPlayer* P = Pair.Value.Get())
         {
-            if (!P->IsPendingKill() && P->IsActorInitialized() && P->IsActorTickEnabled())
+			if (IsValid(P) && P->IsActorInitialized() && P->IsActorTickEnabled())
             {
                 // 同样可以加 IsDead / IsOnline 等逻辑
                 OutPlayers.Add(P);

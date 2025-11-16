@@ -227,11 +227,10 @@ void UMonsterWorldSubsystem::GetAllAliveMonsters(TArray<AMMOARPGMonster*>& OutMo
     {
         if (AMMOARPGMonster* M = Pair.Value.Get())
         {
-            if (!M->IsPendingKill() && M->IsActorInitialized() && M->IsActorTickEnabled())
-            {
-                // 这里你也可以加怪物是否死亡的判断，比如 M->IsDead()
-                OutMonsters.Add(M);
-            }
+			if (IsValid(M) && M->IsActorInitialized() && M->IsActorTickEnabled())
+			{
+				OutMonsters.Add(M);
+			}
         }
     }
 }

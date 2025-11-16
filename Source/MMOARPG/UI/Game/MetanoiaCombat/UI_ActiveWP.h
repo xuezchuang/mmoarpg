@@ -23,6 +23,22 @@ public:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	UTextBlock* MountPower;
 
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	UTextBlock* CharacterName;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	UTextBlock* CharacterLevel;
+
+	UPROPERTY(BlueprintReadOnly,Category="UI")
+	FRoleBasicView RoleInfo;
+
+protected:
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Config")
+	bool IsSelf;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Status")
+	void UpdateState();
+
 public:
 	virtual void NativeConstruct();
 
@@ -33,7 +49,10 @@ public:
 	void UpdateMountUIText(const FText& InMountNameText = FText::GetEmpty(), const FText& InMountPowerText = FText::GetEmpty());
 protected:
 
-	virtual void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
+	TArray<uint32> InterestingProtos;
+	TArray<FDelegateHandle> InterestingHandles;
+
+	void RecvProtocol(uint32 ProtocolNumber);
 
 	//virtual void LinkServerInfo(ESimpleNetErrorType InType, const FString& InMsg);
 

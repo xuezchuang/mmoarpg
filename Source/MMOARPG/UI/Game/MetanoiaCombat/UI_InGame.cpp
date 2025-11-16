@@ -19,17 +19,17 @@ void UUI_InGame::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>();
-	if (GI)
-	{
-		m_UserData = &GI->GetUserData();
-	}
+	//UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>();
+	//if (GI)
+	//{
+	//	m_UserData = &GI->GetUserData();
+	//}
 
-	if (auto* Net = GI->GetSubsystem<UMMOARPGNetSubsystem>())
-	{
-		InterestingProtos = { SP_CharacterResponse,SP_RoleHP, SP_RoleMP };
-        Net->AddProtoListenerBatch(InterestingProtos, this, &UUI_InGame::RecvProtocol, InterestingHandles);
-	}
+	//if (auto* Net = GI->GetSubsystem<UMMOARPGNetSubsystem>())
+	//{
+	//	//InterestingProtos = { SP_CharacterResponse,SP_RoleHP, SP_RoleMP };
+ //       //Net->AddProtoListenerBatch(InterestingProtos, this, &UUI_InGame::RecvProtocol, InterestingHandles);
+	//}
 }
 
 void UUI_InGame::NativeDestruct()
@@ -57,17 +57,17 @@ void UUI_InGame::InitHotkeys(const TMap<FKey, int32>& Hotkeys, const TArray<int3
 
 void UUI_InGame::RecvProtocol(uint32 ProtocolNumber)
 {
-	switch (ProtocolNumber)
-	{
-	case SP_CharacterResponse:
-	{
-		m_dTolHP = m_UserData->base.life.hp;
-		m_dTolMP = m_UserData->base.life.mp;
-		m_dCurHP = m_UserData->base.life.hp;
-		m_dCurMP = m_UserData->base.life.mp;
-		UpdateState();
-		break;
-	}
-	}
+	//switch (ProtocolNumber)
+	//{
+	////case SP_CharacterResponse:
+	////{
+	////	m_dTolHP = m_UserData->base.life.hp;
+	////	m_dTolMP = m_UserData->base.life.mp;
+	////	m_dCurHP = m_UserData->base.life.hp;
+	////	m_dCurMP = m_UserData->base.life.mp;
+	////	UpdateState();
+	////	break;
+	////}
+	//}
 }
 #undef LOCTEXT_NAMESPACE

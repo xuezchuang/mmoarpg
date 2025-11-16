@@ -820,6 +820,32 @@ struct MMOARPGCOMMON_API FMMOARPGPlayerRegistInfo
 	bool IsValid();
 };
 
+// MMOARPGType.h 之类公共头文件中
+USTRUCT(BlueprintType)
+struct FRoleBasicView
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadOnly, Category = "Role")
+	FString Name;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Role")
+	int32 Level = 1;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Role")
+	int32 HP = 0;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Role")
+	int32 MaxHP = 0;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Role")
+	int32 MP = 0;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Role")
+	int32 MaxMP = 0;
+};
+
+
 namespace NetDataAnalysis
 {
 	void MMOARPGCOMMON_API AnalysisToArrayName(const FString &InRowString, TArray<FName> &OutInfo);

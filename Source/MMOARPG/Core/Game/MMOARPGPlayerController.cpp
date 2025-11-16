@@ -9,6 +9,10 @@
 #include "../../MMOARPGBPLibrary.h"
 #include "MetanoiaCombat/UI_InGame.h"
 #include "Component/SelectableComponent.h"
+#include "MonsterWorldSubsystem.h"
+#include "Character/MMOARPGMonster.h"
+#include "NetPlay/BladeIINetPlayer.h"
+#include "PlayerWorldSubsystem.h"
 
 
 AMMOARPGPlayerController::AMMOARPGPlayerController()
@@ -150,8 +154,8 @@ void AMMOARPGPlayerController::InitHotkeys()
     HotkeyToSlot.Add(EKeys::Nine, 8);
 
     // 槽 9～29 默认空，不加映射
-	HotkeyMap[ESystemHotkey::SelectTarget] = EKeys::Tab;
-	HotkeyMap[ESystemHotkey::DeselectAll] = EKeys::Escape;
+	HotkeyMap.Add(ESystemHotkey::SelectTarget, EKeys::Tab);
+	HotkeyMap.Add(ESystemHotkey::DeselectAll, EKeys::Escape);
 	//HotkeyMap[ESystemHotkey::SelectSelf] = EKeys::Tab;
 	
 	
@@ -226,7 +230,7 @@ void AMMOARPGPlayerController::SetCurrentTarget(AActor* NewTarget)
         if (USelectableComponent* OldSelectable =
             CurrentSelectedTarget->FindComponentByClass<USelectableComponent>())
         {
-            OldSelectable->OnSelectionEnd(this);   // 这里用你自己的函数名
+            OldSelectable->OnSelectionEnd();   // 这里用你自己的函数名
         }
     }
 
@@ -238,7 +242,7 @@ void AMMOARPGPlayerController::SetCurrentTarget(AActor* NewTarget)
         if (USelectableComponent* NewSelectable =
             CurrentSelectedTarget->FindComponentByClass<USelectableComponent>())
         {
-            NewSelectable->OnSelected(this);       // 这里用你自己的函数名
+            NewSelectable->OnSelected();       // 这里用你自己的函数名
         }
     }
 
@@ -247,7 +251,7 @@ void AMMOARPGPlayerController::SetCurrentTarget(AActor* NewTarget)
 
 bool AMMOARPGPlayerController::IsActorSelectable(AActor* Candidate, float MaxDistance, float MaxHalfAngleDeg) const
 {
-    if (!Candidate || Candidate->IsPendingKill())
+	if (!IsValid(Candidate))
     {
         return false;
     }
@@ -394,7 +398,7 @@ AActor* AMMOARPGPlayerController::FindBestFriendlyTarget()
     }
 
     TArray<ABladeIINetPlayer*> Players;
-    PlayerSub->GetAllOtherPlayers(Players, LocalPlayer);
+    PlayerSub->GetAllOtherPlayers(Players);
 
     if (Players.Num() == 0)
     {

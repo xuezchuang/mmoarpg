@@ -73,6 +73,10 @@ public:
 
 protected:
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = UI)
+	TSubclassOf<UUserWidget> EnemyWidgetClass;
+
+
 	//float BaseDamage = 25.0f;
 	//EDamageType DamageType = EDamageType::Physical;
 	//UPROPERTY(EditAnywhere, Category = Info)
