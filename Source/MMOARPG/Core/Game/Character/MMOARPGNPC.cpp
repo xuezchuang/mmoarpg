@@ -3,14 +3,23 @@
 
 #include "MMOARPGNPC.h"
 #include "Component/SelectableComponent.h"
+#include "Component/InteractionComponent.h"
 
-AMMOARPGNPC::AMMOARPGNPC()
+AMMOARPGNPC::AMMOARPGNPC(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	SelectableComp = CreateDefaultSubobject<USelectableComponent>(TEXT("SelectableComp"));
+
+	InteractionComp = CreateDefaultSubobject<UInteractionComponent>(TEXT("InteractionComponent"));
 }
 
 void AMMOARPGNPC::BeginPlay()
 {
+	//if (InteractionComponentClass)
+	//{
+	//	InteractionComponent = NewObject<UInteractionComponent>(this, InteractionComponentClass);
+	//	InteractionComponent->RegisterComponent();
+	//}
+
 	Super::BeginPlay();
 
 	if (SelectableComp)
@@ -18,6 +27,8 @@ void AMMOARPGNPC::BeginPlay()
 		SelectableComp->OnSelectedEvent.AddDynamic(this, &AMMOARPGNPC::HandleSelected);
 		SelectableComp->OnSelectionEndEvent.AddDynamic(this, &AMMOARPGNPC::HandleSelectionEnd);
 	}
+
+
 }
 
 void AMMOARPGNPC::HandleSelected_Implementation()

@@ -12,6 +12,8 @@
 
 class UFlyComponent;
 class UCameraComponent;
+class UInteractionComponent;
+
 UCLASS()
 class MMOARPG_API AMMOARPGCharacterBase : public ACharacter//, public IDamageableInterface//,public ISimpleCombatInterface
 {
@@ -22,9 +24,18 @@ class MMOARPG_API AMMOARPGCharacterBase : public ACharacter//, public IDamageabl
 	UPROPERTY()
 	TObjectPtr<UFlyComponent> FlyComponent;
 
+	int a = 3;
 public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	UInteractionComponent* InteractionComp;
+
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
+	void SetInteractionComponent(UInteractionComponent* NewComponent);
+
+	void Interaction();
+	void StopInteractionHold();
 	// Sets default values for this character's properties
-	AMMOARPGCharacterBase();
+	AMMOARPGCharacterBase(const FObjectInitializer& ObjectInitializer);
 
 	virtual void AnimSignal(int32 InSignal);
 	virtual UCameraComponent* GetFollowCamera() const { return NULL; }

@@ -540,6 +540,7 @@ struct FMonsterDataPacket
 	uint8	Dir;
 	int32	Hp;
 	int32	TolHp;
+	uint32	level;
 
 	int32 GridX;
 	int32 GridY;

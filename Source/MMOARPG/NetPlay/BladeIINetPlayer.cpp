@@ -21,7 +21,7 @@
 //////////////////////////////////////////////////////////////////////////
 // ABladeIINetPlayer
 
-ABladeIINetPlayer::ABladeIINetPlayer()
+ABladeIINetPlayer::ABladeIINetPlayer(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	
 }

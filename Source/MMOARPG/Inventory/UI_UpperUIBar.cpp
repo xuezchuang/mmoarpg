@@ -7,11 +7,12 @@
 //#include "Stream/SimpleIOStream.h"
 #include "GameFramework/PlayerController.h"
 #include "UI_CraftingWindow.h"
-#include "UI_WindowSwitcher.h"
+
 
 void UUI_UpperUIBar::NativeConstruct()
 {
 	Super::NativeConstruct(); 
+	WB_WindowSwitcher->InitOutIcon(IconTexture,ActiveTextTab,ActiveType);
 	//WB_WindowSwitcher->WindowSwitchDelegate.BindUObject(this, &UUI_UpperUIBar::ShowWidget);
 	Button_Close->OnClicked.AddDynamic(this, &UUI_UpperUIBar::OnClosed);
 	
@@ -108,5 +109,11 @@ void UUI_UpperUIBar::OnClosed()
 	}
 	SetVisibility(ESlateVisibility::Hidden);
 	m_bVisibility = false;
+}
+
+void UUI_UpperUIBar::NativePreConstruct()
+{
+	Super::NativePreConstruct(); 
+	WB_WindowSwitcher->InitOutIcon(IconTexture,ActiveTextTab,ActiveType);
 }
 

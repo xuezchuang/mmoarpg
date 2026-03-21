@@ -69,7 +69,7 @@ class MMOARPG_API AMMOARPGMonster : public AMMOARPGCharacterBase//, public ISele
 	GENERATED_BODY()
 	
 public:
-	AMMOARPGMonster();
+	AMMOARPGMonster(const FObjectInitializer& ObjectInitializer);
 
 protected:
 

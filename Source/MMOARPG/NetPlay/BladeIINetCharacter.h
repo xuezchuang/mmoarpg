@@ -15,7 +15,7 @@ class ABladeIINetCharacter : public ABladeIICharacter
 	GENERATED_BODY()
 
 public:
-	ABladeIINetCharacter();
+	ABladeIINetCharacter(const FObjectInitializer& ObjectInitializer);
 
 	virtual void BeginPlay()	override;
 

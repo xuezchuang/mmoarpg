@@ -28,11 +28,14 @@ public:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	UUI_VendorStorageInventory* WB_VendorStorageInventory;
 
-	//UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	//UUI_UpperUIBar* WB_UpperUIBar;
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	UUI_InventoryBase* WB_InventoryBase;
 
-	//UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	//UWidgetSwitcher* WidgetSwitcher;
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	UUI_UpperUIBar* WB_UpperUIBar;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	UWidgetSwitcher* WidgetSwitcher;
 
 	//UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	//void ShowVendor();
@@ -54,9 +57,10 @@ protected:
 
 	void RecvProtocol(uint32 ProtocolNumber);
 	
+
+	virtual FReply NativeOnKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent) override;
+
 private:
-	//UFUNCTION()
-	//void SetNativeUIType(E_UIType eType);
-
-
+	UFUNCTION()
+	void SetNativeUIType(E_UIType eType);
 };

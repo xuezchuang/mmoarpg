@@ -16,7 +16,7 @@ class ABladeIIPlayer : public AMMOARPGCharacterBase//,public ISelectableInterfac
 	GENERATED_BODY()
 
 public:
-	ABladeIIPlayer();
+	ABladeIIPlayer(const FObjectInitializer& ObjectInitializer);
 
 	virtual void BeginPlay()	override;
 
@@ -24,7 +24,6 @@ protected:
  
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Selectable")
     USelectableComponent* SelectableComp;
-
 
 	UFUNCTION(BlueprintNativeEvent, Category="Selectable")
 	void HandleSelected();

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "MMOARPGCharacter.h"
+#include "BladeIICharacter.h"
 #include "MMOARPGMapCharacter.generated.h"
 
 class UUI_EditMap;
@@ -12,7 +12,7 @@ class UUI_EditMap;
  * 
  */
 UCLASS()
-class MMOARPG_API AMMOARPGMapCharacter : public AMMOARPGCharacter
+class MMOARPG_API AMMOARPGMapCharacter : public ABladeIICharacter
 {
 	GENERATED_BODY()
 

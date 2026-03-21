@@ -129,30 +129,32 @@ void UMonsterWorldSubsystem::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel*
 		const FVector WorldPos(P.GridX, P.GridY, 0.0);
 		FTransform T = FTransform(FRotator::ZeroRotator, WorldPos);
 		
-		if (AMMOARPGMonster* M = FindMonsterById(P.Id))
+		if (AMMOARPGMonster* M = FindMonsterById(P.robotindex))
 		{
 			UE_LOG(MMOARPG, Error, TEXT("recv SP_MonsterData"));
 		}
 		else
 		{
-			AMMOARPGMonster* NewMonster = SpawnAndSyncMonster(P.Id, T, ServerTimes);
+			AMMOARPGMonster* NewMonster = SpawnAndSyncMonster(P.robotindex, P.Id, T, ServerTimes);
 			if (NewMonster)
 			{
 				NewMonster->Info.CurrentHealth = P.Hp;
 				NewMonster->Info.TotalHealth = P.TolHp;
+				NewMonster->Info.Level = P.level;
 				NewMonster->UpdateHealthBar();
+				UE_LOG(MMOARPG, Display, TEXT("recv SP_MonsterData %d,%d"), P.Hp, P.TolHp);
 			}
 		}
 		break;
 	}
 	case SP_MonsterState:
 	{
-		int32 MonsterId = 0; uint8 NewState = 0;
-		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterState, MonsterId, NewState);
+		uint32 robotindex = 0; uint8 NewState = 0;
+		SIMPLE_PROTOCOLS_RECEIVE(SP_MonsterState, robotindex, NewState);
 
 		const double ServerTimes = FPlatformTime::Seconds();
 
-		if (AMMOARPGMonster* M = FindMonsterById(MonsterId))
+		if (AMMOARPGMonster* M = FindMonsterById(robotindex))
 		{
 			FQueuedMonsterMsg Msg; Msg.ServerTimes = ServerTimes;
 			// Msg.填状态
@@ -162,7 +164,7 @@ void UMonsterWorldSubsystem::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel*
 		{
 			FQueuedMonsterMsg Msg; Msg.ServerTimes = ServerTimes;
 			// Msg.填状态
-			EnqueuePending(MonsterId, Msg);
+			EnqueuePending(robotindex, Msg);
 		}
 		break;
 	}
@@ -207,15 +209,15 @@ void UMonsterWorldSubsystem::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel*
 }
 
 
-AMMOARPGMonster* UMonsterWorldSubsystem::FindMonsterById(int32 MonsterId) const
+AMMOARPGMonster* UMonsterWorldSubsystem::FindMonsterById(uint32 robotindex) const
 {
-    if (const TWeakObjectPtr<AMMOARPGMonster>* P = IdToMonster.Find(MonsterId)) return P->Get();
+    if (const TWeakObjectPtr<AMMOARPGMonster>* P = IdToMonster.Find(robotindex)) return P->Get();
     return nullptr;
 }
 
-AMMOARPGNetEnemyController* UMonsterWorldSubsystem::FindMonsterCtlr(int32 MonsterId) const
+AMMOARPGNetEnemyController* UMonsterWorldSubsystem::FindMonsterCtlr(uint32 robotindex) const
 {
-    if (const TWeakObjectPtr<AMMOARPGNetEnemyController>* P = IdToCtrl.Find(MonsterId)) return P->Get();
+    if (const TWeakObjectPtr<AMMOARPGNetEnemyController>* P = IdToCtrl.Find(robotindex)) return P->Get();
     return nullptr;
 }
 
@@ -236,16 +238,16 @@ void UMonsterWorldSubsystem::GetAllAliveMonsters(TArray<AMMOARPGMonster*>& OutMo
 }
 
 
-void UMonsterWorldSubsystem::EnqueuePending(int32 MonsterId, const FQueuedMonsterMsg& Msg)
+void UMonsterWorldSubsystem::EnqueuePending(uint32 robotindex, const FQueuedMonsterMsg& Msg)
 {
-    PendingMsgs.FindOrAdd(MonsterId).Add(Msg);
-    PendingFirstSeenSec.FindOrAdd(MonsterId) = FPlatformTime::Seconds();
+    PendingMsgs.FindOrAdd(robotindex).Add(Msg);
+    PendingFirstSeenSec.FindOrAdd(robotindex) = FPlatformTime::Seconds();
 }
 
-void UMonsterWorldSubsystem::FlushPendingTo(AMMOARPGMonster* M, int32 MonsterId)
+void UMonsterWorldSubsystem::FlushPendingTo(AMMOARPGMonster* M, uint32 robotindex)
 {
     if (!M) return;
-    TArray<FQueuedMonsterMsg>* Arr = PendingMsgs.Find(MonsterId);
+    TArray<FQueuedMonsterMsg>* Arr = PendingMsgs.Find(robotindex);
     if (!Arr || Arr->Num() == 0) return;
 
     Arr->StableSort([](const FQueuedMonsterMsg& A, const FQueuedMonsterMsg& B)
@@ -257,8 +259,8 @@ void UMonsterWorldSubsystem::FlushPendingTo(AMMOARPGMonster* M, int32 MonsterId)
     {
         ApplyQueued(M, Msg, /*bAuthoritative*/false);
     }
-    PendingMsgs.Remove(MonsterId);
-    PendingFirstSeenSec.Remove(MonsterId);
+    PendingMsgs.Remove(robotindex);
+    PendingFirstSeenSec.Remove(robotindex);
 }
 
 void UMonsterWorldSubsystem::ApplyQueued(AMMOARPGMonster* M, const FQueuedMonsterMsg& Msg, bool bAuthoritative)
@@ -279,7 +281,7 @@ void UMonsterWorldSubsystem::ApplyQueued(AMMOARPGMonster* M, const FQueuedMonste
     }
 }
 
-AMMOARPGMonster* UMonsterWorldSubsystem::SpawnAndSyncMonster(int32 MonsterId, const FTransform& T, double ServerTimes)
+AMMOARPGMonster* UMonsterWorldSubsystem::SpawnAndSyncMonster(uint32 robotindex, int32 MonsterId, const FTransform& T, double ServerTimes)
 {
     AMMOARPGMonster* NewM = SpawnMonsterByIdSync(MonsterId, T.GetLocation(), T.Rotator());
     if (!NewM) 
@@ -288,14 +290,14 @@ AMMOARPGMonster* UMonsterWorldSubsystem::SpawnAndSyncMonster(int32 MonsterId, co
 	}
 
     // 记录
-    IdToMonster.FindOrAdd(MonsterId) = NewM;
+    IdToMonster.FindOrAdd(robotindex) = NewM;
     if (AMMOARPGNetEnemyController* Ctl = Cast<AMMOARPGNetEnemyController>(NewM->GetController()))
     {
-        IdToCtrl.FindOrAdd(MonsterId) = Ctl;
+        IdToCtrl.FindOrAdd(robotindex) = Ctl;
     }
 
     // 先回放排队
-    FlushPendingTo(NewM, MonsterId);
+    FlushPendingTo(NewM, robotindex);
 
     // 再应用权威
     FQueuedMonsterMsg Cur; Cur.ServerTimes = ServerTimes; Cur.bHasTransform = true; Cur.Transform = T;
@@ -329,7 +331,7 @@ AMMOARPGMonster* UMonsterWorldSubsystem::SpawnMonsterByIdSync(int32 MonsterId, c
         Monster->AutoPossessAI   = EAutoPossessAI::PlacedInWorldOrSpawned;
         Monster->AIControllerClass = AMMOARPGNetEnemyController::StaticClass();
         Monster->MonsterID = MonsterId;
-
+		Monster->Info.Name = FText::FromName(Row->Name);
         if (USkeletalMeshComponent* Skel = Monster->GetMesh())
         {
             if (USkeletalMesh* Mesh = Row->Mesh.Get()) Skel->SetSkeletalMesh(Mesh);

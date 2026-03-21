@@ -12,6 +12,8 @@ class UButton;
 class UUI_CategoryTabButton;
 class UWidgetSwitcher;
 class UCanvasPanel;
+class UImage;
+class UTextBlock;
 
 UENUM(BlueprintType)
 enum class E_UpSwitchType : uint8
@@ -48,10 +50,11 @@ public:
 
 #pragma region Storage
 
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	UUI_CategoryTabButton* WB_Category_Storage;
+
 #pragma endregion
 
-	UPROPERTY(BlueprintReadOnly,meta = (BindWidget))
-	UUI_CategoryTabButton* WB_Category_Storage;
 
 #pragma region MainTable
 public:
@@ -94,10 +97,9 @@ public:
 
 #pragma endregion
 public:
-	//UPROPERTY(EditInstanceOnly, Category = "AASet")
-	//E_UpSwitchType ActiveTabType;
-
-
+	E_UpSwitchType ActiveTabType;
+	UImage* IconTexture;
+	UTextBlock* ActiveTextTab;
 public:
 	virtual void NativeConstruct();
 
@@ -105,7 +107,8 @@ public:
 
 	virtual void NativePreConstruct()override;
 
-	
+	void InitOutIcon(UImage* InIconTexture,UTextBlock* InActiveTextTab,E_UpSwitchType InActiveTabType);
+
 	//void SetCallBackShowWidget(FWindowSwitch callback);
 	//void SetCallBackShowWidget(FWindowSwitch&& callback);
 

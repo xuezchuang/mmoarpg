@@ -8,7 +8,7 @@
 #include "Blueprint/UserWidget.h"
 #include "UI_EditMap.h"
 
-AMMOARPGInventoryCharacter::AMMOARPGInventoryCharacter()
+AMMOARPGInventoryCharacter::AMMOARPGInventoryCharacter(const FObjectInitializer& ObjectInitializer): Super(ObjectInitializer)
 {
 	m_UpperUI = NULL;
 }

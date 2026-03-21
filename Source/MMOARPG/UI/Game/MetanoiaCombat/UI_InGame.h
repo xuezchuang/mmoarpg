@@ -10,10 +10,11 @@
 class UTextBlock;
 class UUI_ActiveWP;
 struct FMMOARPGUserData;
+class AMMOARPGMonster;
 /**
  * 
  */
-UCLASS()
+UCLASS(Abstract)
 class MMOARPG_API UUI_InGame : public UUI_MainBase
 {
 	GENERATED_BODY()
@@ -38,11 +39,12 @@ protected:
 
 	//virtual void LinkServerInfo(ESimpleNetErrorType InType, const FString& InMsg);
 
-protected:
+public:
 	
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Status")
 	void UpdateState();
 
-
+	UPROPERTY(BlueprintReadOnly, Category = "Status")
+	AMMOARPGMonster* TargetMonster = nullptr;
 };

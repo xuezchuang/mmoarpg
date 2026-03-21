@@ -5,11 +5,32 @@
 #include "../../Animation/Instance/Core/MMOARPGAnimInstanceBase.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "../../../Component/FlyComponent.h"
+#include "Component/FlyComponent.h"
+#include "Component/InteractionComponent.h"
+
+void AMMOARPGCharacterBase::SetInteractionComponent(UInteractionComponent* NewComponent)
+{
+	InteractionComp = NewComponent;
+}
+
+void AMMOARPGCharacterBase::Interaction()
+{
+	if (InteractionComp == NULL)
+		return;
+	InteractionComp->StartHold();
+}
+
+void AMMOARPGCharacterBase::StopInteractionHold()
+{
+	if (InteractionComp)
+	{
+		InteractionComp->StopHold();
+	}
+}
 
 // Sets default values
-AMMOARPGCharacterBase::AMMOARPGCharacterBase()
-	:ActionState(ECharacterActionState::NORMAL_STATE)
+AMMOARPGCharacterBase::AMMOARPGCharacterBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+	,ActionState(ECharacterActionState::NORMAL_STATE)
 	,LastActionState(ECharacterActionState::NORMAL_STATE)
 	,ID(INDEX_NONE)
 	,UserID(INDEX_NONE)
@@ -19,6 +40,9 @@ AMMOARPGCharacterBase::AMMOARPGCharacterBase()
 	
 	FlyComponent = CreateDefaultSubobject<UFlyComponent>(TEXT("FlightComponent"));
 //	FlyComponent->SetupAttachment(RootComponent);
+
+	
+	
 }
 
 // Called when the game starts or when spawned

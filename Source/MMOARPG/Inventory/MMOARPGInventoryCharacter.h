@@ -19,7 +19,7 @@ class AMMOARPGInventoryCharacter : public ABladeIINetCharacter
 
 public:
 
-	AMMOARPGInventoryCharacter();
+	AMMOARPGInventoryCharacter(const FObjectInitializer& ObjectInitializer);
 
 	UFUNCTION(BlueprintCallable, Category = "InventorySystem")
 	void OpenInventory();

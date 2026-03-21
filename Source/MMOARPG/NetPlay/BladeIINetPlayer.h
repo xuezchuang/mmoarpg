@@ -15,7 +15,7 @@ class ABladeIINetPlayer : public ABladeIIPlayer
 	GENERATED_BODY()
 
 public:
-	ABladeIINetPlayer();
+	ABladeIINetPlayer(const FObjectInitializer& ObjectInitializer);
 
 	virtual void BeginPlay()	override;
 

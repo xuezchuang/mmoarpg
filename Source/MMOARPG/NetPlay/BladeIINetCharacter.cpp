@@ -22,7 +22,7 @@
 //////////////////////////////////////////////////////////////////////////
 // ABladeIINetCharacter
 
-ABladeIINetCharacter::ABladeIINetCharacter()
+ABladeIINetCharacter::ABladeIINetCharacter(const FObjectInitializer& ObjectInitializer): Super(ObjectInitializer)
 {
 	
 }

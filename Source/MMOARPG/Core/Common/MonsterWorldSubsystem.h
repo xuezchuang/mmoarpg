@@ -42,8 +42,8 @@ public:
     void RecvProtocol(uint32 Proto, FSimpleChannel* Channel);
 
     // 对外查询
-    AMMOARPGMonster*            FindMonsterById(int32 MonsterId) const;
-    AMMOARPGNetEnemyController* FindMonsterCtlr (int32 MonsterId) const;
+    AMMOARPGMonster*            FindMonsterById(uint32 robotindex) const;
+    AMMOARPGNetEnemyController* FindMonsterCtlr (uint32 robotindex) const;
 
 	 void GetAllAliveMonsters(TArray<AMMOARPGMonster*>& OutMonsters) const;
 private:
@@ -51,10 +51,10 @@ private:
     void UnbindNet();
 
     // 生成与回放
-    void EnqueuePending(int32 MonsterId, const FQueuedMonsterMsg& Msg);
-    void FlushPendingTo(AMMOARPGMonster* M, int32 MonsterId);
+    void EnqueuePending(uint32 robotindex, const FQueuedMonsterMsg& Msg);
+    void FlushPendingTo(AMMOARPGMonster* M, uint32 robotindex);
     void ApplyQueued(AMMOARPGMonster* M, const FQueuedMonsterMsg& Msg, bool bAuthoritative);
-    AMMOARPGMonster* SpawnAndSyncMonster(int32 MonsterId, const FTransform& T, double ServerTimes);
+	AMMOARPGMonster* SpawnAndSyncMonster(uint32 robotindex, int32 MonsterId, const FTransform& T, double ServerTimes);
 
     // 生成（同步版，编辑器/小资源可用）
     AMMOARPGMonster* SpawnMonsterByIdSync(int32 MonsterId, const FVector& Pos, const FRotator& Rot);
@@ -70,12 +70,12 @@ private:
 
 private:
     // 运行时表
-    TMap<int32, TWeakObjectPtr<AMMOARPGMonster>>            IdToMonster;
-    TMap<int32, TWeakObjectPtr<AMMOARPGNetEnemyController>> IdToCtrl;
+    TMap<uint32, TWeakObjectPtr<AMMOARPGMonster>>            IdToMonster;
+    TMap<uint32, TWeakObjectPtr<AMMOARPGNetEnemyController>> IdToCtrl;
 
     // 未落地排队
-    TMap<int32, TArray<FQueuedMonsterMsg>> PendingMsgs;
-    TMap<int32, double>                    PendingFirstSeenSec;
+    TMap<uint32, TArray<FQueuedMonsterMsg>> PendingMsgs;
+    TMap<uint32, double>                    PendingFirstSeenSec;
 
     FTimerHandle PendingCleanupHandle;
 

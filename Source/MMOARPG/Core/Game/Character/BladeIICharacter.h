@@ -35,7 +35,7 @@ class ABladeIICharacter : public AMMOARPGCharacterBase
 	class UInputAction* LookAction;
 
 public:
-	ABladeIICharacter();
+	ABladeIICharacter(const FObjectInitializer& ObjectInitializer);
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -45,6 +45,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -52,6 +53,9 @@ protected:
 	virtual void OnRep_ActionStateChanged();
 
 	void FightChanged();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Selectable")
+	void Interaction();
 protected:
 
 	/** Resets HMD orientation in VR. */

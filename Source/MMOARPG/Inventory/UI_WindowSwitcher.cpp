@@ -7,6 +7,9 @@
 //#include "Stream/SimpleIOStream.h"
 #include "UI_CategoryTabButton.h"
 #include <Components/WidgetSwitcher.h>
+#include "Components/CanvasPanel.h"
+#include "Components/Image.h"
+#include "Components/TextBlock.h"
 
 void UUI_WindowSwitcher::NativeConstruct()
 {
@@ -34,8 +37,35 @@ void UUI_WindowSwitcher::NativeDestruct()
 void UUI_WindowSwitcher::NativePreConstruct()
 {
 	Super::NativePreConstruct();
-	//sw
-	//Switcher->SetActiveWidget();
+	//SetNativeUIType()
+}
+
+void UUI_WindowSwitcher::InitOutIcon(UImage* InIconTexture,UTextBlock* InActiveTextTab,E_UpSwitchType InActiveTabType)
+{
+	ActiveTabType = InActiveTabType;
+	IconTexture = InIconTexture;
+	ActiveTextTab = InActiveTextTab;
+	switch (ActiveTabType)
+	{
+		case E_UpSwitchType::None:
+			break;
+		case E_UpSwitchType::MainTab:
+			Switcher->SetActiveWidget(MainTab);
+			SetType(E_UIType::Character);
+			break;
+		case E_UpSwitchType::Vendor:
+			Switcher->SetActiveWidget(Vendor);
+			SetType(E_UIType::Buy);
+			break;
+		case E_UpSwitchType::Storage:
+			Switcher->SetActiveWidget(Storage);
+			break;
+		case E_UpSwitchType::LoadGame:
+			Switcher->SetActiveWidget(LoadGame);
+			break;
+		default:
+			break;
+	}
 }
 
 void UUI_WindowSwitcher::SetType(E_UIType eType,bool bPassivity /* = false */)
@@ -50,15 +80,54 @@ void UUI_WindowSwitcher::SetType(E_UIType eType,bool bPassivity /* = false */)
 	}
 	pWidget = GetUIButtonByType(eType);
 	if (pWidget)
+	{
 		pWidget->Active(true);
+		IconTexture->SetBrushFromTexture(pWidget->CategoryIcon);
+	}
 	m_eCurType = eType;
+
+	
+
+	switch (eType)
+	{
+		case E_UIType::None:
+			break;
+		case E_UIType::Character:
+			
+			break;
+		case E_UIType::Joural:
+			break;
+		case E_UIType::Map:
+			break;
+		case E_UIType::Ability:
+			break;
+		case E_UIType::Crafting:
+			break;
+		case E_UIType::Runes:
+			break;
+		case E_UIType::CodeX:
+			break;
+		case E_UIType::Glossary:
+			break;
+		case E_UIType::Gallery:
+			break;
+		case E_UIType::Control:
+			break;
+		case E_UIType::Buy:
+			ActiveTextTab->SetText(FText::FromString("Food Shop/Buy"));
+			break;
+		case E_UIType::SellBack:
+			ActiveTextTab->SetText(FText::FromString("Food Shop/Sell Back"));
+			break;
+		default:
+			break;
+	}
 }
 
 void UUI_WindowSwitcher::SetNativeUIType(E_UIType eType)
 {
 	SetType(eType, true);
-	//if(WindowSwitchDelegate.IsBound())
-	//	WindowSwitchDelegate.Execute(eType);
+	WindowSwitchDelegate.ExecuteIfBound(eType);
 }
 
 UUI_CategoryTabButton* UUI_WindowSwitcher::GetUIButtonByType(E_UIType eType)
@@ -69,7 +138,14 @@ UUI_CategoryTabButton* UUI_WindowSwitcher::GetUIButtonByType(E_UIType eType)
 	case E_UIType::None:
 		break;
 	case E_UIType::Character:
-		pButton = WB_Category_Inventory;
+		if (ActiveTabType == E_UpSwitchType::Vendor)
+		{
+			pButton = WB_Category_Inventory;
+		}
+		else
+		{
+			pButton = WB_Category_Player_Sell;
+		}
 		break;
 	case E_UIType::Joural:
 		pButton = WB_Category_Quest;
@@ -101,7 +177,7 @@ UUI_CategoryTabButton* UUI_WindowSwitcher::GetUIButtonByType(E_UIType eType)
 	case E_UIType::Buy:
 		pButton = WB_Category_Vendor_Buy;
 		break;
-	case E_UIType::Sell:
+	case E_UIType::SellBack:
 		pButton = WB_Category_Player_Sell;
 		break;
 	default:

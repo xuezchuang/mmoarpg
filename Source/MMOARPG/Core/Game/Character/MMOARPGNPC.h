@@ -7,6 +7,8 @@
 #include "MMOARPGNPC.generated.h"
 
 class USelectableComponent;
+class UInteractionComponent;
+//class UWidgetComponent;
 /**
  * 
  */
@@ -14,15 +16,29 @@ UCLASS()
 class MMOARPG_API AMMOARPGNPC : public AMMOARPGCharacterBase
 {
 	GENERATED_BODY()
-public:
-	AMMOARPGNPC();
 
+public:
+
+
+	//UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
+	//UWidgetComponent* InteractionWidget;
+public:
+	AMMOARPGNPC(const FObjectInitializer& ObjectInitializer);
+	
 	virtual void BeginPlay()	override;
 protected:
 
+	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	//UInteractionComponent* InteractionComp;
+
+	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	//UInteractionComponent* InteractionComponent;
+
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction", meta = (AllowAbstract = false))
+	//TSubclassOf<UInteractionComponent> InteractionComponentClass;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Selectable")
 	USelectableComponent* SelectableComp;
-
 
 	UFUNCTION(BlueprintNativeEvent, Category = "Selectable")
 	void HandleSelected();

@@ -15,12 +15,19 @@ class UCapsuleComponent;
 class UCameraComponent;
 class UUI_Vendor;
 class AInventoryGameState;
+class UWidgetComponent;
+class UUI_Interaction;
 
-UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent), Blueprintable)
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent),Blueprintable)
 class MMOARPG_API UInteractionComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
+	//UPROPERTY(EditAnywhere, Category = "Interaction|UI")
+	//TSubclassOf<UUI_Interaction> InteractionWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "BP_Setting")
+	TMap<E_InTeractableType, TSubclassOf<UUserWidget>> InteractionUIMap;
 
 public:
 	UPROPERTY(EditInstanceOnly, Category = BP_Setting)
@@ -31,13 +38,14 @@ public:
 
 	virtual void InitializeComponent() override;
 
-	//FResetBool bFastFly;
-	//FResetBool bLand;
-public:	
+	void StartHold();
+	void StopHold();
+	void Interaction();
+public:
 	// Sets default values for this component's properties
 	UInteractionComponent();
 
-
+	
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -47,6 +55,13 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
+	void Initialize(UWidget* InInteractionWidget);
+
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
+	void ShowTitle(bool Visibility);
+
 
 	//void ResetFly();
 
@@ -64,7 +79,22 @@ public:
 protected:
 	//UPROPERTY()
 	//TWeakObjectPtr<AMMOARPGCharacterBase> MMOARPGCharacterBase;
-
+	
+	// 按住需要的时间（秒）
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
+	float HoldTime = 1.0f;
 private:
 	//AInventoryGameState* m_InventoryGameState = NULL;
+	UPROPERTY()
+	UUI_Interaction* InteractionWidget;
+
+	float HoldProgress = 0.f;
+
+	// 是否正在按住
+	bool bIsHolding = false;
+
+	// 当前按下的按键名（可用于多键）
+	FKey HoldingKey;
+
+
 };

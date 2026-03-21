@@ -18,6 +18,7 @@ enum class ESystemHotkey : uint8
     DeselectAll,        // Esc：取消所有选中
     ToggleMount,        // 上/下马
     OpenMainMenu,       // 打开主菜单
+	Interaction,		// 交互
 };
 
 
@@ -36,12 +37,14 @@ public:
 	void ReplaceCharacter(int32 InCharacterID);
 
 	void RebindSelectTargetKey(const FKey& NewKey);
+
 protected:
 	virtual void BeginPlay() override;
 
 	virtual void SetupInputComponent() override;
 
 	void OnAnyKeyPressed(FKey Key);
+	void OnAnyKeyReleased(FKey Key);
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "UI")
 	TSubclassOf<class UUI_InGame> MainUserWidgetClass;
@@ -73,7 +76,7 @@ protected:
 
 	// 切换选中目标（统一入口，负责通知组件/蓝图/UI）
 	void SetCurrentTarget(AActor* NewTarget);
-
+	void Interaction();
 	AActor* FindBestEnemyTarget();
 	AActor* FindBestFriendlyTarget();
 

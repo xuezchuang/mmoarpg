@@ -15,6 +15,9 @@ struct FMonsterAnimRow : public FTableRowBase
     int32 MonsterId = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Monster")
+	FName Name;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Monster")
 	TSoftClassPtr<class AMMOARPGMonster> MonsterBlueprint;
 
 	// 模型（SkeletalMesh）

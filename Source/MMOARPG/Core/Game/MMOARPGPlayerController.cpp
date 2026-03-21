@@ -57,6 +57,7 @@ void AMMOARPGPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 	InputComponent->BindKey(EKeys::AnyKey, IE_Pressed, this, &AMMOARPGPlayerController::OnAnyKeyPressed);
+	InputComponent->BindKey(EKeys::AnyKey, IE_Released, this, &AMMOARPGPlayerController::OnAnyKeyReleased);
 }
 
 void AMMOARPGPlayerController::OnAnyKeyPressed(FKey Key)
@@ -78,6 +79,25 @@ void AMMOARPGPlayerController::OnAnyKeyPressed(FKey Key)
         }
     }
 }
+
+void AMMOARPGPlayerController::OnAnyKeyReleased(FKey Key)
+{
+	// 找出 Interaction 热键
+	const FKey* InteractionKeyPtr = HotkeyMap.Find(ESystemHotkey::Interaction);
+
+	if (!InteractionKeyPtr)
+		return;   // 没绑定 Interaction 热键
+
+	// 对比当前松开的 Key
+	if (Key == *InteractionKeyPtr)
+	{
+		if (AMMOARPGCharacterBase* Base = GetPawn<AMMOARPGCharacterBase>())
+		{
+			Base->StopInteractionHold();
+		}
+	}
+}
+
 
 void AMMOARPGPlayerController::ReplaceCharacter_Implementation(int32 InCharacterID)
 {
@@ -156,6 +176,7 @@ void AMMOARPGPlayerController::InitHotkeys()
     // 槽 9～29 默认空，不加映射
 	HotkeyMap.Add(ESystemHotkey::SelectTarget, EKeys::Tab);
 	HotkeyMap.Add(ESystemHotkey::DeselectAll, EKeys::Escape);
+	HotkeyMap.Add(ESystemHotkey::Interaction, EKeys::F);
 	//HotkeyMap[ESystemHotkey::SelectSelf] = EKeys::Tab;
 	
 	
@@ -185,29 +206,33 @@ void AMMOARPGPlayerController::HandleSystemHotkey(ESystemHotkey Action)
 {
 	switch (Action)
 	{
-	case ESystemHotkey::SelectTarget:
-		OnSelectTarget();
-		break;
-
-    //case ESystemHotkey::SelectSelf:
-    //    OnSelectSelf();
-    //    break;
-
-    //case ESystemHotkey::DeselectAll:
-    //    OnDeselectAll();
-    //    break;
-
-    //case ESystemHotkey::ToggleMount:
-    //    OnToggleMount();
-    //    break;
-
-    //case ESystemHotkey::OpenMainMenu:
-    //    OnOpenMainMenu();
-    //    break;
-
-	default:
-		break;
-    }
+		case ESystemHotkey::SelectTarget:
+		{
+			OnSelectTarget();
+			break;
+		}
+		//case ESystemHotkey::SelectSelf:
+		//    OnSelectSelf();
+		//    break;
+		case ESystemHotkey::DeselectAll:
+		{
+			SetCurrentTarget(NULL);
+			break;
+		}
+		//case ESystemHotkey::ToggleMount:
+		//    OnToggleMount();
+		//    break;
+		//case ESystemHotkey::OpenMainMenu:
+		//    OnOpenMainMenu();
+		//    break;
+		case ESystemHotkey::Interaction:
+		{
+			Interaction();
+			break;
+		}
+		default:
+			break;
+	}
 }
 
 
@@ -235,18 +260,37 @@ void AMMOARPGPlayerController::SetCurrentTarget(AActor* NewTarget)
     }
 
     CurrentSelectedTarget = NewTarget;
-
+	
     // 新目标被选中
     if (CurrentSelectedTarget)
     {
-        if (USelectableComponent* NewSelectable =
-            CurrentSelectedTarget->FindComponentByClass<USelectableComponent>())
+		if (USelectableComponent* NewSelectable = CurrentSelectedTarget->FindComponentByClass<USelectableComponent>())
         {
             NewSelectable->OnSelected();       // 这里用你自己的函数名
+			if (AMMOARPGMonster* TargetMonster = Cast<AMMOARPGMonster>(NewSelectable->GetOwner()))
+			{
+				MainUserWidget->TargetMonster = TargetMonster;
+			}
+			else
+			{
+				MainUserWidget->TargetMonster = nullptr;
+			}
+
         }
     }
+	else
+	{
+		MainUserWidget->TargetMonster = nullptr;
+	}
+	MainUserWidget->UpdateState();
+}
 
-    // TODO：这里顺便通知 UI（比如广播委托，或者 GameInstanceSubsystem 的多播）
+void AMMOARPGPlayerController::Interaction()
+{
+	if (AMMOARPGCharacterBase* MMOARPGBase = GetPawn<AMMOARPGCharacterBase>())
+	{
+		MMOARPGBase->Interaction();
+	}
 }
 
 bool AMMOARPGPlayerController::IsActorSelectable(AActor* Candidate, float MaxDistance, float MaxHalfAngleDeg) const

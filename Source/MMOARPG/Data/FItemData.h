@@ -316,7 +316,7 @@ enum class E_UIType : uint8
 	Gallery,
 	Control,
 	Buy,
-	Sell,
+	SellBack,
 };
 
 /** C++ FST_Stats */

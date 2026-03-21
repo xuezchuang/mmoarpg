@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////
 // ABladeIIPlayer
 
-ABladeIIPlayer::ABladeIIPlayer()
+ABladeIIPlayer::ABladeIIPlayer(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	SelectableComp = CreateDefaultSubobject<USelectableComponent>(TEXT("SelectableComp"));
 }

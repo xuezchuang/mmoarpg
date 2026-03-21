@@ -26,7 +26,7 @@ public:
 	FText Text;
 
 	UPROPERTY(meta = (BindWidget))
-	UImage* Image_Item;
+	UImage* Icon_Texture;
 
 	UPROPERTY(meta = (BindWidget))
 	UImage* HoverPulse;
@@ -56,16 +56,16 @@ public:
 	UTextBlock* TextGuide;
 
 	UPROPERTY(EditInstanceOnly, Category = "UISetting")
-	E_UIType m_eCurType;
+	E_UIType CurrentType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UISetting")
-	bool m_bActive = false;
+	bool bActive = false;
 //protected:
 public:
 	UPROPERTY(meta = (BindWidget))
 	UButton* CT_Button;
 
-	void Active(bool bActive);
+	void Active(bool InbActive);
 
 	FWindowSwitch FunClicked;
 
