@@ -92,6 +92,22 @@ For client-side runtime issues, check:
 
 - `Saved/Logs/MMOARPG.log`
 
+### Primary Server Logs And Server Code
+
+Do not rely on the repository-local `server_mmorpg` copy as the long-term source of truth.
+
+The active server logs and server-side code to inspect during debugging are under:
+
+- `\\wsl.localhost\Ubuntu-22.04\root\server_mmorpg`
+
+In particular:
+
+- Active daily server logs live under `\\wsl.localhost\Ubuntu-22.04\root\server_mmorpg\build\bin\<YYYY-MM-DD>\`
+- Typical files are `login.txt`, `gate.txt`, `center.txt`, `game.txt`, and `db.txt`
+- The date directory changes over time and should be discovered dynamically instead of hardcoding a single date
+
+If the repository copy of `server_mmorpg` is missing or deleted, Codex should continue debugging by reading code and logs from the WSL path above.
+
 If UE keeps the log file open, prefer closing PIE or the editor before truncating or replacing the log.
 
 ### Quick Network Triage Order
@@ -107,6 +123,14 @@ When debugging login, gate, or scene-entry issues, inspect the chain in this ord
 7. `Send/Recv SP_CharacterSelect`
 8. `Recv SP_CharacterResponse`
 9. `SP_EnterWorld`
+
+For cross-service issues, correlate the client log with:
+
+1. `login.txt`
+2. `gate.txt`
+3. `center.txt`
+4. `game.txt`
+5. `db.txt`
 
 If the user asks why a login succeeded or failed, do not stop at socket connection. Distinguish:
 

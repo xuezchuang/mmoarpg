@@ -66,6 +66,11 @@ The game uses a custom networking system with `FSimpleNetManage`:
 ### Runtime Logging And Protocol Notes
 
 - Main client runtime log: `Saved/Logs/MMOARPG.log`
+- Active server logs and server-side code should be checked under `\\wsl.localhost\Ubuntu-22.04\root\server_mmorpg`
+- Daily server logs live under `\\wsl.localhost\Ubuntu-22.04\root\server_mmorpg\build\bin\<YYYY-MM-DD>\`
+- Common server log files are `login.txt`, `gate.txt`, `center.txt`, `game.txt`, and `db.txt`
+- The date directory changes and should be discovered dynamically when debugging
+- If the repository-local `server_mmorpg` folder is deleted, continue using the WSL path above as the source of truth
 - `Proto 60000` is heartbeat traffic from `SimpleNetChannel`
 - `Proto 900` is `SP_EnterWorld`
 - Socket connection success does not imply business login success; handshake and business response must be checked separately

@@ -44,6 +44,43 @@ namespace
 
 		return ShortName;
 	}
+
+	int32 ExtractPieInstanceIndex(const FString& InMapName)
+	{
+		FString ShortName = FPackageName::GetShortName(InMapName);
+		TArray<FString> Parts;
+		ShortName.ParseIntoArray(Parts, TEXT("_"), true);
+		if (Parts.Num() >= 3 && Parts[0] == TEXT("UEDPIE") && Parts[1].IsNumeric())
+		{
+			return FCString::Atoi(*Parts[1]);
+		}
+
+		return INDEX_NONE;
+	}
+
+	FString ResolveQuickTestAccountForInstance(const FString& BaseAccount, int32 InstanceIndex)
+	{
+		if (BaseAccount.IsEmpty() || InstanceIndex <= 0)
+		{
+			return BaseAccount;
+		}
+
+		int32 SeparatorIndex = INDEX_NONE;
+		if (!BaseAccount.FindLastChar(TEXT('_'), SeparatorIndex))
+		{
+			return BaseAccount;
+		}
+
+		const FString Prefix = BaseAccount.Left(SeparatorIndex + 1);
+		const FString NumericSuffix = BaseAccount.Mid(SeparatorIndex + 1);
+		if (!NumericSuffix.IsNumeric())
+		{
+			return BaseAccount;
+		}
+
+		const int32 BaseIndex = FCString::Atoi(*NumericSuffix);
+		return FString::Printf(TEXT("%s%d"), *Prefix, BaseIndex + InstanceIndex);
+	}
 }
 
 void UMMOARPGGameInstance::Init()
@@ -68,7 +105,7 @@ void UMMOARPGGameInstance::Tick(float DeltaTime)
 		Client->Tick(DeltaTime);
 	}
 
-	if (bPendingEnterWorldAfterTravel && !bEnterWorldSentForCurrentTravel)
+	if (bPendingEnterWorldAfterTravel && !bEnterWorldSentForCurrentTravel && !bWaitingForEnterWorldMapLoad)
 	{
 		TrySendDeferredEnterWorld(GetWorld());
 	}
@@ -186,6 +223,7 @@ void UMMOARPGGameInstance::QueueEnterWorldAfterTravel()
 {
 	bPendingEnterWorldAfterTravel = true;
 	bEnterWorldSentForCurrentTravel = false;
+	bWaitingForEnterWorldMapLoad = true;
 	UE_LOG(MMOARPG, Display, TEXT("[GameplayNet] Queue SP_EnterWorld after successful character response"));
 }
 
@@ -209,6 +247,7 @@ void UMMOARPGGameInstance::TrySendDeferredEnterWorld(UWorld* LoadedWorld)
 
 	bEnterWorldSentForCurrentTravel = true;
 	bPendingEnterWorldAfterTravel = false;
+	bWaitingForEnterWorldMapLoad = false;
 	UE_LOG(MMOARPG, Display, TEXT("[GameplayNet] Deferred send SP_EnterWorld on map [%s]"), *CurrentMap);
 	SIMPLE_CLIENT_SEND(GetClient(), SP_EnterWorld);
 }
@@ -216,6 +255,14 @@ void UMMOARPGGameInstance::TrySendDeferredEnterWorld(UWorld* LoadedWorld)
 void UMMOARPGGameInstance::HandleQuickTestMapLoaded(UWorld* LoadedWorld)
 {
 	UE_LOG(MMOARPG, Display, TEXT("[QuickTest] PostLoadMapWithWorld [%s] [Enabled:%d]"), LoadedWorld ? *LoadedWorld->GetMapName() : TEXT("None"), bEnableQuickTest ? 1 : 0);
+
+	if (bPendingEnterWorldAfterTravel)
+	{
+		bWaitingForEnterWorldMapLoad = false;
+		TrySendDeferredEnterWorld(LoadedWorld);
+		return;
+	}
+
 	ResetQuickTestRuntimeState();
 	TryStartQuickTestBootstrap(LoadedWorld);
 	TrySendDeferredEnterWorld(LoadedWorld);
@@ -289,6 +336,8 @@ void UMMOARPGGameInstance::StartQuickTestNetworkFlow(UWorld* LoadedWorld)
 		QuickTestStartupMap = NormalizeMapName(LoadedWorld->GetMapName());
 	}
 
+	ResolveQuickTestRuntimeCredentials(LoadedWorld);
+
 	if (UMMOARPGNetSubsystem* NetSub = GetSubsystem<UMMOARPGNetSubsystem>())
 	{
 		bQuickTestLoginRequestSent = false;
@@ -304,7 +353,8 @@ void UMMOARPGGameInstance::StartQuickTestNetworkFlow(UWorld* LoadedWorld)
 
 		NetSub->OnNetLinked.BindUObject(this, &UMMOARPGGameInstance::QuickTestLinkInit);
 		bQuickTestNetworkFlowActive = true;
-		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] BeginLink(Login) [TargetMap:%s Account:%s]"), *QuickTestStartupMap, *QuickTestAccount);
+		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] BeginLink(Login) [TargetMap:%s Account:%s Instance:%d]"),
+			*QuickTestStartupMap, *QuickTestResolvedAccount, QuickTestRuntimeInstanceIndex);
 		NetSub->BeginLink(ENetServerRole::Login);
 	}
 }
@@ -339,8 +389,49 @@ void UMMOARPGGameInstance::ResetQuickTestRuntimeState()
 	bQuickTestNetworkFlowActive = false;
 	bQuickTestLoginRequestSent = false;
 	bQuickTestCharacterLoginSent = false;
+	bWaitingForEnterWorldMapLoad = false;
+	QuickTestLoginRetryCount = 0;
+	QuickTestRuntimeInstanceIndex = 0;
+	QuickTestResolvedAccount.Reset();
+	QuickTestResolvedPassword.Reset();
 	QuickTestStartupMap.Reset();
 	GateStatus.GateServerAddrInfo.Port = 0;
+}
+
+void UMMOARPGGameInstance::ResolveQuickTestRuntimeCredentials(UWorld* LoadedWorld)
+{
+	if (!QuickTestResolvedAccount.IsEmpty())
+	{
+		return;
+	}
+
+	int32 InstanceIndex = INDEX_NONE;
+	if (LoadedWorld)
+	{
+		InstanceIndex = ExtractPieInstanceIndex(LoadedWorld->GetMapName());
+	}
+
+	if (InstanceIndex == INDEX_NONE)
+	{
+		InstanceIndex = FMath::Max(0, nIndex - 1);
+	}
+
+	QuickTestRuntimeInstanceIndex = InstanceIndex;
+	QuickTestResolvedAccount = ResolveQuickTestAccountForInstance(QuickTestAccount, InstanceIndex);
+	QuickTestResolvedPassword = QuickTestPassword;
+
+	if (QuickTestResolvedAccount.IsEmpty())
+	{
+		QuickTestResolvedAccount = QuickTestAccount;
+	}
+
+	if (QuickTestResolvedPassword.IsEmpty())
+	{
+		QuickTestResolvedPassword = QuickTestPassword;
+	}
+
+	UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Resolved credentials [Base:%s Resolved:%s Instance:%d]"),
+		*QuickTestAccount, *QuickTestResolvedAccount, QuickTestRuntimeInstanceIndex);
 }
 
 void UMMOARPGGameInstance::QuickTestLinkInit(ENetServerRole ServerRole)
@@ -359,11 +450,11 @@ void UMMOARPGGameInstance::QuickTestLinkInit(ENetServerRole ServerRole)
 
 		S_LOGIN_NAME Name{};
 		S_LOGIN_PASS Pass{};
-		FMemory::Memcpy(&Name, TCHAR_TO_UTF8(*QuickTestAccount), USER_MAX_MEMBER);
-		FMemory::Memcpy(&Pass, TCHAR_TO_UTF8(*QuickTestPassword), USER_MAX_PASS);
-		FMemory::Memcpy(&UserData.Account, TCHAR_TO_UTF8(*QuickTestAccount), USER_MAX_MEMBER);
+		FMemory::Memcpy(&Name, TCHAR_TO_UTF8(*QuickTestResolvedAccount), USER_MAX_MEMBER);
+		FMemory::Memcpy(&Pass, TCHAR_TO_UTF8(*QuickTestResolvedPassword), USER_MAX_PASS);
+		FMemory::Memcpy(&UserData.Account, TCHAR_TO_UTF8(*QuickTestResolvedAccount), USER_MAX_MEMBER);
 		bQuickTestLoginRequestSent = true;
-		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Send SP_LoginResponses [Account:%s]"), *QuickTestAccount);
+		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Send SP_LoginResponses [Account:%s]"), *QuickTestResolvedAccount);
 		SIMPLE_CLIENT_SEND(GetClient(), SP_LoginResponses, Name, Pass);
 	}
 	else if (ServerRole == ENetServerRole::Gate)
@@ -385,6 +476,8 @@ void UMMOARPGGameInstance::RecvQuickTestProtocol(uint32 ProtocolNumber, FSimpleC
 	{
 	case SP_LoginResponses:
 	{
+		constexpr int32 MaxQuickTestLoginRetries = 12;
+		constexpr float QuickTestLoginRetryDelaySeconds = 5.5f;
 		uint16 Childcmd = 0;
 		TArray<uint8> Buffer;
 		Channel->Receive(Buffer);
@@ -407,8 +500,35 @@ void UMMOARPGGameInstance::RecvQuickTestProtocol(uint32 ProtocolNumber, FSimpleC
 					GetClient()->Close();
 				}
 			}
+
+			if (Childcmd == 1003 && bEnableQuickTest && QuickTestLoginRetryCount < MaxQuickTestLoginRetries)
+			{
+				++QuickTestLoginRetryCount;
+				UE_LOG(MMOARPG, Warning, TEXT("[QuickTest] Retry login after childcmd 1003 [attempt:%d/%d delay:%.1fs]"),
+					QuickTestLoginRetryCount, MaxQuickTestLoginRetries, QuickTestLoginRetryDelaySeconds);
+				GThread::Get()->GetCoroutines().BindLambda(QuickTestLoginRetryDelaySeconds, [this]()
+					{
+						if (!bEnableQuickTest)
+						{
+							return;
+						}
+
+						if (QuickTestStartupMap.IsEmpty())
+						{
+							if (UWorld* World = GetWorld())
+							{
+								QuickTestStartupMap = NormalizeMapName(World->GetMapName());
+							}
+						}
+
+						bQuickTestBootstrapping = true;
+						StartQuickTestNetworkFlow(GetWorld());
+					});
+			}
 			return;
 		}
+
+		QuickTestLoginRetryCount = 0;
 
 		S_LOGIN_KEY LoginKey{};
 		S_LOGIN_IP IP{};
@@ -469,11 +589,12 @@ void UMMOARPGGameInstance::RecvQuickTestProtocol(uint32 ProtocolNumber, FSimpleC
 			return;
 		}
 
-		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Queue SP_CharacterSelect [slot:%d mid:%lld]"), Slot, UserData.ID);
-		GThread::Get()->GetCoroutines().BindLambda(0.2f, [this, Slot]()
+		const uint8 SlotId = static_cast<uint8>(Slot);
+		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Queue SP_CharacterSelect [slot:%d mid:%lld]"), SlotId, UserData.ID);
+		GThread::Get()->GetCoroutines().BindLambda(0.2f, [this, SlotId]()
 			{
-				UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Send SP_CharacterSelect [slot:%d mid:%lld]"), Slot, UserData.ID);
-				SIMPLE_CLIENT_SEND(GetClient(), SP_CharacterSelect, Slot, UserData.ID);
+				UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Send SP_CharacterSelect [slot:%d mid:%lld]"), SlotId, UserData.ID);
+				SIMPLE_CLIENT_SEND(GetClient(), SP_CharacterSelect, SlotId, UserData.ID);
 			});
 		break;
 	}

@@ -50,5 +50,5 @@ protected:
 	void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
 
 	//UFUNCTION()
-	void HandleRegisterResponse(ERegistrationType Type);
+	void HandleRegisterResponse(uint16 ErrorCode);
 };

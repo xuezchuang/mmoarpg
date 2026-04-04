@@ -68,6 +68,7 @@ public:
 	void QuickTestLinkInit(ENetServerRole ServerRole);
 	void RecvQuickTestProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
 	int32 ResolveQuickTestCharacterSlot() const;
+	void ResolveQuickTestRuntimeCredentials(UWorld* LoadedWorld);
 	FString GetQuickTestTravelMap() const;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Data")
@@ -114,6 +115,11 @@ private:
 	bool bQuickTestCharacterLoginSent = false;
 	bool bPendingEnterWorldAfterTravel = false;
 	bool bEnterWorldSentForCurrentTravel = false;
+	bool bWaitingForEnterWorldMapLoad = false;
+	int32 QuickTestLoginRetryCount = 0;
+	int32 QuickTestRuntimeInstanceIndex = 0;
+	FString QuickTestResolvedAccount;
+	FString QuickTestResolvedPassword;
 
 public:
     UDataTable* EnsureMonsterTableSync();
