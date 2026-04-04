@@ -28,6 +28,8 @@ void UMMOARPGNetSubsystem::BindClientRcv()
 	UnbindClientRcv();
 
 	const int32 ThisGen = ++BindGen;
+	UE_LOG(MMOARPG, Display, TEXT("[NetSubsys] BindClientRcv start [gen=%d current=%d desired=%d]"),
+		ThisGen, (int32)CurrentRole, (int32)DesiredRole);
 
     // 尝试一次
     if (USimpleNetworkObject* Ctrl = TryGetReadyController())
@@ -35,7 +37,12 @@ void UMMOARPGNetSubsystem::BindClientRcv()
 		CurrentRole = DesiredRole;
 		if (OnNetLinked.IsBound())
 		{
+			UE_LOG(MMOARPG, Display, TEXT("[NetSubsys] OnNetLinked execute [role=%d gen=%d]"), (int32)CurrentRole, ThisGen);
 			OnNetLinked.Execute(CurrentRole);
+		}
+		else
+		{
+			UE_LOG(MMOARPG, Warning, TEXT("[NetSubsys] OnNetLinked not bound [role=%d gen=%d]"), (int32)CurrentRole, ThisGen);
 		}
 		
 
@@ -49,6 +56,7 @@ void UMMOARPGNetSubsystem::BindClientRcv()
     }
 
     // 未就绪：延迟重试；回调里校验世代号
+	UE_LOG(MMOARPG, Display, TEXT("[NetSubsys] BindClientRcv pending retry [gen=%d desired=%d]"), ThisGen, (int32)DesiredRole);
     GThread::Get()->GetCoroutines().BindLambda(0.5f, [this, ThisGen]()
     {
         if (ThisGen != BindGen) return; // 老回调，丢弃
@@ -73,11 +81,28 @@ USimpleNetworkObject* UMMOARPGNetSubsystem::TryGetReadyController()
                         {
                             return Ctrl;
                         }
+
+						UE_LOG(MMOARPG, Display, TEXT("[NetSubsys] Controller not secure yet [state=%d]"), (int32)Conn->GetState());
+						return nullptr;
                     }
+
+					UE_LOG(MMOARPG, Display, TEXT("[NetSubsys] Channel exists but connection is null"));
+					return nullptr;
                 }
+
+				UE_LOG(MMOARPG, Display, TEXT("[NetSubsys] Controller exists but channel is null"));
+				return nullptr;
             }
+
+			UE_LOG(MMOARPG, Display, TEXT("[NetSubsys] Client exists but controller is null"));
+			return nullptr;
         }
+
+		UE_LOG(MMOARPG, Display, TEXT("[NetSubsys] GameInstance client is null"));
+		return nullptr;
     }
+
+	UE_LOG(MMOARPG, Warning, TEXT("[NetSubsys] GameInstance cast failed"));
     return nullptr;
 }
 

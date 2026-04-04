@@ -199,3 +199,37 @@ void UUI_Login::ShowLoginWarnings()
 {
 	PlayWidgetAnim(TEXT("GameErrorAnimation"));
 }
+
+void UUI_Login::SetAccountText(const FText& InText)
+{
+	if (Account)
+	{
+		Account->SetText(InText);
+	}
+}
+
+void UUI_Login::SetPasswordText(const FText& InText)
+{
+	if (Password)
+	{
+		Password->SetText(InText);
+	}
+}
+
+FText UUI_Login::GetAccountText() const
+{
+	if (Account)
+	{
+		return Account->GetText();
+	}
+	return FText();
+}
+
+FText UUI_Login::GetPasswordText() const
+{
+	if (Password)
+	{
+		return Password->GetText();
+	}
+	return FText();
+}

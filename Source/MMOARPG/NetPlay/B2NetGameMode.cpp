@@ -73,7 +73,7 @@ void ABladeIINetGameMode::BindClientRcv()
 	{
 		if (InGameInstance->GetClient() && InGameInstance->GetClient()->GetController())
 		{
-			SEND_DATA(SP_EnterWorld);
+			UE_LOG(MMOARPG, Display, TEXT("[GameplayNet] B2NetGameMode no longer auto-sends SP_EnterWorld"));
 			RecvDelegate = InGameInstance->GetClient()->GetController()->RecvDelegate.AddLambda(
 				[&](uint32 ProtocolNumber, FSimpleChannel* Channel)
 				{

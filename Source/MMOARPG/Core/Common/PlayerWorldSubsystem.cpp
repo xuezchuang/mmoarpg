@@ -36,7 +36,7 @@ void UPlayerWorldSubsystem::OnWorldBeginPlay(UWorld& InWorld)
     if (IsGameplayMap_Player(InWorld))
     {
         // 通知服务器：我进入了某地图，拉取当前地图的玩家快照
-        SEND_DATA(SP_EnterWorld);
+        UE_LOG(MMOARPG, Display, TEXT("[GameplayNet] PlayerWorldSubsystem no longer auto-sends SP_EnterWorld"));
     }
 
     // 每 5 秒清一次排队

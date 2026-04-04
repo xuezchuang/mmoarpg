@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 #include "UI_HallMain.h"
 #include "ThreadManage.h"
 //#include "UObject/SimpleController.h"
@@ -159,7 +159,7 @@ void UUI_HallMain::ResetCharacterCreatePanel(bool bSpawnNewCharacter)
 
 	if (bSpawnNewCharacter)
 	{
-		//生成最近的对象
+		//鐢熸垚鏈€杩戠殑瀵硅薄
 		SpawnRecentCharacter();
 	}
 
@@ -168,7 +168,7 @@ void UUI_HallMain::ResetCharacterCreatePanel(bool bSpawnNewCharacter)
 
 void UUI_HallMain::DestroyCharacter()
 {
-	//删除刚刚角色
+	//鍒犻櫎鍒氬垰瑙掕壊
 	if (AHallPawn* InPawn = GetPawn<AHallPawn>())
 	{
 		if (InPawn->CharacterStage)
@@ -215,7 +215,7 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 	case SP_CharacterLogin:
 	{
 		uint16 childcmd;
-		//拿到客户端发送的账号
+		//鎷垮埌瀹㈡埛绔彂閫佺殑璐﹀彿
 		TArray<uint8> Buffer;
 		Channel->Receive(Buffer);
 		FSimpleIOStream Stream(Buffer);
@@ -230,15 +230,16 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 		}
 		else
 		{
-			if(UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
+			UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>();
+			if(GI)
 			{
-				FMMOARPGUserData& UserData = InGameInstance->GetUserData();
+				FMMOARPGUserData& UserData = GI->GetUserData();
 				UserData.Reset();
 				Stream >> UserData.ID >> UserData.role[0] >> UserData.role[1] >> UserData.role[2];
 				//UE_LOG(MMOARPG, Display, TEXT("Recv SP_CharacterLogin [childcmd:%d,mid:%lld]"), childcmd, mid);
 
 				AHallPlayerState* InState = GetPlayerState<AHallPlayerState>();
-				FMMOARPGCharacterAppearance tempData; 
+				FMMOARPGCharacterAppearance tempData;
 				for(int i = 2; i >= 0; i--)
 				{
 					if(UserData.role[i].isT())
@@ -249,18 +250,35 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 						InState->AddCharacterCA(tempData);
 					}
 				}
-				UI_CharacterCreatePanel->InitCharacterButtons(InState->GetCharacterAppearance());
-				//
-				if(tempData.SlotPosition != INDEX_NONE)
+
+				//蹇€熸祴璇曟ā寮忥細璺宠繃UI鍒濆鍖栵紝鐩存帴閫夋嫨绗竴涓湁鏁堣鑹?
+				if (GI->bEnableQuickTest)
 				{
-					UI_CharacterCreatePanel->SpawnCharacter(&tempData);
-					SetEditCharacter(&tempData);
-					UI_CharacterCreatePanel->HighlightSelection(tempData.SlotPosition);
+					if (tempData.SlotPosition != INDEX_NONE)
+					{
+						UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Auto select character slot: %d"), GI->QuickTestCharacterSlot);
+						JumpDSServer(GI->QuickTestCharacterSlot);
+					}
+					else
+					{
+						UE_LOG(MMOARPG, Error, TEXT("[QuickTest] No character found, cannot auto login"));
+					}
 				}
 				else
 				{
-					PlayRenameOut();
-					ResetCharacterCreatePanel();
+					UI_CharacterCreatePanel->InitCharacterButtons(InState->GetCharacterAppearance());
+					//
+					if(tempData.SlotPosition != INDEX_NONE)
+					{
+						UI_CharacterCreatePanel->SpawnCharacter(&tempData);
+						SetEditCharacter(&tempData);
+						UI_CharacterCreatePanel->HighlightSelection(tempData.SlotPosition);
+					}
+					else
+					{
+						PlayRenameOut();
+						ResetCharacterCreatePanel();
+					}
 				}
 			}
 		}
@@ -273,10 +291,10 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 		//	
 		//		UI_CharacterCreatePanel->InitCharacterButtons(InState->GetCharacterAppearance());
 
-		//		//生成最近使用角色
+		//		//鐢熸垚鏈€杩戜娇鐢ㄨ鑹?
 		//		SpawnRecentCharacter();
 
-		//		//让我们高亮
+		//		//璁╂垜浠珮浜?
 		//		HighlightDefaultSelection();
 		//	}
 		//}
@@ -291,7 +309,14 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 		FSimpleIOStream Stream(Buffer);
 		Stream.Seek(sizeof(FSimpleBunchHead));
 		Stream >> childcmd;
-		UE_LOG(MMOARPG, Error, TEXT("Recv SP_CharacterSelect [childcmd:%d]"), childcmd);
+		if (childcmd == 0)
+		{
+			UE_LOG(MMOARPG, Display, TEXT("Recv SP_CharacterSelect [childcmd:%d]"), childcmd);
+		}
+		else
+		{
+			UE_LOG(MMOARPG, Error, TEXT("Recv SP_CharacterSelect [childcmd:%d]"), childcmd);
+		}
 		break;
 	}
 	case SP_CreateCharacter:
@@ -308,11 +333,11 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 			{
 				FMMOARPGUserData& UserData = InGameInstance->GetUserData();
 				
-				uint64  roleid;//角色id
-				uint8   roleindex;//角色索引
-				uint8   job;//职业
-				uint8   sex;//性别
-				S_LOGIN_NAME nick;//昵称
+				uint64  roleid;//瑙掕壊id
+				uint8   roleindex;//瑙掕壊绱㈠紩
+				uint8   job;//鑱屼笟
+				uint8   sex;//鎬у埆
+				S_LOGIN_NAME nick;//鏄电О
 
 				Stream >> roleindex >> roleid >> job >> sex >> nick;
 				S_USER_MEMBER_ROLE& mRole = UserData.role[roleindex];
@@ -380,17 +405,21 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 				Stream >> childcmd;
 				if (childcmd == 0)
 				{
-					FMMOARPGUserData& UserData = GetGameInstance<UMMOARPGGameInstance>()->GetUserData();
+					UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>();
+					FMMOARPGUserData& UserData = GI->GetUserData();
 					int32  userindex;
 					Stream >> UserData.base.exp >> UserData.base.econ >> UserData.base.status >> UserData.base.life;
 					Stream >> userindex >> UserData.stand.myskill >> UserData.stand.bag;
-					UE_LOG(MMOARPG, Display, TEXT("Recv SP_CharacterResponse"));
+					UE_LOG(MMOARPG, Display, TEXT("Recv SP_CharacterResponse [userindex:%d exp:%d econ:%d status:%d life:%d]"), userindex, UserData.base.exp, UserData.base.econ, UserData.base.status, UserData.base.life);
+					GI->QueueEnterWorldAfterTravel();
 					HallMainOut();
-					//协程
+					const FString TargetMap = GI ? GI->GetQuickTestTravelMap() : FString(TEXT("TestInventory"));
+					//鍗忕▼
 					GThread::Get()->GetCoroutines().BindLambda(
-						1.f, [=]()
+						1.f, [this, TargetMap]()
 						{
-							UGameplayStatics::OpenLevel(GetWorld(), TEXT("TestInventory"));
+							UE_LOG(MMOARPG, Display, TEXT("OpenLevel after SP_CharacterResponse -> %s"), *TargetMap);
+							UGameplayStatics::OpenLevel(GetWorld(), FName(*TargetMap));
 						});
 				}
 				else
@@ -425,7 +454,7 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 	//		if (AHallPlayerState* InPlayerState = GetPlayerState<AHallPlayerState>())
 	//		{
 	//			InPlayerState->AddCharacterCA(InCA);
-	//			//淡出
+	//			//娣″嚭
 	//			PlayRenameOut();
 	//			ResetCharacterCreatePanel(false);
 	//			SetEditCharacter(&InCA);
@@ -447,7 +476,7 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 	//	FString DSAddrString = FSimpleNetManage::GetAddrString(Addr);
 
 	//	HallMainOut();
-	//	//协程
+	//	//鍗忕▼
 	//	GThread::Get()->GetCoroutines().BindLambda(1.f, [=]()
 	//	{
 	//		UGameplayStatics::OpenLevel(GetWorld(),*DSAddrString);
@@ -492,7 +521,7 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 	//		PrintLog(LOCTEXT("EDITORCHARACTERRESPONSES_ERROR", "Edit character Error."));
 	//	}
 
-	//	//淡出
+	//	//娣″嚭
 	//	PlayRenameOut();
 	//	ResetCharacterCreatePanel(false);
 	//}
@@ -515,10 +544,10 @@ void UUI_HallMain::EditCharacter(int32 InSlot)
 
 				ResetEidtorType();
 				
-				//打开动画
+				//鎵撳紑鍔ㄧ敾
 				PlayEditorCharacterOut();
 
-				//设置名称
+				//璁剧疆鍚嶇О
 				UI_RenameCreate->SetEditableName(FText::FromString(InCA->Name));
 			}
 		}
@@ -564,11 +593,11 @@ void UUI_HallMain::ResetCharacterAppearance(FMMOARPGCharacterAppearance* InCA)
 //		if (UMMOARPGGameInstance* InGameInstance = GetGameInstance<UMMOARPGGameInstance>())
 //		{	
 //			//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("id:%d"), InGameInstance->GetUserData().ID));
-//			//将验证信息发过去
+//			//灏嗛獙璇佷俊鎭彂杩囧幓
 //			FString String;
 //			NetDataAnalysis::UserDataToString(InGameInstance->GetUserData(), String);
 //
-//			//发送角色形象请求
+//			//鍙戦€佽鑹插舰璞¤姹?
 //			//SEND_DATA(SP_CharacterAppearanceRequests, String);
 //		}
 //	}
@@ -638,7 +667,12 @@ void UUI_HallMain::JumpDSServer(int32 InSlotID)
 	{
 		int64 mid = InGameInstance->GetUserData().ID;
 		uint8 slotid = InSlotID;
+		UE_LOG(MMOARPG, Display, TEXT("Send SP_CharacterSelect [slotid:%d mid:%lld]"), slotid, mid);
 		SEND_DATA(SP_CharacterSelect, slotid, mid);
+	}
+	else
+	{
+		UE_LOG(MMOARPG, Error, TEXT("Send SP_CharacterSelect failed, GameInstance is null [slotid:%d]"), InSlotID);
 	}
 }
 
@@ -695,10 +729,11 @@ void UUI_HallMain::PrintLog(const FString& InMsg)
 
 void UUI_HallMain::PrintLog(const FText& InMsg)
 {
-	//播放动画
+	//鎾斁鍔ㄧ敾
 	UI_Print->PlayTextAnim();
 
 	UI_Print->SetText(InMsg);
 }
 
 #undef LOCTEXT_NAMESPACE
+

@@ -9,6 +9,11 @@ namespace SimpleEncryptionAndDecryption
 
 void SimpleEncryptionAndDecryption::Encryption(TArray<uint8>& InData, uint16 rCode)
 {
+	const uint8 PlainHead0 = Head[0];
+	const uint8 PlainHead1 = Head[1];
+	const uint16 PlainCmd = (static_cast<uint16>(InData[6]) | (static_cast<uint16>(InData[7]) << 8));
+	const int32 PlainLen = *reinterpret_cast<int32*>(&InData[2]);
+
 	InData[0] = Head[0] ^ rCode;
 	InData[1] = Head[1] ^ rCode;
 
@@ -20,10 +25,20 @@ void SimpleEncryptionAndDecryption::Encryption(TArray<uint8>& InData, uint16 rCo
 	int32 len = *reinterpret_cast<int32*>(&InData[2]);
 	len = len ^ rCode;
 	*reinterpret_cast<int32*>(&InData[2]) = len;
+
+	UE_LOG(LogSimpleNetChannel, Display,
+		TEXT("[ProtoEnc] Send head [%02X %02X]->[%02X %02X] cmd [%u]->[%u] len [%d]->[%d] rCode [%u]"),
+		PlainHead0, PlainHead1, InData[0], InData[1],
+		PlainCmd, newcmd, PlainLen, len, rCode);
 }
 
 void SimpleEncryptionAndDecryption::Decryption(uint8* InData, int32 InLen, uint16 rCode)
 {
+	const uint8 CipherHead0 = InData[0];
+	const uint8 CipherHead1 = InData[1];
+	const uint16 CipherCmd = (static_cast<uint16>(InData[6]) | (static_cast<uint16>(InData[7]) << 8));
+	const int32 CipherLen = *reinterpret_cast<int32*>(&InData[2]);
+
 	InData[0] = InData[0] ^ rCode;
 	InData[1] = InData[1] ^ rCode;
 
@@ -37,6 +52,11 @@ void SimpleEncryptionAndDecryption::Decryption(uint8* InData, int32 InLen, uint1
 	int32 len = *reinterpret_cast<int32*>(&InData[2]);
 	len = len ^ rCode;
 	*reinterpret_cast<int32*>(&InData[2]) = len;
+
+	UE_LOG(LogSimpleNetChannel, Display,
+		TEXT("[ProtoEnc] Recv head [%02X %02X]->[%02X %02X] cmd [%u]->[%u] len [%d]->[%d] rCode [%u]"),
+		CipherHead0, CipherHead1, InData[0], InData[1],
+		CipherCmd, newcmd, CipherLen, len, rCode);
 
 	FSimpleBunchHead* pCheck = reinterpret_cast<FSimpleBunchHead*>(InData);
 	if(pCheck->len != InLen)

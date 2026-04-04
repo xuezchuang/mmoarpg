@@ -69,13 +69,17 @@ bool UUI_CharacterButton::IsHighlight()
 
 void UUI_CharacterButton::ClickedCharacter()
 {
+	UE_LOG(MMOARPG, Display, TEXT("ClickedCharacter [Slot:%d]"), SlotPosition);
+
 	if (AHallPlayerState* InState = GetPlayerState<AHallPlayerState>())
 	{
 		if (UUI_CharacterCreatePanel* UI_CharacterCreatePanel = GetParents<UUI_CharacterCreatePanel>())
 		{
-			//创建角色
+			// Create character
 			if (!InState->IsCharacterExistInSlot(SlotPosition))
 			{
+				UE_LOG(MMOARPG, Display, TEXT("ClickedCharacter -> CreateCharacterFlow [Slot:%d]"), SlotPosition);
+
 				if (ACharacterStage *InCS = UI_CharacterCreatePanel->CreateCharacter())
 				{
 					if (InState->GetCurrentTmpCreateCharacter())
@@ -98,15 +102,23 @@ void UUI_CharacterButton::ClickedCharacter()
 					UI_HallMain->PlayEditorCharacterOut();
 				}
 			}
-			//在已经存在的角色进入地图
+			// Enter the map with an existing character
 			else if(UI_CharacterCreatePanel->GetHighlightButton() == this)
 			{
-				//DS服务器
+				UE_LOG(MMOARPG, Display, TEXT("ClickedCharacter -> JumpDSServer [Slot:%d]"), SlotPosition);
 				JumpDSServer();
 			}
-			//把自己设置为高亮
+			// Set this button as highlighted
 			else
 			{
+				int32 HighlightSlot = INDEX_NONE;
+				if (UUI_CharacterButton* HighlightButton = UI_CharacterCreatePanel->GetHighlightButton())
+				{
+					HighlightSlot = HighlightButton->GetSlotPosition();
+				}
+
+				UE_LOG(MMOARPG, Display, TEXT("ClickedCharacter -> HighlightSelection [Slot:%d PrevHighlight:%d]"), SlotPosition, HighlightSlot);
+
 				UI_CharacterCreatePanel->GetHighlightButton()->SetHighlight(false);
 				SetHighlight(true);
 
@@ -128,8 +140,14 @@ void UUI_CharacterButton::ClickedCharacter()
 
 void UUI_CharacterButton::JumpDSServer()
 {
+	UE_LOG(MMOARPG, Display, TEXT("UUI_CharacterButton::JumpDSServer [Slot:%d]"), SlotPosition);
+
 	if (UUI_CharacterCreatePanel* InUI_CharacterCreatePanel = GetParents<UUI_CharacterCreatePanel>())
 	{
 		InUI_CharacterCreatePanel->JumpDSServer(SlotPosition);
+	}
+	else
+	{
+		UE_LOG(MMOARPG, Error, TEXT("UUI_CharacterButton::JumpDSServer failed, CharacterCreatePanel is null [Slot:%d]"), SlotPosition);
 	}
 }

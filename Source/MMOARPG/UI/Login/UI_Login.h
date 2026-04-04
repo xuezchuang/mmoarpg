@@ -36,6 +36,18 @@ public:
 	bool DecryptionFromLocal(const FString& InPaths);
 public:
 	void ShowLoginWarnings();
+
+	/** 设置账号文本（快速测试用） */
+	void SetAccountText(const FText& InText);
+
+	/** 设置密码文本（快速测试用） */
+	void SetPasswordText(const FText& InText);
+
+	/** 获取账号文本 */
+	FText GetAccountText() const;
+
+	/** 获取密码文本 */
+	FText GetPasswordText() const;
 protected:
 	UFUNCTION()
 	void SignIn();

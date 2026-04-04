@@ -79,7 +79,6 @@ protected:
 	void HallMainIn();
 	void HallMainOut();
 protected:
-
 	virtual void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
 
 	//virtual void LinkServerInfo(ESimpleNetErrorType InType, const FString& InMsg);

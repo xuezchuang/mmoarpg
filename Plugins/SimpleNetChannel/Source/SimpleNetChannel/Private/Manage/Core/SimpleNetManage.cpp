@@ -81,6 +81,9 @@ void FSimpleNetManage::VerificationConnectionInfo(TSharedPtr<FSimpleConnetion> I
 				{
 					char md5[MAX_MD5_LEN];
 					InConnetion->rCode = InData[8];
+					UE_LOG(LogSimpleNetChannel, Display,
+						TEXT("[ProtoHandshake] Recv SP_RCODE [rCode:%u rawHead:%02X %02X cmd:%u len:%d]"),
+						InConnetion->rCode, InData[0], InData[1], Head.ProtocolsNumber, Head.len);
 					char a[20];
 					sprintf_s(a, "%s_%d", SafeCode, InConnetion->rCode);
 					FMemory::Memset(md5, 0, sizeof(md5));
@@ -89,6 +92,9 @@ void FSimpleNetManage::VerificationConnectionInfo(TSharedPtr<FSimpleConnetion> I
 					int32 ID = 0;
 					int8 type = 0;
 					int32 version = 20180408;
+					UE_LOG(LogSimpleNetChannel, Display,
+						TEXT("[ProtoHandshake] Send SP_SECURITY [rCode:%u version:%d md5:%S]"),
+						InConnetion->rCode, version, md5);
 					SIMPLE_PROTOCOLS_SEND(SP_SECURITY, ID, type, version, md5);
 
 					//Send heartbeat
@@ -105,6 +111,9 @@ void FSimpleNetManage::VerificationConnectionInfo(TSharedPtr<FSimpleConnetion> I
 					uint16 kind = 0;
 					int32 Pos = 8;
 					FMemory::Memcpy(&InData[Pos], &kind, sizeof(uint16));
+					UE_LOG(LogSimpleNetChannel, Display,
+						TEXT("[ProtoHandshake] Recv SP_SECURITY [kind:%u rawHead:%02X %02X cmd:%u len:%d]"),
+						kind, InData[0], InData[1], Head.ProtocolsNumber, Head.len);
 					if(kind > 0)
 					{
 						UE_LOG(LogSimpleNetChannel, Error, TEXT("SP_SECURITY"));

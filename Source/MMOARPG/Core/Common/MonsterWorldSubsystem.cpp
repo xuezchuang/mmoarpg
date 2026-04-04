@@ -56,7 +56,7 @@ void UMonsterWorldSubsystem::OnWorldBeginPlay(UWorld& InWorld)
 
 	if (IsGameplayMap(InWorld))
 	{
-		SEND_DATA(SP_EnterWorld);
+		UE_LOG(MMOARPG, Display, TEXT("[GameplayNet] MonsterWorldSubsystem no longer auto-sends SP_EnterWorld"));
 	}
 
     // 每 5 秒清一次排队

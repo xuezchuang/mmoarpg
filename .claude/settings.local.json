@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash",
+      "WebFetch(domain:minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com)"
+    ]
+  },
+  "build": {
+    "command": "cd /d/ueDemo/MMOARPG && dotnet /d/ue/UE_5.2/Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.dll MMOARPGEditor Win64 Development -Project=\"D:/ueDemo/MMOARPG/MMOARPG.uproject\"",
+    "description": "编译 MMOARPG 项目 (UE5.2 Editor Development)"
+  }
+}

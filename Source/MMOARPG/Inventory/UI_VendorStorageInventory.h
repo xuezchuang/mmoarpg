@@ -25,6 +25,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	UUniformGridPanel* StorageUniformGrid;
 
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	UUniformGridPanel* UniformGridBuyBack;
+
 	UPROPERTY(EditDefaultsOnly, Category = "BP_Setting")
 	TSubclassOf<UUI_VendorStorageSlot> Slot_BPClass;
 

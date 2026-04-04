@@ -6,6 +6,7 @@
 #include "Engine/GameInstance.h"
 #include "SimpleNetManage.h"
 #include "MMOARPGType.h"
+#include "MMOARPGNetSubsystem.h"
 #include "Engine/DataTable.h"
 #include "MMOARPGGameInstance.generated.h"
 
@@ -56,6 +57,18 @@ public:
 	FSimpleNetManage* GetClient();
 	FMMOARPGUserData &GetUserData();
 	FMMOARPGGateStatus& GetGateStatus();
+	bool CanSendGameplayProtocols() const;
+	void QueueEnterWorldAfterTravel();
+	void TrySendDeferredEnterWorld(UWorld* LoadedWorld);
+	void HandleQuickTestMapLoaded(UWorld* LoadedWorld);
+	void TryStartQuickTestBootstrap(UWorld* LoadedWorld);
+	void StartQuickTestNetworkFlow(UWorld* LoadedWorld);
+	void StopQuickTestNetworkFlow();
+	void ResetQuickTestRuntimeState();
+	void QuickTestLinkInit(ENetServerRole ServerRole);
+	void RecvQuickTestProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
+	int32 ResolveQuickTestCharacterSlot() const;
+	FString GetQuickTestTravelMap() const;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Data")
 	TSoftObjectPtr<UDataTable> DT_Monster;
@@ -75,6 +88,32 @@ private:
 	FSimpleNetManage* Client;
 	FMMOARPGUserData UserData;
 	FMMOARPGGateStatus GateStatus;
+
+public:
+	/** 快速测试模式配置 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "QuickTest")
+	bool bEnableQuickTest = false;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "QuickTest",
+		meta = (EditCondition = "bEnableQuickTest"))
+	FString QuickTestAccount = TEXT("xuezc_1");
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "QuickTest",
+		meta = (EditCondition = "bEnableQuickTest"))
+	FString QuickTestPassword = TEXT("123456");
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "QuickTest",
+		meta = (EditCondition = "bEnableQuickTest"))
+	int32 QuickTestCharacterSlot = 0;
+
+private:
+	FString QuickTestStartupMap;
+	bool bQuickTestBootstrapping = false;
+	bool bQuickTestNetworkFlowActive = false;
+	bool bQuickTestLoginRequestSent = false;
+	bool bQuickTestCharacterLoginSent = false;
+	bool bPendingEnterWorldAfterTravel = false;
+	bool bEnterWorldSentForCurrentTravel = false;
 
 public:
     UDataTable* EnsureMonsterTableSync();

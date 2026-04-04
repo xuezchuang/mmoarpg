@@ -26,9 +26,10 @@ void UUI_LoginMain::NativeConstruct()
 	UI_Login->SetParents(this);
 	UI_Register->SetParents(this);
 
+	UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>();
 
 	//LinkServer();
-	if(UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+	if (GI)
     {
         if (auto* NetSub = GI->GetSubsystem<UMMOARPGNetSubsystem>())
         {
@@ -42,11 +43,34 @@ void UUI_LoginMain::NativeConstruct()
         }
     }
 
+	// 快速测试模式：自动登录
+	if (GI && GI->bEnableQuickTest)
+	{
+		UE_LOG(LogTemp, Display, TEXT("[QuickTest] Auto login with account: %s"), *GI->QuickTestAccount);
+
+		// 自动填充账号密码
+		UI_Login->SetAccountText(FText::FromString(GI->QuickTestAccount));
+		UI_Login->SetPasswordText(FText::FromString(GI->QuickTestPassword));
+
+		// 延迟一点调用登录，确保网络已连接
+		FTimerHandle TimerHandle;
+		FTimerDelegate TimerDel;
+		TimerDel.BindWeakLambda(this, [this]()
+		{
+			// 使用UI_Login的公共方法获取文本
+			FString AccountStr = UI_Login->GetAccountText().ToString();
+			FString PasswordStr = UI_Login->GetPasswordText().ToString();
+			SignIn(AccountStr, PasswordStr);
+		});
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, TimerDel, 1.0f, false);
+		return;
+	}
+
 	//读取账号
 	if (!UI_Login->DecryptionFromLocal(FPaths::ProjectDir() / TEXT("User")))
 	{
 		PrintLog(TEXT("No account detected."));
-	}	
+	}
 }
 
 void UUI_LoginMain::NativeDestruct()
@@ -79,6 +103,7 @@ void UUI_LoginMain::SignIn(FString& InAccount,FString& InPassword)
 
 		FMMOARPGUserData& UserData = InGameInstance->GetUserData();
 		FMemory::Memcpy(&UserData.Account, TCHAR_TO_UTF8(*InAccount), 20);
+		UE_LOG(MMOARPG, Display, TEXT("[LoginUI] Send SP_LoginResponses [Account:%s]"), *InAccount);
 
 		SEND_DATA(SP_LoginResponses, name, pass);
 					

@@ -24,7 +24,6 @@ class MMOARPG_API AMMOARPGCharacterBase : public ACharacter//, public IDamageabl
 	UPROPERTY()
 	TObjectPtr<UFlyComponent> FlyComponent;
 
-	int a = 3;
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
 	UInteractionComponent* InteractionComp;
