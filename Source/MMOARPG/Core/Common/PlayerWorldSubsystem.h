@@ -49,13 +49,14 @@ public:
     virtual void Deinitialize() override;
     virtual void OnWorldBeginPlay(UWorld& InWorld) override;
 
-    void RecvProtocol(uint32 Proto, FSimpleChannel* Channel);
+	void RecvProtocol(uint32 Proto, FSimpleChannel* Channel);
 
-    // 对外查询
-    ABladeIINetPlayer* FindPlayerById(uint32 PlayerId) const;
-    AController*       FindPlayerCtlr(uint32 PlayerId) const;
+	// 对外查询
+	ABladeIINetPlayer* FindPlayerById(uint32 PlayerId);
+	AController*       FindPlayerCtlr(uint32 PlayerId) const;
 
 	void GetAllOtherPlayers(TArray<ABladeIINetPlayer*>& OutPlayers) const;
+	bool IsLocalPlayerId(uint32 PlayerId) const;
 private:
     void BindNet();
     void UnbindNet();
@@ -64,7 +65,7 @@ private:
     void EnqueuePending(uint32 PlayerId, const FQueuedPlayerMsg& Msg);
     void FlushPendingTo(ABladeIINetPlayer* P, uint32 PlayerId);
     void ApplyQueued(ABladeIINetPlayer* P, const FQueuedPlayerMsg& Msg, bool bAuthoritative);
-    void SpawnMonsterByJobIdSync(uint32 PlayerId, uint32 jobId, const FTransform& T, double ServerTimes);
+    void SpawnPlayerByJobIdSync(uint32 PlayerId, uint32 jobId, const FTransform& T, double ServerTimes);
 
     // 进入本地图/离开本地图
     void OnPlayerEnterMap(uint32 PlayerId, const FVector& SpawnPos, const FRotator& SpawnRot);
@@ -84,8 +85,11 @@ private:
 
 private:
     // 运行时表
-    TMap<uint32, TWeakObjectPtr<ABladeIINetPlayer>> IdToPlayer;
-    TMap<uint32, TWeakObjectPtr<AController>>       IdToCtrl;
+    UPROPERTY(Transient)
+    TMap<uint32, TObjectPtr<ABladeIINetPlayer>> IdToPlayer;
+
+    UPROPERTY(Transient)
+    TMap<uint32, TObjectPtr<AController>>       IdToCtrl;
 
     // 未落地排队
     TMap<uint32, TArray<FQueuedPlayerMsg>> PendingMsgs;

@@ -92,9 +92,6 @@ void UMonsterWorldSubsystem::BindNet()
 	{
 		Protos =
 		{
-			SP_RoleHP,
-			SP_RoleMP,
-			SP_RoleState,
 			SP_MonsterData,
 			SP_MonsterMove,
 			SP_MonsterState

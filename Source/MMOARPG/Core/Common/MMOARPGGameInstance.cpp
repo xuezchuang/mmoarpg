@@ -27,6 +27,26 @@ int UMMOARPGGameInstance::nIndex = 0;
 
 namespace
 {
+	bool TryParseJobIdFromRowName(const FName& RowName, int32& OutJobId)
+	{
+		const FString RowString = RowName.ToString();
+		if (LexTryParseString(OutJobId, *RowString))
+		{
+			return true;
+		}
+
+		FString DigitsOnly;
+		for (const TCHAR Ch : RowString)
+		{
+			if (FChar::IsDigit(Ch))
+			{
+				DigitsOnly.AppendChar(Ch);
+			}
+		}
+
+		return !DigitsOnly.IsEmpty() && LexTryParseString(OutJobId, *DigitsOnly);
+	}
+
 	FString NormalizeMapName(const FString& InMapName)
 	{
 		FString ShortName = FPackageName::GetShortName(InMapName);
@@ -81,13 +101,43 @@ namespace
 		const int32 BaseIndex = FCString::Atoi(*NumericSuffix);
 		return FString::Printf(TEXT("%s%d"), *Prefix, BaseIndex + InstanceIndex);
 	}
+
+	bool DoesWorldBelongToGameInstance(const UWorld* World, const UGameInstance* GameInstance)
+	{
+		return World && GameInstance && World->GetGameInstance() == GameInstance;
+	}
+
+	UDataTable* TryLoadDataTableFromCandidates(const TArray<const TCHAR*>& CandidatePaths)
+	{
+		for (const TCHAR* CandidatePath : CandidatePaths)
+		{
+			if (!CandidatePath || CandidatePath[0] == '\0')
+			{
+				continue;
+			}
+
+			if (UDataTable* Table = LoadObject<UDataTable>(nullptr, CandidatePath))
+			{
+				return Table;
+			}
+		}
+
+		return nullptr;
+	}
+
+	bool ShouldAutoEnableQuickTestForWorld(const UWorld* World)
+	{
+		return World && World->WorldType == EWorldType::PIE;
+	}
 }
 
 void UMMOARPGGameInstance::Init()
 {	
 	Super::Init();
 	nIndex++;
-	UE_LOG(MMOARPG, Display, TEXT("[QuickTest] GameInstance Init [Enabled:%d]"), bEnableQuickTest ? 1 : 0);
+	const bool bEffectiveQuickTestEnabled = bEnableQuickTest || ShouldAutoEnableQuickTestForWorld(GetWorld());
+	UE_LOG(MMOARPG, Display, TEXT("[QuickTest] GameInstance Init [Enabled:%d Effective:%d]"),
+		bEnableQuickTest ? 1 : 0, bEffectiveQuickTestEnabled ? 1 : 0);
 
 	FCoreUObjectDelegates::PostLoadMapWithWorld.AddUObject(this, &UMMOARPGGameInstance::HandleQuickTestMapLoaded);
 	if (UWorld* World = GetWorld())
@@ -234,6 +284,11 @@ void UMMOARPGGameInstance::TrySendDeferredEnterWorld(UWorld* LoadedWorld)
 		return;
 	}
 
+	if (!DoesWorldBelongToGameInstance(LoadedWorld, this))
+	{
+		return;
+	}
+
 	const FString CurrentMap = NormalizeMapName(LoadedWorld->GetMapName());
 	if (CurrentMap == TEXT("Login") || CurrentMap == TEXT("HallMap"))
 	{
@@ -254,7 +309,14 @@ void UMMOARPGGameInstance::TrySendDeferredEnterWorld(UWorld* LoadedWorld)
 
 void UMMOARPGGameInstance::HandleQuickTestMapLoaded(UWorld* LoadedWorld)
 {
-	UE_LOG(MMOARPG, Display, TEXT("[QuickTest] PostLoadMapWithWorld [%s] [Enabled:%d]"), LoadedWorld ? *LoadedWorld->GetMapName() : TEXT("None"), bEnableQuickTest ? 1 : 0);
+	if (!DoesWorldBelongToGameInstance(LoadedWorld, this))
+	{
+		return;
+	}
+
+	const bool bEffectiveQuickTestEnabled = bEnableQuickTest || ShouldAutoEnableQuickTestForWorld(LoadedWorld);
+	UE_LOG(MMOARPG, Display, TEXT("[QuickTest] PostLoadMapWithWorld [%s] [Enabled:%d Effective:%d]"),
+		LoadedWorld ? *LoadedWorld->GetMapName() : TEXT("None"), bEnableQuickTest ? 1 : 0, bEffectiveQuickTestEnabled ? 1 : 0);
 
 	if (bPendingEnterWorldAfterTravel)
 	{
@@ -270,12 +332,19 @@ void UMMOARPGGameInstance::HandleQuickTestMapLoaded(UWorld* LoadedWorld)
 
 void UMMOARPGGameInstance::TryStartQuickTestBootstrap(UWorld* LoadedWorld)
 {
-	if (!bEnableQuickTest || !LoadedWorld)
+	const bool bEffectiveQuickTestEnabled = bEnableQuickTest || ShouldAutoEnableQuickTestForWorld(LoadedWorld);
+	if (!bEffectiveQuickTestEnabled || !LoadedWorld)
 	{
-		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Skip bootstrap [Enabled:%d World:%s]"),
+		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Skip bootstrap [Enabled:%d Effective:%d World:%s]"),
 			bEnableQuickTest ? 1 : 0,
+			bEffectiveQuickTestEnabled ? 1 : 0,
 			LoadedWorld ? *LoadedWorld->GetMapName() : TEXT("None"));
 		return;
+	}
+
+	if (!bEnableQuickTest && ShouldAutoEnableQuickTestForWorld(LoadedWorld))
+	{
+		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Auto-enable bootstrap for PIE world [%s]"), *LoadedWorld->GetMapName());
 	}
 
 	const FString CurrentMap = NormalizeMapName(LoadedWorld->GetMapName());
@@ -310,7 +379,7 @@ void UMMOARPGGameInstance::TryStartQuickTestBootstrap(UWorld* LoadedWorld)
 
 FString UMMOARPGGameInstance::GetQuickTestTravelMap() const
 {
-	if (bEnableQuickTest && !QuickTestStartupMap.IsEmpty())
+	if (!QuickTestStartupMap.IsEmpty())
 	{
 		return QuickTestStartupMap;
 	}
@@ -396,6 +465,8 @@ void UMMOARPGGameInstance::ResetQuickTestRuntimeState()
 	QuickTestResolvedPassword.Reset();
 	QuickTestStartupMap.Reset();
 	GateStatus.GateServerAddrInfo.Port = 0;
+	LocalUserIndex = INDEX_NONE;
+	CurrentCharacterSlot = INDEX_NONE;
 }
 
 void UMMOARPGGameInstance::ResolveQuickTestRuntimeCredentials(UWorld* LoadedWorld)
@@ -590,6 +661,7 @@ void UMMOARPGGameInstance::RecvQuickTestProtocol(uint32 ProtocolNumber, FSimpleC
 		}
 
 		const uint8 SlotId = static_cast<uint8>(Slot);
+		SetCurrentCharacterSlot(Slot);
 		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Queue SP_CharacterSelect [slot:%d mid:%lld]"), SlotId, UserData.ID);
 		GThread::Get()->GetCoroutines().BindLambda(0.2f, [this, SlotId]()
 			{
@@ -611,13 +683,13 @@ void UMMOARPGGameInstance::RecvQuickTestProtocol(uint32 ProtocolNumber, FSimpleC
 	}
 	case SP_CharacterResponse:
 	{
-		uint8 Childcmd = 0;
+		uint16 Childcmd = 0;
 		TArray<uint8> Buffer;
 		Channel->Receive(Buffer);
 		FSimpleIOStream Stream(Buffer);
 		Stream.Seek(sizeof(FSimpleBunchHead));
 		Stream >> Childcmd;
-		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Recv SP_CharacterResponse [childcmd:%d]"), Childcmd);
+		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Recv SP_CharacterResponse [childcmd:%u]"), Childcmd);
 		if (Childcmd != 0)
 		{
 			return;
@@ -626,6 +698,9 @@ void UMMOARPGGameInstance::RecvQuickTestProtocol(uint32 ProtocolNumber, FSimpleC
 		int32 UserIndex = 0;
 		Stream >> UserData.base.exp >> UserData.base.econ >> UserData.base.status >> UserData.base.life;
 		Stream >> UserIndex >> UserData.stand.myskill >> UserData.stand.bag;
+		SetLocalUserIndex(UserIndex);
+		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] CharacterResponse payload [userindex:%d level:%d gold:%d map:%d hp:%d mp:%d]"),
+			UserIndex, UserData.base.exp.level, UserData.base.econ.gold, UserData.base.status.mapid, UserData.base.life.hp, UserData.base.life.mp);
 		const FString TargetMap = GetQuickTestTravelMap();
 		QueueEnterWorldAfterTravel();
 		UE_LOG(MMOARPG, Display, TEXT("[QuickTest] Character ready -> OpenLevel [%s]"), *TargetMap);
@@ -662,6 +737,15 @@ int32 UMMOARPGGameInstance::ResolveQuickTestCharacterSlot() const
 UDataTable* UMMOARPGGameInstance::EnsureMonsterTableSync()
 {
     if (DT_Monster_Loaded) return DT_Monster_Loaded;
+    if (DT_Monster.IsNull())
+    {
+        static const TArray<const TCHAR*> MonsterTableCandidates =
+        {
+            TEXT("/Game/DataTable/Demo/DT_Monster.DT_Monster")
+        };
+        DT_Monster_Loaded = TryLoadDataTableFromCandidates(MonsterTableCandidates);
+        return DT_Monster_Loaded;
+    }
     if (DT_Monster.IsNull()) return nullptr;
 
     DT_Monster_Loaded = DT_Monster.LoadSynchronous(); // 同步加载
@@ -681,6 +765,18 @@ const FMonsterAnimRow* UMMOARPGGameInstance::GetMonsterRowSync(int32 MonsterId)
 UDataTable* UMMOARPGGameInstance::EnsurePlayerTableSync()
 {
     if (DT_Player_Loaded) return DT_Player_Loaded;
+    if (DT_Player.IsNull())
+    {
+        static const TArray<const TCHAR*> PlayerTableCandidates =
+        {
+            TEXT("/Game/DataTable/Character/01/Character_01.Character_01"),
+            TEXT("/Game/DataTable/Character/01/Character_1.Character_1"),
+            TEXT("/Game/DataTable/Character/16424/Character_16424.Character_16424"),
+            TEXT("/Game/DataTable/Character/16424/Character_016424.Character_016424")
+        };
+        DT_Player_Loaded = TryLoadDataTableFromCandidates(PlayerTableCandidates);
+        return DT_Player_Loaded;
+    }
     if (DT_Player.IsNull()) return nullptr;
 
     DT_Player_Loaded = DT_Player.LoadSynchronous(); // 同步加载
@@ -690,9 +786,39 @@ UDataTable* UMMOARPGGameInstance::EnsurePlayerTableSync()
 const FCharacterAnimRow* UMMOARPGGameInstance::GetPlayerRowSync(int32 JobId)
 {
     UDataTable* Table = EnsurePlayerTableSync();
-    if (!Table) return nullptr;
+    if (!Table)
+    {
+		UE_LOG(MMOARPG, Warning, TEXT("[PlayerSync] DT_Player is null when resolving job [%d]"), JobId);
+		return nullptr;
+    }
 
     static const FString Context(TEXT("PlayerRowLookup"));
     const FName RowName(*FString::FromInt(JobId));
-    return Table->FindRow<FCharacterAnimRow>(RowName, Context);
+	if (const FCharacterAnimRow* ExactRow = Table->FindRow<FCharacterAnimRow>(RowName, Context))
+	{
+		return ExactRow;
+	}
+
+	const TArray<FName> RowNames = Table->GetRowNames();
+	for (const FName& CandidateName : RowNames)
+	{
+		int32 CandidateJobId = INDEX_NONE;
+		if (TryParseJobIdFromRowName(CandidateName, CandidateJobId) && CandidateJobId == JobId)
+		{
+			UE_LOG(MMOARPG, Display, TEXT("[PlayerSync] Fallback row match for job [%d] -> row [%s]"),
+				JobId, *CandidateName.ToString());
+			return Table->FindRow<FCharacterAnimRow>(CandidateName, Context);
+		}
+	}
+
+	if (JobId == 0 && RowNames.Num() > 0)
+	{
+		UE_LOG(MMOARPG, Warning, TEXT("[PlayerSync] Use default player row for job [0] -> row [%s]"),
+			*RowNames[0].ToString());
+		return Table->FindRow<FCharacterAnimRow>(RowNames[0], Context);
+	}
+
+	UE_LOG(MMOARPG, Warning, TEXT("[PlayerSync] No player row found for job [%d] in DT_Player [%s]"),
+		JobId, *GetNameSafe(Table));
+    return nullptr;
 }

@@ -49,6 +49,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
 	virtual void OnRep_ActionStateChanged();
 
@@ -119,6 +120,11 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
+	void UpdateSyncedMove();
+	void SendSynecdMove(int kind, int state);
+	bool IsMoveTrace();
+	void TryApplyAuthoritativeSpawn();
+
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -129,6 +135,14 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE virtual class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+private:
+	FVector m_SyncedPos = FVector::ZeroVector;
+	float m_SynedTime = 0.f;
+	float m_SynedTimeTemp = 0.f;
+	float m_face = 0.f;
+	int32 m_State = 0;
+	bool bAppliedAuthoritativeSpawn = false;
 
 };
 

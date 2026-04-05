@@ -108,11 +108,6 @@ void ABladeIINetCharacter::UpdateLocation(const S_MOVE_ROLE* rMove)
 void ABladeIINetCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if(UGameplayStatics::GetGameMode(GetWorld())->IsA<ABladeIINetGameMode>())
-	{
-		m_CurSpeed = GetVelocity().Size();
-		UpdateSyncedMove();
-	}
 }
 
 void ABladeIINetCharacter::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
@@ -206,16 +201,26 @@ void ABladeIINetCharacter::SendSynecdMove(int kind, int state)
 	//4 step
 	int16 tface = m_face * 100;
 	int32 tspeed = speed * 100;
-	S_VECTOR3 s_pos, s_tpos;
-	s_pos.x = m_SyncedPos.X;
-	s_pos.y = m_SyncedPos.Y;
-	s_pos.z = m_SyncedPos.Z;
-	s_tpos.x = targetpos.X;
-	s_tpos.y = targetpos.Y;
-	s_tpos.z = targetpos.Z;
+	if (UMMOARPGGameInstance* GameInstance = GetGameInstance<UMMOARPGGameInstance>())
+	{
+		const int32 LocalUserIndex = GameInstance->GetLocalUserIndex();
+		const int64 LocalMemId = GameInstance->GetUserData().ID;
+		if (LocalUserIndex == INDEX_NONE || LocalMemId == INDEX_NONE)
+		{
+			return;
+		}
 
-	SEND_DATA(SP_SelfMove, tface, tspeed, s_pos, s_tpos);
-	UE_LOG(MMOARPG, Display, TEXT("CurPos:%d-%d-%d"), s_pos.x, s_pos.y,s_pos.z);
+		S_VECTOR3 s_pos, s_tpos;
+		s_pos.x = m_SyncedPos.X;
+		s_pos.y = m_SyncedPos.Y;
+		s_pos.z = m_SyncedPos.Z;
+		s_tpos.x = targetpos.X;
+		s_tpos.y = targetpos.Y;
+		s_tpos.z = targetpos.Z;
+
+		SEND_DATA(SP_SelfMove, tface, tspeed, s_pos, s_tpos);
+		UE_LOG(MMOARPG, Display, TEXT("CurPos:%d-%d-%d [uid:%d mid:%lld]"), s_pos.x, s_pos.y, s_pos.z, LocalUserIndex, LocalMemId);
+	}
 }
 
 bool ABladeIINetCharacter::IsMoveTrace()

@@ -23,12 +23,19 @@
 
 ABladeIINetPlayer::ABladeIINetPlayer(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
-	
+	PrimaryActorTick.bCanEverTick = true;
 }
 
 void ABladeIINetPlayer::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void ABladeIINetPlayer::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	UE_LOG(MMOARPG, Display, TEXT("[PlayerSync] Remote player EndPlay [uid:%u actor:%s reason:%d]"),
+		RemotePlayerId, *GetNameSafe(this), static_cast<int32>(EndPlayReason));
+	Super::EndPlay(EndPlayReason);
 }
 
 void ABladeIINetPlayer::SubscribeEvents()
@@ -72,8 +79,8 @@ void ABladeIINetPlayer::UpdateMoveData(const S_MOVE_ROLE* rMove)
 	m_TargetPos.X = rMove->targetpos.x;
 	m_TargetPos.Y = rMove->targetpos.y;
 	m_TargetPos.Z = rMove->targetpos.z;
-	m_TargetSpeedTemp = rMove->speed / 100;
-	m_TargetFace = rMove->face / 100;
+	m_TargetSpeedTemp = static_cast<float>(rMove->speed) / 100.f;
+	m_TargetFace = static_cast<float>(rMove->face) / 100.f;
 
 	m_CurFace = GetActorRotation().Yaw;
 	m_CurPos = GetActorLocation();
@@ -105,16 +112,31 @@ void ABladeIINetPlayer::UpdateBaseData(const S_ROLE_O_BASE* RoleBase)
 	m_TargetPos.X = RoleBase->pos.x;
 	m_TargetPos.Y = RoleBase->pos.y;
 	m_TargetPos.Z = RoleBase->pos.z;
+	m_TargetFace = static_cast<float>(RoleBase->face) / 100.f;
+	m_CurFace = m_TargetFace;
+	m_TargetSpeedTemp = 0.0f;
+	m_CurSpeed = 0.0f;
 	SetActorLocation(m_TargetPos);
+	SetActorRotation(FRotator(0.f, m_TargetFace, 0.f));
+}
+
+void ABladeIINetPlayer::SetRemotePlayerId(uint32 InRemotePlayerId)
+{
+	RemotePlayerId = InRemotePlayerId;
+}
+
+uint32 ABladeIINetPlayer::GetRemotePlayerId() const
+{
+	return RemotePlayerId;
 }
 
 void ABladeIINetPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//m_Speed = GetVelocity().Size();
-	//if(!m_TargetPos.Equals(m_CurPos, 10))
+
+	if (!m_TargetPos.Equals(GetActorLocation(), 2.f) || m_TargetSpeedTemp > 0.f)
 	{
-		//UpDateMove(DeltaTime);
+		UpDateMove(DeltaTime);
 	}
 }
 
@@ -126,7 +148,7 @@ void ABladeIINetPlayer::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Chan
 void ABladeIINetPlayer::UpDateMove(float DeltaTime)
 {
 	m_CurFace = GetActorRotation().Yaw;
-	float RealYaw = FMath::Lerp(m_CurFace, m_TargetFace, DeltaTime * 16);
+	float RealYaw = FMath::Lerp(m_CurFace, m_TargetFace, FMath::Clamp(DeltaTime * 16.f, 0.f, 1.f));
 	SetActorRotation(FRotator(0, RealYaw, 0));
 	//
 	m_CurPos = GetActorLocation();
@@ -147,8 +169,11 @@ void ABladeIINetPlayer::UpDateMove(float DeltaTime)
 		FVector Location = m_CurPos + CurSpeed * DeltaTime * dir;
 		//UE_LOG(MMOARPG, Display, TEXT("curpos[%f,%f,%f]"), Location.X, Location.Y, Location.Z);
 		SetActorLocation(Location);
+		return;
 	}
-	else if(m_TargetSpeedTemp == 0.0)
+
+	SetActorLocation(m_TargetPos);
+	if(m_TargetSpeedTemp == 0.0)
 	{
 		m_TargetIndex++;
 		if(m_TargetIndex == 1)

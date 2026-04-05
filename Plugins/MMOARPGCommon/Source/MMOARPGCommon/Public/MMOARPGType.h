@@ -237,8 +237,6 @@ struct S_ROLE_BASE_STATUS
 	S_VECTOR3	pos;  //当前坐标
 	//int32		c_mapid; //保存的地图ID
 	//S_VECTOR3	c_pos;//保存坐标
-	int32		hp;
-	int32		mp;
 
 
 	////进入副本或者退出副本 设置
@@ -565,17 +563,21 @@ struct MMOARPGCOMMON_API FMMOARPGUserData
 	void Reset();
 };
 //
-struct S_MOVE_ROLE
+struct S_MOVE_ROLE : S_COMMAND_GATEBASE
 {
 	uint32		userindex;
 	int16		face;//朝向
 	int32		speed;//速度
+	S_VECTOR3   curpos;//当前位置
 	S_VECTOR3   targetpos;//目标位置
 	S_MOVE_ROLE()
 	{
+		user_connectid = 0;
+		memid = 0;
 		userindex = 0;
 		face = 0;
 		speed = 0;
+		curpos.init();
 		targetpos.init();
 	}
 };

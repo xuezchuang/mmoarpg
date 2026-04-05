@@ -57,6 +57,10 @@ public:
 	FSimpleNetManage* GetClient();
 	FMMOARPGUserData &GetUserData();
 	FMMOARPGGateStatus& GetGateStatus();
+	int32 GetLocalUserIndex() const { return LocalUserIndex; }
+	void SetLocalUserIndex(int32 InUserIndex) { LocalUserIndex = InUserIndex; }
+	int32 GetCurrentCharacterSlot() const { return CurrentCharacterSlot; }
+	void SetCurrentCharacterSlot(int32 InSlot) { CurrentCharacterSlot = InSlot; }
 	bool CanSendGameplayProtocols() const;
 	void QueueEnterWorldAfterTravel();
 	void TrySendDeferredEnterWorld(UWorld* LoadedWorld);
@@ -89,6 +93,8 @@ private:
 	FSimpleNetManage* Client;
 	FMMOARPGUserData UserData;
 	FMMOARPGGateStatus GateStatus;
+	int32 LocalUserIndex = INDEX_NONE;
+	int32 CurrentCharacterSlot = INDEX_NONE;
 
 public:
 	/** 快速测试模式配置 */

@@ -168,6 +168,9 @@ If the user asks why a login succeeded or failed, do not stop at socket connecti
 6. If a task changes code, try to compile or otherwise validate the affected area before finishing.
 7. If validation cannot be completed, say exactly why.
 8. When a request is ambiguous, resolve it from repository context first instead of immediately asking.
+9. When referencing repository files to the user, use clickable VS Code workspace file links whose targets are absolute paths under this project root, formatted like `/d:/ueDemo/MMOARPG/...`.
+10. Prefer labels like `UI_LoginMain.cpp (line 227)` and include the line number in the target when possible, for example `/d:/ueDemo/MMOARPG/Source/MMOARPG/UI/Login/UI_LoginMain.cpp#L227`.
+11. Do not use webpage-style or connector-style file references for repository files in this project.
 
 ## Files Worth Checking Early
 

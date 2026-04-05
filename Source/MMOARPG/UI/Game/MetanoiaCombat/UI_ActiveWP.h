@@ -33,8 +33,8 @@ public:
 	FRoleBasicView RoleInfo;
 
 protected:
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Config")
-	bool IsSelf;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config")
+	bool IsSelf = false;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Status")
 	void UpdateState();
@@ -53,6 +53,7 @@ protected:
 	TArray<FDelegateHandle> InterestingHandles;
 
 	void RecvProtocol(uint32 ProtocolNumber);
+	void RefreshSelfRoleInfo();
 
 	//virtual void LinkServerInfo(ESimpleNetErrorType InType, const FString& InMsg);
 

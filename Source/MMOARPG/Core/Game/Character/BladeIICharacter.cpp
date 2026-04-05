@@ -11,7 +11,13 @@
 #include "Core/Component/FlyComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "MMOARPGType.h"
+#include "MMOARPGMacroType.h"
+#include "MMOARPG.h"
+#include "NetPlay/B2NetGameMode.h"
+#include "Protocol/GameProtocol.h"
 //////////////////////////////////////////////////////////////////////////
 // ABladeIICharacter
 
@@ -61,6 +67,28 @@ void ABladeIICharacter::BeginPlay()
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
 	}
+
+	TryApplyAuthoritativeSpawn();
+}
+
+void ABladeIICharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (!IsLocallyControlled())
+	{
+		return;
+	}
+
+	if (!Cast<ABladeIINetGameMode>(UGameplayStatics::GetGameMode(GetWorld())))
+	{
+		return;
+	}
+
+	TryApplyAuthoritativeSpawn();
+
+	m_CurSpeed = GetVelocity().Size();
+	UpdateSyncedMove();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -137,6 +165,159 @@ void ABladeIICharacter::Move(const FInputActionValue& Value)
 		AddMovementInput(RightDirection, MovementVector.X);
 	}
 }
+
+void ABladeIICharacter::UpdateSyncedMove()
+{
+	int State = m_CurSpeed > 0.0f ? 1 : 0;
+	if (m_State == 0)
+	{
+		m_SynedTime = GetWorld()->GetTimeSeconds();
+	}
+
+	if (State != m_State)
+	{
+		SendSynecdMove(0, State);
+		return;
+	}
+
+	if (GetWorld()->GetTimeSeconds() - m_SynedTime > 0.1f)
+	{
+		if (FMath::Abs(GetActorRotation().Yaw - m_face) > 1.f)
+		{
+			SendSynecdMove(1, State);
+			return;
+		}
+
+		if (m_CurSpeed > 0.f && FVector::Distance(m_SyncedPos, GetActorLocation()) > 5.f)
+		{
+			SendSynecdMove(1, State);
+		}
+	}
+}
+
+void ABladeIICharacter::TryApplyAuthoritativeSpawn()
+{
+	if (bAppliedAuthoritativeSpawn || !GetWorld())
+	{
+		return;
+	}
+
+	if (!IsLocallyControlled() || !Cast<ABladeIINetGameMode>(UGameplayStatics::GetGameMode(GetWorld())))
+	{
+		return;
+	}
+
+	UMMOARPGGameInstance* GameInstance = GetGameInstance<UMMOARPGGameInstance>();
+	if (!GameInstance)
+	{
+		return;
+	}
+
+	const FMMOARPGUserData& UserData = GameInstance->GetUserData();
+	if (UserData.ID <= 0)
+	{
+		return;
+	}
+
+	const FVector ServerPos(
+		static_cast<float>(UserData.base.status.pos.x),
+		static_cast<float>(UserData.base.status.pos.y),
+		static_cast<float>(UserData.base.status.pos.z));
+	const float ServerYaw = static_cast<float>(UserData.base.status.face) / 100.f;
+
+	SetActorLocation(ServerPos, false, nullptr, ETeleportType::TeleportPhysics);
+	SetActorRotation(FRotator(0.f, ServerYaw, 0.f), ETeleportType::TeleportPhysics);
+
+	m_SyncedPos = ServerPos;
+	m_face = ServerYaw;
+	m_State = UserData.base.status.state;
+	bAppliedAuthoritativeSpawn = true;
+
+	UE_LOG(MMOARPG, Display, TEXT("[PlayerSync] Apply authoritative spawn [mid:%lld uid:%d pos:(%d,%d,%d) face:%d]"),
+		UserData.ID,
+		GameInstance->GetLocalUserIndex(),
+		UserData.base.status.pos.x,
+		UserData.base.status.pos.y,
+		UserData.base.status.pos.z,
+		UserData.base.status.face);
+}
+
+void ABladeIICharacter::SendSynecdMove(int kind, int state)
+{
+	m_State = state;
+	m_face = GetActorRotation().Yaw;
+	m_SyncedPos = GetActorLocation();
+	float Speed = m_CurSpeed;
+	m_SynedTime = GetWorld()->GetTimeSeconds();
+
+	float DistanceAhead = 60.f;
+	if (GetWorld()->GetTimeSeconds() - m_SynedTimeTemp < 0.25f)
+	{
+		DistanceAhead = 30.f;
+	}
+	m_SynedTimeTemp = m_SynedTime;
+
+	FVector TargetPos = Speed > 0.f ? (m_SyncedPos + GetActorForwardVector() * DistanceAhead) : m_SyncedPos;
+	if (IsMoveTrace())
+	{
+		TargetPos = GetActorLocation();
+	}
+	else if (kind > 0)
+	{
+		Speed = 600.f;
+	}
+
+	const int16 Face = static_cast<int16>(m_face * 100.f);
+	const int32 EncodedSpeed = static_cast<int32>(Speed * 100.f);
+	if (UMMOARPGGameInstance* GameInstance = GetGameInstance<UMMOARPGGameInstance>())
+	{
+		const int32 LocalUserIndex = GameInstance->GetLocalUserIndex();
+		const int64 LocalMemId = GameInstance->GetUserData().ID;
+		if (LocalUserIndex == INDEX_NONE || LocalMemId == INDEX_NONE)
+		{
+			return;
+		}
+
+		S_VECTOR3 Pos;
+		S_VECTOR3 Target;
+		Pos.x = m_SyncedPos.X;
+		Pos.y = m_SyncedPos.Y;
+		Pos.z = m_SyncedPos.Z;
+		Target.x = TargetPos.X;
+		Target.y = TargetPos.Y;
+		Target.z = TargetPos.Z;
+
+		SEND_DATA(SP_SelfMove, Face, EncodedSpeed, Pos, Target);
+		UE_LOG(MMOARPG, Display, TEXT("[PlayerSync] Send SP_SelfMove [uid:%u mid:%lld pos:(%d,%d,%d) target:(%d,%d,%d) speed:%d state:%d]"),
+			static_cast<uint32>(LocalUserIndex), LocalMemId,
+			Pos.x, Pos.y, Pos.z,
+			Target.x, Target.y, Target.z,
+			EncodedSpeed, state);
+	}
+}
+
+bool ABladeIICharacter::IsMoveTrace()
+{
+	FVector Pos = GetActorLocation();
+	FVector TargetPos = Pos + GetActorForwardVector() * 60.f;
+	Pos.Z -= 1000.f;
+	TargetPos.Z += 1000.f;
+
+	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
+	FHitResult OutHit;
+	TArray<AActor*> ActorsToIgnore;
+	return UKismetSystemLibrary::LineTraceSingleForObjects(
+		GetWorld(),
+		Pos,
+		TargetPos,
+		ObjectTypes,
+		false,
+		ActorsToIgnore,
+		EDrawDebugTrace::None,
+		OutHit,
+		false);
+}
+
 void ABladeIICharacter::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D

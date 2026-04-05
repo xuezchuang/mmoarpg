@@ -401,7 +401,7 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 	{
 		SIMPLE_PROTOCOLS_RECEIVE_WITH(SP_CharacterResponse, [&](FSimpleIOStream& Stream)
 			{
-				uint8 childcmd = 0;
+				uint16 childcmd = 0;
 				Stream >> childcmd;
 				if (childcmd == 0)
 				{
@@ -410,7 +410,9 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 					int32  userindex;
 					Stream >> UserData.base.exp >> UserData.base.econ >> UserData.base.status >> UserData.base.life;
 					Stream >> userindex >> UserData.stand.myskill >> UserData.stand.bag;
-					UE_LOG(MMOARPG, Display, TEXT("Recv SP_CharacterResponse [userindex:%d exp:%d econ:%d status:%d life:%d]"), userindex, UserData.base.exp, UserData.base.econ, UserData.base.status, UserData.base.life);
+					GI->SetLocalUserIndex(userindex);
+					UE_LOG(MMOARPG, Display, TEXT("Recv SP_CharacterResponse [userindex:%d level:%d gold:%d map:%d hp:%d mp:%d]"),
+						userindex, UserData.base.exp.level, UserData.base.econ.gold, UserData.base.status.mapid, UserData.base.life.hp, UserData.base.life.mp);
 					GI->QueueEnterWorldAfterTravel();
 					HallMainOut();
 					const FString TargetMap = GI ? GI->GetQuickTestTravelMap() : FString(TEXT("TestInventory"));
@@ -424,7 +426,7 @@ void UUI_HallMain::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
 				}
 				else
 				{
-					UE_LOG(MMOARPG, Error, TEXT("Recv SP_CharacterResponse [childcmd:%d]"), childcmd);
+					UE_LOG(MMOARPG, Error, TEXT("Recv SP_CharacterResponse [childcmd:%u]"), childcmd);
 				}
 			});
 		break;
@@ -667,6 +669,7 @@ void UUI_HallMain::JumpDSServer(int32 InSlotID)
 	{
 		int64 mid = InGameInstance->GetUserData().ID;
 		uint8 slotid = InSlotID;
+		InGameInstance->SetCurrentCharacterSlot(InSlotID);
 		UE_LOG(MMOARPG, Display, TEXT("Send SP_CharacterSelect [slotid:%d mid:%lld]"), slotid, mid);
 		SEND_DATA(SP_CharacterSelect, slotid, mid);
 	}
