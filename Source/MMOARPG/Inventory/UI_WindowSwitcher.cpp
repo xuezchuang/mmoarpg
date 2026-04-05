@@ -82,7 +82,14 @@ void UUI_WindowSwitcher::SetType(E_UIType eType,bool bPassivity /* = false */)
 	if (pWidget)
 	{
 		pWidget->Active(true);
-		IconTexture->SetBrushFromTexture(pWidget->CategoryIcon);
+		if (IconTexture)
+		{
+			IconTexture->SetBrushFromTexture(pWidget->CategoryIcon);
+		}
+		if (ActiveTextTab)
+		{
+			ActiveTextTab->SetText(pWidget->Text);
+		}
 	}
 	m_eCurType = eType;
 
@@ -114,10 +121,16 @@ void UUI_WindowSwitcher::SetType(E_UIType eType,bool bPassivity /* = false */)
 		case E_UIType::Control:
 			break;
 		case E_UIType::Buy:
-			ActiveTextTab->SetText(FText::FromString("Food Shop/Buy"));
+			if (ActiveTextTab)
+			{
+				ActiveTextTab->SetText(FText::FromString("Food Shop/Buy"));
+			}
 			break;
 		case E_UIType::SellBack:
-			ActiveTextTab->SetText(FText::FromString("Food Shop/Sell Back"));
+			if (ActiveTextTab)
+			{
+				ActiveTextTab->SetText(FText::FromString("Food Shop/Sell Back"));
+			}
 			break;
 		default:
 			break;
@@ -140,11 +153,11 @@ UUI_CategoryTabButton* UUI_WindowSwitcher::GetUIButtonByType(E_UIType eType)
 	case E_UIType::Character:
 		if (ActiveTabType == E_UpSwitchType::Vendor)
 		{
-			pButton = WB_Category_Inventory;
+			pButton = WB_Category_Player_Sell;
 		}
 		else
 		{
-			pButton = WB_Category_Player_Sell;
+			pButton = WB_Category_Inventory;
 		}
 		break;
 	case E_UIType::Joural:
@@ -184,5 +197,14 @@ UUI_CategoryTabButton* UUI_WindowSwitcher::GetUIButtonByType(E_UIType eType)
 		break;
 	}
 	return pButton;
+}
+
+void UUI_WindowSwitcher::ApplyType(E_UIType eType, bool bBroadcast)
+{
+	SetType(eType, false);
+	if (bBroadcast)
+	{
+		WindowSwitchDelegate.ExecuteIfBound(eType);
+	}
 }
 

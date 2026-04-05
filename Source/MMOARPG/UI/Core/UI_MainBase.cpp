@@ -11,7 +11,6 @@ void UUI_MainBase::NativeConstruct()
 {
 	Super::NativeConstruct();
 	//UE_LOG(MMOARPG, Display, TEXT("UUI_MainBase::NativeConstruct"));
-	
 }
 
 void UUI_MainBase::NativeDestruct()

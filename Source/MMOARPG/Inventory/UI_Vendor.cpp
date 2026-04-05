@@ -9,6 +9,50 @@
 #include "UI_VendorStorageInventory.h"
 #include "UI_InventoryBase.h"
 #include "UI_UpperUIBar.h"
+#include "../Core/Component/InteractionComponent.h"
+#include "../Core/Game/MMOARPGPlayerController.h"
+
+namespace
+{
+	void SyncMainHUDVisibility(UWorld* World, ESlateVisibility InVisibility)
+	{
+		if (!World)
+		{
+			return;
+		}
+
+		if (AMMOARPGPlayerController* PC = World->GetFirstPlayerController<AMMOARPGPlayerController>())
+		{
+			PC->SetMainUserWidgetVisibility(InVisibility);
+		}
+	}
+
+	void SetVendorInputMode(UWorld* World, bool bShowCursor)
+	{
+		if (!World)
+		{
+			return;
+		}
+
+		if (APlayerController* PC = World->GetFirstPlayerController())
+		{
+			if (bShowCursor)
+			{
+				FInputModeGameAndUI InputMode;
+				InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+				InputMode.SetHideCursorDuringCapture(false);
+				PC->SetInputMode(InputMode);
+			}
+			else
+			{
+				FInputModeGameOnly InputMode;
+				PC->SetInputMode(InputMode);
+			}
+
+			PC->bShowMouseCursor = bShowCursor;
+		}
+	}
+}
 
 
 //void UUI_Vendor::ShowVendor_Implementation()
@@ -19,23 +63,71 @@
 void UUI_Vendor::VendorBuy(uint16 count, uint32 propid)
 {
 	SEND_DATA(SP_ItemBuy, count, propid);
-	UE_LOG(MMOARPG, Display, TEXT("Send SP_VendorSell"));
+	UE_LOG(MMOARPG, Display, TEXT("[VendorUI] Send SP_ItemBuy [count:%u propid:%u]"), count, propid);
 }
 
 void UUI_Vendor::VendorSell(uint8 pos, uint16 count, uint32 propid)
 {
 	SEND_DATA(SP_ItemSell, count, propid);
-	UE_LOG(MMOARPG, Display, TEXT("Send SP_VendorSell"));
+	UE_LOG(MMOARPG, Display, TEXT("[VendorUI] Send SP_ItemSell [pos:%u count:%u propid:%u]"), pos, count, propid);
+}
+
+void UUI_Vendor::OpenWithInteraction(UInteractionComponent* SourceInteraction)
+{
+	if (!SourceInteraction)
+	{
+		UE_LOG(MMOARPG, Warning, TEXT("[VendorUI] OpenWithInteraction failed because SourceInteraction is null"));
+		return;
+	}
+
+	InteractionComponent = SourceInteraction;
+	UE_LOG(MMOARPG, Display, TEXT("[VendorUI] OpenWithInteraction [ShopUI:%p SourceInteraction:%p DataTableType:%d]"),
+		this,
+		InteractionComponent,
+		static_cast<int32>(InteractionComponent->DataTableType));
+
+	SetNativeUIType(E_UIType::Buy);
+
+	if (WB_VendorStorageInventory)
+	{
+		WB_VendorStorageInventory->UpdateInteraction(InteractionComponent);
+	}
+	else
+	{
+		UE_LOG(MMOARPG, Warning, TEXT("[VendorUI] OpenWithInteraction missing WB_VendorStorageInventory [ShopUI:%p]"), this);
+	}
+
+	SyncMainHUDVisibility(GetWorld(), ESlateVisibility::Hidden);
+	SetVendorInputMode(GetWorld(), true);
+
+	// 商店打开 → 切换到 VendorUI 上下文，屏蔽游戏快捷键
+	if (AMMOARPGPlayerController* PC = GetWorld()->GetFirstPlayerController<AMMOARPGPlayerController>())
+	{
+		PC->SetInputContext(EInputContext::VendorUI);
+	}
+
+	SetVisibility(ESlateVisibility::Visible);
 }
 
 void UUI_Vendor::SetVisibility(ESlateVisibility InVisibility)
 {
-	if(InVisibility==ESlateVisibility::Visible && InteractionComponent)
-	{
-		WB_VendorStorageInventory->UpdateInteraction(InteractionComponent);
-	}
-	//WB_VendorStorageInventory->InteractionComponent = InteractionComponent;
+	UE_LOG(MMOARPG, Display, TEXT("[VendorUI] SetVisibility [%d] [Interaction:%p DataTableType:%d]"),
+		static_cast<int32>(InVisibility),
+		InteractionComponent,
+		InteractionComponent ? static_cast<int32>(InteractionComponent->DataTableType) : INDEX_NONE);
 	SetVisibilityInternal(InVisibility);
+
+	if (InVisibility == ESlateVisibility::Hidden)
+	{
+		SyncMainHUDVisibility(GetWorld(), ESlateVisibility::Visible);
+		SetVendorInputMode(GetWorld(), false);
+
+		// 商店关闭 → 恢复游戏上下文
+		if (AMMOARPGPlayerController* PC = GetWorld()->GetFirstPlayerController<AMMOARPGPlayerController>())
+		{
+			PC->SetInputContext(EInputContext::Game);
+		}
+	}
 }
 
 void UUI_Vendor::NativeConstruct()
@@ -108,15 +200,6 @@ FReply UUI_Vendor::NativeOnKeyDown(const FGeometry& InGeometry, const FKeyEvent&
 		SetVisibility(ESlateVisibility::Hidden);
 
 		// 4. 设置输入模式为 Game + UI
-		if (APlayerController* PC = GetWorld()->GetFirstPlayerController())
-		{
-			FInputModeGameAndUI InputMode;
-			InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-			InputMode.SetHideCursorDuringCapture(false);
-
-			PC->SetInputMode(InputMode);
-		}
-
 		return FReply::Handled();
 	}
 

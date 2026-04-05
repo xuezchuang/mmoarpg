@@ -8,6 +8,7 @@
 #include "Engine/EngineBaseTypes.h"
 #include "../../MMOARPGBPLibrary.h"
 #include "MetanoiaCombat/UI_InGame.h"
+#include "UI/Game/UI_CharacterMenu.h"
 #include "Component/SelectableComponent.h"
 #include "MonsterWorldSubsystem.h"
 #include "Character/MMOARPGMonster.h"
@@ -17,8 +18,37 @@
 
 AMMOARPGPlayerController::AMMOARPGPlayerController()
 {
-	bShowMouseCursor = true;
+	bShowMouseCursor = false;
 	
+}
+
+void AMMOARPGPlayerController::SetMainUserWidgetVisibility(ESlateVisibility InVisibility)
+{
+	if (MainUserWidget)
+	{
+		MainUserWidget->SetVisibility(InVisibility);
+	}
+}
+
+void AMMOARPGPlayerController::ToggleCharacterMenu()
+{
+	if (UUI_CharacterMenu* Widget = GetOrCreateCharacterMenuWidget())
+	{
+		Widget->ToggleMenu();
+	}
+}
+
+void AMMOARPGPlayerController::CloseCharacterMenu()
+{
+	if (CharacterMenuWidget)
+	{
+		CharacterMenuWidget->CloseMenu();
+	}
+}
+
+bool AMMOARPGPlayerController::IsCharacterMenuOpen() const
+{
+	return CharacterMenuWidget && CharacterMenuWidget->IsMenuOpen();
 }
 
 void AMMOARPGPlayerController::BeginPlay()
@@ -30,10 +60,7 @@ void AMMOARPGPlayerController::BeginPlay()
         return;
     }
 
-	// 1. 初始化 SkillBar（30 个槽位）
 	InitSkillSlots();
-
-	// 2. 初始化默认快捷键
 	InitHotkeys();
 
     if (MainUserWidgetClass && !MainUserWidget)
@@ -42,15 +69,12 @@ void AMMOARPGPlayerController::BeginPlay()
         if (MainUserWidget)
         {
             MainUserWidget->AddToViewport();
-
-            // 如果你有热键初始化，放这里：
-            //MainUserWidget->GenerateHotkeys(Keys, KeysPerRow);
         }
     }
 
-	FInputModeGameAndUI InputMode;
-	InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+	FInputModeGameOnly InputMode;
 	SetInputMode(InputMode);
+	bShowMouseCursor = false;
 }
 
 void AMMOARPGPlayerController::SetupInputComponent()
@@ -60,35 +84,76 @@ void AMMOARPGPlayerController::SetupInputComponent()
 	InputComponent->BindKey(EKeys::AnyKey, IE_Released, this, &AMMOARPGPlayerController::OnAnyKeyReleased);
 }
 
+void AMMOARPGPlayerController::SetInputContext(EInputContext NewContext)
+{
+	CurrentInputContext = NewContext;
+}
+
+bool AMMOARPGPlayerController::IsVendorHotkey(ESystemHotkey Hotkey)
+{
+	return Hotkey == ESystemHotkey::VendorBuy
+		|| Hotkey == ESystemHotkey::VendorCountDecrease
+		|| Hotkey == ESystemHotkey::VendorCountIncrease
+		|| Hotkey == ESystemHotkey::VendorLeave;
+}
+
 void AMMOARPGPlayerController::OnAnyKeyPressed(FKey Key)
 {
-    // 1. 是技能槽？
-    if (int32* SlotIndex = HotkeyToSlot.Find(Key))
-    {
-        CastSkillInSlot(*SlotIndex);
-        return;
-    }
+	// [DBG] 临时日志 — 测试完删除
+	UE_LOG(MMOARPG, Display, TEXT("[DBG-PC] OnAnyKeyPressed Key=%s Context=%d"),
+		*Key.ToString(), static_cast<int32>(CurrentInputContext));
 
-    // 2. 是系统热键？
-    for (auto& Pair : HotkeyMap)
-    {
-        if (Pair.Value == Key)
-        {
-            HandleSystemHotkey(Pair.Key);
-            return;
-        }
-    }
+	switch (CurrentInputContext)
+	{
+	case EInputContext::VendorUI:
+	{
+		// 只响应 Vendor 快捷键，其余全屏蔽
+		for (auto& Pair : HotkeyMap)
+		{
+			if (IsVendorHotkey(Pair.Key) && Pair.Value == Key)
+			{
+				// [DBG] 临时日志 — 测试完删除
+				UE_LOG(MMOARPG, Display, TEXT("[DBG-PC] VendorUI context -> HandleSystemHotkey(%d)"),
+					static_cast<int32>(Pair.Key));
+				HandleSystemHotkey(Pair.Key);
+				return;
+			}
+		}
+		// [DBG] 临时日志 — 测试完删除
+		UE_LOG(MMOARPG, Display, TEXT("[DBG-PC] VendorUI context: key %s not a vendor key, discarded"), *Key.ToString());
+		return; // 非 Vendor 键在此上下文下丢弃
+	}
+
+	case EInputContext::Game:
+	default:
+	{
+		// 技能栏
+		if (int32* SlotIndex = HotkeyToSlot.Find(Key))
+		{
+			CastSkillInSlot(*SlotIndex);
+			return;
+		}
+		// 系统快捷键（跳过 Vendor 专属键）
+		for (auto& Pair : HotkeyMap)
+		{
+			if (!IsVendorHotkey(Pair.Key) && Pair.Value == Key)
+			{
+				HandleSystemHotkey(Pair.Key);
+				return;
+			}
+		}
+		break;
+	}
+	}
 }
 
 void AMMOARPGPlayerController::OnAnyKeyReleased(FKey Key)
 {
-	// 找出 Interaction 热键
 	const FKey* InteractionKeyPtr = HotkeyMap.Find(ESystemHotkey::Interaction);
 
 	if (!InteractionKeyPtr)
-		return;   // 没绑定 Interaction 热键
+		return;
 
-	// 对比当前松开的 Key
 	if (Key == *InteractionKeyPtr)
 	{
 		if (AMMOARPGCharacterBase* Base = GetPawn<AMMOARPGCharacterBase>())
@@ -101,45 +166,6 @@ void AMMOARPGPlayerController::OnAnyKeyReleased(FKey Key)
 
 void AMMOARPGPlayerController::ReplaceCharacter_Implementation(int32 InCharacterID)
 {
-	//if (!GetPawn())
-	//{
-	//	return;
-	//}
-
-	//if (AMMOARPGCharacterBase* MMOARPGBase = GetPawn<AMMOARPGCharacterBase>())
-	//{
-	//	if (MMOARPGBase->GetID() == InCharacterID)
-	//	{
-	//		return;
-	//	}
-	//}
-
-	//if (AMMOARPGGameState* InGameState = GetWorld()->GetGameState<AMMOARPGGameState>())
-	//{
-	//	if (FCharacterStyleTable* InStyleTable = InGameState->GetCharacterStyleTable(InCharacterID))
-	//	{
-	//		if (AMMOARPGCharacter* InNewCharacter = GetWorld()->SpawnActor<AMMOARPGCharacter>(
-	//			InStyleTable->MMOARPGCharacterClass,
-	//			GetPawn()->GetActorLocation(),
-	//			GetPawn()->GetActorRotation()))
-	//		{
-	//			if (AMMOARPGPlayerState* InPlayerState = GetPlayerState<AMMOARPGPlayerState>())
-	//			{
-	//				//判断是不是主要玩家角色
-	//				if (AMMOARPGPlayerCharacter* InPlayerCharacter = Cast<AMMOARPGPlayerCharacter>(InNewCharacter))
-	//				{
-	//					InPlayerCharacter->UpdateKneadingBoby(InPlayerState->GetCA());
-	//					InPlayerCharacter->CallUpdateKneadingBobyOnClient(InPlayerState->GetCA());
-	//				}
-
-	//				APawn* InPawn = GetPawn();
-	//				OnPossess(InNewCharacter);
-
-	//				InPawn->Destroy(true);
-	//			}
-	//		}
-	//	}
-	//}
 }
 
 void AMMOARPGPlayerController::RebindSelectTargetKey(const FKey& NewKey)
@@ -151,7 +177,6 @@ void AMMOARPGPlayerController::InitSkillSlots()
 {
     SkillBar.SetNum(30);
 
-    // 这里为每个槽默认 SkillId = -1（空）
     for (int32 i = 0; i < SkillBar.Num(); i++)
     {
         SkillBar[i] = -1;
@@ -162,7 +187,6 @@ void AMMOARPGPlayerController::InitHotkeys()
 {
     HotkeyToSlot.Empty();
 
-    // 默认 1～9 对应槽 0～8
     HotkeyToSlot.Add(EKeys::One, 0);
     HotkeyToSlot.Add(EKeys::Two, 1);
     HotkeyToSlot.Add(EKeys::Three, 2);
@@ -173,13 +197,40 @@ void AMMOARPGPlayerController::InitHotkeys()
     HotkeyToSlot.Add(EKeys::Eight, 7);
     HotkeyToSlot.Add(EKeys::Nine, 8);
 
-    // 槽 9～29 默认空，不加映射
-	HotkeyMap.Add(ESystemHotkey::SelectTarget, EKeys::Tab);
-	HotkeyMap.Add(ESystemHotkey::DeselectAll, EKeys::Escape);
-	HotkeyMap.Add(ESystemHotkey::Interaction, EKeys::F);
-	//HotkeyMap[ESystemHotkey::SelectSelf] = EKeys::Tab;
-	
-	
+	if (!HotkeyMap.Contains(ESystemHotkey::SelectTarget))
+	{
+		HotkeyMap.Add(ESystemHotkey::SelectTarget, EKeys::Tab);
+	}
+	if (!HotkeyMap.Contains(ESystemHotkey::DeselectAll))
+	{
+		HotkeyMap.Add(ESystemHotkey::DeselectAll, EKeys::Escape);
+	}
+	if (!HotkeyMap.Contains(ESystemHotkey::ToggleCharacterMenu))
+	{
+		HotkeyMap.Add(ESystemHotkey::ToggleCharacterMenu, EKeys::I);
+	}
+	if (!HotkeyMap.Contains(ESystemHotkey::Interaction))
+	{
+		HotkeyMap.Add(ESystemHotkey::Interaction, EKeys::F);
+	}
+
+	// 商人弹窗默认快捷键
+	if (!HotkeyMap.Contains(ESystemHotkey::VendorBuy))
+	{
+		HotkeyMap.Add(ESystemHotkey::VendorBuy, EKeys::E);
+	}
+	if (!HotkeyMap.Contains(ESystemHotkey::VendorCountDecrease))
+	{
+		HotkeyMap.Add(ESystemHotkey::VendorCountDecrease, EKeys::A);
+	}
+	if (!HotkeyMap.Contains(ESystemHotkey::VendorCountIncrease))
+	{
+		HotkeyMap.Add(ESystemHotkey::VendorCountIncrease, EKeys::D);
+	}
+	if (!HotkeyMap.Contains(ESystemHotkey::VendorLeave))
+	{
+		HotkeyMap.Add(ESystemHotkey::VendorLeave, EKeys::X);
+	}
 }
 
 void AMMOARPGPlayerController::CastSkillInSlot(int32 SlotIndex)
@@ -190,14 +241,10 @@ void AMMOARPGPlayerController::CastSkillInSlot(int32 SlotIndex)
 
     int32 SkillId = SkillBar[SlotIndex];
     if (SkillId < 0)
-        return; // 空槽
+        return;
 
-    // 调用角色执行技能
     if (auto* Ch = Cast<ACharacter>(GetPawn()))
     {
-        // 你自己的函数，例如：
-        // Ch->CastSkill(SkillId);
-
         UE_LOG(LogTemp, Warning, TEXT("Cast Skill Slot: %d  SkillId: %d"), SlotIndex, SkillId);
     }
 }
@@ -211,23 +258,27 @@ void AMMOARPGPlayerController::HandleSystemHotkey(ESystemHotkey Action)
 			OnSelectTarget();
 			break;
 		}
-		//case ESystemHotkey::SelectSelf:
-		//    OnSelectSelf();
-		//    break;
 		case ESystemHotkey::DeselectAll:
 		{
 			SetCurrentTarget(NULL);
 			break;
 		}
-		//case ESystemHotkey::ToggleMount:
-		//    OnToggleMount();
-		//    break;
-		//case ESystemHotkey::OpenMainMenu:
-		//    OnOpenMainMenu();
-		//    break;
+		case ESystemHotkey::ToggleCharacterMenu:
+		{
+			ToggleCharacterMenu();
+			break;
+		}
 		case ESystemHotkey::Interaction:
 		{
 			Interaction();
+			break;
+		}
+		case ESystemHotkey::VendorBuy:
+		case ESystemHotkey::VendorCountDecrease:
+		case ESystemHotkey::VendorCountIncrease:
+		case ESystemHotkey::VendorLeave:
+		{
+			OnVendorHotkey.Broadcast(Action);
 			break;
 		}
 		default:
@@ -249,24 +300,22 @@ void AMMOARPGPlayerController::SetCurrentTarget(AActor* NewTarget)
         return;
     }
 
-    // 旧目标取消选中
     if (CurrentSelectedTarget)
     {
         if (USelectableComponent* OldSelectable =
             CurrentSelectedTarget->FindComponentByClass<USelectableComponent>())
         {
-            OldSelectable->OnSelectionEnd();   // 这里用你自己的函数名
+            OldSelectable->OnSelectionEnd();
         }
     }
 
     CurrentSelectedTarget = NewTarget;
 	
-    // 新目标被选中
     if (CurrentSelectedTarget)
     {
 		if (USelectableComponent* NewSelectable = CurrentSelectedTarget->FindComponentByClass<USelectableComponent>())
         {
-            NewSelectable->OnSelected();       // 这里用你自己的函数名
+            NewSelectable->OnSelected();
 			if (AMMOARPGMonster* TargetMonster = Cast<AMMOARPGMonster>(NewSelectable->GetOwner()))
 			{
 				MainUserWidget->TargetMonster = TargetMonster;
@@ -293,6 +342,35 @@ void AMMOARPGPlayerController::Interaction()
 	}
 }
 
+UUI_CharacterMenu* AMMOARPGPlayerController::GetOrCreateCharacterMenuWidget()
+{
+	if (CharacterMenuWidget)
+	{
+		return CharacterMenuWidget;
+	}
+
+	AMMOARPGGameState* MMOARPGGameState = GetWorld() ? GetWorld()->GetGameState<AMMOARPGGameState>() : nullptr;
+	if (!MMOARPGGameState)
+	{
+		return nullptr;
+	}
+
+	TSubclassOf<UUI_CharacterMenu> WidgetClass = MMOARPGGameState->GetCharacterMenuWidgetClass();
+	if (!WidgetClass)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CharacterMenuWidgetClass is not configured on GameState."));
+		return nullptr;
+	}
+
+	CharacterMenuWidget = CreateWidget<UUI_CharacterMenu>(this, WidgetClass);
+	if (CharacterMenuWidget)
+	{
+		CharacterMenuWidget->ApplyMenuConfig(MMOARPGGameState->GetCharacterMenuConfig());
+	}
+
+	return CharacterMenuWidget;
+}
+
 bool AMMOARPGPlayerController::IsActorSelectable(AActor* Candidate, float MaxDistance, float MaxHalfAngleDeg) const
 {
 	if (!IsValid(Candidate))
@@ -315,13 +393,11 @@ bool AMMOARPGPlayerController::IsActorSelectable(AActor* Candidate, float MaxDis
     const FVector ToTarget  = TargetLoc - ViewLoc;
     const float Distance    = ToTarget.Size();
 
-    // 距离限制
     if (Distance > MaxDistance)
     {
         return false;
     }
 
-    // 视野锥限制：计算夹角
     const FVector DirNorm = ToTarget.GetSafeNormal();
     const float  Dot      = FVector::DotProduct(ViewDir, DirNorm);
     const float  CosHalf  = FMath::Cos(FMath::DegreesToRadians(MaxHalfAngleDeg));
@@ -330,7 +406,6 @@ bool AMMOARPGPlayerController::IsActorSelectable(AActor* Candidate, float MaxDis
         return false;
     }
 
-    // 视线遮挡（可见性判断）
     FHitResult Hit;
     FCollisionQueryParams Params(SCENE_QUERY_STAT(SelectTargetLOS), false, MyPawn);
     bool bHit = GetWorld()->LineTraceSingleByChannel(
@@ -343,7 +418,6 @@ bool AMMOARPGPlayerController::IsActorSelectable(AActor* Candidate, float MaxDis
 
     if (bHit && Hit.GetActor() != Candidate)
     {
-        // 被别的东西挡住了
         return false;
     }
 
@@ -364,8 +438,6 @@ float AMMOARPGPlayerController::CalcTargetScore(AActor* Candidate, const FVector
     const FVector DirNorm = ToTarget.GetSafeNormal();
     const float Dot       = FVector::DotProduct(ViewDir, DirNorm);
 
-    // 一个简单的 score：角度 + 距离综合
-    // Dot ∈ [-1,1]，越大越好。这里稍微压一点距离的影响。
     return Dot * 1000.f - Distance * 0.1f;
 }
 

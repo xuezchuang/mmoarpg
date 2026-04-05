@@ -14,7 +14,8 @@ class UCharacterMovementComponent;
 class UCapsuleComponent;
 class UCameraComponent;
 class UUI_Vendor;
-class AInventoryGameState;
+class AMMOARPGGameState;
+class UInteractionComponent;
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent), Blueprintable)
 class MMOARPG_API UInventoryComponent : public UActorComponent
@@ -32,9 +33,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = BP_Setting)
 	UUI_Vendor* m_UIShop;
 
-	UPROPERTY(BlueprintReadWrite, Category = BP_Setting)
-	bool m_CanShop = false;
-
 	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI")
 	//bool m_CanShop2 = false;
 
@@ -51,7 +49,7 @@ public:
 	UInventoryComponent();
 
 	UFUNCTION(BlueprintCallable, Category = BP_Setting)
-	void ShowVendor();
+	void ShowVendor(UInteractionComponent* SourceInteraction);
 
 protected:
 	// Called when the game starts
@@ -93,5 +91,5 @@ protected:
 	//UPROPERTY()
 	//FRotator LastRotator;
 private:
-	AInventoryGameState* m_InventoryGameState = NULL;
+	AMMOARPGGameState* m_InventoryGameState = nullptr;
 };

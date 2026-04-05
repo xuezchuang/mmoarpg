@@ -43,6 +43,7 @@ public:
 public:
 	void VendorBuy(uint16 count, uint32 propid);
 	void VendorSell(uint8 pos, uint16 count, uint32 propid);
+	void OpenWithInteraction(UInteractionComponent* SourceInteraction);
 
 	//UFUNCTION(BlueprintCallable, Category = "Widget")
 	virtual void SetVisibility(ESlateVisibility InVisibility);

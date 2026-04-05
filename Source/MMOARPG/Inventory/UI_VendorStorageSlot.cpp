@@ -4,7 +4,7 @@
 #include "Components\Image.h"
 #include "Components\TextBlock.h"
 #include "Components/Button.h"
-#include "InventoryGameState.h"
+#include "../Core/Game/MMOARPGGameState.h"
 
 //#include <Components/VerticalBox.h>
 //#include "UI_CraftingListSlot.h"
@@ -14,7 +14,8 @@ void UUI_VendorStorageSlot::NativeConstruct()
 	Super::NativeConstruct();
 	if(m_ItemData)
 	{
-		AInventoryGameState* pGameState = GetGameState<AInventoryGameState>();
+		AMMOARPGGameState* pGameState = GetGameState<AMMOARPGGameState>();
+		if (!pGameState) return;
 		FSlateColor mSlateColor = pGameState->GetRarityColor(m_ItemData->Rarity);
 		
 		BG->SetColorAndOpacity(mSlateColor.GetSpecifiedColor());

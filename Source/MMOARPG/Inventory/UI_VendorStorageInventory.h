@@ -3,6 +3,8 @@
 #include "CoreMinimal.h"
 #include "UI_Base.h"
 #include "../Data/FItemData.h"
+#include "UI_SplitStack.h"
+#include "../Core/Game/MMOARPGPlayerController.h"
 #include "UI_VendorStorageInventory.generated.h"
 
 class UUI_CategoryButton;
@@ -31,6 +33,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "BP_Setting")
 	TSubclassOf<UUI_VendorStorageSlot> Slot_BPClass;
 
+	/** 购买弹窗蓝图类，在 Blueprint 子类的 Details 里赋值 */
+	UPROPERTY(EditDefaultsOnly, Category = "BP_Setting")
+	TSubclassOf<UUI_SplitStack> SplitStackClass;
+
 	UPROPERTY(BlueprintReadWrite, Category = "BP_Setting")
 	UInteractionComponent* InteractionComponent = NULL;
 	//protected:
@@ -52,6 +58,15 @@ private:
 
 	void InitItems();
 
-	const FFS_ItemData* m_pItemData = NULL;
+	const FFS_ItemData* m_pItemData = nullptr;
 	TMap<const FFS_ItemData*, UUI_VendorStorageSlot*> mapSlot;
+
+	/** 复用的购买弹窗实例 */
+	UPROPERTY()
+	UUI_SplitStack* m_SplitStack = nullptr;
+
+	FDelegateHandle m_VendorHotkeyHandle;
+
+	void OnVendorHotkey(ESystemHotkey Action);
+	void OpenSplitStack();
 };

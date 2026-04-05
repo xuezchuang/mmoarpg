@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "UI_Base.h"
 #include "../Data/FItemData.h"
+#include "UI_SplitStack.h"
 #include "UI_VendorStorageSlot.generated.h"
 
 class UButton;
@@ -50,8 +51,9 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = UI)
 	void OnUnFocus();
+
 private:
-	const FFS_ItemData* m_ItemData = NULL;
+	const FFS_ItemData* m_ItemData = nullptr;
 
 	UFUNCTION(Category = "UI")
 	void OnClicked();

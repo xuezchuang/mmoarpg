@@ -8,33 +8,47 @@
 #include "Camera/CameraComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "MMOARPGType.h"
+#include "../../MMOARPG.h"
 #include "../../Inventory/UI_Vendor.h"
 #include "../../MMOARPGBPLibrary.h"
-#include "../../Inventory/InventoryGameState.h"
+#include "../Game/MMOARPGGameState.h"
+#include "InteractionComponent.h"
 
 void UInventoryComponent::InitializeComponent()
 {
-	/*m_InventoryGameState = GetWorld()->GetGameState<AInventoryGameState>();*/
 }
 
 // Sets default values for this component's properties
 UInventoryComponent::UInventoryComponent()
 {
-	if(GetWorld())
-		m_InventoryGameState = GetWorld()->GetGameState<AInventoryGameState>();
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 	// ...
 }
 
-void UInventoryComponent::ShowVendor()
+void UInventoryComponent::ShowVendor(UInteractionComponent* SourceInteraction)
 {
-	if(m_CanShop && m_UIShop)
+	if (!m_UIShop)
 	{
-		m_UIShop->SetVisibility(ESlateVisibility::Visible);
-		UMMOARPGBPLibrary::MMOARPG_InputMode(GetWorld(), EMMOARPG_InputMode::Input_UI, m_UIShop);
+		UE_LOG(MMOARPG, Warning, TEXT("[VendorUI] ShowVendor failed because m_UIShop is null [SourceInteraction:%p]"),
+			SourceInteraction);
+		return;
 	}
+
+	if (!SourceInteraction)
+	{
+		UE_LOG(MMOARPG, Warning, TEXT("[VendorUI] ShowVendor failed because SourceInteraction is null"));
+		return;
+	}
+
+	UE_LOG(MMOARPG, Display, TEXT("[VendorUI] ShowVendor [ShopUI:%p SourceInteraction:%p DataTableType:%d]"),
+		m_UIShop,
+		SourceInteraction,
+		static_cast<int32>(SourceInteraction->DataTableType));
+
+	m_UIShop->OpenWithInteraction(SourceInteraction);
+	UMMOARPGBPLibrary::MMOARPG_InputMode(GetWorld(), EMMOARPG_InputMode::Input_UI, m_UIShop);
 }
 
 // Called when the game starts
@@ -42,13 +56,25 @@ void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
+	m_InventoryGameState = GetWorld()->GetGameState<AMMOARPGGameState>();
+
 	MMOARPGCharacterBase = Cast<AMMOARPGCharacterBase>(GetOwner());
 	if (MMOARPGCharacterBase.IsValid())
 	{
 		m_UIShop = CreateWidget<UUI_Vendor>(GetWorld(), Vendor_BPClass);
-		m_UIShop->AddToViewport();
-		m_UIShop->SetVisibility(ESlateVisibility::Hidden);
+		if (m_UIShop)
+		{
+			m_UIShop->AddToViewport();
+			m_UIShop->SetVisibility(ESlateVisibility::Hidden);
+			UE_LOG(MMOARPG, Display, TEXT("[VendorUI] Create shared player vendor UI [ShopUI:%p Class:%s]"),
+				m_UIShop,
+				*GetNameSafe(Vendor_BPClass.Get()));
+		}
+		else
+		{
+			UE_LOG(MMOARPG, Warning, TEXT("[VendorUI] Failed to create shared player vendor UI [Class:%s]"),
+				*GetNameSafe(Vendor_BPClass.Get()));
+		}
 	}
 }
 
@@ -101,7 +127,17 @@ UInventoryComponent* UInventoryComponent::GetInventoryComponent(const UObject* W
 	}
 
 	APlayerController* PC = World->GetFirstPlayerController<APlayerController>();
+	if (!PC)
+	{
+		return nullptr;
+	}
+
 	ACharacter* Pawn = Cast<ACharacter>(PC->GetPawn());
+	if (!Pawn)
+	{
+		return nullptr;
+	}
+
 	return Pawn->FindComponentByClass<UInventoryComponent>();
 }
 

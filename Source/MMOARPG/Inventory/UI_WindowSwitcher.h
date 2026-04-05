@@ -134,6 +134,12 @@ private:
 public:
 	UFUNCTION(BlueprintCallable, Category = "UISetting")
 	UUI_CategoryTabButton* GetUIButtonByType(E_UIType eType);
+
+	UFUNCTION(BlueprintCallable, Category = "UISetting")
+	void ApplyType(E_UIType eType, bool bBroadcast = false);
+
+	UFUNCTION(BlueprintPure, Category = "UISetting")
+	E_UIType GetCurrentType() const { return m_eCurType; }
 	
 
 
