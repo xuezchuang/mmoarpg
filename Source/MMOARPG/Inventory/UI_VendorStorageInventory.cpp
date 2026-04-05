@@ -66,21 +66,33 @@ void UUI_VendorStorageInventory::NativeDestruct()
 	Super::NativeDestruct();
 }
 
+bool UUI_VendorStorageInventory::TryCloseSplitStack()
+{
+	if (!m_SplitStack) return false;
+
+	const ESlateVisibility V = m_SplitStack->GetVisibility();
+	if (V == ESlateVisibility::Hidden || V == ESlateVisibility::Collapsed) return false;
+
+	m_SplitStack->SetVisibility(ESlateVisibility::Hidden);
+	UE_LOG(MMOARPG, Display, TEXT("[VendorUI] TryCloseSplitStack: closed SplitStack"));
+	return true;
+}
+
 void UUI_VendorStorageInventory::OnVendorHotkey(ESystemHotkey Action)
 {
 	// [DBG] 临时日志 — 测试完删除
 	UE_LOG(MMOARPG, Display, TEXT("[DBG-VendorStorage] OnVendorHotkey Action=%d SplitStack=%p"),
 		static_cast<int32>(Action), m_SplitStack);
 
-	// SplitStack 可见时不处理 VendorBuy（让 SplitStack 自己响应确认购买）
-	if (Action == ESystemHotkey::VendorBuy)
+	// VendorOpenDialog（X）：打开购买数量弹窗
+	if (Action == ESystemHotkey::VendorOpenDialog)
 	{
 		const bool bSplitOpen = m_SplitStack &&
 			m_SplitStack->GetVisibility() != ESlateVisibility::Hidden &&
 			m_SplitStack->GetVisibility() != ESlateVisibility::Collapsed;
 
 		// [DBG] 临时日志 — 测试完删除
-		UE_LOG(MMOARPG, Display, TEXT("[DBG-VendorStorage] VendorBuy: bSplitOpen=%d SelectedItem=%p"),
+		UE_LOG(MMOARPG, Display, TEXT("[DBG-VendorStorage] VendorOpenDialog: bSplitOpen=%d SelectedItem=%p"),
 			bSplitOpen, m_pItemData);
 
 		if (!bSplitOpen)

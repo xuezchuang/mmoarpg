@@ -107,6 +107,11 @@ void UUI_Vendor::OpenWithInteraction(UInteractionComponent* SourceInteraction)
 	}
 
 	SetVisibility(ESlateVisibility::Visible);
+
+	// Blueprint 可能把输入模式覆盖为 UIOnly（NoCapture），导致 InputComponent 不触发。
+	// UUI_Vendor::NativeSupportsKeyboardFocus 已返回 true，这里强制抢焦点，
+	// 确保 NativeOnKeyDown 能路由 vendor 热键。
+	SetKeyboardFocus();
 }
 
 void UUI_Vendor::SetVisibility(ESlateVisibility InVisibility)
@@ -188,19 +193,31 @@ void UUI_Vendor::SetNativeUIType(E_UIType eType)
 
 FReply UUI_Vendor::NativeOnKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)
 {
-	Super::NativeOnKeyDown(InGeometry, InKeyEvent);
+	const FKey InputKey = InKeyEvent.GetKey();
 
-	// 1. 获取按下的键
-	FKey InputKey = InKeyEvent.GetKey();
-
-	// 2. 判断是不是你要处理的键（例如 R 或 V）
+	// R / V → 关闭"当前层级"：SplitStack 打开时先关弹窗，否则关整个商店
 	if (InputKey == EKeys::R || InputKey == EKeys::V)
 	{
-		// 3. 隐藏当前 Widget
-		SetVisibility(ESlateVisibility::Hidden);
-
-		// 4. 设置输入模式为 Game + UI
+		if (WB_VendorStorageInventory && WB_VendorStorageInventory->TryCloseSplitStack())
+		{
+			// SplitStack 已关，商店保持打开
+		}
+		else
+		{
+			SetVisibility(ESlateVisibility::Hidden);
+		}
 		return FReply::Handled();
+	}
+
+	// Blueprint 可能将输入模式切换为 UIOnly，导致 PlayerController 的 InputComponent 不触发。
+	// 由于 NativeSupportsKeyboardFocus() 返回 true，本 widget 会收到 NativeOnKeyDown，
+	// 在这里通过 TryHandleVendorKey 手动路由 vendor 热键。
+	if (AMMOARPGPlayerController* PC = GetOwningPlayer<AMMOARPGPlayerController>())
+	{
+		if (PC->TryHandleVendorKey(InputKey))
+		{
+			return FReply::Handled();
+		}
 	}
 
 	return FReply::Unhandled();

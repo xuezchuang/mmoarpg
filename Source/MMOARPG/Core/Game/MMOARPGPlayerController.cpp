@@ -91,10 +91,31 @@ void AMMOARPGPlayerController::SetInputContext(EInputContext NewContext)
 
 bool AMMOARPGPlayerController::IsVendorHotkey(ESystemHotkey Hotkey)
 {
-	return Hotkey == ESystemHotkey::VendorBuy
+	return Hotkey == ESystemHotkey::VendorOpenDialog
+		|| Hotkey == ESystemHotkey::VendorBuy
 		|| Hotkey == ESystemHotkey::VendorCountDecrease
 		|| Hotkey == ESystemHotkey::VendorCountIncrease
 		|| Hotkey == ESystemHotkey::VendorLeave;
+}
+
+bool AMMOARPGPlayerController::TryHandleVendorKey(FKey Key)
+{
+	if (CurrentInputContext != EInputContext::VendorUI)
+	{
+		return false;
+	}
+
+	for (auto& Pair : HotkeyMap)
+	{
+		if (IsVendorHotkey(Pair.Key) && Pair.Value == Key)
+		{
+			UE_LOG(MMOARPG, Display, TEXT("[DBG-PC] TryHandleVendorKey Key=%s -> Hotkey=%d"),
+				*Key.ToString(), static_cast<int32>(Pair.Key));
+			HandleSystemHotkey(Pair.Key);
+			return true;
+		}
+	}
+	return false;
 }
 
 void AMMOARPGPlayerController::OnAnyKeyPressed(FKey Key)
@@ -215,6 +236,12 @@ void AMMOARPGPlayerController::InitHotkeys()
 	}
 
 	// 商人弹窗默认快捷键
+	// X → 打开购买数量弹窗（VendorOpenDialog）
+	if (!HotkeyMap.Contains(ESystemHotkey::VendorOpenDialog))
+	{
+		HotkeyMap.Add(ESystemHotkey::VendorOpenDialog, EKeys::X);
+	}
+	// E → 确认购买（VendorBuy，仅在 SplitStack 可见时生效）
 	if (!HotkeyMap.Contains(ESystemHotkey::VendorBuy))
 	{
 		HotkeyMap.Add(ESystemHotkey::VendorBuy, EKeys::E);
@@ -229,7 +256,7 @@ void AMMOARPGPlayerController::InitHotkeys()
 	}
 	if (!HotkeyMap.Contains(ESystemHotkey::VendorLeave))
 	{
-		HotkeyMap.Add(ESystemHotkey::VendorLeave, EKeys::X);
+		HotkeyMap.Add(ESystemHotkey::VendorLeave, EKeys::Escape);
 	}
 }
 
@@ -273,6 +300,7 @@ void AMMOARPGPlayerController::HandleSystemHotkey(ESystemHotkey Action)
 			Interaction();
 			break;
 		}
+		case ESystemHotkey::VendorOpenDialog:
 		case ESystemHotkey::VendorBuy:
 		case ESystemHotkey::VendorCountDecrease:
 		case ESystemHotkey::VendorCountIncrease:

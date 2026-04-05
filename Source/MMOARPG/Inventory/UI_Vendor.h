@@ -48,6 +48,8 @@ public:
 	//UFUNCTION(BlueprintCallable, Category = "Widget")
 	virtual void SetVisibility(ESlateVisibility InVisibility);
 public:
+	virtual bool NativeSupportsKeyboardFocus() const override { return true; }
+
 	virtual void NativeConstruct();
 
 	virtual void NativeDestruct();

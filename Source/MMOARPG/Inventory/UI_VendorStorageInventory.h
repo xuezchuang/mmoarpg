@@ -43,6 +43,9 @@ public:
 public:
 	void UpdateInteraction(UInteractionComponent* ITCom);
 
+	/** R 键"返回"逻辑：SplitStack 可见时关闭弹窗，否则返回 false 让 Vendor 自己关闭 */
+	bool TryCloseSplitStack();
+
 	UFUNCTION(BlueprintImplementableEvent, Category = "BP_Setting")
 	void UpdateItem(const FFS_ItemData& ItemData);
 

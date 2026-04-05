@@ -32,7 +32,8 @@ enum class ESystemHotkey : uint8
 	Interaction,
 
 	// 商人购买弹窗快捷键（可重绑定）
-	VendorBuy,
+	VendorOpenDialog,    // 打开购买数量弹窗（默认 X）
+	VendorBuy,           // 确认购买（默认 E，仅在 SplitStack 可见时生效）
 	VendorCountDecrease,
 	VendorCountIncrease,
 	VendorLeave,
@@ -65,6 +66,13 @@ public:
 	/** 切换输入上下文（开关商店、菜单时调用） */
 	void SetInputContext(EInputContext NewContext);
 	EInputContext GetInputContext() const { return CurrentInputContext; }
+
+	/**
+	 * 供 widget NativeOnKeyDown 调用：在 VendorUI 上下文中查找并执行对应 vendor 热键。
+	 * UIOnly 模式下 InputComponent 不触发，通过此方法路由。
+	 * @return true 表示已处理，false 表示未匹配。
+	 */
+	bool TryHandleVendorKey(FKey Key);
 
 private:
 	EInputContext CurrentInputContext = EInputContext::Game;
