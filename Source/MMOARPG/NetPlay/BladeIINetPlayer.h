@@ -37,6 +37,7 @@ private:
 	virtual void RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
 	void UpDateMove(float DeltaTime);
 	bool IsMoveTrace();
+	void SyncRemoteMovementState(const FVector& PreviousLocation, const FVector& NewLocation, float DeltaTime);
 private:
 	FVector m_TargetPos;
 	FVector m_CurPos;

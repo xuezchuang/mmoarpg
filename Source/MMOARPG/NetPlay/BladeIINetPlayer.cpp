@@ -118,6 +118,12 @@ void ABladeIINetPlayer::UpdateBaseData(const S_ROLE_O_BASE* RoleBase)
 	m_CurSpeed = 0.0f;
 	SetActorLocation(m_TargetPos);
 	SetActorRotation(FRotator(0.f, m_TargetFace, 0.f));
+
+	if (UCharacterMovementComponent* MovementComponent = GetCharacterMovement())
+	{
+		MovementComponent->Velocity = FVector::ZeroVector;
+		MovementComponent->SetMovementMode(MOVE_Walking);
+	}
 }
 
 void ABladeIINetPlayer::SetRemotePlayerId(uint32 InRemotePlayerId)
@@ -152,6 +158,7 @@ void ABladeIINetPlayer::UpDateMove(float DeltaTime)
 	SetActorRotation(FRotator(0, RealYaw, 0));
 	//
 	m_CurPos = GetActorLocation();
+	FVector NewLocation = m_CurPos;
 	FVector dir = (m_TargetPos - m_CurPos).GetSafeNormal(0.0001);
 	float distance = FVector::Distance(m_CurPos, m_TargetPos);
 	if(distance > 10)
@@ -166,13 +173,16 @@ void ABladeIINetPlayer::UpDateMove(float DeltaTime)
 		{
 			CurSpeed = m_CurSpeed + DeltaTime / 1.8;
 		}
-		FVector Location = m_CurPos + CurSpeed * DeltaTime * dir;
+		NewLocation = m_CurPos + CurSpeed * DeltaTime * dir;
 		//UE_LOG(MMOARPG, Display, TEXT("curpos[%f,%f,%f]"), Location.X, Location.Y, Location.Z);
-		SetActorLocation(Location);
+		SetActorLocation(NewLocation);
+		SyncRemoteMovementState(m_CurPos, NewLocation, DeltaTime);
 		return;
 	}
 
-	SetActorLocation(m_TargetPos);
+	NewLocation = m_TargetPos;
+	SetActorLocation(NewLocation);
+	SyncRemoteMovementState(m_CurPos, NewLocation, DeltaTime);
 	if(m_TargetSpeedTemp == 0.0)
 	{
 		m_TargetIndex++;
@@ -203,6 +213,21 @@ void ABladeIINetPlayer::UpDateMove(float DeltaTime)
 		}
 	}
 
+}
+
+void ABladeIINetPlayer::SyncRemoteMovementState(const FVector& PreviousLocation, const FVector& NewLocation, float DeltaTime)
+{
+	if (UCharacterMovementComponent* MovementComponent = GetCharacterMovement())
+	{
+		const FVector Velocity = DeltaTime > KINDA_SMALL_NUMBER
+			? (NewLocation - PreviousLocation) / DeltaTime
+			: FVector::ZeroVector;
+
+		MovementComponent->Velocity = Velocity;
+
+		const bool bHasVerticalMotion = FMath::Abs(Velocity.Z) > 10.f || FMath::Abs(m_TargetPos.Z - NewLocation.Z) > 5.f;
+		MovementComponent->SetMovementMode(bHasVerticalMotion ? MOVE_Falling : MOVE_Walking);
+	}
 }
 
 bool ABladeIINetPlayer::IsMoveTrace()
