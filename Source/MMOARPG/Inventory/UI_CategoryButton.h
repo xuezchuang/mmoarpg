@@ -2,40 +2,41 @@
 
 #include "CoreMinimal.h"
 #include "UI_Base.h"
-#include "Engine\Texture2D.h"
-#include "UObject\NoExportTypes.h"
+#include "Engine/Texture2D.h"
 #include "UI_CategoryButton.generated.h"
 
 class UButton;
 class UImage;
+class UBorder;
 
 UCLASS()
 class UUI_CategoryButton : public UUI_Base
 {
 	GENERATED_BODY()
 
-	//UPROPERTY(EditInstanceOnly, Category = "Default")
-	//TObjectPtr<UTexture2D> CategoryIcon;
+private:
+	UPROPERTY(meta = (BindWidget))
+	UImage* Image_92;
 
-	//UPROPERTY(EditInstanceOnly, Category = "Default")
-	//FLinearColor IconColor = FLinearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	UPROPERTY(meta = (BindWidget))
+	UImage* Button_Preview_Icon;
 
-	//UPROPERTY(meta = (BindWidget))
-	//UImage* Preview_Icon;
+	UPROPERTY(meta = (BindWidget))
+	UBorder* Border_Weapons;
 
-	//protected:
 public:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	UButton* Button_Weapons;
 
-	UFUNCTION()
-	void TestButton();
-public:
-	virtual void NativeConstruct();
+	/** 分类图标纹理 — EditAnywhere 使得父 Widget 设计器里可以对每个实例单独赋值 */
+	UPROPERTY(EditAnywhere, Category = "BP_Setting")
+	UTexture2D* Texture;
 
-	virtual void NativeDestruct();
+	void SetActive(bool bActive);
+
+	virtual void NativeConstruct() override;
+	virtual void NativeDestruct() override;
 
 protected:
 	virtual void NativePreConstruct() override;
-
 };

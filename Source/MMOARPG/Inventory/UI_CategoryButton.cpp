@@ -2,17 +2,34 @@
 
 #include "UI_CategoryButton.h"
 #include "Components/Button.h"
+#include "Components/Image.h"
+#include "Components/Border.h"
 
-void UUI_CategoryButton::TestButton()
+static const FLinearColor GIconColorActive   = FLinearColor(FColor::FromHex(TEXT("414758FF")));
+static const FLinearColor GIconColorInactive = FLinearColor(FColor::FromHex(TEXT("EDE5DCFF"))); 
+static const FLinearColor GBorderColorActive   = FLinearColor(FColor::FromHex(TEXT("00000000"))); 
+static const FLinearColor GBorderColorInactive = FLinearColor(FColor::FromHex(TEXT("FFFFFFFF")));
+
+void UUI_CategoryButton::SetActive(bool bActive)
 {
-	int a = 0;
+	if (Image_92)
+	{
+		Image_92->SetVisibility(bActive ? ESlateVisibility::HitTestInvisible : ESlateVisibility::Hidden);
+	}
+	if (Button_Preview_Icon)
+	{
+		Button_Preview_Icon->SetColorAndOpacity(bActive ? GIconColorActive : GIconColorInactive);
+	}
+	if (Border_Weapons)
+	{
+		Border_Weapons->SetBrushColor(bActive ? GBorderColorActive : GBorderColorInactive);
+	}
 }
 
 void UUI_CategoryButton::NativeConstruct()
 {
 	Super::NativeConstruct();
-	//Button_Weapons->OnClicked.AddDynamic(this, &ThisClass::TestButton);
-	Button_Weapons->OnClicked.__Internal_AddDynamic(this, &ThisClass::TestButton, TEXT("TestButton"));
+	SetActive(false);
 }
 
 void UUI_CategoryButton::NativeDestruct()
@@ -23,6 +40,9 @@ void UUI_CategoryButton::NativeDestruct()
 void UUI_CategoryButton::NativePreConstruct()
 {
 	Super::NativePreConstruct();
-	//Preview_Icon->SetBrushResourceObject(CategoryIcon);
-	//Preview_Icon->SetColorAndOpacity(IconColor);
+	if (Button_Preview_Icon && Texture)
+	{
+		Button_Preview_Icon->SetBrushResourceObject(Texture);
+	}
+	SetActive(false);
 }

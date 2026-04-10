@@ -4,6 +4,7 @@
 #include "UI_Base.h"
 #include "Engine\Texture2D.h"
 #include "Data/FPlayerInventoryData.h"
+#include "UI_InventorySlot.h"
 
 #include "UI_InventoryBase.generated.h"
 
@@ -11,7 +12,7 @@ class UButton;
 class UImage;
 class UUI_CategoryButton;
 class UUniformGridPanel;
-//class UUserWidget;
+class UWidgetSwitcher;
 
 UCLASS()
 class UUI_InventoryBase : public UUI_Base
@@ -50,6 +51,9 @@ class UUI_InventoryBase : public UUI_Base
 	UUI_CategoryButton* WB_CategoryEvent;
 #pragma endregion
 
+	UPROPERTY(meta = (BindWidget))
+	UWidgetSwitcher* Panels_Switcher;
+
 #pragma region UniformGridPanels
 	UPROPERTY(meta = (BindWidget))
 	UUniformGridPanel* UniformGrid_P1;
@@ -82,23 +86,55 @@ class UUI_InventoryBase : public UUI_Base
 	UUniformGridPanel* UniformGrid_P10;
 #pragma endregion
 
-
 public:
 	virtual void NativeConstruct();
-
 	virtual void NativeDestruct();
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
-	/** 将指定分类的物品填充到对应的 UniformGrid（打开背包时调用） */
 	void PopulateGridForCategory(E_InventoryCategory Category);
-
-	/** 根据分类枚举获取对应的 UniformGrid 面板 */
 	UUniformGridPanel* GetGridByCategory(E_InventoryCategory Category) const;
 
-	/** 背包物品槽 Widget 蓝图类，需在 Blueprint 中赋值 */
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
-	TSubclassOf<UUserWidget> InventorySlotClass;
+	TSubclassOf<UUI_InventorySlot> InventorySlotClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
+	int32 TotalSlots = 40;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
+	int32 Columns = 5;
+
+	/** 自动列数上限。<=0 表示不限制 */
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
+	int32 MaxAutoColumns = 8;
+
+	/** 每格最小宽度（像素），控制 Grid 撑满容器，按实际槽位宽度调整 */
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
+	float SlotMinWidth = 90.f;
+
+	/** 每格最小高度（像素） */
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
+	float SlotMinHeight = 110.f;
 
 protected:
 	void NativePreConstruct() override;
 
+private:
+	int32 ResolveRuntimeColumns(UUniformGridPanel* Grid) const;
+
+	E_InventoryCategory CurrentCategory = E_InventoryCategory::Weapon;
+	int32 RuntimeColumns = 0;
+	bool bRebuildingFromAutoColumns = false;
+
+	UFUNCTION() void OnCategoryWeapon();
+	UFUNCTION() void OnCategoryRange();
+	UFUNCTION() void OnCategoryArmor();
+	UFUNCTION() void OnCategoryAccessories();
+	UFUNCTION() void OnCategoryRuneStone();
+	UFUNCTION() void OnCategoryConsumable();
+	UFUNCTION() void OnCategoryResources();
+	UFUNCTION() void OnCategoryMount();
+	UFUNCTION() void OnCategoryQuest();
+	UFUNCTION() void OnCategoryEvent();
+
+	void SetActiveCategoryButton(UUI_CategoryButton* ActiveBtn);
 };
