@@ -11,6 +11,7 @@
 #include "Components/WidgetSwitcher.h"
 #include "Blueprint/UserWidget.h"
 #include "TimerManager.h"
+#include "UI_ToolTip.h"
 #include "../Core/Game/MMOARPGPlayerState.h"
 #include "GameFramework/PlayerState.h"
 
@@ -31,6 +32,7 @@ void UUI_InventoryBase::NativeConstruct()
 	if (WB_CategoryEvent      && WB_CategoryEvent->Button_Weapons)      WB_CategoryEvent->Button_Weapons->OnClicked.AddDynamic(this, &ThisClass::OnCategoryEvent);
 
 	// Default to weapon category on open.
+	UpdateMainToolTip(nullptr);
 	SetActiveCategoryButton(WB_CategoryWeapon);
 	PopulateGridForCategory(E_InventoryCategory::Weapon);
 }
@@ -142,6 +144,8 @@ int32 UUI_InventoryBase::ResolveRuntimeColumns(UUniformGridPanel* Grid) const
 void UUI_InventoryBase::PopulateGridForCategory(E_InventoryCategory Category)
 {
 	CurrentCategory = Category;
+	ClearSelection();
+
 	// Switch visible panel.
 	if (Panels_Switcher)
 	{
@@ -257,6 +261,8 @@ void UUI_InventoryBase::PopulateGridForCategory(E_InventoryCategory Category)
 	int32 AddFailed = 0;
 	int32 LastRow = INDEX_NONE;
 	int32 LastCol = INDEX_NONE;
+	UUI_InventorySlot* FirstItemSlot = nullptr;
+	const FFS_ItemData* FirstItemData = nullptr;
 	for (int32 i = 0; i < TotalSlots; ++i)
 	{
 		UUI_InventorySlot* SlotWidget = CreateWidget<UUI_InventorySlot>(this, InventorySlotClass);
@@ -271,6 +277,14 @@ void UUI_InventoryBase::PopulateGridForCategory(E_InventoryCategory Category)
 		{
 			SlotWidget->SetItemData(nullptr);
 		}
+		SlotWidget->OnSlotClicked.BindUObject(this, &ThisClass::HandleSlotClicked);
+
+		if (!FirstItemSlot && Items.IsValidIndex(i))
+		{
+			FirstItemSlot = SlotWidget;
+			FirstItemData = Items[i];
+		}
+
 		// Keep blueprint default visuals for empty cells unless explicit clear is enabled.
 		const int32 Row = i / FinalColumns;
 		const int32 Col = i % FinalColumns;
@@ -329,6 +343,15 @@ void UUI_InventoryBase::PopulateGridForCategory(E_InventoryCategory Category)
 				*WeakThis->GetName(), (int32)Cat, DS.X, DS.Y);
 		}));
 	}
+
+	if (FirstItemSlot && FirstItemData)
+	{
+		UpdateSelectedSlot(FirstItemSlot, FirstItemData);
+	}
+	else
+	{
+		UpdateMainToolTip(nullptr);
+	}
 }
 
 void UUI_InventoryBase::RefreshCurrentCategory()
@@ -359,4 +382,47 @@ void UUI_InventoryBase::SetActiveCategoryButton(UUI_CategoryButton* ActiveBtn)
 	{
 		if (Btn) Btn->SetActive(Btn == ActiveBtn);
 	}
+}
+
+void UUI_InventoryBase::UpdateSelectedSlot(UUI_InventorySlot* SlotWidget, const FFS_ItemData* ItemData)
+{
+	if (SelectedSlotWidget.IsValid() && SelectedSlotWidget.Get() != SlotWidget)
+	{
+		SelectedSlotWidget->SetActive(false);
+	}
+
+	SelectedSlotWidget = nullptr;
+	SelectedItemData = nullptr;
+
+	if (SlotWidget && ItemData)
+	{
+		SelectedSlotWidget = SlotWidget;
+		SelectedItemData = ItemData;
+		SelectedSlotWidget->SetActive(true);
+	}
+
+	UpdateMainToolTip(SelectedItemData);
+}
+
+void UUI_InventoryBase::UpdateMainToolTip(const FFS_ItemData* ItemData) const
+{
+	if (WB_MainToolTip)
+	{
+		WB_MainToolTip->SetItemData(ItemData);
+	}
+
+	if (WB_CompareToolTip)
+	{
+		WB_CompareToolTip->SetVisibility(ESlateVisibility::Collapsed);
+	}
+}
+
+void UUI_InventoryBase::ClearSelection()
+{
+	UpdateSelectedSlot(nullptr, nullptr);
+}
+
+void UUI_InventoryBase::HandleSlotClicked(UUI_InventorySlot* SlotWidget, const FFS_ItemData* ItemData)
+{
+	UpdateSelectedSlot(SlotWidget, ItemData);
 }

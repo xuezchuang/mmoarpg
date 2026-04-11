@@ -12,8 +12,9 @@ class UUniformGridPanel;
 class UWidget;
 class UUI_RarityStar;
 class UUI_ConsumableTypeIcon;
+class UUI_InventorySlot;
 
-DECLARE_DELEGATE_OneParam(FOnInventorySlotClicked, const FFS_ItemData*);
+DECLARE_DELEGATE_TwoParams(FOnInventorySlotClicked, UUI_InventorySlot*, const FFS_ItemData*);
 
 /**
  * UI_InventorySlot — 背包物品格 Widget
@@ -109,6 +110,12 @@ private:
 
 	UFUNCTION()
 	void OnButtonClicked();
+
+	UFUNCTION()
+	void OnButtonHovered();
+
+	UFUNCTION()
+	void OnButtonUnhovered();
 
 	/** 根据稀有度等级刷新 CloneGridBoost 中的星星 */
 	void RefreshRarityStars(E_ItemRarity Rarity);

@@ -1,15 +1,67 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "UI_VendorStorageInventory.h"
+#include "Components/TextBlock.h"
 #include "Components/UniformGridPanel.h"
+#include "UI_ToolTip.h"
 #include "UI_VendorStorageSlot.h"
 #include "../MMOARPG.h"
+#include "../Core/Common/MMOARPGGameInstance.h"
+#include "../Core/Common/MMOARPGNetSubsystem.h"
 #include "../Core/Component/InventoryComponent.h"
 #include "../Core/Component/InteractionComponent.h"
 #include "../Core/Game/MMOARPGGameState.h"
+#include "../Core/Game/MMOARPGPlayerState.h"
+#include "Protocol/HallProtocol.h"
+#include "Protocol/GameProtocol.h"
 
 namespace
 {
+	FString NormalizeVendorItemId(FString InValue)
+	{
+		InValue.TrimStartAndEndInline();
+		InValue = InValue.ToLower();
+
+		FString Result;
+		Result.Reserve(InValue.Len());
+		for (const TCHAR Ch : InValue)
+		{
+			if (FChar::IsAlnum(Ch))
+			{
+				Result.AppendChar(Ch);
+			}
+		}
+		return Result;
+	}
+
+	FString NormalizeVendorItemName(FString InValue)
+	{
+		InValue.TrimStartAndEndInline();
+		InValue = InValue.ToLower();
+
+		FString Result;
+		Result.Reserve(InValue.Len());
+		bool bLastWasSpace = false;
+		for (const TCHAR Ch : InValue)
+		{
+			if (FChar::IsWhitespace(Ch))
+			{
+				if (!bLastWasSpace)
+				{
+					Result.AppendChar(TEXT(' '));
+					bLastWasSpace = true;
+				}
+				continue;
+			}
+
+			Result.AppendChar(Ch);
+			bLastWasSpace = false;
+		}
+
+		Result.TrimStartAndEndInline();
+		return Result;
+	}
+
 	FString DescribeVendorItem(const FFS_ItemData* ItemData)
 	{
 		if (!ItemData)
@@ -32,6 +84,7 @@ namespace
 void UUI_VendorStorageInventory::UpdateInteraction(UInteractionComponent* ITCom)
 {
 	InteractionComponent = ITCom;
+	ClearSelection();
 	UE_LOG(MMOARPG, Display, TEXT("[VendorUI] UpdateInteraction [Interaction:%p DataTableType:%d]"),
 		InteractionComponent,
 		InteractionComponent ? static_cast<int32>(InteractionComponent->DataTableType) : INDEX_NONE);
@@ -50,10 +103,32 @@ void UUI_VendorStorageInventory::NativeConstruct()
 	{
 		m_VendorHotkeyHandle = PC->OnVendorHotkey.AddUObject(this, &UUI_VendorStorageInventory::OnVendorHotkey);
 	}
+
+	if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+	{
+		if (UMMOARPGNetSubsystem* Net = GI->GetSubsystem<UMMOARPGNetSubsystem>())
+		{
+			InterestingProtos = { SP_CharacterResponse, SP_ItemBuy };
+			Net->AddProtoListenerBatch(InterestingProtos, this, &UUI_VendorStorageInventory::RecvProtocol, InterestingHandles);
+		}
+	}
+
+	UpdateGoldText();
 }
 
 void UUI_VendorStorageInventory::NativeDestruct()
 {
+	if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+	{
+		if (UMMOARPGNetSubsystem* Net = GI->GetSubsystem<UMMOARPGNetSubsystem>())
+		{
+			Net->RemoveProtoListenersBatch(InterestingProtos, InterestingHandles);
+		}
+	}
+
+	InterestingProtos.Reset();
+	InterestingHandles.Reset();
+
 	if (AMMOARPGPlayerController* PC = GetOwningPlayer<AMMOARPGPlayerController>())
 	{
 		if (m_VendorHotkeyHandle.IsValid())
@@ -126,23 +201,32 @@ void UUI_VendorStorageInventory::DeleteUpdateItem(const FFS_ItemData* ItemData)
 {
 	if (!ItemData)
 	{
+		ClearSelection();
 		UE_LOG(MMOARPG, Warning, TEXT("[VendorUI] DeleteUpdateItem ignored because ItemData is null"));
 		return;
 	}
 
-	if(m_pItemData == ItemData)
+	if (m_pItemData != ItemData)
 	{
-		UE_LOG(MMOARPG, Display, TEXT("[VendorUI] DeleteUpdateItem ignored because selection is unchanged [%s]"),
-			*DescribeVendorItem(ItemData));
-		return;
+		UUI_VendorStorageSlot** pOldWidget = mapSlot.Find(m_pItemData);
+		if (pOldWidget && *pOldWidget)
+		{
+			(*pOldWidget)->OnUnFocus();
+		}
+
+		m_pItemData = ItemData;
+		UUI_VendorStorageSlot** pNewWidget = mapSlot.Find(m_pItemData);
+		if (pNewWidget && *pNewWidget)
+		{
+			(*pNewWidget)->OnFocus();
+		}
+
+		UE_LOG(MMOARPG, Display, TEXT("[VendorUI] Selected vendor item [%s]"), *DescribeVendorItem(m_pItemData));
 	}
-	UUI_VendorStorageSlot** pWidget = mapSlot.Find(m_pItemData);
-	if(pWidget && *pWidget)
-	{
-		(*pWidget)->OnUnFocus();
-	}
-	m_pItemData = ItemData;
-	UE_LOG(MMOARPG, Display, TEXT("[VendorUI] Selected vendor item [%s]"), *DescribeVendorItem(m_pItemData));
+
+	UpdateMainToolTip(ItemData);
+	UpdateOwnedText(ItemData);
+	UpdateGoldText();
 	UpdateItem(*ItemData);
 }
 
@@ -150,6 +234,7 @@ void UUI_VendorStorageInventory::InitItems()
 {
 	if (!StorageUniformGrid)
 	{
+		ClearSelection();
 		UE_LOG(MMOARPG, Warning, TEXT("[VendorUI] InitItems aborted because StorageUniformGrid is null"));
 		return;
 	}
@@ -158,6 +243,7 @@ void UUI_VendorStorageInventory::InitItems()
 	AMMOARPGGameState* pGameState = GetGameState<AMMOARPGGameState>();
 	if(!pGameState || !InteractionComponent)
 	{
+		ClearSelection();
 		UE_LOG(MMOARPG, Warning, TEXT("[VendorUI] InitItems aborted [GameState:%p Interaction:%p]"),
 			pGameState,
 			InteractionComponent);
@@ -166,6 +252,7 @@ void UUI_VendorStorageInventory::InitItems()
 	TArray<FFS_ItemData>* aItemList = pGameState->GetItemsByDataTableType(InteractionComponent->DataTableType);
 	if(aItemList==NULL)
 	{
+		ClearSelection();
 		UE_LOG(MMOARPG, Warning, TEXT("[VendorUI] InitItems failed to resolve item list [DataTableType:%d]"),
 			static_cast<int32>(InteractionComponent->DataTableType));
 		return;
@@ -218,12 +305,131 @@ void UUI_VendorStorageInventory::InitItems()
 		(*pWidget)->OnFocus();
 		UE_LOG(MMOARPG, Display, TEXT("[VendorUI] Focus vendor slot and push UpdateItem [%s]"),
 			*DescribeVendorItem(m_pItemData));
+		UpdateMainToolTip(m_pItemData);
+		UpdateOwnedText(m_pItemData);
+		UpdateGoldText();
 		UpdateItem(*m_pItemData);
 	}
 	else
 	{
+		UpdateMainToolTip(nullptr);
+		UpdateOwnedText(nullptr);
+		UpdateGoldText();
 		UE_LOG(MMOARPG, Warning, TEXT("[VendorUI] No valid focused vendor slot after InitItems [Selected:%s MapSlotCount:%d]"),
 			*DescribeVendorItem(m_pItemData),
 			mapSlot.Num());
 	}
+}
+
+void UUI_VendorStorageInventory::UpdateMainToolTip(const FFS_ItemData* ItemData) const
+{
+	if (WB_MainToolTip)
+	{
+		WB_MainToolTip->SetItemData(ItemData);
+	}
+}
+
+void UUI_VendorStorageInventory::UpdateOwnedText(const FFS_ItemData* ItemData) const
+{
+	if (OwnedText)
+	{
+		OwnedText->SetText(FText::FromString(FString::Printf(TEXT("Owned: %d"), GetOwnedItemCount(ItemData))));
+	}
+}
+
+void UUI_VendorStorageInventory::UpdateGoldText()
+{
+	if (!TextGold)
+	{
+		return;
+	}
+
+	UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>();
+	const int32 GoldValue = GI ? static_cast<int32>(GI->GetUserData().base.econ.gold) : 0;
+	TextGold->SetText(FText::AsNumber(GoldValue));
+}
+
+void UUI_VendorStorageInventory::RecvProtocol(uint32 ProtocolNumber)
+{
+	switch (ProtocolNumber)
+	{
+	case SP_CharacterResponse:
+	case SP_ItemBuy:
+		UpdateGoldText();
+		break;
+	default:
+		break;
+	}
+}
+
+void UUI_VendorStorageInventory::ClearSelection()
+{
+	if (UUI_VendorStorageSlot** pWidget = mapSlot.Find(m_pItemData))
+	{
+		if (*pWidget)
+		{
+			(*pWidget)->OnUnFocus();
+		}
+	}
+
+	m_pItemData = nullptr;
+	UpdateMainToolTip(nullptr);
+	UpdateOwnedText(nullptr);
+	UpdateGoldText();
+}
+
+int32 UUI_VendorStorageInventory::GetOwnedItemCount(const FFS_ItemData* ItemData) const
+{
+	if (!ItemData)
+	{
+		return 0;
+	}
+
+	APlayerController* OwningPC = GetOwningPlayer();
+	APlayerController* PC = OwningPC;
+	if (!PC)
+	{
+		if (UWorld* World = GetWorld())
+		{
+			PC = World->GetFirstPlayerController();
+		}
+	}
+
+	const AMMOARPGPlayerState* PlayerState = PC ? PC->GetPlayerState<AMMOARPGPlayerState>() : nullptr;
+	if (!PlayerState)
+	{
+		return 0;
+	}
+
+	const TArray<FFS_ItemData>& BagItems = PlayerState->GetBagItems();
+	const FString TargetName = NormalizeVendorItemName(ItemData->Description.Name.ToString());
+	const FString TargetId = NormalizeVendorItemId(ItemData->Description.ID);
+	int32 OwnedCountByName = 0;
+	int32 OwnedCount = 0;
+
+	for (const FFS_ItemData& BagItem : BagItems)
+	{
+		const FString BagItemName = NormalizeVendorItemName(BagItem.Description.Name.ToString());
+		if (!TargetName.IsEmpty() && BagItemName == TargetName)
+		{
+			OwnedCountByName += FMath::Max(1, BagItem.Stacks.Quantity);
+			continue;
+		}
+
+		const bool bSameIndex = ItemData->Index > 0 && BagItem.Index == ItemData->Index;
+		const bool bSameId = !TargetId.IsEmpty() && NormalizeVendorItemId(BagItem.Description.ID) == TargetId;
+		if (!bSameIndex && !bSameId)
+		{
+			continue;
+		}
+
+		OwnedCount += FMath::Max(1, BagItem.Stacks.Quantity);
+	}
+
+	if (OwnedCountByName > 0 || !TargetName.IsEmpty())
+	{
+		return OwnedCountByName;
+	}
+
+	return OwnedCount;
 }

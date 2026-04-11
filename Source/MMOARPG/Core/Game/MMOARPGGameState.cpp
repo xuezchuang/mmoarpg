@@ -4,6 +4,83 @@
 #include "UI/Game/UI_CharacterMenu.h"
 #include "Engine/DataTable.h"
 
+namespace
+{
+	void EnsureInventoryTableLoaded(TMap<E_DataTableType, UDataTable*>& DataTableMap, E_DataTableType TableType, const TCHAR* AssetPath)
+	{
+		if (DataTableMap.Contains(TableType))
+		{
+			return;
+		}
+
+		if (UDataTable* LoadedTable = LoadObject<UDataTable>(nullptr, AssetPath))
+		{
+			DataTableMap.Add(TableType, LoadedTable);
+		}
+	}
+
+	int32 GetGeneratedVendorBucketCode(E_ItemType ItemType)
+	{
+		switch (ItemType)
+		{
+		case E_ItemType::Weapon:
+		case E_ItemType::Shield:
+		case E_ItemType::Bow:
+		case E_ItemType::Arrow:
+		case E_ItemType::Armor:
+		case E_ItemType::Accessories:
+		case E_ItemType::Horse_Saddle:
+		case E_ItemType::Horse_Armor:
+		case E_ItemType::Horse_Reins:
+		case E_ItemType::Horse_Wings:
+		case E_ItemType::Horse_Horn:
+		case E_ItemType::Glider:
+			return 10;
+		case E_ItemType::Food:
+		case E_ItemType::Potion:
+		case E_ItemType::Crafting_Ingredient:
+		case E_ItemType::Currency:
+		case E_ItemType::Other:
+		case E_ItemType::Mining_Tool:
+		case E_ItemType::Logging_Tool:
+		case E_ItemType::Fishing_Tool:
+			return 20;
+		case E_ItemType::Quest_Item:
+		default:
+			return 30;
+		}
+	}
+
+	int32 GetGeneratedVendorTableCode(E_DataTableType DataTableType)
+	{
+		switch (DataTableType)
+		{
+		case E_DataTableType::E_WeaponDT: return 1;
+		case E_DataTableType::E_ArmorDT: return 2;
+		case E_DataTableType::E_Accessory: return 3;
+		case E_DataTableType::E_Consumables: return 4;
+		case E_DataTableType::E_Cooking: return 5;
+		case E_DataTableType::E_Crafting_IngredientDT: return 6;
+		case E_DataTableType::E_Ingredients_Fish: return 7;
+		case E_DataTableType::E_Gather_Resources: return 8;
+		case E_DataTableType::E_Glider: return 9;
+		default: return 0;
+		}
+	}
+
+	int32 BuildGeneratedVendorPropId(E_DataTableType DataTableType, E_ItemType ItemType, int32 Sequence)
+	{
+		const int32 BucketCode = GetGeneratedVendorBucketCode(ItemType);
+		const int32 TableCode = GetGeneratedVendorTableCode(DataTableType);
+		if (BucketCode <= 0 || TableCode <= 0 || Sequence <= 0 || Sequence > 9999)
+		{
+			return 0;
+		}
+
+		return 900000000 + (BucketCode * 1000000) + (TableCode * 10000) + Sequence;
+	}
+}
+
 AMMOARPGGameState::AMMOARPGGameState()
 {
 	static ConstructorHelpers::FObjectFinder<UDataTable> CharacterAnimTable(TEXT("/Game/DataTable/CharacterAnimTable"));
@@ -19,32 +96,6 @@ AMMOARPGGameState::AMMOARPGGameState()
 	};
 
 	// Food / Consumable (server prop.csv nick → propid)
-	VendorItemIdToPropId.Add(TEXT("Bread"),        200900101);
-	VendorItemIdToPropId.Add(TEXT("Beer"),          200900102);
-	VendorItemIdToPropId.Add(TEXT("Breadroll"),     200900103);
-	VendorItemIdToPropId.Add(TEXT("Carrot"),        200900104);
-	VendorItemIdToPropId.Add(TEXT("Cucumber"),      200900105);
-	// Fire King armor set (DT_Armor, Description.ID matches server nick)
-	VendorItemIdToPropId.Add(TEXT("fs_hm"),        800100107);
-	VendorItemIdToPropId.Add(TEXT("fs_p"),         800100109);
-	VendorItemIdToPropId.Add(TEXT("fs_g"),         800100106);
-	VendorItemIdToPropId.Add(TEXT("fs_pt"),        800100108);
-	VendorItemIdToPropId.Add(TEXT("fs_b"),         800100105);
-	// Water King armor set
-	VendorItemIdToPropId.Add(TEXT("ws_hm"),        800100115);
-	VendorItemIdToPropId.Add(TEXT("ws_pt"),        800100117);
-	VendorItemIdToPropId.Add(TEXT("ws_gs"),        800100114);
-	VendorItemIdToPropId.Add(TEXT("ws_ps"),        800100116);
-	VendorItemIdToPropId.Add(TEXT("ws_bt"),        800100113);
-	// Elder King accessories
-	VendorItemIdToPropId.Add(TEXT("ek_neck_01"),   800100110);
-	VendorItemIdToPropId.Add(TEXT("ek_talis_01"),  800100112);
-	VendorItemIdToPropId.Add(TEXT("ek_ring_01"),   800100111);
-	VendorItemIdToPropId.Add(TEXT("ek_brace_01"),  800100104);
-	// DT_Accessory standalone accessories
-	VendorItemIdToPropId.Add(TEXT("Necklace01"),   800100102);
-	VendorItemIdToPropId.Add(TEXT("Necklace02_Blue"), 800100103);
-	VendorItemIdToPropId.Add(TEXT("Necklace02_Red"),  800100101);
 }
 
 FCharacterAnimTable* AMMOARPGGameState::GetCharacterAnimTable(int32 InAnimTableID)
@@ -73,21 +124,34 @@ void AMMOARPGGameState::BeginPlay()
 {
 	Super::BeginPlay();
 
+	EnsureInventoryTableLoaded(mapDataTable, E_DataTableType::E_Accessory, TEXT("/Game/DataTable/Inventory/FDT_Accessory.FDT_Accessory"));
+
 	// 从编辑器配置的 DataTable 加载所有物品到 mapDTType2ArrayItem
 	for (const auto& it : mapDataTable)
 	{
 		UDataTable* Value = it.Value;
 		if (!Value) continue;
+		if (Value->GetRowStruct() != FFS_ItemData::StaticStruct()) continue;
 
-		TArray<FFS_ItemData*> aItemP;
-		GetTables(Value, aItemP, TEXT("Inventory"));
-		if (aItemP.Num() > 0)
+		TArray<FName> RowNames = Value->GetRowNames();
+		RowNames.Sort([](const FName& A, const FName& B)
+		{
+			return A.ToString() < B.ToString();
+		});
+
+		if (RowNames.Num() > 0)
 		{
 			TArray<FFS_ItemData> aItem;
-			aItem.Reserve(aItemP.Num());
-			for (auto itItem : aItemP)
+			aItem.Reserve(RowNames.Num());
+			for (const FName& RowName : RowNames)
 			{
-				aItem.Add(*itItem);
+				if (const FFS_ItemData* ItemRow = Value->FindRow<FFS_ItemData>(RowName, TEXT("Inventory"), false))
+				{
+					FFS_ItemData Item = *ItemRow;
+					Item.RuntimeRowName = RowName;
+					Item.RuntimeSourceTableType = static_cast<int32>(it.Key);
+					aItem.Add(MoveTemp(Item));
+				}
 			}
 			mapDTType2ArrayItem.Emplace(it.Key, MoveTemp(aItem));
 		}
@@ -101,58 +165,23 @@ void AMMOARPGGameState::BeginPlay()
 
 void AMMOARPGGameState::ApplyVendorPropIdMap()
 {
-	if (VendorItemIdToPropId.Num() == 0)
-	{
-		return;
-	}
-
-	auto NormalizeVendorItemId = [](const FString& InId) -> FString
-	{
-		FString Out;
-		Out.Reserve(InId.Len());
-		for (TCHAR Ch : InId)
-		{
-			if (FChar::IsAlnum(Ch))
-			{
-				Out.AppendChar(FChar::ToLower(Ch));
-			}
-		}
-		return Out;
-	};
-
-	TMap<FString, int32> NormalizedMap;
-	NormalizedMap.Reserve(VendorItemIdToPropId.Num());
-	for (const auto& Pair : VendorItemIdToPropId)
-	{
-		NormalizedMap.FindOrAdd(NormalizeVendorItemId(Pair.Key)) = Pair.Value;
-	}
-
 	int32 AppliedCount = 0;
 	for (auto& Pair : mapDTType2ArrayItem)
 	{
+		int32 Sequence = 0;
 		for (FFS_ItemData& Item : Pair.Value)
 		{
+			++Sequence;
+			Item.RuntimeSourceTableType = static_cast<int32>(Pair.Key);
+			Item.Index = BuildGeneratedVendorPropId(Pair.Key, Item.Type, Sequence);
 			if (Item.Index > 0)
 			{
-				continue;
-			}
-
-			const FString ItemId = NormalizeVendorItemId(Item.Description.ID.TrimStartAndEnd());
-			if (ItemId.IsEmpty())
-			{
-				continue;
-			}
-
-			if (const int32* FoundPropId = NormalizedMap.Find(ItemId))
-			{
-				Item.Index = *FoundPropId;
 				AppliedCount++;
 			}
 		}
 	}
 
-	UE_LOG(LogTemp, Log, TEXT("[VendorMap] Applied propid mapping count=%d mapSize=%d"),
-		AppliedCount, VendorItemIdToPropId.Num());
+	UE_LOG(LogTemp, Log, TEXT("[VendorMap] Generated propid mapping count=%d"), AppliedCount);
 }
 
 void AMMOARPGGameState::BuildCategoryMap()

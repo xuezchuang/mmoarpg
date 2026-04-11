@@ -8,22 +8,10 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $scriptRoot = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Path }
+. (Join-Path $scriptRoot 'VendorPropIdRules.ps1')
+
 if ([string]::IsNullOrWhiteSpace($VendorExportPath)) {
     $VendorExportPath = Join-Path $scriptRoot '..\doc\VendorPropExport.csv'
-}
-
-function Get-ServerBucketForSync {
-    param([string]$ItemType)
-
-    switch ($ItemType) {
-        'Weapon' { return 'equip' }
-        'Shield' { return 'equip' }
-        'Bow' { return 'equip' }
-        'Arrow' { return 'equip' }
-        'Armor' { return 'equip' }
-        'Accessories' { return 'equip' }
-        default { return 'consume' }
-    }
 }
 
 function Get-ServerColor {
@@ -44,7 +32,7 @@ function Get-ServerEquipKind {
         [string]$Slot
     )
 
-    if ($ItemType -in @('Weapon', 'Shield', 'Bow', 'Arrow')) { return 1 }
+    if ((Normalize-VendorItemType $ItemType) -in @('Weapon', 'Shield', 'Bow', 'Arrow')) { return 1 }
 
     switch ($Slot) {
         'Head' { return 2 }
@@ -66,7 +54,7 @@ function Get-ServerEquipPart {
         [string]$Slot
     )
 
-    if ($ItemType -in @('Weapon', 'Shield', 'Bow', 'Arrow')) { return 0 }
+    if ((Normalize-VendorItemType $ItemType) -in @('Weapon', 'Shield', 'Bow', 'Arrow')) { return 0 }
 
     switch ($Slot) {
         'Head' { return 1 }
@@ -82,31 +70,17 @@ function Get-ServerEquipPart {
     }
 }
 
-function Parse-StatInt {
-    param($Row, [string]$Name)
-    if ($null -eq $Row) { return 0 }
-    if ($Row.PSObject.Properties.Name -notcontains $Name) { return 0 }
-    $n = 0.0
-    if ([double]::TryParse([string]$Row.$Name, [ref]$n)) {
-        return [int][Math]::Round($n)
-    }
-    return 0
-}
-
-function Get-MaxExistingId {
+function Parse-PositiveInt {
     param(
-        [object[]]$Rows,
-        [int]$Fallback
+        [string]$ValueText,
+        [int]$DefaultValue
     )
 
-    $maxId = $Fallback
-    foreach ($row in $Rows) {
-        $id = 0
-        if ([int]::TryParse([string]$row.id, [ref]$id) -and $id -gt $maxId) {
-            $maxId = $id
-        }
+    $parsed = 0
+    if ([int]::TryParse($ValueText, [ref]$parsed) -and $parsed -gt 0) {
+        return $parsed
     }
-    return $maxId
+    return $DefaultValue
 }
 
 function Write-PlainCsv {
@@ -131,18 +105,68 @@ function Write-PlainCsv {
     [System.IO.File]::WriteAllLines($Path, $lines, [System.Text.UTF8Encoding]::new($false))
 }
 
-$vendorRows = Import-Csv $VendorExportPath
-$duplicateGroups = $vendorRows | Group-Object item_id | Where-Object { $_.Count -gt 1 }
+function Ensure-UniquePropNick {
+    param([object[]]$Rows)
 
-foreach ($group in $duplicateGroups) {
-    Write-Warning ("Duplicate item_id collapsed for server sync: {0} ({1} rows)" -f $group.Name, $group.Count)
+    $counts = @{}
+    foreach ($row in $Rows) {
+        $nick = [string]$row.nick
+        if ([string]::IsNullOrWhiteSpace($nick) -or $nick.Contains([string][char]0xFFFD)) {
+            $nick = ('legacy_{0}' -f [string]$row.id)
+        }
+
+        if ($counts.ContainsKey($nick)) {
+            $counts[$nick]++
+        } else {
+            $counts[$nick] = 1
+        }
+    }
+
+    $usedNick = New-Object 'System.Collections.Generic.HashSet[string]'
+    foreach ($row in $Rows) {
+        $nick = [string]$row.nick
+        if ([string]::IsNullOrWhiteSpace($nick) -or $nick.Contains([string][char]0xFFFD)) {
+            $nick = ('legacy_{0}' -f [string]$row.id)
+        }
+
+        $candidate = if ($counts[$nick] -gt 1) {
+            ('{0}__{1}' -f $nick, [string]$row.id)
+        } else {
+            $nick
+        }
+
+        while ($usedNick.Contains($candidate)) {
+            $candidate = ('{0}_dup' -f $candidate)
+        }
+
+        $row.nick = $candidate
+        [void]$usedNick.Add($candidate)
+    }
+
+    return $Rows
 }
 
-$uniqueByItemId = [ordered]@{}
-foreach ($row in ($vendorRows | Sort-Object { [string]::IsNullOrWhiteSpace($_.server_propid) }, source_table, row_name)) {
-    if (-not $uniqueByItemId.Contains($row.item_id)) {
-        $uniqueByItemId[$row.item_id] = $row
-    }
+$vendorRows = @(Import-Csv $VendorExportPath | Sort-Object source_table, row_name)
+if ($vendorRows.Count -eq 0) {
+    throw "No vendor rows found in $VendorExportPath"
+}
+
+$duplicateKeyGroups = @(
+    $vendorRows |
+        Group-Object { Get-VendorUniqueItemKey -SourceTable ([string]$_.source_table) -RowName ([string]$_.row_name) } |
+        Where-Object { $_.Count -gt 1 }
+)
+if ($duplicateKeyGroups.Count -gt 0) {
+    throw ("Duplicate source_table + row_name keys found in vendor export: {0}" -f ($duplicateKeyGroups[0].Name))
+}
+
+$duplicatePropIds = @(
+    $vendorRows |
+        Group-Object server_propid |
+        Where-Object { -not [string]::IsNullOrWhiteSpace($_.Name) -and $_.Count -gt 1 }
+)
+if ($duplicatePropIds.Count -gt 0) {
+    throw ("Duplicate server_propid found in vendor export: {0}" -f ($duplicatePropIds[0].Name))
 }
 
 $propCsvPath = Join-Path $ServerCsvDir 'prop.csv'
@@ -153,71 +177,75 @@ $propRows = @(Import-Csv $propCsvPath)
 $equipRows = @(Import-Csv $equipCsvPath)
 $consumeRows = @(Import-Csv $consumeCsvPath)
 
-$existingPropById = @{}
-foreach ($row in $propRows) {
-    $existingPropById[[string]$row.id] = $true
+$targetPropIds = New-Object 'System.Collections.Generic.HashSet[string]'
+$targetRowNames = New-Object 'System.Collections.Generic.HashSet[string]'
+$targetItemIds = New-Object 'System.Collections.Generic.HashSet[string]'
+$targetServerNicks = New-Object 'System.Collections.Generic.HashSet[string]'
+
+foreach ($row in $vendorRows) {
+    [void]$targetPropIds.Add([string]$row.server_propid)
+    [void]$targetRowNames.Add([string]$row.row_name)
+    [void]$targetItemIds.Add([string]$row.item_id)
+    [void]$targetServerNicks.Add((Get-VendorServerNick -SourceTable ([string]$row.source_table) -RowName ([string]$row.row_name)))
 }
 
-$existingEquipPropRows = @($propRows | Where-Object { [string]$_.type -eq '1' })
-$existingConsumePropRows = @($propRows | Where-Object { [string]$_.type -eq '2' })
-
-$nextEquipId = [Math]::Max((Get-MaxExistingId $existingEquipPropRows 100900000), (Get-MaxExistingId $equipRows 100900000))
-if ($nextEquipId -lt 100900000) { $nextEquipId = 100900000 }
-$nextConsumeId = [Math]::Max((Get-MaxExistingId $existingConsumePropRows 210500100), (Get-MaxExistingId $consumeRows 210500100))
-if ($nextConsumeId -lt 210500100) { $nextConsumeId = 210500100 }
-
-$resolvedPropIdByItemId = @{}
-foreach ($pair in $uniqueByItemId.GetEnumerator()) {
-    $row = $pair.Value
-    $existingId = [string]$row.server_propid
-    if (-not [string]::IsNullOrWhiteSpace($existingId)) {
-        $resolvedPropIdByItemId[$pair.Key] = $existingId
-        continue
+$rowsToRemoveFromProp = @(
+    $propRows | Where-Object {
+        $targetPropIds.Contains([string]$_.id) -or
+        $targetRowNames.Contains([string]$_.nick) -or
+        $targetItemIds.Contains([string]$_.nick) -or
+        $targetServerNicks.Contains([string]$_.nick)
     }
+)
 
-    $bucket = Get-ServerBucketForSync ([string]$row.item_type)
-    if ($bucket -eq 'equip') {
-        $nextEquipId++
-        $resolvedPropIdByItemId[$pair.Key] = [string]$nextEquipId
-    } else {
-        $nextConsumeId++
-        $resolvedPropIdByItemId[$pair.Key] = [string]$nextConsumeId
-    }
+$removeIds = New-Object 'System.Collections.Generic.HashSet[string]'
+foreach ($row in $rowsToRemoveFromProp) {
+    [void]$removeIds.Add([string]$row.id)
 }
+
+$preservedPropRows = @(
+    $propRows | Where-Object {
+        -not $removeIds.Contains([string]$_.id) -and
+        -not $targetRowNames.Contains([string]$_.nick) -and
+        -not $targetItemIds.Contains([string]$_.nick) -and
+        -not $targetServerNicks.Contains([string]$_.nick)
+    }
+)
+
+$preservedEquipRows = @(
+    $equipRows | Where-Object {
+        -not $removeIds.Contains([string]$_.id) -and
+        -not $targetRowNames.Contains([string]$_.name) -and
+        -not $targetItemIds.Contains([string]$_.name) -and
+        -not $targetServerNicks.Contains([string]$_.name)
+    }
+)
+
+$preservedConsumeRows = @(
+    $consumeRows | Where-Object {
+        -not $removeIds.Contains([string]$_.id)
+    }
+)
 
 $serverPropRows = New-Object System.Collections.Generic.List[object]
 $serverEquipRows = New-Object System.Collections.Generic.List[object]
 $serverConsumeRows = New-Object System.Collections.Generic.List[object]
 
-foreach ($pair in $uniqueByItemId.GetEnumerator()) {
-    $row = $pair.Value
-    $propId = $resolvedPropIdByItemId[$pair.Key]
-    if ($existingPropById.ContainsKey($propId)) {
-        continue
+foreach ($row in $vendorRows) {
+    $propId = Parse-PositiveInt -ValueText ([string]$row.server_propid) -DefaultValue 0
+    if ($propId -le 0) {
+        throw ("Invalid server_propid for {0}/{1}" -f $row.source_table, $row.row_name)
     }
 
-    $bucket = Get-ServerBucketForSync ([string]$row.item_type)
+    $bucket = Get-VendorServerBucket -ItemType ([string]$row.item_type)
     $minLevel = 1
-    $tmpLevel = 0
-    if ([int]::TryParse([string]$row.current_index, [ref]$tmpLevel) -and $tmpLevel -gt 0) {
-        $minLevel = $tmpLevel
-    }
-
-    $maxCount = 1
-    $tmpCount = 0
-    if ([int]::TryParse([string]$row.stack_max, [ref]$tmpCount) -and $tmpCount -gt 0) {
-        $maxCount = $tmpCount
-    }
-
+    $maxCount = Parse-PositiveInt -ValueText ([string]$row.stack_max) -DefaultValue 1
     $price = 1
-    $tmpPrice = 0
-    if ([int]::TryParse([string]([math]::Round([double]$row.value)), [ref]$tmpPrice) -and $tmpPrice -gt 0) {
-        $price = $tmpPrice
-    }
-
+    $roundedValue = [Math]::Round([double]$row.value)
+    $price = Parse-PositiveInt -ValueText ([string]$roundedValue) -DefaultValue 1
     $stackable = [string]$row.stackable
     $isSplit = if ($stackable -match 'True|true|1') { 1 } else { 0 }
-    $nick = ([string]$row.item_id) -replace ',', '_'
+    $serverNick = Get-VendorServerNick -SourceTable ([string]$row.source_table) -RowName ([string]$row.row_name)
     $color = Get-ServerColor ([string]$row.rarity)
 
     if ($bucket -eq 'equip') {
@@ -225,8 +253,6 @@ foreach ($pair in $uniqueByItemId.GetEnumerator()) {
         $part = Get-ServerEquipPart -ItemType ([string]$row.item_type) -Slot ([string]$row.slot)
         $rAtk = $price
         $rDef = $price
-        $rHp = 0
-        $rCrit = 0
 
         $serverPropRows.Add([pscustomobject][ordered]@{
             id             = $propId
@@ -244,7 +270,7 @@ foreach ($pair in $uniqueByItemId.GetEnumerator()) {
             isbind         = 0
             issell         = 1
             tab            = 1
-            nick           = $nick
+            nick           = $serverNick
             end            = 0
         })
 
@@ -266,18 +292,15 @@ foreach ($pair in $uniqueByItemId.GetEnumerator()) {
             r_atk      = $rAtk
             r_defend   = $rDef
             r_dodge    = 0
-            r_crit     = $rCrit
-            r_hp       = $rHp
-            name       = $nick
+            r_crit     = 0
+            r_hp       = 0
+            name       = $serverNick
             needprop   = '0;0-0;0-0'
             end        = 0
         })
     } else {
         $consumeKind = 1
-        $potionValue = 1
-        if ($price -gt 0) {
-            $potionValue = $price
-        }
+        $potionValue = $price
 
         $serverPropRows.Add([pscustomobject][ordered]@{
             id             = $propId
@@ -295,7 +318,7 @@ foreach ($pair in $uniqueByItemId.GetEnumerator()) {
             isbind         = 0
             issell         = 1
             tab            = 1
-            nick           = $nick
+            nick           = $serverNick
             end            = 0
         })
 
@@ -316,24 +339,15 @@ foreach ($path in @($propCsvPath, $equipCsvPath, $consumeCsvPath)) {
     Copy-Item $path "$path.$backupStamp.bak" -Force
 }
 
-$mergedPropRows = @($propRows + $serverPropRows)
-$mergedEquipRows = @($equipRows + $serverEquipRows)
-$mergedConsumeRows = @($consumeRows + $serverConsumeRows)
+$mergedPropRows = @($preservedPropRows + @($serverPropRows | Sort-Object id))
+$mergedEquipRows = @($preservedEquipRows + @($serverEquipRows | Sort-Object id))
+$mergedConsumeRows = @($preservedConsumeRows + @($serverConsumeRows | Sort-Object id))
+
+$mergedPropRows = @(Ensure-UniquePropNick -Rows $mergedPropRows)
 
 Write-PlainCsv -Path $propCsvPath -Headers @('id','type','kind','color','minlevel','maxcount','price','maxuse','issplit','isdestroy','istransaction','isshow','isbind','issell','tab','nick','end') -Rows $mergedPropRows
 Write-PlainCsv -Path $equipCsvPath -Headers @('id','kind','level','color','job','part','hp','mp','p_atk','m_atk','p_defend','m_defend','dodge','crit','r_atk','r_defend','r_dodge','r_crit','r_hp','name','needprop','end') -Rows $mergedEquipRows
 Write-PlainCsv -Path $consumeCsvPath -Headers @('id','kind','potion_value','potion_cdtime','gem_class','gem_value','end') -Rows $mergedConsumeRows
 
-$updatedVendorRows = foreach ($row in $vendorRows) {
-    $copy = [ordered]@{}
-    foreach ($prop in $row.PSObject.Properties.Name) {
-        $copy[$prop] = $row.$prop
-    }
-    $copy['server_propid'] = $resolvedPropIdByItemId[[string]$row.item_id]
-    [pscustomobject]$copy
-}
-
-$updatedVendorRows | Export-Csv -Path $VendorExportPath -NoTypeInformation -Encoding UTF8
-
-Write-Host ("Server sync complete. Added prop={0} equip={1} consume={2}" -f $serverPropRows.Count, $serverEquipRows.Count, $serverConsumeRows.Count)
+Write-Host ("Server sync complete. Wrote prop={0} equip={1} consume={2}" -f $serverPropRows.Count, $serverEquipRows.Count, $serverConsumeRows.Count)
 Write-Host ("Backups created with suffix .{0}.bak" -f $backupStamp)

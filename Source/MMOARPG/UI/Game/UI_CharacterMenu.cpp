@@ -58,7 +58,7 @@ FReply UUI_CharacterMenu::NativeOnPreviewKeyDown(const FGeometry& InGeometry, co
 	const FKey InputKey = InKeyEvent.GetKey();
 	if (InputKey == EKeys::R || InputKey == EKeys::I || InputKey == EKeys::Escape)
 	{
-		CloseMenu();
+		CloseMenuInternal(false);
 		return FReply::Handled();
 	}
 
@@ -100,6 +100,11 @@ void UUI_CharacterMenu::OpenMenu()
 		SetActiveTab(ActiveTab);
 	}
 
+	if (WB_LevelExp)
+	{
+		WB_LevelExp->RefreshDisplay();
+	}
+
 	RefreshInventoryWidgets();
 	TriggerLoadingScreen(EUMGSequencePlayMode::Forward);
 	ApplyInputMode(true);
@@ -107,6 +112,11 @@ void UUI_CharacterMenu::OpenMenu()
 }
 
 void UUI_CharacterMenu::CloseMenu()
+{
+	CloseMenuInternal(true);
+}
+
+void UUI_CharacterMenu::CloseMenuInternal(bool bPlayLoadingScreen)
 {
 	if (!bIsMenuOpen && GetVisibility() != ESlateVisibility::Visible)
 	{
@@ -117,13 +127,18 @@ void UUI_CharacterMenu::CloseMenu()
 	ApplyInputMode(false);
 	BP_OnMenuClosed();
 
-	if (WB_LoadingScreen)
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().ClearTimer(CloseMenuTimerHandle);
+		World->GetTimerManager().ClearTimer(LoadingScreenHideTimerHandle);
+	}
+
+	if (bPlayLoadingScreen && WB_LoadingScreen)
 	{
 		TriggerLoadingScreen(EUMGSequencePlayMode::Reverse);
 
 		if (UWorld* World = GetWorld())
 		{
-			World->GetTimerManager().ClearTimer(CloseMenuTimerHandle);
 			const float Delay = FMath::Max(0.f, WB_LoadingScreen->GetLoadingScreenDuration());
 			if (Delay > KINDA_SMALL_NUMBER)
 			{
@@ -223,6 +238,10 @@ void UUI_CharacterMenu::SetTopInfoBarShowLevelExp(bool bShowLevelExp)
 	if (WB_LevelExp)
 	{
 		WB_LevelExp->SetVisibility(bShowLevelExp ? ESlateVisibility::SelfHitTestInvisible : ESlateVisibility::Collapsed);
+		if (bShowLevelExp)
+		{
+			WB_LevelExp->RefreshDisplay();
+		}
 	}
 }
 

@@ -158,6 +158,7 @@ void UPlayerWorldSubsystem::BindNet()
             SP_OtherMove,    // 绉诲姩/浣嶇疆鏇存柊
             SP_RoleHP,        // HP
             SP_RoleMP,        // MP
+            SP_RoleCurrency,  // Gold / diamonds
             //SP_PlayerState    // 鑷畾涔夌殑鐘舵€?
         };
         Net->RegisterUniqueHandlers(Protos, FProtocolHandler::CreateUObject(this, &UPlayerWorldSubsystem::RecvProtocol));
@@ -294,6 +295,23 @@ void UPlayerWorldSubsystem::RecvProtocol(uint32 ProtocolNumber, FSimpleChannel* 
 			UE_LOG(MMOARPG, Display, TEXT("[PlayerSync] Missing remote player for move, request role base [uid:%u]"), PlayerId);
 			SIMPLE_PROTOCOLS_SEND(SP_RoleBaseInfo, PlayerId);
 		}
+		break;
+	}
+	case SP_RoleCurrency:
+	{
+		uint32 Gold = 0;
+		uint32 Diamonds = 0;
+		SIMPLE_PROTOCOLS_RECEIVE(SP_RoleCurrency, Gold, Diamonds);
+
+		if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
+		{
+			FMMOARPGUserData& UserData = GI->GetUserData();
+			UserData.base.econ.gold = Gold;
+			UserData.base.econ.diamonds = Diamonds;
+		}
+
+		UE_LOG(MMOARPG, Display, TEXT("[PlayerSync] Recv SP_RoleCurrency [gold:%u diamonds:%u]"),
+			Gold, Diamonds);
 		break;
 	}
 	case SP_RoleHP:

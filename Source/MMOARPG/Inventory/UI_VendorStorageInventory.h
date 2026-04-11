@@ -11,6 +11,8 @@ class UUI_CategoryButton;
 class UUniformGridPanel;
 class UUI_VendorStorageSlot;
 class UInteractionComponent;
+class UUI_ToolTip;
+class UTextBlock;
 
 UCLASS()
 class UUI_VendorStorageInventory : public UUI_Base
@@ -29,6 +31,15 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	UUniformGridPanel* UniformGridBuyBack;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional))
+	UUI_ToolTip* WB_MainToolTip;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional))
+	UTextBlock* OwnedText;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional))
+	UTextBlock* TextGold;
 
 	UPROPERTY(EditDefaultsOnly, Category = "BP_Setting")
 	TSubclassOf<UUI_VendorStorageSlot> Slot_BPClass;
@@ -58,6 +69,12 @@ public:
 private:
 
 	void DeleteUpdateItem(const FFS_ItemData* ItemData);
+	void UpdateMainToolTip(const FFS_ItemData* ItemData) const;
+	void UpdateOwnedText(const FFS_ItemData* ItemData) const;
+	void UpdateGoldText();
+	void RecvProtocol(uint32 ProtocolNumber);
+	void ClearSelection();
+	int32 GetOwnedItemCount(const FFS_ItemData* ItemData) const;
 
 	void InitItems();
 
@@ -69,6 +86,8 @@ private:
 	UUI_SplitStack* m_SplitStack = nullptr;
 
 	FDelegateHandle m_VendorHotkeyHandle;
+	TArray<uint32> InterestingProtos;
+	TArray<FDelegateHandle> InterestingHandles;
 
 	void OnVendorHotkey(ESystemHotkey Action);
 	void OpenSplitStack();

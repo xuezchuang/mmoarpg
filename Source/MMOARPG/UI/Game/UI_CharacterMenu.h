@@ -94,6 +94,7 @@ protected:
 	int32 ViewportZOrder = 200;
 
 private:
+	void CloseMenuInternal(bool bPlayLoadingScreen);
 	const FCharacterMenuTabData* FindTabData(E_UIType InTabType) const;
 	void ApplyInputMode(bool bMenuOpen);
 	void FinishCloseMenu();

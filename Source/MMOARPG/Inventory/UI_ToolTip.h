@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "UI_Base.h"
+#include "../Data/FItemData.h"
 #include "UI_ToolTip.generated.h"
 
 class UTextBlock;
@@ -14,6 +15,8 @@ class MMOARPG_API UUI_ToolTip : public UUI_Base
 	GENERATED_BODY()
 
 public:
+	void SetItemData(const FFS_ItemData* InItemData);
+
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional), Category = "ToolTip")
 	UUI_ToolTip_ItemInfo* WB_ToolTip_ItemInfo;
 

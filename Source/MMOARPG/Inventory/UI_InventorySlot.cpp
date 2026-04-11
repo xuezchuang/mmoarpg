@@ -15,6 +15,8 @@ void UUI_InventorySlot::NativeConstruct()
 	Super::NativeConstruct();
 
 	Item_Button->OnClicked.__Internal_AddDynamic(this, &ThisClass::OnButtonClicked, TEXT("OnButtonClicked"));
+	Item_Button->OnHovered.AddDynamic(this, &ThisClass::OnButtonHovered);
+	Item_Button->OnUnhovered.AddDynamic(this, &ThisClass::OnButtonUnhovered);
 
 	// Hide hover/active by default.
 	Hover->SetVisibility(ESlateVisibility::Collapsed);
@@ -39,6 +41,9 @@ void UUI_InventorySlot::SetItemData(const FFS_ItemData* InItemData)
 	{
 		Image_Item->SetVisibility(ESlateVisibility::Collapsed);
 		CloneGridBoost->SetVisibility(ESlateVisibility::Collapsed);
+		BrokenImage->SetVisibility(ESlateVisibility::Collapsed);
+		Hover->SetVisibility(ESlateVisibility::Collapsed);
+		ActiveBorder->SetVisibility(ESlateVisibility::Collapsed);
 		if (WB_Icon_Consumable_Type)
 		{
 			WB_Icon_Consumable_Type->SetByItemData(nullptr);
@@ -124,7 +129,17 @@ void UUI_InventorySlot::SetActive(bool bActive)
 
 void UUI_InventorySlot::OnButtonClicked()
 {
-	OnSlotClicked.ExecuteIfBound(m_ItemData);
+	OnSlotClicked.ExecuteIfBound(this, m_ItemData);
+}
+
+void UUI_InventorySlot::OnButtonHovered()
+{
+	Hover->SetVisibility(ESlateVisibility::HitTestInvisible);
+}
+
+void UUI_InventorySlot::OnButtonUnhovered()
+{
+	Hover->SetVisibility(ESlateVisibility::Collapsed);
 }
 
 void UUI_InventorySlot::RefreshRarityStars(E_ItemRarity Rarity)

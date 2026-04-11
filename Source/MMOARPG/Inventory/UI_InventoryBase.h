@@ -131,10 +131,16 @@ protected:
 
 private:
 	int32 ResolveRuntimeColumns(UUniformGridPanel* Grid) const;
+	void UpdateSelectedSlot(UUI_InventorySlot* SlotWidget, const FFS_ItemData* ItemData);
+	void UpdateMainToolTip(const FFS_ItemData* ItemData) const;
+	void ClearSelection();
+	void HandleSlotClicked(UUI_InventorySlot* SlotWidget, const FFS_ItemData* ItemData);
 
 	E_InventoryCategory CurrentCategory = E_InventoryCategory::Weapon;
 	int32 RuntimeColumns = 0;
 	bool bRebuildingFromAutoColumns = false;
+	TWeakObjectPtr<UUI_InventorySlot> SelectedSlotWidget;
+	const FFS_ItemData* SelectedItemData = nullptr;
 
 	UFUNCTION() void OnCategoryWeapon();
 	UFUNCTION() void OnCategoryRange();

@@ -1,13 +1,16 @@
 [CmdletBinding()]
 param(
     [string]$DocDir = '',
-    [string]$OutputPath = ''
+    [string]$OutputPath = '',
+    [switch]$RebuildIds
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $scriptRoot = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Path }
+. (Join-Path $scriptRoot 'VendorPropIdRules.ps1')
+
 if ([string]::IsNullOrWhiteSpace($DocDir)) {
     $DocDir = Join-Path $scriptRoot '..\doc'
 }
@@ -18,7 +21,7 @@ if ([string]::IsNullOrWhiteSpace($OutputPath)) {
 function Get-InventoryCategory {
     param([string]$ItemType)
 
-    switch ($ItemType) {
+    switch (Normalize-VendorItemType $ItemType) {
         'Weapon' { return 'Weapon' }
         'Shield' { return 'Weapon' }
         'Bow' { return 'Range' }
@@ -44,45 +47,41 @@ function Get-InventoryCategory {
     }
 }
 
-function Get-ServerBucket {
-    param([string]$ItemType)
+function Get-PreservedServerPropIds {
+    param(
+        [string]$ExistingOutputPath,
+        [switch]$UseExistingIds
+    )
 
-    switch ($ItemType) {
-        'Weapon' { return 'equip' }
-        'Shield' { return 'equip' }
-        'Bow' { return 'equip' }
-        'Arrow' { return 'equip' }
-        'Armor' { return 'equip' }
-        'Accessories' { return 'equip' }
-        'Horse_Saddle' { return 'equip' }
-        'Horse_Armor' { return 'equip' }
-        'Horse_Reins' { return 'equip' }
-        'Horse_Wings' { return 'equip' }
-        'Horse_Horn' { return 'equip' }
-        'Glider' { return 'equip' }
-        'Food' { return 'consume' }
-        'Potion' { return 'consume' }
-        'Crafting_Ingredient' { return 'prop' }
-        'Currency' { return 'prop' }
-        'Other' { return 'prop' }
-        'Mining_Tool' { return 'prop' }
-        'Logging_Tool' { return 'prop' }
-        'Fishing_Tool' { return 'prop' }
-        'Quest_Item' { return 'prop' }
-        default { return 'unknown' }
+    $result = @{}
+    if (-not $UseExistingIds -or -not (Test-Path $ExistingOutputPath)) {
+        return $result
     }
+
+    foreach ($row in (Import-Csv $ExistingOutputPath)) {
+        $sourceTable = [string]$row.source_table
+        $rowName = [string]$row.row_name
+        $serverPropIdText = [string]$row.server_propid
+        if ([string]::IsNullOrWhiteSpace($sourceTable) -or [string]::IsNullOrWhiteSpace($rowName)) {
+            continue
+        }
+
+        $serverPropId = 0
+        if (-not [int]::TryParse($serverPropIdText, [ref]$serverPropId)) {
+            continue
+        }
+        if ($serverPropId -lt 900000000 -or $serverPropId -gt 999999999) {
+            continue
+        }
+
+        $result[(Get-VendorUniqueItemKey -SourceTable $sourceTable -RowName $rowName)] = $serverPropId
+    }
+
+    return $result
 }
 
 $docRoot = (Resolve-Path $DocDir).Path
-$existingPropIdByItemId = @{}
-
-if (Test-Path $OutputPath) {
-    foreach ($row in (Import-Csv $OutputPath)) {
-        if ($row.item_id -and $row.server_propid) {
-            $existingPropIdByItemId[[string]$row.item_id] = [string]$row.server_propid
-        }
-    }
-}
+$preservedServerPropIds = Get-PreservedServerPropIds -ExistingOutputPath $OutputPath -UseExistingIds:(-not $RebuildIds)
 
 $rows = New-Object System.Collections.Generic.List[object]
 $jsonFiles = Get-ChildItem $docRoot -Filter 'DT_*.json' | Sort-Object Name
@@ -100,12 +99,13 @@ foreach ($file in $jsonFiles) {
         continue
     }
 
-    foreach ($item in $tableRows) {
-        $itemId = [string]($item.Description.ID)
-        if ([string]::IsNullOrWhiteSpace($itemId)) {
-            $itemId = [string]$item.Name
+    foreach ($item in ($tableRows | Sort-Object Name)) {
+        $rowName = [string]$item.Name
+        if ([string]::IsNullOrWhiteSpace($rowName)) {
+            continue
         }
 
+        $itemType = [string]$item.Type
         $stackable = $null
         if ($item.Stacks.PSObject.Properties.Name -contains 'Stackable') {
             $stackable = [string]$item.Stacks.Stackable
@@ -113,33 +113,93 @@ foreach ($file in $jsonFiles) {
             $stackable = [string]$item.Stacks.'Stackable?'
         }
 
-        $stackMax = [string]$item.Stacks.Quantity
-        $serverPropId = ''
-        if ($existingPropIdByItemId.ContainsKey($itemId)) {
-            $serverPropId = $existingPropIdByItemId[$itemId]
-        }
-
         $rows.Add([pscustomobject][ordered]@{
             source_table       = $file.BaseName
-            row_name           = [string]$item.Name
-            item_id            = $itemId
+            row_name           = $rowName
+            item_id            = [string]$item.Description.ID
             sample_name        = [string]$item.Description.Name
-            item_type          = [string]$item.Type
-            inventory_category = Get-InventoryCategory ([string]$item.Type)
-            server_bucket      = Get-ServerBucket ([string]$item.Type)
+            item_type          = $itemType
+            inventory_category = Get-InventoryCategory $itemType
+            server_bucket      = Get-VendorServerBucket $itemType
             rarity             = [string]$item.Rarity
             slot               = [string]$item.Slot
             stackable          = $stackable
-            stack_max          = $stackMax
+            stack_max          = [string]$item.Stacks.Quantity
             value              = [string]$item.Stats.Value
             current_index      = [string]$item.Index
-            server_propid      = $serverPropId
+            server_propid      = ''
         })
     }
 }
 
-$rows |
-    Sort-Object source_table, item_id, row_name |
-    Export-Csv -Path $OutputPath -NoTypeInformation -Encoding UTF8
+$resolvedPropIdByKey = @{}
+foreach ($tableGroup in ($rows | Group-Object source_table | Sort-Object Name)) {
+    $tableCode = Get-VendorTableCode -SourceTable $tableGroup.Name
+    $usedSequences = New-Object 'System.Collections.Generic.HashSet[int]'
+    $maxSequence = 0
 
-Write-Host ("Exported {0} rows -> {1}" -f $rows.Count, $OutputPath)
+    foreach ($row in ($tableGroup.Group | Sort-Object row_name)) {
+        $key = Get-VendorUniqueItemKey -SourceTable ([string]$row.source_table) -RowName ([string]$row.row_name)
+        if (-not $preservedServerPropIds.ContainsKey($key)) {
+            continue
+        }
+
+        $existingId = [int]$preservedServerPropIds[$key]
+        $expectedBucket = Get-VendorBucketCode -ItemType ([string]$row.item_type)
+        $actualBucket = [int](($existingId / 1000000) % 100)
+        $actualTable = [int](($existingId / 10000) % 100)
+        $actualSequence = [int]($existingId % 10000)
+
+        if ($actualBucket -ne $expectedBucket -or $actualTable -ne $tableCode -or $actualSequence -le 0) {
+            continue
+        }
+        if (-not $usedSequences.Add($actualSequence)) {
+            continue
+        }
+
+        $resolvedPropIdByKey[$key] = $existingId
+        if ($actualSequence -gt $maxSequence) {
+            $maxSequence = $actualSequence
+        }
+    }
+
+    foreach ($row in ($tableGroup.Group | Sort-Object row_name)) {
+        $key = Get-VendorUniqueItemKey -SourceTable ([string]$row.source_table) -RowName ([string]$row.row_name)
+        if ($resolvedPropIdByKey.ContainsKey($key)) {
+            continue
+        }
+
+        $nextSequence = if ($RebuildIds) {
+            ($usedSequences.Count + 1)
+        } else {
+            ($maxSequence + 1)
+        }
+
+        while ($usedSequences.Contains($nextSequence)) {
+            $nextSequence++
+        }
+
+        $bucketCode = Get-VendorBucketCode -ItemType ([string]$row.item_type)
+        $resolvedPropIdByKey[$key] = New-VendorGeneratedPropId -BucketCode $bucketCode -TableCode $tableCode -Sequence $nextSequence
+        [void]$usedSequences.Add($nextSequence)
+        if ($nextSequence -gt $maxSequence) {
+            $maxSequence = $nextSequence
+        }
+    }
+}
+
+$updatedRows = foreach ($row in ($rows | Sort-Object source_table, row_name)) {
+    $copy = [ordered]@{}
+    foreach ($prop in $row.PSObject.Properties.Name) {
+        $copy[$prop] = $row.$prop
+    }
+    $copy.server_propid = [string]$resolvedPropIdByKey[(Get-VendorUniqueItemKey -SourceTable ([string]$row.source_table) -RowName ([string]$row.row_name))]
+    [pscustomobject]$copy
+}
+
+$updatedRows | Export-Csv -Path $OutputPath -NoTypeInformation -Encoding UTF8
+
+Write-Host ("Exported {0} rows -> {1}" -f $updatedRows.Count, $OutputPath)
+if ($RebuildIds) {
+    Write-Host 'Rebuilt all vendor prop ids from source_table + row_name.'
+}

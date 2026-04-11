@@ -25,6 +25,7 @@ public:
 
 	/** 获取背包物品列表 */
 	TArray<FFS_ItemData>& GetBagItems() { return BagItems; }
+	const TArray<FFS_ItemData>& GetBagItems() const { return BagItems; }
 
 	/** 按 UI 分类获取背包物品指针 */
 	TArray<FFS_ItemData*> GetBagItemsByCategory(E_InventoryCategory Category);

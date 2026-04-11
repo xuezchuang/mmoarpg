@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "UI_Base.h"
+#include "../Data/FItemData.h"
 #include "UI_ToolTip_ItemInfo.generated.h"
 
 class UImage;
@@ -17,8 +18,16 @@ class MMOARPG_API UUI_ToolTip_ItemInfo : public UUI_Base
 	GENERATED_BODY()
 
 public:
+	void SetItemData(const FFS_ItemData* InItemData);
+
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional), Category = "ToolTipItemInfo")
 	UTextBlock* ItemName;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional), Category = "ToolTipItemInfo")
+	UImage* BG;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional), Category = "ToolTipItemInfo")
+	UImage* HeaderBG;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional), Category = "ToolTipItemInfo")
 	UWidgetSwitcher* ToolTipSwitcher;

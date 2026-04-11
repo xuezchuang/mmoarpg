@@ -569,6 +569,7 @@ enum class E_DataTableType : uint8
 	E_Ingredients_Fish,
 	E_Gather_Resources,
 	E_Glider,
+	E_Accessory,
 
 };
 
@@ -652,6 +653,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (DisplayName = "Mount Data"))
 	FS_MountData MountData;
+
+	FName RuntimeRowName;
+	int32 RuntimeSourceTableType = INDEX_NONE;
 };
 
 /** C++ FS_Crafting */

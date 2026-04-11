@@ -28,6 +28,8 @@ It is not useful if it becomes a second, stale copy of the codebase.
   - login flow, packet routing, and QuickTest constraints
 - `item-inventory.md`
   - item enums, inventory-related code paths, and practical touch points
+- `server-backend.md`
+  - live server repo location, build flow, server layout, and backend entry points
 
 ## Maintenance rule
 

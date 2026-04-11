@@ -5,6 +5,7 @@
 #include "Components\TextBlock.h"
 #include "Components/Button.h"
 #include "../Core/Game/MMOARPGGameState.h"
+#include "../MMOARPG.h"
 
 //#include <Components/VerticalBox.h>
 //#include "UI_CraftingListSlot.h"
@@ -42,6 +43,17 @@ void UUI_VendorStorageSlot::SetItemData(const FFS_ItemData& pItemData)
 
 void UUI_VendorStorageSlot::OnClicked()
 {
+	if (!m_ItemData)
+	{
+		UE_LOG(MMOARPG, Warning, TEXT("[VendorUI] Ignore vendor slot click because item data is null [Widget:%s]"), *GetName());
+		return;
+	}
+
+	UE_LOG(MMOARPG, Display, TEXT("[VendorUI] Vendor slot clicked [Name:%s ID:%s Index:%d Ptr:%p]"),
+		*m_ItemData->Description.Name.ToString(),
+		*m_ItemData->Description.ID,
+		m_ItemData->Index,
+		m_ItemData);
 	OnFocus();
 	FunUpdateItem.ExecuteIfBound(m_ItemData);
 }
