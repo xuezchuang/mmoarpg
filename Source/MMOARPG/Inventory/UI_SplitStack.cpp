@@ -131,13 +131,37 @@ uint32 UUI_SplitStack::ResolveBuyPropId() const
 		return static_cast<uint32>(FCString::Strtoui64(*IdText, nullptr, 10));
 	}
 
+	// Normalized item_id (lowercase, alphanumeric only) → server propid.
+	// Source of truth: doc/VendorPropExport.csv + server bin/csv/prop.csv
 	static const TMap<FString, uint32> FallbackVendorIdMap =
 	{
-		{ TEXT("bread"), 200900101u },
-		{ TEXT("beer"), 200900102u },
-		{ TEXT("breadroll"), 200900103u },
-		{ TEXT("carrot"), 200900104u },
-		{ TEXT("cucumber"), 200900105u }
+		// Food / Consumable
+		{ TEXT("bread"),        200900101u },
+		{ TEXT("beer"),         200900102u },
+		{ TEXT("breadroll"),    200900103u },
+		{ TEXT("carrot"),       200900104u },
+		{ TEXT("cucumber"),     200900105u },
+		// Fire King armor set (DT_Armor fs_*)
+		{ TEXT("fshm"),         800100107u },  // fs_hm  Helm of Fire King
+		{ TEXT("fsp"),          800100109u },  // fs_p   Plate of Fire King
+		{ TEXT("fsg"),          800100106u },  // fs_g   Gloves of Fire King
+		{ TEXT("fspt"),         800100108u },  // fs_pt  Pants of Fire King
+		{ TEXT("fsb"),          800100105u },  // fs_b   Boots of Fire King
+		// Water King armor set (DT_Armor ws_*)
+		{ TEXT("wshm"),         800100115u },  // ws_hm  Helm of Water King
+		{ TEXT("wspt"),         800100117u },  // ws_pt  Plate of the Water King
+		{ TEXT("wsgs"),         800100114u },  // ws_gs  Gloves of Water King
+		{ TEXT("wsps"),         800100116u },  // ws_ps  Pants of Water King
+		{ TEXT("wsbt"),         800100113u },  // ws_bt  Boots of Water King
+		// Elder King accessories (DT_Armor ek_*)
+		{ TEXT("ekneck01"),     800100110u },  // ek_neck_01
+		{ TEXT("ektalis01"),    800100112u },  // ek_talis_01
+		{ TEXT("ekring01"),     800100111u },  // ek_ring_01
+		{ TEXT("ekbrace01"),    800100104u },  // ek_brace_01
+		// DT_Accessory standalone accessories
+		{ TEXT("necklace01"),   800100102u },  // Necklace01
+		{ TEXT("necklace02blue"), 800100103u },// Necklace02_Blue
+		{ TEXT("necklace02red"), 800100101u }, // Necklace02_Red
 	};
 
 	const FString NormalizedIdText = NormalizeVendorItemId(IdText);

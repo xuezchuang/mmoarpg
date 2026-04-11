@@ -8,6 +8,10 @@ At the start of every new task or new conversation in this repository, Codex sho
 
 If [`CLAUDE.md`](./CLAUDE.md) also exists, treat it as supplemental project context. When `AGENTS.md` and `CLAUDE.md` overlap, prefer `AGENTS.md` for Codex-specific behavior and use `CLAUDE.md` for project background.
 
+If [`doc/ai-context/README.md`](./doc/ai-context/README.md) exists, treat it as the curated AI context pack for this repository. Read it after `AGENTS.md`, then read only the most relevant topic files for the current task instead of bulk-loading the whole folder.
+
+When the user explicitly asks to "summarize and save" the current session, update the relevant file under `doc/ai-context/` with durable project knowledge discovered in the session. Prefer stable architecture, protocol, debugging, and workflow knowledge. Do not save temporary guesses, one-off logs, or session-specific noise.
+
 ## Project Overview
 
 This repository is an Unreal Engine 5.2 multiplayer online action RPG (MMOARPG) written in C++ with Blueprint support.
@@ -199,5 +203,9 @@ If the user asks why a login succeeded or failed, do not stop at socket connecti
 For a new conversation, the user can simply say:
 
 `先读取 AGENTS.md 做初始化`
+
+Or, for more context:
+
+`先读取 AGENTS.md 和 doc/ai-context/README.md 做初始化`
 
 That is sufficient to restore the repository-specific working rules for Codex.

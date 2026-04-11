@@ -18,11 +18,33 @@ AMMOARPGGameState::AMMOARPGGameState()
 		{ E_UIType::Character, NSLOCTEXT("CharacterMenu", "CharacterTab", "Character"), nullptr, 1 }
 	};
 
-	VendorItemIdToPropId.Add(TEXT("Bread"), 200900101);
-	VendorItemIdToPropId.Add(TEXT("Beer"), 200900102);
-	VendorItemIdToPropId.Add(TEXT("Breadroll"), 200900103);
-	VendorItemIdToPropId.Add(TEXT("Carrot"), 200900104);
-	VendorItemIdToPropId.Add(TEXT("Cucumber"), 200900105);
+	// Food / Consumable (server prop.csv nick → propid)
+	VendorItemIdToPropId.Add(TEXT("Bread"),        200900101);
+	VendorItemIdToPropId.Add(TEXT("Beer"),          200900102);
+	VendorItemIdToPropId.Add(TEXT("Breadroll"),     200900103);
+	VendorItemIdToPropId.Add(TEXT("Carrot"),        200900104);
+	VendorItemIdToPropId.Add(TEXT("Cucumber"),      200900105);
+	// Fire King armor set (DT_Armor, Description.ID matches server nick)
+	VendorItemIdToPropId.Add(TEXT("fs_hm"),        800100107);
+	VendorItemIdToPropId.Add(TEXT("fs_p"),         800100109);
+	VendorItemIdToPropId.Add(TEXT("fs_g"),         800100106);
+	VendorItemIdToPropId.Add(TEXT("fs_pt"),        800100108);
+	VendorItemIdToPropId.Add(TEXT("fs_b"),         800100105);
+	// Water King armor set
+	VendorItemIdToPropId.Add(TEXT("ws_hm"),        800100115);
+	VendorItemIdToPropId.Add(TEXT("ws_pt"),        800100117);
+	VendorItemIdToPropId.Add(TEXT("ws_gs"),        800100114);
+	VendorItemIdToPropId.Add(TEXT("ws_ps"),        800100116);
+	VendorItemIdToPropId.Add(TEXT("ws_bt"),        800100113);
+	// Elder King accessories
+	VendorItemIdToPropId.Add(TEXT("ek_neck_01"),   800100110);
+	VendorItemIdToPropId.Add(TEXT("ek_talis_01"),  800100112);
+	VendorItemIdToPropId.Add(TEXT("ek_ring_01"),   800100111);
+	VendorItemIdToPropId.Add(TEXT("ek_brace_01"),  800100104);
+	// DT_Accessory standalone accessories
+	VendorItemIdToPropId.Add(TEXT("Necklace01"),   800100102);
+	VendorItemIdToPropId.Add(TEXT("Necklace02_Blue"), 800100103);
+	VendorItemIdToPropId.Add(TEXT("Necklace02_Red"),  800100101);
 }
 
 FCharacterAnimTable* AMMOARPGGameState::GetCharacterAnimTable(int32 InAnimTableID)

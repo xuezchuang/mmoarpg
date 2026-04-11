@@ -40,6 +40,7 @@ void UUI_InventoryBase::NativeDestruct()
 	Super::NativeDestruct();
 }
 
+
 void UUI_InventoryBase::NativePreConstruct()
 {
 	Super::NativePreConstruct();

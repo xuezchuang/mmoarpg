@@ -63,10 +63,30 @@ void UUI_InventorySlot::SetItemData(const FFS_ItemData* InItemData)
 	}
 	Image_Item->SetBrushResourceObject(m_ItemData->Image);
 
-	// Quantity.
-	const int32 Qty = m_ItemData->Stacks.Stackable ? m_ItemData->Stacks.Quantity : 1;
-	Quantity->SetText(FText::FromString(FString::FromInt(Qty)));
-	Quantity->SetVisibility(m_ItemData->Stacks.Stackable ? ESlateVisibility::HitTestInvisible : ESlateVisibility::Collapsed);
+	// Quantity — equipment shows required level, stackables show count.
+	const bool bIsEquipment = (m_ItemData->Type == E_ItemType::Armor        ||
+	                           m_ItemData->Type == E_ItemType::Weapon        ||
+	                           m_ItemData->Type == E_ItemType::Shield        ||
+	                           m_ItemData->Type == E_ItemType::Accessories   ||
+	                           m_ItemData->Type == E_ItemType::Bow           ||
+	                           m_ItemData->Type == E_ItemType::Arrow         ||
+	                           m_ItemData->Type == E_ItemType::Horse_Saddle  ||
+	                           m_ItemData->Type == E_ItemType::Horse_Armor   ||
+	                           m_ItemData->Type == E_ItemType::Horse_Reins   ||
+	                           m_ItemData->Type == E_ItemType::Horse_Wings   ||
+	                           m_ItemData->Type == E_ItemType::Horse_Horn    ||
+	                           m_ItemData->Type == E_ItemType::Glider);
+	if (bIsEquipment)
+	{
+		Quantity->SetText(FText::FromString(FString::Printf(TEXT("Lv.%d"), m_ItemData->Stats.RequiredLevel)));
+		Quantity->SetVisibility(ESlateVisibility::HitTestInvisible);
+	}
+	else
+	{
+		const int32 Qty = m_ItemData->Stacks.Stackable ? m_ItemData->Stacks.Quantity : 1;
+		Quantity->SetText(FText::FromString(FString::FromInt(Qty)));
+		Quantity->SetVisibility(m_ItemData->Stacks.Stackable ? ESlateVisibility::HitTestInvisible : ESlateVisibility::Collapsed);
+	}
 
 	// Rarity color.
 	AMMOARPGGameState* GS = GetGameState<AMMOARPGGameState>();

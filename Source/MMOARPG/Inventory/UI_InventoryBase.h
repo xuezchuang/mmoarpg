@@ -11,6 +11,7 @@
 class UButton;
 class UImage;
 class UUI_CategoryButton;
+class UUI_ToolTip;
 class UUniformGridPanel;
 class UWidgetSwitcher;
 
@@ -53,6 +54,12 @@ class UUI_InventoryBase : public UUI_Base
 
 	UPROPERTY(meta = (BindWidget))
 	UWidgetSwitcher* Panels_Switcher;
+
+	UPROPERTY(meta = (BindWidgetOptional))
+	UUI_ToolTip* WB_CompareToolTip;
+
+	UPROPERTY(meta = (BindWidgetOptional))
+	UUI_ToolTip* WB_MainToolTip;
 
 #pragma region UniformGridPanels
 	UPROPERTY(meta = (BindWidget))

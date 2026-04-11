@@ -10,7 +10,5 @@ ALoginGameMode::ALoginGameMode()
 	HUDClass = ALoginHUD::StaticClass();
 	DefaultPawnClass = ALoginPawn::StaticClass();
 	PlayerControllerClass = ALoginPlayerController::StaticClass();
-
-	UE_LOG(MMOARPG, Display, TEXT("123"));
 }
 

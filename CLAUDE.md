@@ -2,6 +2,19 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## AI Context Pack
+
+If `doc/ai-context/README.md` exists, read it early in the task after this file. Then read only the topic files relevant to the user's request.
+
+Use `doc/ai-context/` as a maintained memory layer for durable repository knowledge:
+
+- architecture and module boundaries
+- protocol and login flow constraints
+- debugging playbooks
+- inventory, UI, or server integration notes
+
+When the user asks to "summarize and save", update the matching file in `doc/ai-context/` with stable findings from the current session. Do not store temporary speculation or raw log spam there.
+
 ## Project Overview
 
 An Unreal Engine 5.2 multiplayer online action RPG (MMOARPG) written in C++ with Blueprint support. The project uses a client-server architecture with dedicated server support and includes custom plugins for networking, combat, and animation.
@@ -115,3 +128,51 @@ UI classes in `Inventory/` and `UI/` directories:
 - `FItemData.h` - Complete item system enums and structures
 - `MMOARPGCharacterBase.h` - Base character with replicated action state
 - `MMOARPGGameInstance.h` - Game instance with network client management
+
+---
+
+## Server Development
+
+> 完整服务器开发指南（架构、协议、构建）见 `doc/server/SERVER_GUIDE.md`
+
+服务器代码路径（工具访问）：`//wsl.localhost/Ubuntu-22.04/root/server_mmorpg`
+
+### 服务器构建（在 WSL 中运行）
+
+```bash
+# 编译全部
+wsl -d Ubuntu-22.04 -e bash -c "cd /root/server_mmorpg && cmake --build build"
+
+# 编译指定服务器（例如 GameServer）
+wsl -d Ubuntu-22.04 -e bash -c "cd /root/server_mmorpg && cmake --build build --target GameServer"
+```
+
+### 服务器目录结构速查
+
+| 服务器 | 路径 | 职责 |
+|--------|------|------|
+| LoginServer | `LoginServer/code/` | 账号登录/注册 |
+| GateServer | `GateServer/code/` | 客户端路由（纯路由，Router.cpp统一转发） |
+| GameServer | `GameServer/code/` | 游戏逻辑（ECS架构：component/entity/service/handler/event/system） |
+| DBServer | `DBServer/code/` | 数据库持久化 |
+| CenterServer | `CenterServer/code/` | 跨服协调 |
+| 共享定义 | `share/CmdDefines.h` | 全部 CMD_* 协议号 |
+| 共享数据 | `share/UserData.h` | S_USER_BASE（玩家）、S_ROBOT_BASE（怪物/NPC） |
+
+### GameServer ECS 层次（重构已全部完成 Phase 1-8）
+
+```
+component/  → 纯数据（BagComponent, StatsComponent, PositionComponent …）
+entity/     → Player / Monster / Npc（包装 S_USER_BASE/S_ROBOT_BASE）
+service/    → 纯业务逻辑（InventoryService, SkillService, CombatService …）
+handler/    → 薄协议层（解包→调Service→回包）
+event/      → EventBus（OnMonsterKilled, OnItemAdded …）
+system/     → 帧驱动（BuffSystem, CooldownSystem, AiSystem …）
+```
+
+### 服务器日志
+
+```
+//wsl.localhost/Ubuntu-22.04/root/server_mmorpg/build/bin/<YYYY-MM-DD>/
+```
+日期目录动态变化，每次调试需查找最新日期目录。日志文件：`login.txt`, `gate.txt`, `game.txt`, `db.txt`, `center.txt`

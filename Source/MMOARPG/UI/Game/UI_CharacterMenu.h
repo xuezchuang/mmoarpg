@@ -8,6 +8,9 @@
 class UButton;
 class UImage;
 class UTextBlock;
+class UUI_InventoryOverall;
+class UUI_LevelExp;
+class UUI_LoadingScreen;
 class UUI_WindowSwitcher;
 class UWidgetSwitcher;
 
@@ -40,6 +43,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "CharacterMenu")
 	void RefreshInventoryWidgets();
+
+	UFUNCTION(BlueprintCallable, Category = "CharacterMenu")
+	void SetTopInfoBarShowLevelExp(bool bShowLevelExp);
 
 	UFUNCTION(BlueprintPure, Category = "CharacterMenu")
 	bool IsMenuOpen() const { return bIsMenuOpen; }
@@ -75,13 +81,25 @@ protected:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional))
 	UTextBlock* ActiveTextTab;
 
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional))
+	UUI_LevelExp* WB_LevelExp;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional))
+	UUI_LoadingScreen* WB_LoadingScreen;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional))
+	UUI_InventoryOverall* WB_Inventory_Overall;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterMenu")
 	int32 ViewportZOrder = 200;
 
 private:
 	const FCharacterMenuTabData* FindTabData(E_UIType InTabType) const;
 	void ApplyInputMode(bool bMenuOpen);
+	void FinishCloseMenu();
 	void HandleTabChanged(E_UIType InTabType);
+	void HideLoadingScreen();
+	void TriggerLoadingScreen(EUMGSequencePlayMode::Type PlayMode = EUMGSequencePlayMode::Forward);
 
 	UFUNCTION()
 	void HandleCloseButtonClicked();
@@ -95,4 +113,7 @@ private:
 
 	UPROPERTY(BlueprintReadOnly, Category = "CharacterMenu", meta = (AllowPrivateAccess = "true"))
 	bool bIsMenuOpen = false;
+
+	FTimerHandle CloseMenuTimerHandle;
+	FTimerHandle LoadingScreenHideTimerHandle;
 };
