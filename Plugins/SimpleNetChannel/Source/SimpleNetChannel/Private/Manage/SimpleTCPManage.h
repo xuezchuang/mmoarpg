@@ -47,4 +47,5 @@ protected:
 	};
 
 	TMap<FGuid, FCache> Caches;
+	TArray<uint8> RecvStreamCache;
 };

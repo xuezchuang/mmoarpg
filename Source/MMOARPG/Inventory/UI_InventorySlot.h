@@ -11,6 +11,7 @@ class UButton;
 class UUniformGridPanel;
 class UWidget;
 class UUI_RarityStar;
+class UUI_ConsumableTypeIcon;
 
 DECLARE_DELEGATE_OneParam(FOnInventorySlotClicked, const FFS_ItemData*);
 
@@ -52,6 +53,9 @@ class MMOARPG_API UUI_InventorySlot : public UUI_Base
 	// ---- 物品图标 ----
 	UPROPERTY(meta = (BindWidget))
 	UImage* Image_Item;
+
+	UPROPERTY(meta = (BindWidgetOptional))
+	UUI_ConsumableTypeIcon* WB_Icon_Consumable_Type;
 
 	// ---- 数量 ----
 	UPROPERTY(meta = (BindWidget))

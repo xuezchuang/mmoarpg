@@ -4,9 +4,11 @@
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
 #include "Components/WidgetSwitcher.h"
+#include "Blueprint/WidgetTree.h"
 #include "Core/Game/MMOARPGPlayerController.h"
 #include "GameFramework/PlayerController.h"
 #include "Input/Reply.h"
+#include "Inventory/UI_InventoryBase.h"
 #include "Inventory/UI_WindowSwitcher.h"
 
 UUI_CharacterMenu::UUI_CharacterMenu(const FObjectInitializer& ObjectInitializer)
@@ -87,6 +89,7 @@ void UUI_CharacterMenu::OpenMenu()
 		SetActiveTab(ActiveTab);
 	}
 
+	RefreshInventoryWidgets();
 	ApplyInputMode(true);
 	BP_OnMenuOpened();
 }
@@ -144,6 +147,24 @@ void UUI_CharacterMenu::SetActiveTab(E_UIType InTabType)
 	}
 
 	BP_OnActiveTabChanged(ActiveTab);
+}
+
+void UUI_CharacterMenu::RefreshInventoryWidgets()
+{
+	if (!WidgetTree)
+	{
+		return;
+	}
+
+	TArray<UWidget*> AllWidgets;
+	WidgetTree->GetAllWidgets(AllWidgets);
+	for (UWidget* Widget : AllWidgets)
+	{
+		if (UUI_InventoryBase* InventoryWidget = Cast<UUI_InventoryBase>(Widget))
+		{
+			InventoryWidget->RefreshCurrentCategory();
+		}
+	}
 }
 
 const FCharacterMenuTabData* UUI_CharacterMenu::FindTabData(E_UIType InTabType) const

@@ -115,7 +115,11 @@ FSlateColor UInventoryComponent::GetRarityColor(E_ItemRarity rarity)
 
 UTexture2D* UInventoryComponent::GetStatTexture(E_StatCategory stat)
 {
-	return *mapStatTexture.Find(stat);
+	if (UTexture2D* const* Found = mapStatTexture.Find(stat))
+	{
+		return *Found;
+	}
+	return nullptr;
 }
 
 UInventoryComponent* UInventoryComponent::GetInventoryComponent(const UObject* WorldContextObject)

@@ -1,5 +1,6 @@
-#include "UI_InventorySlot.h"
+﻿#include "UI_InventorySlot.h"
 #include "UI_RarityStar.h"
+#include "UI_ConsumableTypeIcon.h"
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
 #include "Components/Button.h"
@@ -7,6 +8,7 @@
 #include "Components/UniformGridSlot.h"
 #include "Blueprint/UserWidget.h"
 #include "../Core/Game/MMOARPGGameState.h"
+#include "../MMOARPG.h"
 
 void UUI_InventorySlot::NativeConstruct()
 {
@@ -14,11 +16,11 @@ void UUI_InventorySlot::NativeConstruct()
 
 	Item_Button->OnClicked.__Internal_AddDynamic(this, &ThisClass::OnButtonClicked, TEXT("OnButtonClicked"));
 
-	// 默认隐藏 Hover / ActiveBorder
+	// Hide hover/active by default.
 	Hover->SetVisibility(ESlateVisibility::Collapsed);
 	ActiveBorder->SetVisibility(ESlateVisibility::Collapsed);
 
-	// 默认关闭商人区域
+	// Hide merchant section by default.
 	if (MerchantItem)
 	{
 		MerchantItem->SetVisibility(ESlateVisibility::Collapsed);
@@ -35,25 +37,38 @@ void UUI_InventorySlot::SetItemData(const FFS_ItemData* InItemData)
 	m_ItemData = InItemData;
 	if (!m_ItemData)
 	{
-		// 空格：隐藏图标和所有覆盖层，清空星星
-		Image_Item->SetBrushResourceObject(nullptr);
-		Quantity->SetText(FText::GetEmpty());
-		Quantity->SetVisibility(ESlateVisibility::Collapsed);
-		RarityColor->SetColorAndOpacity(FLinearColor::Transparent);
-		BrokenImage->SetVisibility(ESlateVisibility::Collapsed);
-		CloneGridBoost->ClearChildren();
+		Image_Item->SetVisibility(ESlateVisibility::Collapsed);
+		CloneGridBoost->SetVisibility(ESlateVisibility::Collapsed);
+		if (WB_Icon_Consumable_Type)
+		{
+			WB_Icon_Consumable_Type->SetByItemData(nullptr);
+		}
+		Quantity->SetText(FText::FromString(TEXT("Empty")));
 		return;
 	}
 
-	// 物品图标
+	// Item icon.
+	Image_Item->SetVisibility(ESlateVisibility::HitTestInvisible);
+	CloneGridBoost->SetVisibility(ESlateVisibility::HitTestInvisible);
+	if (WB_Icon_Consumable_Type)
+	{
+		WB_Icon_Consumable_Type->SetByItemData(m_ItemData);
+	}
+	else if ((m_ItemData->Type == E_ItemType::Food) || (m_ItemData->Type == E_ItemType::Potion))
+	{
+		UE_LOG(MMOARPG, Warning, TEXT("[InventorySlot] WB_Icon_Consumable_Type is null [Item:%s Type:%d Stat:%d]"),
+			*m_ItemData->Description.Name.ToString(),
+			static_cast<int32>(m_ItemData->Type),
+			static_cast<int32>(m_ItemData->Stats.ConsumableAction.Stat));
+	}
 	Image_Item->SetBrushResourceObject(m_ItemData->Image);
 
-	// 数量
+	// Quantity.
 	const int32 Qty = m_ItemData->Stacks.Stackable ? m_ItemData->Stacks.Quantity : 1;
 	Quantity->SetText(FText::FromString(FString::FromInt(Qty)));
-	Quantity->SetVisibility(Qty > 1 ? ESlateVisibility::HitTestInvisible : ESlateVisibility::Collapsed);
+	Quantity->SetVisibility(m_ItemData->Stacks.Stackable ? ESlateVisibility::HitTestInvisible : ESlateVisibility::Collapsed);
 
-	// 稀有度底色
+	// Rarity color.
 	AMMOARPGGameState* GS = GetGameState<AMMOARPGGameState>();
 	if (GS)
 	{
@@ -61,10 +76,10 @@ void UUI_InventorySlot::SetItemData(const FFS_ItemData* InItemData)
 		RarityColor->SetColorAndOpacity(RaritySlate.GetSpecifiedColor());
 	}
 
-	// 稀有度星星
+	// Rarity stars.
 	RefreshRarityStars(m_ItemData->Rarity);
 
-	// 损坏图标（耐久为 0 时显示）
+	// Broken icon when durability reaches zero.
 	const bool bBroken = m_ItemData->Stats.Durability.UseDurability
 	                     && (m_ItemData->Stats.Durability.CurrentDurability <= 0);
 	BrokenImage->SetVisibility(bBroken ? ESlateVisibility::HitTestInvisible : ESlateVisibility::Collapsed);
@@ -101,7 +116,7 @@ void UUI_InventorySlot::RefreshRarityStars(E_ItemRarity Rarity)
 
 	CloneGridBoost->ClearChildren();
 
-	// 根据稀有度决定显示几颗星
+	// Decide star count based on rarity.
 	int32 StarCount = 0;
 	switch (Rarity)
 	{
@@ -109,7 +124,7 @@ void UUI_InventorySlot::RefreshRarityStars(E_ItemRarity Rarity)
 	case E_ItemRarity::Superior:  StarCount = 2; break;
 	case E_ItemRarity::Epic:      StarCount = 3; break;
 	case E_ItemRarity::Legendary: StarCount = 4; break;
-	default:                       StarCount = 0; break;
+	default:                      StarCount = 0; break;
 	}
 
 	for (int32 i = 0; i < StarCount; ++i)

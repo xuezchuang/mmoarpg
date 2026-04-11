@@ -91,6 +91,9 @@ public:
 	/** 按 UI 分类查询物品指针列表（玩家背包 UI 分类用） */
 	TArray<FFS_ItemData*> GetItemsByCategory(E_InventoryCategory Category);
 
+	/** 按服务器 propid / Index 查找物品模板 */
+	const FFS_ItemData* FindItemByIndex(int32 InItemIndex) const;
+
 	/** 获取品质颜色 */
 	FSlateColor GetRarityColor(E_ItemRarity ItemRarity);
 
@@ -100,6 +103,10 @@ protected:
 	/** 编辑器里配置的 DataTable 映射（按 E_DataTableType 分类） */
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory|DataTable")
 	TMap<E_DataTableType, UDataTable*> mapDataTable;
+
+	/** 商店道具ID（Description.ID）到服务器propid映射，可在蓝图覆写 */
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory|Vendor")
+	TMap<FString, int32> VendorItemIdToPropId;
 
 	// ---- 品质颜色 ----
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory|UI")
@@ -129,4 +136,5 @@ protected:
 private:
 	/** BeginPlay 中加载完 DataTable 后，构建 E_InventoryCategory 分组索引 */
 	void BuildCategoryMap();
+	void ApplyVendorPropIdMap();
 };

@@ -46,6 +46,10 @@ private:
 	void AddCount(int32 Delta);
 	void ConfirmBuy();
 	void RefreshUI();
+	void RecvProtocol(uint32 ProtocolNumber);
+	void BindNet();
+	void UnbindNet();
+	uint32 ResolveBuyPropId() const;
 
 	/** 响应 PlayerController 广播的 Vendor 快捷键 */
 	void OnVendorHotkey(ESystemHotkey Action);
@@ -57,6 +61,12 @@ private:
 	const FFS_ItemData* m_ItemData  = nullptr;
 	int32               m_Count     = 1;
 	int32               m_MaxCount  = 99;
+	bool                m_bPendingBuy = false;
+	int32               m_PendingCount = 0;
+	uint32              m_PendingPropId = 0;
+	FFS_ItemData        m_PendingItemData;
 
 	FDelegateHandle     m_HotkeyHandle;
+	TArray<uint32>      m_InterestedProtos;
+	TArray<FDelegateHandle> m_ProtoHandles;
 };

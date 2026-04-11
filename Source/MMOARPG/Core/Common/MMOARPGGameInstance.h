@@ -49,6 +49,7 @@ public:
 	static int nIndex;
 public:
 	void CreateClient();
+	void ResetClient();
 
 	//void LinkServer();
 	void LinkLoginServer();

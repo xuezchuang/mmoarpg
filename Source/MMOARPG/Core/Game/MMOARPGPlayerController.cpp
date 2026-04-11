@@ -2,10 +2,16 @@
 #include "MMOARPGPlayerController.h"
 #include "Character/MMOARPGCharacter.h"
 #include "Character/MMOARPGPlayerCharacter.h"
+#include "Core/Common/MMOARPGGameInstance.h"
+#include "Core/Common/MMOARPGNetSubsystem.h"
 #include "MMOARPGGameState.h"
 #include "MMOARPGPlayerState.h"
 #include "GameFramework/PlayerController.h"
 #include "Engine/EngineBaseTypes.h"
+#include "Protocol/GameProtocol.h"
+#include "Stream/SimpleIOStream.h"
+#include "MMOARPG.h"
+#include "TimerManager.h"
 #include "../../MMOARPGBPLibrary.h"
 #include "MetanoiaCombat/UI_InGame.h"
 #include "UI/Game/UI_CharacterMenu.h"
@@ -35,6 +41,10 @@ void AMMOARPGPlayerController::ToggleCharacterMenu()
 	if (UUI_CharacterMenu* Widget = GetOrCreateCharacterMenuWidget())
 	{
 		Widget->ToggleMenu();
+		if (Widget->IsMenuOpen())
+		{
+			RequestInventorySync();
+		}
 	}
 }
 
@@ -63,7 +73,7 @@ void AMMOARPGPlayerController::BeginPlay()
 	InitSkillSlots();
 	InitHotkeys();
 
-    if (MainUserWidgetClass && !MainUserWidget)
+	    if (MainUserWidgetClass && !MainUserWidget)
     {
         MainUserWidget = CreateWidget<UUI_InGame>(this, MainUserWidgetClass);
         if (MainUserWidget)
@@ -72,9 +82,19 @@ void AMMOARPGPlayerController::BeginPlay()
         }
     }
 
+	RegisterInventoryHandlers();
+	ScheduleInitialInventorySync();
+
 	FInputModeGameOnly InputMode;
 	SetInputMode(InputMode);
 	bShowMouseCursor = false;
+}
+
+void AMMOARPGPlayerController::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	StopInitialInventorySync();
+	UnregisterInventoryHandlers();
+	Super::EndPlay(EndPlayReason);
 }
 
 void AMMOARPGPlayerController::SetupInputComponent()
@@ -319,6 +339,245 @@ void AMMOARPGPlayerController::OnSelectTarget()
 {
 	AActor* NewTarget = FindBestEnemyTarget();
 	SetCurrentTarget(NewTarget);
+}
+
+void AMMOARPGPlayerController::RegisterInventoryHandlers()
+{
+	if (bInventoryHandlersRegistered)
+	{
+		return;
+	}
+
+	UGameInstance* GI = GetGameInstance();
+	if (!GI)
+	{
+		return;
+	}
+
+	if (UMMOARPGNetSubsystem* NetSub = GI->GetSubsystem<UMMOARPGNetSubsystem>())
+	{
+		NetSub->RegisterUniqueHandlers(
+			{
+				SP_InventoryQuery
+			},
+			FProtocolHandler::CreateUObject(this, &AMMOARPGPlayerController::RecvInventoryProtocol));
+		bInventoryHandlersRegistered = true;
+	}
+}
+
+void AMMOARPGPlayerController::UnregisterInventoryHandlers()
+{
+	if (!bInventoryHandlersRegistered)
+	{
+		return;
+	}
+
+	UGameInstance* GI = GetGameInstance();
+	if (GI)
+	{
+		if (UMMOARPGNetSubsystem* NetSub = GI->GetSubsystem<UMMOARPGNetSubsystem>())
+		{
+			NetSub->UnRegisterUniqueHandlers(
+				{
+					SP_InventoryQuery
+				});
+		}
+	}
+
+	bInventoryHandlersRegistered = false;
+}
+
+void AMMOARPGPlayerController::ScheduleInitialInventorySync()
+{
+	if (bInitialInventorySyncCompleted)
+	{
+		return;
+	}
+
+	if (UWorld* World = GetWorld())
+	{
+		if (!World->GetTimerManager().IsTimerActive(InitialInventorySyncTimerHandle))
+		{
+			World->GetTimerManager().SetTimer(
+				InitialInventorySyncTimerHandle,
+				this,
+				&AMMOARPGPlayerController::TryInitialInventorySync,
+				1.0f,
+				true,
+				0.2f);
+			UE_LOG(MMOARPG, Display, TEXT("[InventorySync] Schedule initial inventory sync"));
+		}
+	}
+}
+
+void AMMOARPGPlayerController::StopInitialInventorySync()
+{
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().ClearTimer(InitialInventorySyncTimerHandle);
+	}
+}
+
+void AMMOARPGPlayerController::TryInitialInventorySync()
+{
+	if (bInitialInventorySyncCompleted || bInitialInventorySyncRequested)
+	{
+		StopInitialInventorySync();
+		return;
+	}
+
+	UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>();
+	if (!GI || !GI->CanSendGameplayProtocols())
+	{
+		return;
+	}
+
+	if (RequestInventorySync())
+	{
+		bInitialInventorySyncRequested = true;
+		StopInitialInventorySync();
+		UE_LOG(MMOARPG, Display, TEXT("[InventorySync] Initial inventory sync request sent"));
+	}
+}
+
+bool AMMOARPGPlayerController::RequestInventorySync()
+{
+	UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>();
+	if (!GI || !GI->GetClient())
+	{
+		return false;
+	}
+
+	if (!GI->CanSendGameplayProtocols())
+	{
+		return false;
+	}
+
+	if (FSimpleChannel* Channel = GI->GetClient()->GetChannel())
+	{
+		FSimpleProtocols<SP_InventoryQuery>::Send(Channel);
+		UE_LOG(MMOARPG, Display, TEXT("[InventorySync] Send SP_InventoryQuery"));
+		return true;
+	}
+
+	return false;
+}
+
+void AMMOARPGPlayerController::RecvInventoryProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel)
+{
+	if (!Channel)
+	{
+		return;
+	}
+
+	switch (ProtocolNumber)
+	{
+	case SP_InventoryQuery:
+	{
+		if (ApplyInventoryQuery(Channel))
+		{
+			RefreshInventoryUI();
+		}
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+bool AMMOARPGPlayerController::ApplyInventoryQuery(FSimpleChannel* Channel)
+{
+	TArray<uint8> Buffer;
+	if (!Channel->Receive(Buffer))
+	{
+		return false;
+	}
+
+	FSimpleIOStream Stream(Buffer);
+	Stream.Seek(sizeof(FSimpleBunchHead));
+
+	uint16 ChildCmd = 0;
+	uint8 Num = 0;
+	Stream >> ChildCmd;
+	Stream >> Num;
+
+	if (ChildCmd != 0)
+	{
+		UE_LOG(MMOARPG, Warning, TEXT("[InventorySync] Recv SP_InventoryQuery failed [childcmd:%u]"), ChildCmd);
+		return false;
+	}
+
+	AMMOARPGGameState* MMOARPGGameState = GetWorld() ? GetWorld()->GetGameState<AMMOARPGGameState>() : nullptr;
+	AMMOARPGPlayerState* MMOARPGPlayerState = GetPlayerState<AMMOARPGPlayerState>();
+	if (!MMOARPGGameState || !MMOARPGPlayerState)
+	{
+		UE_LOG(MMOARPG, Warning, TEXT("[InventorySync] Missing GameState or PlayerState"));
+		return false;
+	}
+
+	TArray<FFS_ItemData>& BagItems = MMOARPGPlayerState->GetBagItems();
+	BagItems.Empty();
+	BagItems.Reserve(Num);
+
+	for (uint8 i = 0; i < Num; ++i)
+	{
+		uint8 BagPos = 0;
+		S_ROLE_PROP Prop{};
+		Prop.reset();
+
+		Stream >> BagPos;
+		Stream.Read(&Prop, Prop.sendSize());
+
+		FFS_ItemData Item;
+		if (BuildBagItemFromProp(Prop, Item))
+		{
+			BagItems.Add(MoveTemp(Item));
+		}
+		else
+		{
+			UE_LOG(MMOARPG, Warning, TEXT("[InventorySync] Ignore unknown bag item [bagpos:%u propid:%d count:%u type:%u]"),
+				BagPos, Prop.base.id, Prop.base.count, Prop.base.type);
+		}
+	}
+
+	UE_LOG(MMOARPG, Display, TEXT("[InventorySync] Applied full bag sync [num:%u cached:%d]"), Num, BagItems.Num());
+	bInitialInventorySyncCompleted = true;
+	StopInitialInventorySync();
+	return true;
+}
+
+bool AMMOARPGPlayerController::BuildBagItemFromProp(const S_ROLE_PROP& InProp, FFS_ItemData& OutItem) const
+{
+	if (InProp.base.id <= 0 || InProp.base.count <= 0)
+	{
+		return false;
+	}
+
+	const AMMOARPGGameState* MMOARPGGameState = GetWorld() ? GetWorld()->GetGameState<AMMOARPGGameState>() : nullptr;
+	if (!MMOARPGGameState)
+	{
+		return false;
+	}
+
+	const FFS_ItemData* Template = MMOARPGGameState->FindItemByIndex(InProp.base.id);
+	if (!Template)
+	{
+		return false;
+	}
+
+	OutItem = *Template;
+	OutItem.Index = InProp.base.id;
+	OutItem.Stacks.Quantity = static_cast<int32>(InProp.base.count);
+	OutItem.Stats.Value = static_cast<float>(InProp.base.money);
+	return true;
+}
+
+void AMMOARPGPlayerController::RefreshInventoryUI() const
+{
+	if (CharacterMenuWidget && CharacterMenuWidget->IsMenuOpen())
+	{
+		CharacterMenuWidget->RefreshInventoryWidgets();
+	}
 }
 
 void AMMOARPGPlayerController::SetCurrentTarget(AActor* NewTarget)

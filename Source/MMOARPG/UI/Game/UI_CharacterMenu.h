@@ -38,6 +38,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "CharacterMenu")
 	void SetActiveTab(E_UIType InTabType);
 
+	UFUNCTION(BlueprintCallable, Category = "CharacterMenu")
+	void RefreshInventoryWidgets();
+
 	UFUNCTION(BlueprintPure, Category = "CharacterMenu")
 	bool IsMenuOpen() const { return bIsMenuOpen; }
 

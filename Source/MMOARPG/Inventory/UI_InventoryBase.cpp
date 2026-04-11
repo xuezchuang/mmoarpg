@@ -18,7 +18,7 @@ void UUI_InventoryBase::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	// 绑定分类按钮点击 → 切换对应 Grid
+	// Bind category button clicks to switch corresponding grids.
 	if (WB_CategoryWeapon     && WB_CategoryWeapon->Button_Weapons)     WB_CategoryWeapon->Button_Weapons->OnClicked.AddDynamic(this, &ThisClass::OnCategoryWeapon);
 	if (WB_CategoryRange      && WB_CategoryRange->Button_Weapons)      WB_CategoryRange->Button_Weapons->OnClicked.AddDynamic(this, &ThisClass::OnCategoryRange);
 	if (WB_CategoryArmor      && WB_CategoryArmor->Button_Weapons)      WB_CategoryArmor->Button_Weapons->OnClicked.AddDynamic(this, &ThisClass::OnCategoryArmor);
@@ -30,7 +30,7 @@ void UUI_InventoryBase::NativeConstruct()
 	if (WB_CategoryQuest      && WB_CategoryQuest->Button_Weapons)      WB_CategoryQuest->Button_Weapons->OnClicked.AddDynamic(this, &ThisClass::OnCategoryQuest);
 	if (WB_CategoryEvent      && WB_CategoryEvent->Button_Weapons)      WB_CategoryEvent->Button_Weapons->OnClicked.AddDynamic(this, &ThisClass::OnCategoryEvent);
 
-	// 默认显示武器分类（并激活对应按钮）
+	// Default to weapon category on open.
 	SetActiveCategoryButton(WB_CategoryWeapon);
 	PopulateGridForCategory(E_InventoryCategory::Weapon);
 }
@@ -93,7 +93,7 @@ UUniformGridPanel* UUI_InventoryBase::GetGridByCategory(E_InventoryCategory Cate
 
 static int32 CategoryToSwitcherIndex(E_InventoryCategory Category)
 {
-	// Panels_Switcher 子项顺序与 InventoryPanel1~10 对应（0-based）
+	// Panels_Switcher child order: InventoryPanel1~10
 	switch (Category)
 	{
 	case E_InventoryCategory::Weapon:      return 0;
@@ -117,7 +117,7 @@ int32 UUI_InventoryBase::ResolveRuntimeColumns(UUniformGridPanel* Grid) const
 		return 0;
 	}
 
-	// 优先用实际布局宽度；拿不到时再尝试父节点宽度
+	// Prefer the grid's runtime width; fallback to parent width before giving up.
 	float AvailableWidth = Grid->GetCachedGeometry().GetLocalSize().X;
 	if (AvailableWidth <= 1.f && Grid->GetParent())
 	{
@@ -141,7 +141,7 @@ int32 UUI_InventoryBase::ResolveRuntimeColumns(UUniformGridPanel* Grid) const
 void UUI_InventoryBase::PopulateGridForCategory(E_InventoryCategory Category)
 {
 	CurrentCategory = Category;
-	// 切换可见面板
+	// Switch visible panel.
 	if (Panels_Switcher)
 	{
 		Panels_Switcher->SetActiveWidgetIndex(CategoryToSwitcherIndex(Category));
@@ -199,7 +199,7 @@ void UUI_InventoryBase::PopulateGridForCategory(E_InventoryCategory Category)
 	Grid->SetMinDesiredSlotWidth(SlotMinWidth);
 	Grid->SetMinDesiredSlotHeight(SlotMinHeight);
 
-	// 诊断：Grid 容器的实际几何尺寸（需已经完成一次 layout pass 才有效）
+	// Debug: current runtime geometry for the active grid.
 	FVector2D GridLocalSize = Grid->GetCachedGeometry().GetLocalSize();
 	UE_LOG(LogTemp, Log, TEXT("[Inventory:%s] Grid CachedSize=(%.0f,%.0f)  MinSlot=(%.0f,%.0f)"),
 		*GetName(), GridLocalSize.X, GridLocalSize.Y, SlotMinWidth, SlotMinHeight);
@@ -214,30 +214,43 @@ void UUI_InventoryBase::PopulateGridForCategory(E_InventoryCategory Category)
 	UE_LOG(LogTemp, Log, TEXT("[Inventory:%s] Config Category=%d  TotalSlots=%d  AutoColumns=%d  LegacyColumns=%d  MaxAuto=%d  ExpectedRows=%d"),
 		*GetName(), (int32)Category, TotalSlots, FinalColumns, Columns, MaxAutoColumns, FMath::DivideAndRoundUp(TotalSlots, FinalColumns));
 
-	// 获取该分类的物品
+	// Collect items for current category.
 	TArray<FFS_ItemData*> Items;
-	APlayerController* PC = GetOwningPlayer();
+	APlayerController* OwningPC = GetOwningPlayer();
+	APlayerController* PC = OwningPC;
+	if (!PC)
+	{
+		if (UWorld* World = GetWorld())
+		{
+			PC = World->GetFirstPlayerController();
+		}
+	}
+
 	AMMOARPGPlayerState* PS = PC ? PC->GetPlayerState<AMMOARPGPlayerState>() : nullptr;
+	UE_LOG(LogTemp, Log, TEXT("[Inventory:%s] PlayerResolve OwningPC=%s ResolvedPC=%s PlayerState=%s"),
+		*GetName(),
+		*GetPathNameSafe(OwningPC),
+		*GetPathNameSafe(PC),
+		*GetPathNameSafe(PS));
+
 	if (PS)
 	{
 		Items = PS->GetBagItemsByCategory(Category);
-		// 调试：确认包裹总数和本分类数
 		UE_LOG(LogTemp, Log, TEXT("[Inventory:%s] Category=%d  BagTotal=%d  Filtered=%d"),
 			*GetName(), (int32)Category, PS->GetBagItemCount(), Items.Num());
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[Inventory:%s] Category=%d cannot resolve AMMOARPGPlayerState"),
+			*GetName(), (int32)Category);
 	}
 
 	if (Items.Num() == 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("[Inventory:%s] Category=%d has no item data, slots will render as empty"),
+		UE_LOG(LogTemp, Warning, TEXT("[Inventory:%s] Category=%d has no item data"),
 			*GetName(), (int32)Category);
 	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("[Inventory:%s] Category=%d  PC=%s  PS=NULL"),
-			*GetName(), (int32)Category, PC ? TEXT("OK") : TEXT("NULL"));
-	}
 
-	// 固定创建 TotalSlots 个格子，超出物品数量的为空格
 	int32 CreatedWidgets = 0;
 	int32 AddedToGrid = 0;
 	int32 AddFailed = 0;
@@ -253,12 +266,11 @@ void UUI_InventoryBase::PopulateGridForCategory(E_InventoryCategory Category)
 		{
 			SlotWidget->SetItemData(Items[i]);
 		}
-		else
+		else// if (bClearEmptySlotsVisual)
 		{
 			SlotWidget->SetItemData(nullptr);
 		}
-		// 空槽不调用 SetItemData，保留蓝图设计的默认外观
-
+		// Keep blueprint default visuals for empty cells unless explicit clear is enabled.
 		const int32 Row = i / FinalColumns;
 		const int32 Col = i % FinalColumns;
 		LastRow = Row;
@@ -277,7 +289,7 @@ void UUI_InventoryBase::PopulateGridForCategory(E_InventoryCategory Category)
 				*GetName(), i, Row, Col);
 		}
 
-		// 仅对第一个槽位打印 DesiredSize，用于诊断视觉尺寸
+		// Print desired size for the first slot as a quick layout sanity check.
 		if (i == 0)
 		{
 			FVector2D DS = SlotWidget->GetDesiredSize();
@@ -287,7 +299,7 @@ void UUI_InventoryBase::PopulateGridForCategory(E_InventoryCategory Category)
 	UE_LOG(LogTemp, Log, TEXT("[Inventory:%s] CreateDone Widgets=%d  Added=%d  Failed=%d  GridChildren=%d  LastCell=(%d,%d)"),
 		*GetName(), CreatedWidgets, AddedToGrid, AddFailed, Grid->GetChildrenCount(), LastRow, LastCol);
 
-	// 下一帧再记录一次布局后的几何，避免首帧 CachedSize=(0,0) 误导判断
+	// Log one more time next tick after layout settles.
 	if (UWorld* World = GetWorld())
 	{
 		TWeakObjectPtr<UUI_InventoryBase> WeakThis(this);
@@ -318,7 +330,12 @@ void UUI_InventoryBase::PopulateGridForCategory(E_InventoryCategory Category)
 	}
 }
 
-// ---- 分类按钮回调 ----
+void UUI_InventoryBase::RefreshCurrentCategory()
+{
+	PopulateGridForCategory(CurrentCategory);
+}
+
+// ---- Category button callbacks ----
 void UUI_InventoryBase::OnCategoryWeapon()     { SetActiveCategoryButton(WB_CategoryWeapon);      PopulateGridForCategory(E_InventoryCategory::Weapon); }
 void UUI_InventoryBase::OnCategoryRange()      { SetActiveCategoryButton(WB_CategoryRange);       PopulateGridForCategory(E_InventoryCategory::Range); }
 void UUI_InventoryBase::OnCategoryArmor()      { SetActiveCategoryButton(WB_CategoryArmor);       PopulateGridForCategory(E_InventoryCategory::Armor); }

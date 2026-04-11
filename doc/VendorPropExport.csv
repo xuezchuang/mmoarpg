@@ -1,0 +1,6 @@
+﻿"item_id","sample_name","stack_max","value","server_propid"
+"Beer","INVTEXT(""Rambulan ng mushroom"")","99","2","200900102"
+"Bread","INVTEXT(""Inihaw na karne"")","99","1","200900101"
+"Breadroll","INVTEXT(""Pen pen apple pen"")","99","1","200900103"
+"Carrot","INVTEXT(""Onigiri with tuna on top"")","99","1","200900104"
+"Cucumber","INVTEXT(""Inihaw na tilapia"")","99","2","200900105"

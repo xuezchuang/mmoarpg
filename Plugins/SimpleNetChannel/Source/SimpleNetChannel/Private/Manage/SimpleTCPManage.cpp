@@ -12,6 +12,52 @@
 #pragma optimize("",off) 
 #endif
 
+namespace
+{
+	enum class ETcpPacketPeekResult : uint8
+	{
+		NeedMoreData,
+		Ready,
+		InvalidHeader
+	};
+
+	ETcpPacketPeekResult PeekPacketInfo(const TArray<uint8>& InBuffer, uint16 InRCode, int32& OutPacketLen, uint16& OutProtocol)
+	{
+		OutPacketLen = 0;
+		OutProtocol = 0;
+
+		if (InBuffer.Num() < sizeof(FSimpleBunchHead))
+		{
+			return ETcpPacketPeekResult::NeedMoreData;
+		}
+
+		uint8 HeaderBytes[sizeof(FSimpleBunchHead)] = {};
+		FMemory::Memcpy(HeaderBytes, InBuffer.GetData(), sizeof(FSimpleBunchHead));
+
+		HeaderBytes[0] ^= InRCode;
+		HeaderBytes[1] ^= InRCode;
+		if (HeaderBytes[0] != 'D' || HeaderBytes[1] != 'E')
+		{
+			return ETcpPacketPeekResult::InvalidHeader;
+		}
+
+		int32 PacketLen = 0;
+		FMemory::Memcpy(&PacketLen, HeaderBytes + 2, sizeof(int32));
+		PacketLen ^= InRCode;
+		if (PacketLen < (int32)sizeof(FSimpleBunchHead) || PacketLen > 8 * 1024 * 1024)
+		{
+			return ETcpPacketPeekResult::InvalidHeader;
+		}
+
+		uint16 Protocol = 0;
+		FMemory::Memcpy(&Protocol, HeaderBytes + 6, sizeof(uint16));
+		Protocol ^= InRCode;
+
+		OutPacketLen = PacketLen;
+		OutProtocol = Protocol;
+		return ETcpPacketPeekResult::Ready;
+	}
+}
 
 FSimpleTCPManage::FSimpleTCPManage(ESimpleNetLinkState InType)
 	:Super()
@@ -252,21 +298,47 @@ void FSimpleTCPManage::Listen()
 	bool bRecvFrom = Socket->Recv(Data, RecvDataNumber, BytesRead);
 	if(bRecvFrom && BytesRead > 0)
 	{
-		SimpleEncryptionAndDecryption::Decryption(Data, BytesRead, Net.LocalConnetion->rCode);
+		const int32 CachePos = RecvStreamCache.AddUninitialized(BytesRead);
+		FMemory::Memcpy(RecvStreamCache.GetData() + CachePos, Data, BytesRead);
 
-		FGuid InGUID;
+		while (RecvStreamCache.Num() >= sizeof(FSimpleBunchHead))
+		{
+			int32 PacketLen = 0;
+			uint16 Protocol = 0;
+			const ETcpPacketPeekResult PeekResult = PeekPacketInfo(RecvStreamCache, Net.LocalConnetion->rCode, PacketLen, Protocol);
+			if (PeekResult == ETcpPacketPeekResult::NeedMoreData)
+			{
+				break;
+			}
 
-		if(Net.LocalConnetion->GetState() == ESimpleConnetionLinkType::LINK_ConnectSecure)
-		{
-			Net.LocalConnetion->Analysis(Data, BytesRead);
-		}
-		else
-		{
-			VerificationConnectionInfo(Net.LocalConnetion, Data, BytesRead);
-		}
-		if(InGUID != FGuid())
-		{
-			Caches.Remove(InGUID);
+			if (PeekResult == ETcpPacketPeekResult::InvalidHeader)
+			{
+				UE_LOG(LogSimpleNetChannel, Warning,
+					TEXT("[TCPRecv] Invalid bunch header, drop 1 byte [CacheBytes:%d rCode:%u]"),
+					RecvStreamCache.Num(), Net.LocalConnetion->rCode);
+				RecvStreamCache.RemoveAt(0, 1, false);
+				continue;
+			}
+
+			if (RecvStreamCache.Num() < PacketLen)
+			{
+				break;
+			}
+
+			TArray<uint8> Packet;
+			Packet.Append(RecvStreamCache.GetData(), PacketLen);
+			RecvStreamCache.RemoveAt(0, PacketLen, false);
+
+			SimpleEncryptionAndDecryption::Decryption(Packet, Net.LocalConnetion->rCode);
+
+			if(Net.LocalConnetion->GetState() == ESimpleConnetionLinkType::LINK_ConnectSecure)
+			{
+				Net.LocalConnetion->Analysis(Packet.GetData(), Packet.Num());
+			}
+			else
+			{
+				VerificationConnectionInfo(Net.LocalConnetion, Packet.GetData(), Packet.Num());
+			}
 		}
 	}
 }
@@ -513,6 +585,7 @@ void FSimpleTCPManage::ResetLocalConnetion()
 	Net.LocalConnetion = MakeShareable(new FSimpleTCPConnetion());
 	Net.LocalConnetion->SetConnetionType(ESimpleConnetionType::CONNETION_MAIN_LISTEN);
 	Net.LocalConnetion->SetManage(this);
+	RecvStreamCache.Empty();
 }
 
 void FSimpleTCPManage::Run()

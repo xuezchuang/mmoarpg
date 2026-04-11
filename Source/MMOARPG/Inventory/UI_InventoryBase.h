@@ -92,6 +92,7 @@ public:
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 	void PopulateGridForCategory(E_InventoryCategory Category);
+	void RefreshCurrentCategory();
 	UUniformGridPanel* GetGridByCategory(E_InventoryCategory Category) const;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
@@ -114,6 +115,9 @@ public:
 	/** 每格最小高度（像素） */
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
 	float SlotMinHeight = 110.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
+	bool bClearEmptySlotsVisual = false;
 
 protected:
 	void NativePreConstruct() override;

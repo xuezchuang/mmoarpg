@@ -9,6 +9,9 @@
 class AMMOARPGCharacter;
 class UUI_CharacterMenu;
 class UUI_InGame;
+class FSimpleChannel;
+struct S_ROLE_PROP;
+struct FFS_ItemData;
 
 /** 当前输入上下文，决定哪些按键有效 */
 UENUM(BlueprintType)
@@ -84,6 +87,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	virtual void SetupInputComponent() override;
 
@@ -115,6 +119,16 @@ protected:
 	UUI_CharacterMenu* CharacterMenuWidget = nullptr;
 
 	void OnSelectTarget();
+	void RegisterInventoryHandlers();
+	void UnregisterInventoryHandlers();
+	void ScheduleInitialInventorySync();
+	void StopInitialInventorySync();
+	void TryInitialInventorySync();
+	bool RequestInventorySync();
+	void RecvInventoryProtocol(uint32 ProtocolNumber, FSimpleChannel* Channel);
+	bool ApplyInventoryQuery(FSimpleChannel* Channel);
+	bool BuildBagItemFromProp(const S_ROLE_PROP& InProp, FFS_ItemData& OutItem) const;
+	void RefreshInventoryUI() const;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Target")
 	AActor* CurrentSelectedTarget = nullptr;
@@ -127,4 +141,9 @@ protected:
 
 	bool IsActorSelectable(AActor* Candidate, float MaxDistance, float MaxHalfAngleDeg) const;
 	float CalcTargetScore(AActor* Candidate, const FVector& ViewLoc, const FVector& ViewDir) const;
+
+	bool bInventoryHandlersRegistered = false;
+	bool bInitialInventorySyncCompleted = false;
+	bool bInitialInventorySyncRequested = false;
+	FTimerHandle InitialInventorySyncTimerHandle;
 };

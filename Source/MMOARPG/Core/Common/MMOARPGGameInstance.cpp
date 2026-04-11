@@ -193,6 +193,20 @@ void UMMOARPGGameInstance::CreateClient()
 	}
 }
 
+void UMMOARPGGameInstance::ResetClient()
+{
+	if (UMMOARPGNetSubsystem* NetSub = GetSubsystem<UMMOARPGNetSubsystem>())
+	{
+		NetSub->UnbindClientRcv();
+	}
+
+	if (Client)
+	{
+		FSimpleNetManage::Destroy(Client);
+		Client = nullptr;
+	}
+}
+
 void UMMOARPGGameInstance::LinkLoginServer()
 {
 	if (Client)
@@ -625,6 +639,8 @@ void UMMOARPGGameInstance::RecvQuickTestProtocol(uint32 ProtocolNumber, FSimpleC
 		{
 			GetClient()->GetChannel()->DestroySelf();
 		}
+
+		ResetClient();
 
 		GThread::Get()->GetCoroutines().BindLambda(0.5f, [this]()
 			{

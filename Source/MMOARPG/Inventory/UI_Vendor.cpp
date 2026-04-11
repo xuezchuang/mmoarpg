@@ -68,7 +68,7 @@ void UUI_Vendor::VendorBuy(uint16 count, uint32 propid)
 
 void UUI_Vendor::VendorSell(uint8 pos, uint16 count, uint32 propid)
 {
-	SEND_DATA(SP_ItemSell, count, propid);
+	SEND_DATA(SP_ItemSell, pos, count, propid);
 	UE_LOG(MMOARPG, Display, TEXT("[VendorUI] Send SP_ItemSell [pos:%u count:%u propid:%u]"), pos, count, propid);
 }
 

@@ -172,6 +172,16 @@ If the user asks why a login succeeded or failed, do not stop at socket connecti
 10. Prefer labels like `UI_LoginMain.cpp (line 227)` and include the line number in the target when possible, for example `/d:/ueDemo/MMOARPG/Source/MMOARPG/UI/Login/UI_LoginMain.cpp#L227`.
 11. Do not use webpage-style or connector-style file references for repository files in this project.
 
+## Comment And Encoding Safety (Strict)
+
+1. Chinese comments are allowed. Do not treat non-ASCII comments as disposable.
+2. Never modify existing comments (content, language, punctuation) unless the user explicitly asks to change comments.
+3. Preserve original file encoding and BOM exactly. Do not convert encoding while editing.
+4. Do not rewrite full files when only local edits are needed. Prefer minimal patch edits.
+5. Avoid `Set-Content`, `Out-File`, or script-based full-file rewrites for source files that contain non-ASCII text.
+6. If encoding is uncertain, stop and ask before editing.
+7. If any mojibake/garbled text appears after an edit, immediately restore and re-verify before replying.
+
 ## Files Worth Checking Early
 
 - `CLAUDE.md`

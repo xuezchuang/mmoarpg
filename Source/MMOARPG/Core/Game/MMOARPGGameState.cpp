@@ -17,6 +17,12 @@ AMMOARPGGameState::AMMOARPGGameState()
 	{
 		{ E_UIType::Character, NSLOCTEXT("CharacterMenu", "CharacterTab", "Character"), nullptr, 1 }
 	};
+
+	VendorItemIdToPropId.Add(TEXT("Bread"), 200900101);
+	VendorItemIdToPropId.Add(TEXT("Beer"), 200900102);
+	VendorItemIdToPropId.Add(TEXT("Breadroll"), 200900103);
+	VendorItemIdToPropId.Add(TEXT("Carrot"), 200900104);
+	VendorItemIdToPropId.Add(TEXT("Cucumber"), 200900105);
 }
 
 FCharacterAnimTable* AMMOARPGGameState::GetCharacterAnimTable(int32 InAnimTableID)
@@ -65,8 +71,66 @@ void AMMOARPGGameState::BeginPlay()
 		}
 	}
 
+	ApplyVendorPropIdMap();
+
 	// 构建按 E_InventoryCategory 的分组索引
 	BuildCategoryMap();
+}
+
+void AMMOARPGGameState::ApplyVendorPropIdMap()
+{
+	if (VendorItemIdToPropId.Num() == 0)
+	{
+		return;
+	}
+
+	auto NormalizeVendorItemId = [](const FString& InId) -> FString
+	{
+		FString Out;
+		Out.Reserve(InId.Len());
+		for (TCHAR Ch : InId)
+		{
+			if (FChar::IsAlnum(Ch))
+			{
+				Out.AppendChar(FChar::ToLower(Ch));
+			}
+		}
+		return Out;
+	};
+
+	TMap<FString, int32> NormalizedMap;
+	NormalizedMap.Reserve(VendorItemIdToPropId.Num());
+	for (const auto& Pair : VendorItemIdToPropId)
+	{
+		NormalizedMap.FindOrAdd(NormalizeVendorItemId(Pair.Key)) = Pair.Value;
+	}
+
+	int32 AppliedCount = 0;
+	for (auto& Pair : mapDTType2ArrayItem)
+	{
+		for (FFS_ItemData& Item : Pair.Value)
+		{
+			if (Item.Index > 0)
+			{
+				continue;
+			}
+
+			const FString ItemId = NormalizeVendorItemId(Item.Description.ID.TrimStartAndEnd());
+			if (ItemId.IsEmpty())
+			{
+				continue;
+			}
+
+			if (const int32* FoundPropId = NormalizedMap.Find(ItemId))
+			{
+				Item.Index = *FoundPropId;
+				AppliedCount++;
+			}
+		}
+	}
+
+	UE_LOG(LogTemp, Log, TEXT("[VendorMap] Applied propid mapping count=%d mapSize=%d"),
+		AppliedCount, VendorItemIdToPropId.Num());
 }
 
 void AMMOARPGGameState::BuildCategoryMap()
@@ -98,6 +162,29 @@ TArray<FFS_ItemData*> AMMOARPGGameState::GetItemsByCategory(E_InventoryCategory 
 		return *Found;
 	}
 	return TArray<FFS_ItemData*>();
+}
+
+const FFS_ItemData* AMMOARPGGameState::FindItemByIndex(int32 InItemIndex) const
+{
+	if (InItemIndex <= 0)
+	{
+		return nullptr;
+	}
+
+	for (const auto& Pair : mapDTType2ArrayItem)
+	{
+		const TArray<FFS_ItemData>& Items = Pair.Value;
+		if (const FFS_ItemData* Found = Items.FindByPredicate(
+			[InItemIndex](const FFS_ItemData& InItem)
+			{
+				return InItem.Index == InItemIndex;
+			}))
+		{
+			return Found;
+		}
+	}
+
+	return nullptr;
 }
 
 FSlateColor AMMOARPGGameState::GetRarityColor(E_ItemRarity ItemRarity)
