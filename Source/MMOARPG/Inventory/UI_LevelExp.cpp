@@ -222,7 +222,7 @@ void UUI_LevelExp::RefreshDisplay()
 	{
 		if (ExtraLevelText)
 		{
-			ExtraLevelText->SetText(FText::AsNumber(CurrentLevel));
+			ExtraLevelText->SetText(FText::AsNumber(CurrentLevel + 1));
 		}
 	}
 

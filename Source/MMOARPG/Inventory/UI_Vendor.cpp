@@ -38,9 +38,8 @@ namespace
 		{
 			if (bShowCursor)
 			{
-				FInputModeGameAndUI InputMode;
+				FInputModeUIOnly InputMode;
 				InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-				InputMode.SetHideCursorDuringCapture(false);
 				PC->SetInputMode(InputMode);
 			}
 			else

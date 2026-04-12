@@ -1,7 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "UI_SplitStack.h"
+#include "UI_VendorStorageInventory.h"
+#include "Components/Button.h"
+#include "Components/EditableTextBox.h"
+#include "Components/Slider.h"
 #include "Components/TextBlock.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "GameFramework/PlayerController.h"
 #include "Protocol/GameProtocol.h"
 #include "MMOARPGMacroType.h"
@@ -9,15 +14,29 @@
 #include "../Core/Game/MMOARPGPlayerState.h"
 #include "../MMOARPG.h"
 
+namespace
+{
+	FText FormatSplitStackWeightText(float InValue)
+	{
+		FNumberFormattingOptions FormatOptions;
+		FormatOptions.MinimumFractionalDigits = 0;
+		FormatOptions.MaximumFractionalDigits = FMath::IsNearlyEqual(InValue, FMath::RoundToFloat(InValue), KINDA_SMALL_NUMBER) ? 0 : 2;
+		return FText::AsNumber(InValue, &FormatOptions);
+	}
+}
+
 void UUI_SplitStack::NativeConstruct()
 {
 	Super::NativeConstruct();
+	SetIsFocusable(true);
+	BindInputWidgets();
 	BindNet();
 }
 
 void UUI_SplitStack::NativeDestruct()
 {
 	UnbindNet();
+	UnbindInputWidgets();
 	UnbindHotkeys();
 	Super::NativeDestruct();
 }
@@ -32,6 +51,100 @@ void UUI_SplitStack::InitWithItem(const FFS_ItemData* Item)
 
 	BindHotkeys();
 	RefreshUI();
+	FocusSplitStack();
+}
+
+FReply UUI_SplitStack::NativeOnPreviewKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)
+{
+	if (GetVisibility() == ESlateVisibility::Hidden ||
+		GetVisibility() == ESlateVisibility::Collapsed)
+	{
+		return Super::NativeOnPreviewKeyDown(InGeometry, InKeyEvent);
+	}
+
+	const FKey InputKey = InKeyEvent.GetKey();
+	if (InputKey == EKeys::R || InputKey == EKeys::V)
+	{
+		CloseSplitStack();
+		return FReply::Handled();
+	}
+
+	if (AMMOARPGPlayerController* PC = GetOwningPlayer<AMMOARPGPlayerController>())
+	{
+		if (PC->TryHandleVendorKey(InputKey))
+		{
+			return FReply::Handled();
+		}
+	}
+
+	return Super::NativeOnPreviewKeyDown(InGeometry, InKeyEvent);
+}
+
+void UUI_SplitStack::FocusSplitStack()
+{
+	if (APlayerController* PC = GetOwningPlayer())
+	{
+		UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PC, this, EMouseLockMode::DoNotLock, true);
+		PC->SetShowMouseCursor(true);
+	}
+
+	SetKeyboardFocus();
+}
+
+void UUI_SplitStack::CloseSplitStack()
+{
+	SetVisibility(ESlateVisibility::Hidden);
+
+	if (UUI_VendorStorageInventory* VendorPanel = GetParents<UUI_VendorStorageInventory>())
+	{
+		VendorPanel->FocusVendorPanel();
+	}
+}
+
+void UUI_SplitStack::BindInputWidgets()
+{
+	if (DecreaseValueButton)
+	{
+		DecreaseValueButton->OnClicked.AddDynamic(this, &UUI_SplitStack::OnDecreaseValueButtonClicked);
+	}
+
+	if (IncreaseValueButton)
+	{
+		IncreaseValueButton->OnClicked.AddDynamic(this, &UUI_SplitStack::OnIncreaseValueButtonClicked);
+	}
+
+	if (Head_Slider)
+	{
+		Head_Slider->OnValueChanged.AddDynamic(this, &UUI_SplitStack::OnHeadSliderValueChanged);
+	}
+
+	if (EditableTextBox_233)
+	{
+		EditableTextBox_233->OnTextCommitted.AddDynamic(this, &UUI_SplitStack::OnCountTextCommitted);
+	}
+}
+
+void UUI_SplitStack::UnbindInputWidgets()
+{
+	if (DecreaseValueButton)
+	{
+		DecreaseValueButton->OnClicked.RemoveDynamic(this, &UUI_SplitStack::OnDecreaseValueButtonClicked);
+	}
+
+	if (IncreaseValueButton)
+	{
+		IncreaseValueButton->OnClicked.RemoveDynamic(this, &UUI_SplitStack::OnIncreaseValueButtonClicked);
+	}
+
+	if (Head_Slider)
+	{
+		Head_Slider->OnValueChanged.RemoveDynamic(this, &UUI_SplitStack::OnHeadSliderValueChanged);
+	}
+
+	if (EditableTextBox_233)
+	{
+		EditableTextBox_233->OnTextCommitted.RemoveDynamic(this, &UUI_SplitStack::OnCountTextCommitted);
+	}
 }
 
 void UUI_SplitStack::BindHotkeys()
@@ -195,6 +308,11 @@ void UUI_SplitStack::RecvProtocol(uint32 ProtocolNumber)
 	m_PendingCount = 0;
 	m_PendingPropId = 0;
 
+	if (UUI_VendorStorageInventory* VendorPanel = GetParents<UUI_VendorStorageInventory>())
+	{
+		VendorPanel->NotifyPurchaseSucceeded(m_ItemData, FinalCount);
+	}
+
 	if (FSimpleChannel* Channel = GI->GetClient()->GetChannel())
 	{
 		FSimpleProtocols<SP_InventoryQuery>::Send(Channel);
@@ -202,7 +320,7 @@ void UUI_SplitStack::RecvProtocol(uint32 ProtocolNumber)
 			BuyPropId, FinalCount);
 	}
 
-	SetVisibility(ESlateVisibility::Hidden);
+	CloseSplitStack();
 }
 
 void UUI_SplitStack::OnVendorHotkey(ESystemHotkey Action)
@@ -223,26 +341,88 @@ void UUI_SplitStack::OnVendorHotkey(ESystemHotkey Action)
 	case ESystemHotkey::VendorBuy:           ConfirmBuy();     break;
 	case ESystemHotkey::VendorCountDecrease: AddCount(-1);     break;
 	case ESystemHotkey::VendorCountIncrease: AddCount(+1);     break;
-	case ESystemHotkey::VendorLeave:         SetVisibility(ESlateVisibility::Hidden); break;
+	case ESystemHotkey::VendorLeave:         CloseSplitStack(); break;
 	default: break;
 	}
 }
 
 void UUI_SplitStack::AddCount(int32 Delta)
 {
-	m_Count = FMath::Clamp(m_Count + Delta, 1, m_MaxCount);
+	SetCount(m_Count + Delta);
+}
+
+void UUI_SplitStack::SetCount(int32 NewCount)
+{
+	m_Count = FMath::Clamp(NewCount, 1, m_MaxCount);
 	RefreshUI();
+}
+
+void UUI_SplitStack::OnDecreaseValueButtonClicked()
+{
+	AddCount(-1);
+}
+
+void UUI_SplitStack::OnIncreaseValueButtonClicked()
+{
+	AddCount(+1);
+}
+
+void UUI_SplitStack::OnHeadSliderValueChanged(float InValue)
+{
+	if (m_bRefreshingUI)
+	{
+		return;
+	}
+
+	const float ClampedValue = FMath::Clamp(InValue, 0.0f, 1.0f);
+	const int32 NewCount = (m_MaxCount <= 1)
+		? 1
+		: FMath::RoundToInt(FMath::Lerp(1.0f, static_cast<float>(m_MaxCount), ClampedValue));
+	SetCount(NewCount);
+}
+
+void UUI_SplitStack::OnCountTextCommitted(const FText& InText, ETextCommit::Type InCommitMethod)
+{
+	if (m_bRefreshingUI)
+	{
+		return;
+	}
+
+	if (InCommitMethod != ETextCommit::OnEnter &&
+		InCommitMethod != ETextCommit::OnUserMovedFocus &&
+		InCommitMethod != ETextCommit::OnCleared)
+	{
+		return;
+	}
+
+	const FString InputString = InText.ToString().TrimStartAndEnd();
+	if (InputString.IsEmpty())
+	{
+		RefreshUI();
+		return;
+	}
+
+	SetCount(FCString::Atoi(*InputString));
 }
 
 void UUI_SplitStack::RefreshUI()
 {
 	if (!m_ItemData) return;
 
+	m_bRefreshingUI = true;
+
 	if (ItemNameText) ItemNameText->SetText(m_ItemData->Description.Name);
-	if (CountText)    CountText->SetText(FText::AsNumber(m_Count));
 	if (MaxCountText) MaxCountText->SetText(FText::AsNumber(m_MaxCount));
 	if (CostText)     CostText->SetText(FText::AsNumber(FMath::RoundToInt(m_ItemData->Stats.Value * m_Count)));
-	if (WeightText)   WeightText->SetText(FText::AsNumber(FMath::RoundToInt(m_ItemData->Stats.Weight * m_Count)));
+	if (WeightText)   WeightText->SetText(FormatSplitStackWeightText(m_ItemData->Stats.Weight * m_Count));
+	if (EditableTextBox_233) EditableTextBox_233->SetText(FText::AsNumber(m_Count));
+	if (Head_Slider)
+	{
+		const float SliderValue = (m_MaxCount <= 1)
+			? 0.0f
+			: static_cast<float>(m_Count - 1) / static_cast<float>(m_MaxCount - 1);
+		Head_Slider->SetValue(SliderValue);
+	}
 
 	int32 CurrentGold = 0;
 	if (UMMOARPGGameInstance* GI = GetGameInstance<UMMOARPGGameInstance>())
@@ -250,6 +430,8 @@ void UUI_SplitStack::RefreshUI()
 		CurrentGold = GI->GetUserData().base.econ.gold;
 	}
 	if (GoldText) GoldText->SetText(FText::AsNumber(CurrentGold));
+
+	m_bRefreshingUI = false;
 }
 
 void UUI_SplitStack::ConfirmBuy()

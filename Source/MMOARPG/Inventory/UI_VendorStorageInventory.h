@@ -53,6 +53,10 @@ public:
 	//protected:
 public:
 	void UpdateInteraction(UInteractionComponent* ITCom);
+	virtual bool NativeSupportsKeyboardFocus() const override { return true; }
+	virtual FReply NativeOnPreviewKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent) override;
+	void FocusVendorPanel();
+	void NotifyPurchaseSucceeded(const FFS_ItemData* ItemData, int32 PurchasedCount);
 
 	/** R 键"返回"逻辑：SplitStack 可见时关闭弹窗，否则返回 false 让 Vendor 自己关闭 */
 	bool TryCloseSplitStack();

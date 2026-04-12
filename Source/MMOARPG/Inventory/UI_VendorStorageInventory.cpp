@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "UI_VendorStorageInventory.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Components/TextBlock.h"
 #include "Components/UniformGridPanel.h"
 #include "UI_ToolTip.h"
@@ -89,6 +90,52 @@ void UUI_VendorStorageInventory::UpdateInteraction(UInteractionComponent* ITCom)
 		InteractionComponent,
 		InteractionComponent ? static_cast<int32>(InteractionComponent->DataTableType) : INDEX_NONE);
 	InitItems();
+}
+
+FReply UUI_VendorStorageInventory::NativeOnPreviewKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)
+{
+	if (GetVisibility() == ESlateVisibility::Hidden ||
+		GetVisibility() == ESlateVisibility::Collapsed)
+	{
+		return Super::NativeOnPreviewKeyDown(InGeometry, InKeyEvent);
+	}
+
+	if (AMMOARPGPlayerController* PC = GetOwningPlayer<AMMOARPGPlayerController>())
+	{
+		if (PC->TryHandleVendorKey(InKeyEvent.GetKey()))
+		{
+			return FReply::Handled();
+		}
+	}
+
+	return Super::NativeOnPreviewKeyDown(InGeometry, InKeyEvent);
+}
+
+void UUI_VendorStorageInventory::FocusVendorPanel()
+{
+	if (APlayerController* PC = GetOwningPlayer())
+	{
+		UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PC, this, EMouseLockMode::DoNotLock, true);
+		PC->SetShowMouseCursor(true);
+	}
+
+	SetKeyboardFocus();
+}
+
+void UUI_VendorStorageInventory::NotifyPurchaseSucceeded(const FFS_ItemData* ItemData, int32 PurchasedCount)
+{
+	if (!ItemData || PurchasedCount <= 0 || !OwnedText)
+	{
+		return;
+	}
+
+	if (m_pItemData != ItemData)
+	{
+		return;
+	}
+
+	const int32 NewOwnedCount = GetOwnedItemCount(ItemData) + PurchasedCount;
+	OwnedText->SetText(FText::FromString(FString::Printf(TEXT("Owned: %d"), NewOwnedCount)));
 }
 
 //#include <Components/VerticalBox.h>
@@ -192,6 +239,7 @@ void UUI_VendorStorageInventory::OpenSplitStack()
 
 	if (m_SplitStack)
 	{
+		m_SplitStack->SetParents(this);
 		m_SplitStack->InitWithItem(m_pItemData);
 		m_SplitStack->SetVisibility(ESlateVisibility::Visible);
 	}

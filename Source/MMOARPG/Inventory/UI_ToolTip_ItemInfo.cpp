@@ -4,11 +4,16 @@
 #include "Components/TextBlock.h"
 #include "Components/UniformGridPanel.h"
 #include "Components/Widget.h"
-#include "../Core/Game/MMOARPGGameState.h"
 #include "UI_ConsumableTypeIcon.h"
 
 namespace
 {
+	struct FTooltipRarityStyle
+	{
+		FLinearColor HeaderTint;
+		FLinearColor BodyTint;
+	};
+
 	FString BeautifyEnumName(FString InName)
 	{
 		InName.ReplaceInline(TEXT("_"), TEXT(" "));
@@ -110,42 +115,39 @@ namespace
 		}
 	}
 
-	FLinearColor GetFallbackRarityColor(E_ItemRarity Rarity)
+	FLinearColor FromHex(const TCHAR* Hex)
+	{
+		return FLinearColor(FColor::FromHex(Hex));
+	}
+
+	FTooltipRarityStyle GetTooltipRarityStyle(E_ItemRarity Rarity)
 	{
 		switch (Rarity)
 		{
-		case E_ItemRarity::Superior:   return FLinearColor(0.18f, 0.62f, 0.96f, 1.0f);
-		case E_ItemRarity::Epic:       return FLinearColor(0.66f, 0.33f, 0.90f, 1.0f);
-		case E_ItemRarity::Legendary:  return FLinearColor(1.00f, 0.62f, 0.14f, 1.0f);
-		case E_ItemRarity::Consumable: return FLinearColor(0.34f, 0.82f, 0.39f, 1.0f);
-		case E_ItemRarity::Usable:     return FLinearColor(0.93f, 0.80f, 0.24f, 1.0f);
+		case E_ItemRarity::Superior:
+			return { FromHex(TEXT("5E87D6FF")), FromHex(TEXT("78A8C5FF")) };
+		case E_ItemRarity::Epic:
+			return { FromHex(TEXT("AA76D8FF")), FromHex(TEXT("BC97CEFF")) };
+		case E_ItemRarity::Legendary:
+			return { FromHex(TEXT("C57C45FF")), FromHex(TEXT("E0B15DFF")) };
+		case E_ItemRarity::Consumable:
+			return { FromHex(TEXT("4EA58AFF")), FromHex(TEXT("739A76FF")) };
+		case E_ItemRarity::Usable:
+			return { FromHex(TEXT("8A8F9CFF")), FromHex(TEXT("A6AFBAFF")) };
 		case E_ItemRarity::Common:
-		default:                       return FLinearColor(0.74f, 0.74f, 0.74f, 1.0f);
+		case E_ItemRarity::None:
+		default:
+			return { FromHex(TEXT("858A97FF")), FromHex(TEXT("A3A8B2FF")) };
 		}
 	}
 
-	FLinearColor GetTooltipRarityColor(const UWorld* World, E_ItemRarity Rarity)
-	{
-		if (World)
-		{
-			if (AMMOARPGGameState* GameState = World->GetGameState<AMMOARPGGameState>())
-			{
-				return GameState->GetRarityColor(Rarity).GetSpecifiedColor();
-			}
-		}
-
-		return GetFallbackRarityColor(Rarity);
-	}
-
-	void ApplyTint(UImage* Image, const FLinearColor& BaseColor, float Alpha)
+	void ApplyTint(UImage* Image, const FLinearColor& Tint)
 	{
 		if (!Image)
 		{
 			return;
 		}
 
-		FLinearColor Tint = BaseColor;
-		Tint.A = Alpha;
 		Image->SetColorAndOpacity(Tint);
 	}
 }
@@ -158,8 +160,8 @@ void UUI_ToolTip_ItemInfo::SetItemData(const FFS_ItemData* InItemData)
 		{
 			ItemName->SetText(FText::GetEmpty());
 		}
-		ApplyTint(BG, FLinearColor::White, 1.0f);
-		ApplyTint(HeaderBG, FLinearColor::White, 1.0f);
+		ApplyTint(BG, FLinearColor::White);
+		ApplyTint(HeaderBG, FLinearColor::White);
 		if (ItemClassText)
 		{
 			ItemClassText->SetText(FText::GetEmpty());
@@ -201,9 +203,9 @@ void UUI_ToolTip_ItemInfo::SetItemData(const FFS_ItemData* InItemData)
 		ItemName->SetText(InItemData->Description.Name);
 	}
 
-	const FLinearColor RarityColor = GetTooltipRarityColor(GetWorld(), InItemData->Rarity);
-	ApplyTint(BG, RarityColor, 0.35f);
-	ApplyTint(HeaderBG, RarityColor, 0.85f);
+	const FTooltipRarityStyle RarityStyle = GetTooltipRarityStyle(InItemData->Rarity);
+	ApplyTint(BG, RarityStyle.BodyTint);
+	ApplyTint(HeaderBG, RarityStyle.HeaderTint);
 
 	if (ItemClassText)
 	{
